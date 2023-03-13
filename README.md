@@ -48,5 +48,40 @@ then, you can safely remove the 'template' remote by typing `git remote rm templ
 
 ```
 git commit -am "customize project"
-git push origin master
+git push origin main
 ```
+
+### Configure Github Actions for Continuous Integration and Delivery
+
+- Block your `main` branch:
+    - Go to your Github repository.
+    - Navigate to `Settings`.
+    - On the left select `Branches`.
+    - Add a Branch Protection Rule by pressing `Add rule`.
+    - Insert `main` as branch name pattern.
+    - In section `Protect matching branches`, enable the option `Require a pull request before merging`.
+    - Go to the bottom, and press `Create`.
+- Add Dockerhub secrets is working:
+    - Go to your Github repository.
+    - Navigate to `Settings`.
+    - On the left select `Secrets and Variables -> Actions`.
+    - Press button `New Repository Secrets`.
+    - In the `Name` textfield insert `DOCKERHUB_USERNAME` and in the `Secret` textfield insert your **dockerhub_username** (for example pentabanana).
+    - Retrieve your Dockerhub token from Dockerhub:
+        - Go to your Dockerhub setting page (`My Settings`).
+        - Navigate to `Security`.
+        - Press `New Access Token`.
+        - Insert a name.
+        - It will display an Access Token, copy it. It will be displayed only once.
+    - Go back to the `Secrets and Variables -> Actions` page and press button `New Repository Secrets`.
+    - In the `Name` textfield insert `DOCKERHUB_TOKEN` and in the `Secret` textfield insert your **dockerhub_access_token** you copied before.
+
+### Git Workflow
+
+- Create a branch
+- Add changes to your file
+- Create pull request
+- Assign reviewer to the code
+- Review the code
+- Check pipeline errors
+- Merge pull request
