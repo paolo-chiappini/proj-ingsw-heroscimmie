@@ -51,7 +51,7 @@ git commit -am "customize project"
 git push origin main
 ```
 
-### Configure Github Actions for Continuous Integration and Delivery
+### [OPTIONAL] Configure Github Actions for Continuous Integration and Delivery
 
 - Block your `main` branch:
     - Go to your Github repository.
@@ -76,7 +76,7 @@ git push origin main
     - Go back to the `Secrets and Variables -> Actions` page and press button `New Repository Secrets`.
     - In the `Name` textfield insert `DOCKERHUB_TOKEN` and in the `Secret` textfield insert your **dockerhub_access_token** you copied before.
 
-### Git Workflow
+### [OPTIONAL] Git Workflow
 
 - Create a branch
 - Add changes to your file
