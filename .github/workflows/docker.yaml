@@ -26,4 +26,4 @@ jobs:
         uses: docker/build-push-action@v4
         with:
           push: true
-          tags: heroscimmie/heroscimmie:latest
+          tags: ciapein02/heroscimmie:latest
