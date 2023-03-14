@@ -5,9 +5,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>it.polimi.ingsw</groupId>
-    <artifactId>proj-ingsw-xxx</artifactId>
+    <artifactId>proj-ingsw-heroscimmie</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <name>proj-ingsw-xxx</name>
+    <name>proj-ingsw-heroscimmie</name>
     <description>Prova Finale Ingegneria del software</description>
 
     <properties>

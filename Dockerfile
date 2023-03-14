@@ -10,4 +10,4 @@ COPY pom.xml .
 RUN mvn clean package
 
 # Run the code
-ENTRYPOINT ["java","-jar","target/proj-ingsw-xxx-1.0-SNAPSHOT-jar-with-dependencies.jar"]
+ENTRYPOINT ["java","-jar","target/proj-ingsw-heroscimmie-1.0-SNAPSHOT-jar-with-dependencies.jar"]
