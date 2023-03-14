@@ -20,10 +20,10 @@ Using the git command line client for your OS, type the following commands:
  # add your repository as 'origin' (default) remote
  git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME
  # push the template project to your github repository, setting
- git push --set-upstream origin master
+ git push --set-upstream origin main
  # alternatively, if you already have some content in your repo (e.g., a README)
  # and YOU WANT TO OVERWRITE IT, force the push
- git push --force --set-upstream origin master
+ git push --force --set-upstream origin main
 
 ```
 
