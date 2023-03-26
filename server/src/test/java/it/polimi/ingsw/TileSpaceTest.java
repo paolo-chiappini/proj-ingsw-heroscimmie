@@ -108,4 +108,20 @@ public class TileSpaceTest {
 
         assertNull(space.getTile());
     }
+
+    /**
+     * Test if setTile does not place tile if space is not active.
+     */
+    @Test
+    public void testSetOnInactiveTile() {
+        int playersNeeded = 0;
+        int playersPlaying = playersNeeded - 1;
+        TileSpace space = new TileSpace(playersNeeded, playersPlaying);
+        GameTile tile = new TestTile(TileType.CAT);
+
+        assertFalse(space.isActive());
+
+        space.setTile(tile);
+        assertNull(space.getTile());
+    }
 }
