@@ -27,7 +27,7 @@ public class TileSpaceTest {
         int playersPlaying = playersNeeded + 1;
         TileSpace space = new TileSpace(playersNeeded, playersPlaying);
 
-        assertTrue(space.isActive());
+        assertTrue(space.canPlaceTile());
     }
 
     /**
@@ -38,7 +38,7 @@ public class TileSpaceTest {
         int playersNeeded = 0;
         TileSpace space = new TileSpace(playersNeeded, playersNeeded);
 
-        assertTrue(space.isActive());
+        assertTrue(space.canPlaceTile());
     }
 
     /**
@@ -50,7 +50,7 @@ public class TileSpaceTest {
         int playersPlaying = playersNeeded - 1;
         TileSpace space = new TileSpace(playersNeeded, playersPlaying);
 
-        assertFalse(space.isActive());
+        assertFalse(space.canPlaceTile());
     }
 
     /**
@@ -67,19 +67,79 @@ public class TileSpaceTest {
     }
 
     /**
-     * Test if changing tile, the correct one is stored.
+     * Test if new tile cannot be stored on already occupied space.
      */
     @Test
-    public void testSetTileMultiple() {
+    public void testCannotPlaceOnOccupiedSpace() {
+        int playersNeeded = 0;
+        TileSpace space = new TileSpace(playersNeeded, playersNeeded);
+        GameTile tile = new TestTile(TileType.CAT);
+
+        assertTrue(space.canPlaceTile());
+        space.setTile(tile);
+        assertFalse(space.canPlaceTile());
+    }
+
+    /**
+     * Test can place on occupied space after removing previous tile.
+     */
+    @Test
+    public void testCanPlaceAfterRemove() {
+        int playersNeeded = 0;
+        TileSpace space = new TileSpace(playersNeeded, playersNeeded);
+        GameTile tile = new TestTile(TileType.CAT);
+
+        assertTrue(space.canPlaceTile());
+        space.setTile(tile);
+        assertFalse(space.canPlaceTile());
+        space.removeTile();
+        assertTrue(space.canPlaceTile());
+    }
+
+    /**
+     * Test if by trying to set tile in a non-empty space does not
+     * store new tiles.
+     */
+    @Test
+    public void testSetTileMultipleOnOccupiedSpace() {
+        int playersNeeded = 0;
+        TileSpace space = new TileSpace(playersNeeded, playersNeeded);
+        GameTile firstTile = new TestTile(TileType.CAT);
+        space.setTile(firstTile);
+
+        for(TileType type : TileType.values()) {
+            if(type == firstTile.getType()) continue;
+
+            GameTile tile = new TestTile(type);
+            space.setTile(tile);
+            assertEquals(space.getTile(), firstTile);
+            assertEquals(space.getTile().getType(), firstTile.getType());
+        }
+    }
+
+    /**
+     * Test setting different tiles on the same space after
+     * it's been emptied each time.
+     */
+    @Test
+    public void testSetTileMultipleWithFree() {
         int playersNeeded = 0;
         TileSpace space = new TileSpace(playersNeeded, playersNeeded);
 
-        for (TileType type : TileType.values()) {
+        for(TileType type : TileType.values()) {
             GameTile tile = new TestTile(type);
-            space.setTile(tile);
 
+            assertTrue(space.canPlaceTile());
+            space.setTile(tile);
+            assertFalse(space.canPlaceTile());
+
+            assertEquals(space.getTile(), tile);
             assertEquals(space.getTile().getType(), tile.getType());
+
+            space.removeTile();
         }
+
+        assertNull(space.getTile());
     }
 
     /**
@@ -119,7 +179,7 @@ public class TileSpaceTest {
         TileSpace space = new TileSpace(playersNeeded, playersPlaying);
         GameTile tile = new TestTile(TileType.CAT);
 
-        assertFalse(space.isActive());
+        assertFalse(space.canPlaceTile());
 
         space.setTile(tile);
         assertNull(space.getTile());
