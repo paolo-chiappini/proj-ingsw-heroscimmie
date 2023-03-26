@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.BoardSpace;
 import it.polimi.ingsw.model.interfaces.GameTile;
 
@@ -36,8 +37,10 @@ public class TileSpace implements BoardSpace {
     }
 
     @Override
-    public void setTile(GameTile tile) {
-        if(!canPlaceTile()) return;
+    public void setTile(GameTile tile) throws IllegalActionException {
+        if(!canPlaceTile()) {
+            throw new IllegalActionException("The space is either inactive or full, please check availability with BoardSpace.canPlaceTile().");
+        }
         tileRef = tile;
     }
 

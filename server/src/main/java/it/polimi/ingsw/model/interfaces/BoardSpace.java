@@ -1,5 +1,7 @@
 package it.polimi.ingsw.model.interfaces;
 
+import it.polimi.ingsw.exceptions.IllegalActionException;
+
 public interface BoardSpace {
     /**
      * Get the tile that is placed in the space.
@@ -12,8 +14,10 @@ public interface BoardSpace {
      * The tile is only placed if the space is active and no other tile is
      * already in place.
      * @param tile tile to be placed inside the space of the board.
+     * @throws IllegalActionException throws when trying to set a new tile
+     *      and the current space is either inactive or occupied.
      */
-    void setTile(GameTile tile);
+    void setTile(GameTile tile) throws IllegalActionException;
 
     /**
      * Check if the current space can be used.
