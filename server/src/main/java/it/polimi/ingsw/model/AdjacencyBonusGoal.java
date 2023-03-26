@@ -7,10 +7,20 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * This class implements the logic necessary to calculate how many
+ * points a player has scored based on the adjacency bonuses only.
+ */
 public class AdjacencyBonusGoal {
     private static final int MIN_GROUP_SIZE = 3;
     private static int[] pointsTable = { 2, 3, 5, 8 };
 
+    /**
+     * The method evaluates the amount of points scored based on the bonus.
+     * @param bookshelf bookshelf containing the tiles to evaluate.
+     * @return amount of points scored.
+     * @throws NullPointerException thrown if bookshelf is null.
+     */
     public int evaluatePoints(Bookshelf bookshelf) throws NullPointerException {
         if (bookshelf == null) throw new NullPointerException();
 
@@ -21,6 +31,12 @@ public class AdjacencyBonusGoal {
         return points;
     }
 
+    /**
+     * The method finds all the groups of adjacent tiles contained in bookshelf and
+     * returns their size.
+     * @param bookshelf bookshelf to evaluate.
+     * @return list containing the size of each adjacency group inside bookshelf.
+     */
     private List<Integer> getTileGroupsSizes(Bookshelf bookshelf) {
         boolean[][] visited = new boolean[0][0];
         List<Integer> groups = new ArrayList<>();
@@ -36,10 +52,19 @@ public class AdjacencyBonusGoal {
         return groups;
     }
 
+    /**
+     * The method uses a classic flood-fill algorithm to find a single
+     * group of adjacent tiles of the same type and returns its size.
+     * @param startX x position to start filling.
+     * @param startY y position to start filling.
+     * @param bookshelf bookshelf to "fill" (search adjacency groups).
+     * @param visited flags marking the groups that have already been filled.
+     * @return the size of the group filled.
+     */
     private int floodFill(int startX, int startY, Bookshelf bookshelf, boolean[][] visited) {
         if(visited[startY][startX]) return 0;
 
-        Tile[][] tiles = bookshelf.getTiles();
+        GameTile[][] tiles = bookshelf.getTiles();
         GameTile startTile = tiles[startY][startX];
 
         int x, y, xEast, xWest, yNorth, ySouth;
@@ -88,9 +113,16 @@ public class AdjacencyBonusGoal {
         return groupDimension;
     }
 
+    /**
+     * This method initializes a 2D array of flags used by the flood-fill algorithm to
+     * find groups of tiles.
+     * @param bookshelf bookshelf used for initializing the visited flags.
+     * @return an array of flags that assume the value true if the corresponding
+     *      space inside the bookshelf is empty.
+     */
     private boolean[][] initVisited(Bookshelf bookshelf) {
         boolean[][] visited = new boolean[Bookshelf.BOOKSHELF_ROW][Bookshelf.BOOKSHELF_COLUMN];
-        Tile[][] tiles = bookshelf.getTiles();
+        GameTile[][] tiles = bookshelf.getTiles();
 
         for (int i = 0; i < visited.length; i++) {
             for (int j = 0; j < visited[i].length; j++) {
@@ -102,6 +134,17 @@ public class AdjacencyBonusGoal {
         return visited;
     }
 
+    /**
+     * The method converts the size of a group of tiles in the corresponding
+     * amount of points.
+     * @param groupSize size of the group to convert into points.
+     * @return amount of points corresponding to the size of the group.
+     *      <p>If the group is too small, the awarded points will be 0.
+     *      <p>If the group is larger than a certain threshold, the points awarded will
+     *      be capped at a maximum amount.
+     *      <p>If the group's size is between the minimum and the threshold (both included),
+     *      the amount of points to award will be chosen based on a points table.
+     */
     public int convertToPoints(int groupSize) {
         if (groupSize < MIN_GROUP_SIZE) return 0;
 
