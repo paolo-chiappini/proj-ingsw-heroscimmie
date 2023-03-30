@@ -29,9 +29,9 @@ class BookshelfTest {
         tiles.add((new Tile(TileType.FRAME)));
         bookshelf.dropTiles(tiles,2);
         assertAll(
-                () -> assertEquals(bookshelf.getTiles()[5][2].getType(),tiles.get(0).getType()),
-                () -> assertEquals(bookshelf.getTiles()[4][2].getType(),tiles.get(1).getType()),
-                () -> assertNull(bookshelf.getTiles()[3][2])
+                () -> assertEquals(bookshelf.getTileAt(5,2).getType(),tiles.get(0).getType()),
+                () -> assertEquals(bookshelf.getTileAt(4,2).getType(),tiles.get(1).getType()),
+                () -> assertNull(bookshelf.getTileAt(3,2))
         );
     }
 

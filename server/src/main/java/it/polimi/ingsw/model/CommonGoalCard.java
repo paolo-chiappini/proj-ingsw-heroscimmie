@@ -6,11 +6,21 @@ import java.util.ArrayList;
 
 public abstract class CommonGoalCard implements GoalCard {
     private final int id;
-    private ArrayList<Integer> points;
+    private ArrayList<Integer> points = new ArrayList<>();
 
-    public CommonGoalCard(int id, ArrayList<Integer> points) {
+    public CommonGoalCard(int id, int numPlayer) {
         this.id = id;
-        this.points = points;
+        points.add(4);
+        points.add(8);
+        if(numPlayer==4)
+        {
+            points.add(0,2);
+            points.add(2,6);
+        }
+        else if(numPlayer==3)
+        {
+            points.add(1,6);
+        }
     }
 
     public int getId() {
