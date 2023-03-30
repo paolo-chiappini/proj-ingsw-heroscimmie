@@ -3,6 +3,7 @@ package it.polimi.ingsw;
 import it.polimi.ingsw.model.Bookshelf;
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.model.TileType;
+import it.polimi.ingsw.model.interfaces.GameTile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -32,7 +33,7 @@ class BookshelfTest {
      */
     @Test
     void dropTiles() {
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles =new ArrayList<>();
         tiles.add(new Tile(TileType.BOOK));
         tiles.add((new Tile(TileType.FRAME)));
         bookshelf.dropTiles(tiles,2);
@@ -50,7 +51,7 @@ class BookshelfTest {
     void canDropTilesTrue() {
         assertTrue(bookshelf.canDropTiles(3,1));
         assertTrue(bookshelf.canDropTiles(6,1));
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles = new ArrayList<>();
         tiles.add(new Tile(TileType.CAT));
         tiles.add((new Tile(TileType.PLANT)));
         bookshelf.dropTiles(tiles,0);
@@ -67,7 +68,7 @@ class BookshelfTest {
     @Test
     void canDropTilesFalse() {
         assertFalse(bookshelf.canDropTiles(7,1));
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles =new ArrayList<>();
         tiles.add(new Tile(TileType.CAT));
         tiles.add((new Tile(TileType.PLANT)));
         bookshelf.dropTiles(tiles,0);
@@ -84,7 +85,7 @@ class BookshelfTest {
     @Test
     void isFull() {
         assertFalse(bookshelf.isFull());
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles =new ArrayList<>();
         for(TileType type : TileType.values())
         {
             tiles.add(new Tile(type));
@@ -101,7 +102,7 @@ class BookshelfTest {
      */
     @Test
     void hasTile() {
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles =new ArrayList<>();
         tiles.add(new Tile(TileType.BOOK));
         tiles.add((new Tile(TileType.FRAME)));
         bookshelf.dropTiles(tiles,3);
@@ -115,7 +116,7 @@ class BookshelfTest {
      */
     @Test
     void compareTilesFalse() {
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles =new ArrayList<>();
         tiles.add(new Tile(TileType.BOOK));
         tiles.add((new Tile(TileType.FRAME)));
         bookshelf.dropTiles(tiles,3);
@@ -128,7 +129,7 @@ class BookshelfTest {
      */
     @Test
     void compareTilesTrue() {
-        List<Tile> tiles =new ArrayList<>();
+        List<GameTile> tiles =new ArrayList<>();
         tiles.add(new Tile(TileType.CAT));
         tiles.add((new Tile(TileType.CAT)));
         bookshelf.dropTiles(tiles,2);

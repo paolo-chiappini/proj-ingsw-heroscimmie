@@ -1,16 +1,19 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBookshelf;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
-public class Bookshelf {
-    private final Tile[][] tiles;
+public class Bookshelf implements IBookshelf {
+    private final GameTile[][] tiles;
     private static final int WIDTH = 5;
     private static final int HEIGHT = 6;
 
     public Bookshelf() {
-        tiles = new Tile[HEIGHT][WIDTH];
+        tiles = new GameTile[HEIGHT][WIDTH];
         for(int i = 0; i< HEIGHT; i++)
         {
             for(int j=0;j<WIDTH;j++)
@@ -20,13 +23,15 @@ public class Bookshelf {
         }
     }
 
-    public Tile getTileAt(int row, int column) {
+    @Override
+    public GameTile getTileAt(int row, int column) {
         return tiles[row][column];
     }
 
     /**
      * @return the width of the bookshelf
      */
+    @Override
     public int getWidth() {
         return WIDTH;
     }
@@ -34,6 +39,7 @@ public class Bookshelf {
     /**
      * @return the height of the bookshelf
      **/
+    @Override
     public int getHeight() {
         return HEIGHT;
     }
@@ -43,7 +49,8 @@ public class Bookshelf {
      * @param column the column where you drop the tiles
      * @param tilesToDrop the chosen tiles to insert
     */
-    public void dropTiles(List<Tile> tilesToDrop, int column)
+    @Override
+    public void dropTiles(List<GameTile> tilesToDrop, int column)
     {
         int startRowInsert=0;
         for (int i = 0; i< HEIGHT; i++) {
@@ -52,9 +59,9 @@ public class Bookshelf {
                 startRowInsert=i;
             }
         }
-        for (Tile tile:tilesToDrop)
+        for (GameTile tile : tilesToDrop)
         {
-            tiles[startRowInsert][column]= new Tile(tile.getType());
+            tiles[startRowInsert][column] = tile;
             startRowInsert--;
         }
     }
@@ -65,6 +72,7 @@ public class Bookshelf {
      * @param numOfTiles the number of tiles to insert
      * @return true if you can insert the tiles
      */
+    @Override
     public boolean canDropTiles(int numOfTiles, int column)
     {
         int AvailableSpaces=0;
@@ -80,6 +88,7 @@ public class Bookshelf {
      * Check if the bookshelf is full
      * @return true if the bookshelf has free spaces
      */
+    @Override
     public boolean isFull()
     {
         return Arrays.stream(tiles).flatMap(Arrays::stream).noneMatch(Objects::isNull);
@@ -89,7 +98,8 @@ public class Bookshelf {
      * Check if the shelf of the bookshelf has a tile
      * @return true if the shelf has a tile
      */
-    public boolean hasTile(int row,int column)
+    @Override
+    public boolean hasTile(int row, int column)
     {
         return tiles[row][column]!=null;
     }
@@ -102,7 +112,8 @@ public class Bookshelf {
      * @param column2 is the column of the second tile
      * @return true if the two tiles are of the same type
      */
-    public boolean compareTiles(int row, int column, int row2 , int column2)
+    @Override
+    public boolean compareTiles(int row, int column, int row2, int column2)
     {
         if (this.hasTile(row,column) && this.hasTile(row2,column2))
         {
