@@ -2,19 +2,18 @@ package it.polimi.ingsw.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class Bookshelf {
-    private Tile[][] tiles;
-    private final int width;
-    private final int height;
+    private final Tile[][] tiles;
+    private static final int WIDTH = 5;
+    private static final int HEIGHT = 6;
 
     public Bookshelf() {
-        width=5;
-        height=6;
-        tiles = new Tile[height][width];
-        for(int i = 0; i< height; i++)
+        tiles = new Tile[HEIGHT][WIDTH];
+        for(int i = 0; i< HEIGHT; i++)
         {
-            for(int j=0;j<width;j++)
+            for(int j=0;j<WIDTH;j++)
             {
                 tiles[i][j] = null;
             }
@@ -29,14 +28,14 @@ public class Bookshelf {
      * @return the width of the bookshelf
      */
     public int getWidth() {
-        return width;
+        return WIDTH;
     }
 
     /**
      * @return the height of the bookshelf
      **/
     public int getHeight() {
-        return height;
+        return HEIGHT;
     }
 
     /**
@@ -47,7 +46,7 @@ public class Bookshelf {
     public void dropTiles(List<Tile> tilesToDrop, int column)
     {
         int startRowInsert=0;
-        for (int i = 0; i< height; i++) {
+        for (int i = 0; i< HEIGHT; i++) {
             if (tiles[i][column]==null)
             {
                 startRowInsert=i;
@@ -69,7 +68,7 @@ public class Bookshelf {
     public boolean canDropTiles(int numOfTiles, int column)
     {
         int AvailableSpaces=0;
-        for(int i = 0; i< height; i++)
+        for(int i = 0; i< HEIGHT; i++)
         {
             if(tiles[i][column]==null)
                 AvailableSpaces++;
@@ -83,7 +82,7 @@ public class Bookshelf {
      */
     public boolean isFull()
     {
-        return Arrays.stream(tiles).flatMap(Arrays::stream).noneMatch(tile -> tile==null);
+        return Arrays.stream(tiles).flatMap(Arrays::stream).noneMatch(Objects::isNull);
     }
 
     /**

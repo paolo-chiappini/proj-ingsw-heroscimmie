@@ -19,6 +19,14 @@ class BookshelfTest {
         bookshelf= new Bookshelf();
     }
 
+    @Test
+    void bookshelfHasCorrectSize() {
+        assertAll(
+                () -> assertEquals(6, bookshelf.getHeight()),
+                () -> assertEquals(5, bookshelf.getWidth())
+        );
+    }
+
     /**
      * test if the tiles are inserted in the library
      */
