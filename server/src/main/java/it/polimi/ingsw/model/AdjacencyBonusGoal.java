@@ -1,11 +1,8 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBookshelf;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.PriorityQueue;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * This class implements the logic necessary to calculate how many
@@ -13,7 +10,7 @@ import java.util.Queue;
  */
 public class AdjacencyBonusGoal {
     private static final int MIN_GROUP_SIZE = 3;
-    private static int[] pointsTable = { 2, 3, 5, 8 };
+    private static final int[] pointsTable = { 2, 3, 5, 8 };
 
     /**
      * The method evaluates the amount of points scored based on the bonus.
@@ -21,7 +18,7 @@ public class AdjacencyBonusGoal {
      * @return amount of points scored.
      * @throws NullPointerException thrown if bookshelf is null.
      */
-    public int evaluatePoints(Bookshelf bookshelf) throws NullPointerException {
+    public int evaluatePoints(IBookshelf bookshelf) throws NullPointerException {
         if (bookshelf == null) throw new NullPointerException();
 
         int points = 0;
@@ -37,13 +34,13 @@ public class AdjacencyBonusGoal {
      * @param bookshelf bookshelf to evaluate.
      * @return list containing the size of each adjacency group inside bookshelf.
      */
-    private List<Integer> getTileGroupsSizes(Bookshelf bookshelf) {
-        boolean[][] visited = new boolean[0][0];
+    private List<Integer> getTileGroupsSizes(IBookshelf bookshelf) {
+        boolean[][] visited;
         List<Integer> groups = new ArrayList<>();
 
         visited = initVisited(bookshelf);
-        for (int y = 0; y < Bookshelf.BOOKSHELF_ROW; y++) {
-            for (int x = 0; x < Bookshelf.BOOKSHELF_COLUMN; x++) {
+        for (int y = 0; y < bookshelf.getHeight(); y++) {
+            for (int x = 0; x < bookshelf.getWidth(); x++) {
                 int groupSize = floodFill(x, y, bookshelf, visited);
                 if(groupSize > 0) groups.add(groupSize);
             }
@@ -55,31 +52,35 @@ public class AdjacencyBonusGoal {
     /**
      * The method uses a classic flood-fill algorithm to find a single
      * group of adjacent tiles of the same type and returns its size.
+     * (source: https://en.wikipedia.org/wiki/Flood_fill)
      * @param startX x position to start filling.
      * @param startY y position to start filling.
      * @param bookshelf bookshelf to "fill" (search adjacency groups).
      * @param visited flags marking the groups that have already been filled.
      * @return the size of the group filled.
      */
-    private int floodFill(int startX, int startY, Bookshelf bookshelf, boolean[][] visited) {
-        if(visited[startY][startX]) return 0;
+    private int floodFill(int startX, int startY, IBookshelf bookshelf, boolean[][] visited) {
+        if(visited[startY][startX] || bookshelf.getTileAt(startY,startX) == null) return 0;
 
-        GameTile[][] tiles = bookshelf.getTiles();
-        GameTile startTile = tiles[startY][startX];
-
+        TileType startTile = bookshelf.getTileAt(startY, startX).getType();
         int x, y, xEast, xWest, yNorth, ySouth;
         int width, height;
         int groupDimension = 0;
-        Queue<Integer> coords = new PriorityQueue<>();
+        Deque<Integer> coords = new ArrayDeque<>();
 
-        width = Bookshelf.BOOKSHELF_COLUMN;
-        height = Bookshelf.BOOKSHELF_ROW;
-        coords.add(startX);
-        coords.add(startY);
+        width = bookshelf.getWidth();
+        height = bookshelf.getHeight();
+        coords.addLast(startX);
+        coords.addLast(startY);
 
         while (coords.size() > 0) {
             x = coords.poll();
             y = coords.poll();
+            if(visited[y][x]) continue;
+
+            visited[y][x] = true;
+            groupDimension++;
+
             xWest = x;
             xEast = x;
 
@@ -88,25 +89,39 @@ public class AdjacencyBonusGoal {
             if (y < height - 1) ySouth = y + 1;
             else ySouth = -1;
 
-            while (xEast < width - 1 && tiles[y][xEast + 1].equals(startTile)) {
+            while (xEast < width - 1 &&
+                    bookshelf.getTileAt(y, xEast + 1) != null &&
+                    bookshelf.getTileAt(y, xEast + 1).getType().equals(startTile)) {
                 xEast++;
-            }
-
-            while (xWest > 0 && tiles[y][xWest - 1].equals(startTile)) {
-                xWest--;
-            }
-
-            for (x = xWest; x < xEast; x++) {
-                visited[x][y] = true;
-                if (yNorth >= 0 && tiles[yNorth][x].equals(startTile)) {
-                    coords.add(x);
-                    coords.add(yNorth);
-                }
-                if (ySouth >= 0 && tiles[ySouth][x].equals(startTile)) {
-                    coords.add(x);
-                    coords.add(ySouth);
-                }
+                visited[y][xEast] = true;
                 groupDimension++;
+            }
+
+            while (xWest > 0 &&
+                    bookshelf.getTileAt(y, xWest - 1) != null &&
+                    bookshelf.getTileAt(y, xWest - 1).getType().equals(startTile)) {
+                xWest--;
+                visited[y][xWest] = true;
+                groupDimension++;
+            }
+
+            for (x = xWest; x <= xEast; x++) {
+                if (yNorth >= 0 &&
+                        !visited[yNorth][x] &&
+                        bookshelf.getTileAt(yNorth, x) != null &&
+                        bookshelf.getTileAt(yNorth, x).getType().equals(startTile)
+                ) {
+                    coords.addLast(x);
+                    coords.addLast(yNorth);
+                }
+                if (ySouth >= 0 &&
+                        !visited[ySouth][x] &&
+                        bookshelf.getTileAt(ySouth, x) != null &&
+                        bookshelf.getTileAt(ySouth, x).getType().equals(startTile)
+                ) {
+                    coords.addLast(x);
+                    coords.addLast(ySouth);
+                }
             }
         }
 
@@ -120,13 +135,12 @@ public class AdjacencyBonusGoal {
      * @return an array of flags that assume the value true if the corresponding
      *      space inside the bookshelf is empty.
      */
-    private boolean[][] initVisited(Bookshelf bookshelf) {
-        boolean[][] visited = new boolean[Bookshelf.BOOKSHELF_ROW][Bookshelf.BOOKSHELF_COLUMN];
-        GameTile[][] tiles = bookshelf.getTiles();
+    private boolean[][] initVisited(IBookshelf bookshelf) {
+        boolean[][] visited = new boolean[bookshelf.getHeight()][bookshelf.getWidth()];
 
         for (int i = 0; i < visited.length; i++) {
             for (int j = 0; j < visited[i].length; j++) {
-                boolean isEmptySpace = tiles[i][j] == null;
+                boolean isEmptySpace = bookshelf.getTileAt(i, j) == null;
                 visited[i][j] = isEmptySpace;
             }
         }
@@ -150,7 +164,7 @@ public class AdjacencyBonusGoal {
 
         // Truncate all groups that exceed 6 in size to be exactly 6
         int normalizedGroupSize = groupSize - MIN_GROUP_SIZE;
-        int truncatedGroupSize = Integer.max(normalizedGroupSize, MIN_GROUP_SIZE);
+        int truncatedGroupSize = Integer.min(normalizedGroupSize, MIN_GROUP_SIZE);
 
         return pointsTable[truncatedGroupSize];
     }
