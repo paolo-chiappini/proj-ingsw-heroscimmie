@@ -2,6 +2,7 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.TurnManager;
+import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 
@@ -37,23 +38,33 @@ public class TurnManagerTest {
         public IBookshelf getBookshelf() { return bookshelf; }
     }
 
+    private static class TestBookshelf implements IBookshelf {
+        private final boolean full;
+
+        public TestBookshelf(boolean full) {
+            this.full = full;
+        }
+
+        @Override
+        public boolean isFull() { return full; }
+        @Override
+        public void dropTiles(List<GameTile> tilesToDrop, int column) {}
+        @Override
+        public boolean canDropTiles(int numOfTiles, int column) { return false; }
+        @Override
+        public boolean hasTile(int row, int column) { return false; }
+        @Override
+        public boolean compareTiles(int row, int column, int row2, int column2) { return false; }
+    }
+
     private static List<IPlayer> players;
 
     @BeforeAll
     public static void initPlayers() {
         players = new ArrayList<>();
-        players.add(new TestPlayer("a", new IBookshelf() {
-            @Override
-            public boolean isFull() { return false;}
-        }));
-        players.add(new TestPlayer("b", new IBookshelf() {
-            @Override
-            public boolean isFull() { return false; }
-        }));
-        players.add((new TestPlayer("c", new IBookshelf() {
-            @Override
-            public boolean isFull() { return false; }
-        })));
+        players.add(new TestPlayer("a", new TestBookshelf(false)));
+        players.add(new TestPlayer("b", new TestBookshelf(false)));
+        players.add(new TestPlayer("c", new TestBookshelf(false)));
     }
 
     @Nested
@@ -127,12 +138,7 @@ public class TurnManagerTest {
         @DisplayName("end of lap should be game over")
         void endOfLapAfterEndGameConditionMet() {
             List<IPlayer> player = new ArrayList<>();
-            player.add(new TestPlayer("a", new IBookshelf() {
-                @Override
-                public boolean isFull() {
-                    return true;
-                }
-            }));
+            player.add(new TestPlayer("a", new TestBookshelf(true)));
 
             TurnManager turnManager = new TurnManager(player);
             turnManager.nextTurn();
@@ -144,10 +150,7 @@ public class TurnManagerTest {
         @DisplayName("after game over, should throw exception")
         void nextTurnAfterGameOverShouldThrowException() {
             List<IPlayer> player = new ArrayList<>();
-            player.add(new TestPlayer("", new IBookshelf() {
-                @Override
-                public boolean isFull() { return true; }
-            }));
+            player.add(new TestPlayer("", new TestBookshelf(true)));
 
             TurnManager turnManager = new TurnManager(player);
             turnManager.nextTurn();

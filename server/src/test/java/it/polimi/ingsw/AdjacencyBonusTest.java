@@ -5,6 +5,9 @@ import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import org.junit.jupiter.api.*;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Test on AdjacencyBonus")
@@ -31,24 +34,34 @@ public class AdjacencyBonusTest {
         private TileType intToTileType(int n) {
             return TileType.values()[n];
         }
-
         @Override
         public GameTile getTileAt(int row, int column) {
             return tiles[row][column];
         }
-
         @Override
         public int getWidth() {
             return tiles[0].length;
         }
-
         @Override
         public int getHeight() {
             return tiles.length;
         }
-
         @Override
         public boolean isFull() {
+            return false;
+        }
+        @Override
+        public void dropTiles(List<GameTile> tilesToDrop, int column) {}
+        @Override
+        public boolean canDropTiles(int numOfTiles, int column) {
+            return false;
+        }
+        @Override
+        public boolean hasTile(int row, int column) {
+            return false;
+        }
+        @Override
+        public boolean compareTiles(int row, int column, int row2, int column2) {
             return false;
         }
     }
