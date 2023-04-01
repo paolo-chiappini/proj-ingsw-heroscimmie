@@ -3,10 +3,11 @@ package it.polimi.ingsw.model;
 import java.util.*;
 
 public class Board {
-    private TileSpace spaces[][];
+    private TileSpace[][] spaces;
 
     public Board(){
-        spaces = new TileSpace[9][9];
+
+
     }
 
     /**
@@ -28,7 +29,10 @@ public class Board {
      * Tiles are drawn from the bag and put on the board
      */
     public void refill(Bag bag){
-        bag.drawTile();
+        for(int i = 0; i < spaces.length; i++)
+            for(int j = 0; j < spaces[0].length; j++)
+                if(spaces[i][j].canPlaceTile())
+                    bag.drawTile();
     }
 
     /**
