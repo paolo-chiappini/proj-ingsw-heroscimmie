@@ -3,7 +3,7 @@ package it.polimi.ingsw.model;
 import java.util.*;
 
 public class Board {
-    private TileSpace[][] spaces;
+    private TileSpace[][] spaces = new TileSpace[9][9];
 
     public Board(){
 
