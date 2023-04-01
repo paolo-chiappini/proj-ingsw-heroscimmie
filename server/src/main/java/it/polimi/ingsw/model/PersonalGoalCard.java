@@ -2,15 +2,14 @@ package it.polimi.ingsw.model;
 
 public class PersonalGoalCard{
     private static final int[] pointsTable = new int[]{1,2,4,6,9,12};
+
     private int id;
     private char[][] pattern;
 
-    public PersonalGoalCard(int id, char[][] pattern){
+    public PersonalGoalCard(int id){
         this.id = id;
-        //this.pattern = new char[][];
     }
 
-    //Mancano i pattern
 
     /**
      * Evaluate if personal goals are matched with the tiles on the bookshelf
