@@ -10,13 +10,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PersonalGoalCardDeckTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="0" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -56,18 +63,38 @@
       <recent name="it.polimi.ingsw.model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.BoardTest.tilesCanBePickedUp">
-    <configuration name="All in server" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.BoardTest">
+    <configuration name="AdjacencyBonusTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.AdjacencyBonusTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoardTest.isBoardEmpty" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BagTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BagTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="BoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -77,13 +104,12 @@
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BoardTest" />
-      <option name="METHOD_NAME" value="isBoardEmpty" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoardTest.pickUp2DifferentTiles" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BookshelfTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -92,14 +118,13 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BoardTest" />
-      <option name="METHOD_NAME" value="pickUp2DifferentTiles" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BookshelfTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BoardTest.tilesCanBePickedUp" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TurnManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
         <pattern>
@@ -108,19 +133,19 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BoardTest" />
-      <option name="METHOD_NAME" value="tilesCanBePickedUp" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.TurnManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.BoardTest.tilesCanBePickedUp" />
-        <item itemvalue="JUnit.BoardTest.isBoardEmpty" />
-        <item itemvalue="JUnit.BoardTest.pickUp2DifferentTiles" />
-        <item itemvalue="JUnit.All in server" />
+        <item itemvalue="JUnit.BoardTest" />
+        <item itemvalue="JUnit.BookshelfTest" />
+        <item itemvalue="JUnit.TurnManagerTest" />
+        <item itemvalue="JUnit.BagTest" />
+        <item itemvalue="JUnit.AdjacencyBonusTest" />
       </list>
     </recent_temporary>
   </component>
@@ -138,7 +163,7 @@
       <workItem from="1679653462352" duration="2369000" />
       <workItem from="1680335692689" duration="223000" />
       <workItem from="1680335988682" duration="7801000" />
-      <workItem from="1680352484497" duration="1038000" />
+      <workItem from="1680352484497" duration="4450000" />
     </task>
     <servers />
   </component>
@@ -157,18 +182,36 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1679606590329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1680339350138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680354353328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1679606590329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
