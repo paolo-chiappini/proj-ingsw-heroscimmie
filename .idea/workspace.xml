@@ -10,13 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +137,8 @@
       <workItem from="1679649725489" duration="2756000" />
       <workItem from="1679653462352" duration="2369000" />
       <workItem from="1680335692689" duration="223000" />
-      <workItem from="1680335988682" duration="7121000" />
+      <workItem from="1680335988682" duration="7801000" />
+      <workItem from="1680352484497" duration="1038000" />
     </task>
     <servers />
   </component>
