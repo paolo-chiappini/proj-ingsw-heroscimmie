@@ -1,5 +1,6 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 
@@ -38,7 +39,7 @@ public class Bookshelf implements IBookshelf {
 
     /**
      * @return the height of the bookshelf
-     **/
+     */
     @Override
     public int getHeight() {
         return HEIGHT;
@@ -73,9 +74,17 @@ public class Bookshelf implements IBookshelf {
      * @return true if you can insert the tiles
      */
     @Override
-    public boolean canDropTiles(int numOfTiles, int column)
+    public boolean canDropTiles(int numOfTiles, int column) throws IllegalActionException
     {
         int AvailableSpaces=0;
+        if(numOfTiles>3)
+        {
+            throw new IllegalActionException("No more than 3 tiles can be inserted, please try again with fewer tiles");
+        }
+        if(column>WIDTH-1 || column<0)
+        {
+            throw new IllegalActionException("The chosen column is not valid, try again with another column");
+        }
         for(int i = 0; i< HEIGHT; i++)
         {
             if(tiles[i][column]==null)
