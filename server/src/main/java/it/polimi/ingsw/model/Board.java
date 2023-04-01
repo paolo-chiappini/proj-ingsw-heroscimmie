@@ -5,6 +5,10 @@ import java.util.*;
 public class Board {
     private TileSpace spaces[][];
 
+    public Board(){
+        spaces = new TileSpace[9][9];
+    }
+
     /**
      * Check whether the board needs to be refilled or not
      * @return true if board is empty
@@ -38,9 +42,9 @@ public class Board {
     public List<TileSpace> pickUpTiles(int row1, int col1, int row2, int col2){
         List<TileSpace> myList = new LinkedList<>();
         myList.add(spaces[row1][col1]);
-        //spaces.removeTile();
+        spaces[row1][col1].removeTile();
         myList.add(spaces[row2][col2]);
-        //spaces.removeTile();
+        spaces[row2][col2].removeTile();
         return myList;
     }
 
