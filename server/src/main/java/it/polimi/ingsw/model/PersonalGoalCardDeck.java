@@ -10,7 +10,7 @@ public class PersonalGoalCardDeck {
         personalGoalCards = new ArrayList<PersonalGoalCard>();
         for(int i = 0; i< NUMBER_OF_PERSONAL_GOAL_CARDS; i++)
             personalGoalCards.add(new PersonalGoalCard(i+1));
-        
+
     }
 
     /**
