@@ -1,21 +1,18 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.mock.DynamicTestBookshelf;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBookshelf;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
-@DisplayName("Tests on CommonGoalCard10")
+@DisplayName("Tests on CommonGoalCard9")
 public class CommonGoalCard9Test {
 
     CommonGoalCard9 card9;
-    Bookshelf bookshelf;
 
     @Nested
     @DisplayName("On card creation")
@@ -33,138 +30,110 @@ public class CommonGoalCard9Test {
 
         @Nested
         @DisplayName("When checking if the card's goal is achieved")
-        class CanPlaceTests {
-            List<GameTile> tiles;
-            List<GameTile> tiles1;
-
-            @BeforeEach
-            void createNewBookshelf() {
-                bookshelf = new Bookshelf();
-                tiles = new ArrayList<>();
-                tiles1=new ArrayList<>();
-            }
+        class CanObtainPointsTests {
 
             @Test
             @DisplayName("should be true with 3 columns each formed by 6 tiles of maximum 3 different types.")
-            void canObtainPoint3Columns3DifferentTiles() {
-                tiles.add(new Tile(TileType.CAT));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.TROPHY));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.FRAME));
-                tiles1.add(new Tile(TileType.BOOK));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles,2);
+            void canObtainPoints3Columns3DifferentTypes() {
+                int[][] template = new int[][] {
+                        { 3,  4, -1,  4, -1},
+                        { 1,  0, -1,  2, -1},
+                        { 2,  4,  3,  4, -1},
+                        { 1,  1,  2,  2, -1},
+                        { 3,  1,  0,  1,  1},
+                        { 2,  0,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertTrue(card9.canObtainPoints(bookshelf));
             }
 
             @Test
             @DisplayName("should be true with 3 columns each formed by 6 tiles of maximum 2 different types.")
-            void canObtainPoint3Columns2DifferentTiles()  {
-                tiles.add(new Tile(TileType.CAT));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.FRAME));
-                tiles1.add(new Tile(TileType.PLANT));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles,2);
+            void canObtainPoints3Columns2DifferentTypes()  {
+                int[][] template = new int[][] {
+                        { 3,  4, -1,  4, -1},
+                        { 3,  0, -1,  1, -1},
+                        { 2,  4,  3,  4, -1},
+                        { 3,  0,  2,  1, -1},
+                        { 3,  0,  0,  1,  1},
+                        { 2,  0,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertTrue(card9.canObtainPoints(bookshelf));
             }
 
             @Test
             @DisplayName("should be true with 3 columns each formed by 6 tiles of the same type")
-            void canObtainPoint3ColumnsSameTiles()  {
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.PLANT));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles,2);
+            void canObtainPoints3ColumnsSameType()  {
+                int[][] template = new int[][] {
+                        { 2,  4, -1,  1, -1},
+                        { 2,  4, -1,  1, -1},
+                        { 2,  4,  3,  1, -1},
+                        { 2,  4,  2,  1, -1},
+                        { 2,  4,  0,  1,  1},
+                        { 2,  4,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertTrue(card9.canObtainPoints(bookshelf));
             }
 
             @Test
-            @DisplayName("should be true with 4 columns each formed by 6 tiles of maximum 3 different types.")
-            void canObtainPoint4Columns3DifferentTiles()  {
-                tiles.add(new Tile(TileType.CAT));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.TROPHY));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.FRAME));
-                tiles1.add(new Tile(TileType.BOOK));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles1,3);
-                bookshelf.dropTiles(tiles1,3);
+            @DisplayName("should be true with more than 3 columns formed by 6 tiles of maximum 3 different types.")
+            void canObtainPointsMoreColumns()  {
+                int[][] template = new int[][] {
+                        { 3,  4, -1,  4,  3},
+                        { 1,  0, -1,  2,  2},
+                        { 2,  4,  3,  4,  3},
+                        { 1,  1,  2,  2,  2},
+                        { 3,  1,  0,  1,  1},
+                        { 2,  0,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertTrue(card9.canObtainPoints(bookshelf));
             }
 
             @Test
-            @DisplayName("should be false with 3 columns each formed by 6 tiles of 4 different types.")
-            void canNotObtainPoint3Columns4DifferentTiles()  {
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.TROPHY));
-                tiles.add(new Tile(TileType.TOY));
-                tiles1.add(new Tile(TileType.CAT));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.PLANT));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,0);
-                bookshelf.dropTiles(tiles,1);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles1,2);
+            @DisplayName("should be false with 3 columns each formed by 6 tiles of more than 3 different types.")
+            void canNotObtainPoints3Columns4DifferentTypes()  {
+                int[][] template = new int[][] {
+                        { 3,  4, -1,  4,  3},
+                        { 0,  0, -1,  1,  2},
+                        { 2,  3,  3,  4,  0},
+                        { 1,  3,  2,  0,  2},
+                        { 3,  1,  0,  1,  1},
+                        { 2,  0,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertFalse(card9.canObtainPoints(bookshelf));
             }
 
             @Test
             @DisplayName("should be false with columns not formed by 6 tiles.")
-            void canNotObtainPointNot6Tiles()  {
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.TROPHY));
-                tiles1.add(new Tile(TileType.CAT));
-                tiles1.add(new Tile(TileType.PLANT));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,0);
-                bookshelf.dropTiles(tiles,1);
-                bookshelf.dropTiles(tiles1,1);
-                bookshelf.dropTiles(tiles,2);
-                bookshelf.dropTiles(tiles1,2);
+            void canNotObtainPointsNot6Tiles()  {
+                int[][] template = new int[][] {
+                        { 3, -1, -1, -1, -1},
+                        { 0,  0, -1,  1, -1},
+                        { 2,  3,  3,  4,  0},
+                        { 1,  3,  2,  0,  2},
+                        { 3,  1,  0,  1,  1},
+                        { 2,  0,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertFalse(card9.canObtainPoints(bookshelf));
             }
 
             @Test
-            @DisplayName("should be false with 2 columns each formed by 6 tiles of maximum 3 different types.")
-            void canNotObtainPoint2Columns(){
-                tiles.add(new Tile(TileType.BOOK));
-                tiles.add(new Tile(TileType.TROPHY));
-                tiles.add(new Tile(TileType.BOOK));
-                tiles1.add(new Tile(TileType.TROPHY));
-                tiles1.add(new Tile(TileType.PLANT));
-                tiles1.add(new Tile(TileType.PLANT));
-                bookshelf.dropTiles(tiles,0);
-                bookshelf.dropTiles(tiles1,0);
-                bookshelf.dropTiles(tiles,1);
-                bookshelf.dropTiles(tiles1,1);
+            @DisplayName("should be false with less than 3 columns formed by 6 tiles of maximum 3 different types.")
+            void canNotObtainsPointLessColumns(){
+                int[][] template = new int[][] {
+                        { 3,  2, -1,  4, -1},
+                        { 1,  0, -1,  2, -1},
+                        { 2,  4,  3,  4, -1},
+                        { 1,  1,  2,  2, -1},
+                        { 3,  1,  0,  1,  1},
+                        { 2,  0,  1,  1,  1}
+                };
+                IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 assertFalse(card9.canObtainPoints(bookshelf));
             }
         }
