@@ -160,5 +160,23 @@ public class TurnManagerTest {
                     () -> assertThrows(IllegalActionException.class, turnManager::nextTurn)
             );
         }
+
+        @Test
+        @DisplayName("the sequence of players should be respected")
+        void turnSequenceShouldBeRespected() {
+            TurnManager turnManager = new TurnManager(players);
+            IPlayer p1, p2, p3;
+            p1 = turnManager.getCurrentPlayer();
+            turnManager.nextTurn();
+            p2 = turnManager.getCurrentPlayer();
+            turnManager.nextTurn();
+            p3 = turnManager.getCurrentPlayer();
+
+            assertAll(
+                    () -> assertEquals(turnManager.getPlayersOrder().get(0), p1),
+                    () -> assertEquals(turnManager.getPlayersOrder().get(1), p2),
+                    () -> assertEquals(turnManager.getPlayersOrder().get(2), p3)
+            );
+        }
     }
 }

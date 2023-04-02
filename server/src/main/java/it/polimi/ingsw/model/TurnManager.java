@@ -53,4 +53,9 @@ public class TurnManager implements ITurnManager {
     public IPlayer getCurrentPlayer() {
         return players.get(currentPlayer);
     }
+
+    @Override
+    public List<IPlayer> getPlayersOrder() {
+        return new ArrayList<>(players);
+    }
 }

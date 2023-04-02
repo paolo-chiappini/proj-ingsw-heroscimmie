@@ -2,6 +2,8 @@ package it.polimi.ingsw.model.interfaces;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 
+import java.util.List;
+
 public interface ITurnManager {
     /**
      * Checks whether the game has ended or turns can still be played.
@@ -20,4 +22,11 @@ public interface ITurnManager {
      * @return the player playing the turn.
      */
     IPlayer getCurrentPlayer();
+
+    /**
+     * Get the list of players in the order in which they
+     * play their turn.
+     * @return the list of players ordered by turn.
+     */
+    List<IPlayer> getPlayersOrder();
 }
