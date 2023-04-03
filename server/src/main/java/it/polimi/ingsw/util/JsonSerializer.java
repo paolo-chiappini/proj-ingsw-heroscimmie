@@ -1,0 +1,103 @@
+package it.polimi.ingsw.util;
+
+import it.polimi.ingsw.model.CommonGoalCard;
+import it.polimi.ingsw.model.interfaces.*;
+import org.json.*;
+
+import java.util.List;
+import java.util.Objects;
+
+public class JsonSerializer implements Serializer {
+    @Override
+    public String serializeGame() {
+        return null;
+    }
+
+    @Override
+    public String serializePlayer(IPlayer player) {
+        IBookshelf bookshelf = player.getBookshelf();
+        JSONObject jsonObject = new JSONObject();
+
+        String serializedBookshelf = serializeBookshelf(bookshelf);
+        JSONObject jsonBookshelf = new JSONObject(serializedBookshelf);
+
+        jsonObject.put("username", player.getUsername());
+        jsonObject.put("score", player.getScore());
+        jsonObject.put("bookshelf", jsonBookshelf);
+
+        return jsonObject.toString();
+    }
+
+    @Override
+    public String serializeBoard() {
+        return null;
+    }
+
+    @Override
+    public String serializeBookshelf(IBookshelf bookshelf) {
+        JSONArray grid = new JSONArray();
+
+        for (int row = 0; row < bookshelf.getHeight(); row++) {
+            JSONArray rowArray = new JSONArray();
+            for (int col = 0; col < bookshelf.getWidth(); col++) {
+                int tileTypeInt = -1; // equivalent to null
+
+                if (bookshelf.hasTile(row, col)) {
+                    tileTypeInt = bookshelf.getTileAt(row, col).getType().ordinal();
+                }
+
+                rowArray.put(tileTypeInt);
+            }
+            grid.put(rowArray);
+        }
+
+        return grid.toString();
+    }
+
+    @Override
+    public String serializePersonalGoalCard() {
+        return null;
+    }
+
+    @Override
+    public String serializeCommonGoalCard(CommonGoalCard commonGoalCard) {
+        JSONObject jsonObject = new JSONObject();
+
+        List<Integer> points = commonGoalCard.getPoints();
+        JSONArray jsonPoints = new JSONArray(points);
+
+        jsonObject.put("card_id", commonGoalCard.getId());
+        jsonObject.put("points", jsonPoints);
+        jsonObject.put("", 0);
+
+        return null;
+    }
+
+    @Override
+    public String serializeBag() {
+        return null;
+    }
+
+    @Override
+    public String serializeBoardSpace(BoardSpace space) {
+        GameTile tile = space.getTile();
+        if (Objects.isNull(tile)) return "-1";
+
+        return tile.getType().ordinal() + "";
+    }
+
+    @Override
+    public String serializeTurn(ITurnManager turnManager) {
+        List<IPlayer> players = turnManager.getPlayersOrder();
+        JSONObject jsonObject = new JSONObject();
+        JSONArray usernames = new JSONArray();
+
+        players.forEach(p -> usernames.put(p.getUsername()));
+        int currentTurn = players.indexOf(turnManager.getCurrentPlayer());
+
+        jsonObject.put("players_turn", currentTurn);
+        jsonObject.put("players_order", usernames);
+
+        return jsonObject.toString();
+    }
+}
