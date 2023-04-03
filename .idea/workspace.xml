@@ -10,10 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard10.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard11.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard12.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard3.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard4.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard5.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard6.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard7.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard8.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard9.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -163,7 +170,9 @@
       <workItem from="1680335988682" duration="7801000" />
       <workItem from="1680352484497" duration="4729000" />
       <workItem from="1680358719842" duration="595000" />
-      <workItem from="1680450160185" duration="3679000" />
+      <workItem from="1680450160185" duration="3986000" />
+      <workItem from="1680513904273" duration="1000" />
+      <workItem from="1680513966883" duration="16641000" />
     </task>
     <servers />
   </component>
