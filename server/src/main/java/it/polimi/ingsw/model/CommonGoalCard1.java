@@ -21,6 +21,6 @@ public class CommonGoalCard1 extends CommonGoalCard{
     public boolean canObtainPoints(IBookshelf bookshelf) {
         List<Integer> groupsAdjacency;
         groupsAdjacency= BookshelfFloodFill.getTileGroupsSizes(bookshelf);
-        return groupsAdjacency.stream().anyMatch(sizeGroups->sizeGroups>=2);
+        return groupsAdjacency.stream().filter(size -> size >= 2).count()>= 6;
     }
 }

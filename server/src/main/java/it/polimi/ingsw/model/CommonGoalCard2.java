@@ -8,36 +8,24 @@ public class CommonGoalCard2 extends CommonGoalCard {
     }
 
     /**
-     * @param bookShelf is the bookshelf on which the achievements of a goal are checked
+     * @param bookshelf is the bookshelf on which the achievements of a goal are checked
      * Pattern to achieve: five tiles of the same type forming a diagonal.
      * @return true if the goal is achieved
      */
     @Override
-    public boolean canObtainPoints(IBookshelf bookShelf) {
-        int countDiagonal1=0;
-        int countDiagonal2=0;
-        int countDiagonal3=0;
-        int countDiagonal4=0;
-        for(int i=0;i<bookShelf.getHeight()-2;i++)
-        {
-            if((bookShelf.compareTiles(i,i,i+1,i+1)))
-            {
-                countDiagonal1++;
+    public boolean canObtainPoints(IBookshelf bookshelf) {
+        for (int i = 0; i < bookshelf.getHeight() - 4; i++) {
+            int matches = 0;
+            int matches2 = 0;
+            for (int j = 1; j < 5; j++) {
+                // compare the tile on the previous row and previous column with the current tile.
+                // i indicate a row offset from where the diagonal begins.
+                if (bookshelf.compareTiles(i + j-1, j-1, i+j, j)) matches++;
+                if (bookshelf.compareTiles(i + j-1, bookshelf.getWidth()-j, i+j, bookshelf.getWidth()-j-1)) matches2++;
             }
-            if((bookShelf.compareTiles(i+1,i,i+2,i+1)))
-            {
-                countDiagonal2++;
-            }
-            if((bookShelf.compareTiles(i, bookShelf.getHeight()-2-i,i+1,bookShelf.getHeight()-3-i)))
-            {
-                countDiagonal3++;
-            }
-            if((bookShelf.compareTiles(i+1, bookShelf.getHeight()-2-i,i+2, bookShelf.getHeight()-3-i)))
-            {
-                countDiagonal4++;
-            }
+            //(if it has 5 tiles, you make 4 comparisons)
+            if ((matches >= 4) || (matches2 >= 4)) return true;
         }
-        return (countDiagonal1== bookShelf.getWidth()-1 || countDiagonal2== bookShelf.getWidth()-1 ||
-                countDiagonal3== bookShelf.getWidth()-1 || countDiagonal4== bookShelf.getWidth()-1);
+        return false;
     }
 }

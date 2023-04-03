@@ -20,6 +20,6 @@ public class CommonGoalCard3 extends CommonGoalCard {
     public boolean canObtainPoints(IBookshelf bookshelf) {
         List<Integer> groupsAdjacency;
         groupsAdjacency= BookshelfFloodFill.getTileGroupsSizes(bookshelf);
-        return groupsAdjacency.stream().anyMatch(sizeGroups->sizeGroups>=4);
+        return groupsAdjacency.stream().filter(size -> size >= 4).count()>= 4;
     }
 }
