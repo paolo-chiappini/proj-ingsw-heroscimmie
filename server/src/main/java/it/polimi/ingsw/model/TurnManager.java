@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.ITurnManager;
+import it.polimi.ingsw.util.Deserializer;
+import it.polimi.ingsw.util.Serializer;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,9 +15,9 @@ import java.util.List;
  * in a game. The class also checks whether
  */
 public class TurnManager implements ITurnManager {
-    private int currentPlayer;
+    private int currentPlayerIndex;
     private boolean lastLap;
-    private final List<IPlayer> players;
+    private List<IPlayer> players;
 
     /**
      * @param players list of players playing the game
@@ -25,16 +27,20 @@ public class TurnManager implements ITurnManager {
         Collections.shuffle(this.players);
     }
 
+    public TurnManager() {
+        this.players = new ArrayList<>();
+    }
+
     /**
      * Checks if the current player has met the end game condition.
      */
     private void checkEndCondition() {
-        lastLap = players.get(currentPlayer).getBookshelf().isFull();
+        lastLap = players.get(currentPlayerIndex).getBookshelf().isFull();
     }
 
     @Override
     public boolean isGameOver() {
-        boolean firstPlayerTurn = currentPlayer == 0;
+        boolean firstPlayerTurn = currentPlayerIndex == 0;
         return lastLap && firstPlayerTurn;
     }
 
@@ -44,18 +50,41 @@ public class TurnManager implements ITurnManager {
             throw new IllegalActionException("The current game is over, there are no more turns to play. Please check with TurnManager.isGameOver().");
         }
 
-        currentPlayer++;
-        currentPlayer = currentPlayer % players.size();
+        currentPlayerIndex++;
+        currentPlayerIndex = currentPlayerIndex % players.size();
         checkEndCondition();
     }
 
     @Override
     public IPlayer getCurrentPlayer() {
-        return players.get(currentPlayer);
+        return players.get(currentPlayerIndex);
     }
 
     @Override
     public List<IPlayer> getPlayersOrder() {
         return new ArrayList<>(players);
+    }
+
+    @Override
+    public void setPlayersOrder(List<IPlayer> players) {
+        this.players = new ArrayList<>(players);
+    }
+
+    @Override
+    public void setCurrentTurn(int turn) throws IllegalArgumentException {
+        if (turn < 0 || turn > this.players.size()) {
+            throw new IllegalArgumentException("Turn must be positive and less (or equal) to the number of players playing.");
+        }
+        currentPlayerIndex = turn;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serializeTurn(this);
+    }
+
+    @Override
+    public void deserialize(Deserializer deserializer, String data) {
+        deserializer.deserializeTurn(this, data);
     }
 }

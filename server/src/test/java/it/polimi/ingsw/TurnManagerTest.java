@@ -6,6 +6,8 @@ import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 
+import it.polimi.ingsw.util.JsonDeserializer;
+import it.polimi.ingsw.util.JsonSerializer;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -176,6 +178,88 @@ public class TurnManagerTest {
                     () -> assertEquals(turnManager.getPlayersOrder().get(0), p1),
                     () -> assertEquals(turnManager.getPlayersOrder().get(1), p2),
                     () -> assertEquals(turnManager.getPlayersOrder().get(2), p3)
+            );
+        }
+    }
+
+    @Nested
+    @DisplayName("When restoring turn manager state through setters")
+    class TestSetters {
+
+        @Test
+        @DisplayName("turns should follow order of players")
+        void orderOfPlayersShouldBeAsSpecified() {
+            TurnManager turnManager = new TurnManager();
+            turnManager.setPlayersOrder(players);
+
+            for (IPlayer player : players) {
+                assertEquals(player, turnManager.getCurrentPlayer());
+                turnManager.nextTurn();
+            }
+        }
+
+        @Test
+        @DisplayName("setting turn should start sequence at the given index")
+        void turnShouldMatchWithParameter() {
+            TurnManager turnManager = new TurnManager();
+            turnManager.setPlayersOrder(players);
+
+            assertAll(
+                    () -> {
+                        turnManager.setCurrentTurn(2);
+                        assertEquals(players.get(2), turnManager.getCurrentPlayer());
+                    },
+                    () -> {
+                        turnManager.setCurrentTurn(1);
+                        assertEquals(players.get(1), turnManager.getCurrentPlayer());
+                    },
+                    () -> {
+                        turnManager.setCurrentTurn(0);
+                        assertEquals(players.get(0), turnManager.getCurrentPlayer());
+                    }
+            );
+        }
+
+        @Test
+        @DisplayName("setting an invalid index should throw an exception")
+        void invalidTurnNumberShouldThrowException() {
+            TurnManager turnManager = new TurnManager();
+
+            assertAll(
+                    () -> assertThrows(IllegalArgumentException.class, () -> turnManager.setCurrentTurn(-1)),
+                    () -> assertThrows(IllegalArgumentException.class, () -> turnManager.setCurrentTurn(players.size()))
+            );
+        }
+    }
+
+    @Nested
+    @DisplayName("When serializing/deserializing turn manager")
+    class TestSerialization {
+        @Test
+        @DisplayName("serialization should return correct data")
+        void turnManagerSerialization() {
+            TurnManager turnManager = new TurnManager();
+            turnManager.setPlayersOrder(players);
+            turnManager.setCurrentTurn(1);
+
+            String serializedData = turnManager.serialize(new JsonSerializer());
+            String expected = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"]}";
+            assertEquals(expected, serializedData);
+        }
+
+        @Test
+        @DisplayName("deserialization should set correct data")
+        void turnManagerDeserialization() {
+            TurnManager turnManager = new TurnManager();
+            String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"]}";
+
+            turnManager.deserialize(new JsonDeserializer(), serializedData);
+            List<IPlayer> players = turnManager.getPlayersOrder();
+            assertAll(
+                    () -> assertEquals("a", players.get(0).getUsername()),
+                    () -> assertEquals("b", players.get(1).getUsername()),
+                    () -> assertEquals("c", players.get(2).getUsername()),
+                    () -> assertEquals(1, players.indexOf(turnManager.getCurrentPlayer()))
             );
         }
     }
