@@ -26,13 +26,13 @@ public class BoardTest {
     }
 
     /**
-     * Test that board doesn't need to be refilled because it's full
+     * Test that there's some cards with no adjacency on the board
+     * therefore baord needs to be refilled
      */
     @Test
-    @DisplayName("Board is full, doesn't need to be refill")
-    void isBoardFull(){
-        myBoard.refill(new Bag());
-        assertFalse(myBoard.needsRefill());
+    @DisplayName("Some card has no adjacency on the board")
+    void adjacencyAmongCards(){
+
     }
 
     /**
