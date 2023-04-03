@@ -57,13 +57,14 @@ public class Bookshelf implements IBookshelf {
         for (int i = 0; i< HEIGHT; i++) {
             if (tiles[i][column]==null)
             {
-                startRowInsert=i;
+                startRowInsert=i+1;
             }
         }
         for (GameTile tile : tilesToDrop)
         {
-            tiles[startRowInsert][column] = tile;
             startRowInsert--;
+            tiles[startRowInsert][column] = tile;
+
         }
     }
 

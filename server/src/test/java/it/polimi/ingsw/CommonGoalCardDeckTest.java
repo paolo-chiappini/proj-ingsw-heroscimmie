@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Tests on CommonGoalCardDeckTest")
+@DisplayName("Tests on CommonGoalCardDeck")
 class CommonGoalCardDeckTest {
 
     ArrayList<CommonGoalCard> myCards;
@@ -81,7 +81,7 @@ class CommonGoalCardDeckTest {
                 assertEquals(2, myCards.size());
             }
             @Test
-            @DisplayName("my cards contain two of the cards in the deck")
+            @DisplayName("my cards contains two of the cards in the deck")
             void myCards() {
                 myCards = commonDeck.drawCards();
                 assertTrue(myCards.contains(commonDeck.getCard(1)) || myCards.contains(commonDeck.getCard(2)) ||

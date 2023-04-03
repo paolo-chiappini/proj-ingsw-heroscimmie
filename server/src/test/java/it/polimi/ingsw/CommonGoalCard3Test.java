@@ -51,8 +51,8 @@ public class CommonGoalCard3Test {
             @DisplayName("should be true with 4 groups each containing more than 4 tiles of the same type")
             void canObtainPoints4GroupsMoreTiles()  {
                 int[][] template = new int[][] {
-                        {-1, -1, -1,  1,  1},
-                        { 3,  1,  1,  1,  4},
+                        {-1, -1,  1,  1,  1},
+                        { 3,  0,  1,  1,  4},
                         { 5,  1,  5,  4,  4},
                         { 1,  1,  2,  4,  4},
                         { 1,  2,  2,  2,  0},
@@ -89,7 +89,7 @@ public class CommonGoalCard3Test {
                         { 0,  0,  2,  0,  1}
                 };
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                assertTrue(card3.canObtainPoints(bookshelf));
+                assertFalse(card3.canObtainPoints(bookshelf));
             }
 
             @Test

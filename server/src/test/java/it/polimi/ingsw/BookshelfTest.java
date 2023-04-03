@@ -15,7 +15,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Tests on BookshelfTest")
+@DisplayName("Tests on Bookshelf")
 class BookshelfTest {
     Bookshelf bookshelf;
 
@@ -79,7 +79,7 @@ class BookshelfTest {
                         () -> bookshelf.canDropTiles(tiles.size(), 3));
             }
             @Test
-            @DisplayName("the number of tiles to inserted should be <= availableSpaces")
+            @DisplayName("the number of tiles to insert should be <= availableSpaces")
             void canDropTilesTrue() {
                 List<GameTile> tiles = new ArrayList<>();
                 tiles.add(new Tile(TileType.CAT));
@@ -92,7 +92,7 @@ class BookshelfTest {
                 );
             }
             @Test
-            @DisplayName("no tiles can be inserted when the number of tiles to inserted are > availableSpaces")
+            @DisplayName("no tiles can be inserted when the number of tiles to insert are > availableSpaces")
             void canDropTilesFalse() {
                 List<GameTile> tiles = new ArrayList<>();
                 tiles.add(new Tile(TileType.CAT));
@@ -118,15 +118,16 @@ class BookshelfTest {
             @DisplayName("the bookshelf should be full when adding 30 tiles")
             void isFull() {
                 assertFalse(bookshelf.isFull());
-                List<GameTile> tiles = new ArrayList<>();
-                for (TileType type : TileType.values()) {
-                    tiles.add(new Tile(type));
-                }
-                for (int i = 0; i < 5; i++) {
-                    bookshelf.dropTiles(tiles, i);
+                List<GameTile> tiles=new ArrayList<>();
+                tiles.add(new Tile(TileType.PLANT));
+                for(int i=0;i< bookshelf.getHeight();i++)
+                {
+                    for(int j=0;j<bookshelf.getWidth();j++)
+                    {
+                        bookshelf.dropTiles(tiles,j);
+                    }
                 }
                 assertTrue(bookshelf.isFull());
-            }
         }
 
         @Nested
@@ -153,4 +154,5 @@ class BookshelfTest {
             }
         }
     }
+}
 }

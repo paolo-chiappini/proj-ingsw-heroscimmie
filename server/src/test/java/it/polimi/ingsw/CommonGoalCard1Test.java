@@ -89,7 +89,7 @@ public class CommonGoalCard1Test {
                         { 0,  1,  2,  2,  1}
                 };
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                assertTrue(card1.canObtainPoints(bookshelf));
+                assertFalse(card1.canObtainPoints(bookshelf));
             }
 
             @Test

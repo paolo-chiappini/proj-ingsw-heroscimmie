@@ -9,7 +9,7 @@ import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Tests on BagTest")
+@DisplayName("Tests on Bag")
 class BagTest {
 
     Bag bag;
@@ -83,7 +83,7 @@ class BagTest {
         @DisplayName("When adding tiles")
         class AddingTests {
             @Test
-            @DisplayName("one tile should be adding to the bag")
+            @DisplayName("one tile should be added to the bag")
             void addOneTile() {
                 GameTile tile = bag.drawTile();
                 bag.addTile(new Tile(tile.getType()));
