@@ -5,11 +5,14 @@ import java.util.ArrayList;
 public class PersonalGoalCardDeck {
     private ArrayList<PersonalGoalCard> personalGoalCards;
     public static final int NUMBER_OF_PERSONAL_GOAL_CARDS = 12;
+    private TileType [][] pattern = new TileType[5][6];
+
 
     public PersonalGoalCardDeck(){
         personalGoalCards = new ArrayList<PersonalGoalCard>();
+
         for(int i = 0; i< NUMBER_OF_PERSONAL_GOAL_CARDS; i++)
-            personalGoalCards.add(new PersonalGoalCard(i+1));
+            personalGoalCards.add(new PersonalGoalCard(i+1, pattern));
 
     }
 
@@ -19,7 +22,7 @@ public class PersonalGoalCardDeck {
      */
     public PersonalGoalCard drawCard(){
         int randomCardDrawnId = (int)(Math.random()*personalGoalCards.size());
-        PersonalGoalCard cardDrawn = new PersonalGoalCard(randomCardDrawnId);
+        PersonalGoalCard cardDrawn = personalGoalCards.get(randomCardDrawnId);
         return  cardDrawn;
     }
 }
