@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public abstract class CommonGoalCard implements GoalCard {
     private final int id;
-    private ArrayList<Integer> points = new ArrayList<>();
+    private final ArrayList<Integer> points = new ArrayList<>();
 
     public CommonGoalCard(int id, int numPlayer) {
         this.id = id;
@@ -28,7 +28,7 @@ public abstract class CommonGoalCard implements GoalCard {
     }
 
     public ArrayList<Integer> getPoints() {
-        return points;
+        return new ArrayList<>(points);
     }
 
     /**
