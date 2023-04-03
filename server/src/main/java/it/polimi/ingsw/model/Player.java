@@ -2,11 +2,13 @@ package it.polimi.ingsw.model;
 
 public class Player {
     private String username;
-    private int score; //depends on how many book in the shelf
+    private int score;
     private PersonalGoalCard personalGoalCard;
+
+    /*
     private AdjacencyBonusGoal bonusGoal;
-    private CommonGoalCard commonGoal;
     private Bookshelf bookshelf;
+    */
 
     public Player(String username, int score){
         this.score = score;
@@ -36,12 +38,11 @@ public class Player {
      * @param points
      */
     public void addPointsToScore(int points){
-        //adjacency
-        points+= bonusGoal.evaluatePoints(bookshelf);
-        //personal goal
-        points += personalGoalCard.evaluatePoints(bookshelf);
-        //common goal
-        points += commonGoal.evaluatePoints();
+        /*
+        points+= bonusGoal.evaluatePoints(bookshelf);   //adjacency
+        points += personalGoalCard.evaluatePoints(bookshelf);   //personal goal
+        */
+        score += points;
     }
 
     public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
