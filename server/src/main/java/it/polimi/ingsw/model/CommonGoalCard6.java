@@ -16,9 +16,9 @@ public class CommonGoalCard6 extends CommonGoalCard {
      */
     @Override
     public boolean canObtainPoints(IBookshelf bookShelf) {
-        HashMap<TileType,Integer> countTileType = new HashMap<>();
-        int countColumns=0;
-        int countTile;
+        HashMap<TileType,Integer> countTileType = new HashMap<>();  //counts the number of each type of tile
+        int countColumns=0; //counts the number of columns formed by 6 different types of tiles.
+        int countTile;      //counts the number of tiles in a column
         for(TileType type : TileType.values())
         {
             countTileType.put(type,0);
@@ -34,6 +34,7 @@ public class CommonGoalCard6 extends CommonGoalCard {
                     countTileType.computeIfPresent(bookShelf.getTileAt(j,i).getType(),(key, value) -> value + 1);
                 }
             }
+            //it has all types of tiles and has 6 tiles
             if((countTileType.values().stream().noneMatch(value -> value == 0))&&(countTile==6))
             {
                 countColumns++;

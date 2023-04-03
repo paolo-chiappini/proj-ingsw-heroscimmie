@@ -17,25 +17,26 @@ public class CommonGoalCard9 extends CommonGoalCard {
      */
     @Override
     public boolean canObtainPoints(IBookshelf bookShelf) {
-        HashMap<TileType,Integer> countTileType = new HashMap<>();
-        int countColumns=0;
-        int countTile;
+        HashMap<TileType,Integer> countTileType = new HashMap<>();  //counts the number of each type of tile
+        int countColumns=0;  //counts the number of columns with 6 tiles of maximum three different types.
+        int countTiles;     ////counts the number of tiles in a column
         for(TileType type : TileType.values())
         {
             countTileType.put(type,0);
         }
         for (int i = 0; i < bookShelf.getWidth(); i++)
         {
-            countTile=0;
+            countTiles=0;
             for (int j = 0; j < bookShelf.getHeight(); j++)
             {
                 if(bookShelf.hasTile(j,i))
                 {
-                    countTile++;
+                    countTiles++;
                     countTileType.computeIfPresent(bookShelf.getTileAt(j,i).getType(),(key, value) -> value + 1);
                 }
             }
-            if((countTileType.values().stream().filter(value->value==0).count()>=3)&&(countTile==6))
+            //if you need to have a maximum of three different types,I must have at least 3 types of tile with no elements
+            if((countTileType.values().stream().filter(value->value==0).count()>=3)&&(countTiles==6))
             {
                 countColumns++;
             }

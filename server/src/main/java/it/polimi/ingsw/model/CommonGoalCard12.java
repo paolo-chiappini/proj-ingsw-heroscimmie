@@ -17,11 +17,11 @@ public class CommonGoalCard12 extends CommonGoalCard {
      **/
     @Override
     public boolean canObtainPoints(IBookshelf bookShelf) {
-       int diagonal1 = 0;
-       int diagonal2 = 0;
-       int diagonal3 = 0;
-       int diagonal4 = 0;
-       int countTiles;
+       int diagonal1 = 0;   //in the first column it has 6 tiles (decreasing height)
+       int diagonal2 = 0;   //in the first column it has 5 tiles (decreasing height)
+       int diagonal3 = 0;   //in the first column it has 1 tiles (increasing height)
+       int diagonal4 = 0;   //in the first column it has 2 tiles (increasing height)
+       int countTiles;      //counts the number of tiles in a column
        for (int i = 0; i < bookShelf.getWidth(); i++)
        {
            countTiles = 0;

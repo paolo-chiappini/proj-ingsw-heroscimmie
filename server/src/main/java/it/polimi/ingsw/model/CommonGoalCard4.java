@@ -17,25 +17,26 @@ public class CommonGoalCard4 extends CommonGoalCard {
      */
     @Override
     public boolean canObtainPoints(IBookshelf bookShelf) {
-        HashMap<TileType,Integer> countTileType = new HashMap<>();
-        int countLines=0;
-        int countTile;
+        HashMap<TileType,Integer> countTileType = new HashMap<>();  //counts the number of each type of tile
+        int countLines=0;   //counts the number of lines with 5 tiles of maximum three different types.
+        int countTiles;     //counts the number of tiles in a line
         for(TileType type : TileType.values())
         {
             countTileType.put(type,0);
         }
         for (int i = 0; i < bookShelf.getHeight(); i++)
         {
-            countTile=0;
+            countTiles=0;
             for (int j = 0; j < bookShelf.getWidth(); j++)
             {
                 if(bookShelf.hasTile(i,j))
                 {
-                    countTile++;
+                    countTiles++;
                     countTileType.computeIfPresent(bookShelf.getTileAt(i,j).getType(),(key, value) -> value + 1);
                 }
             }
-            if((countTileType.values().stream().filter(value->value==0).count()>=3)&&(countTile==5))
+            //if you need to have a maximum of three different types, I must have at least 3 types of tile with no elements
+            if((countTileType.values().stream().filter(value->value==0).count()>=3)&&(countTiles==5))
             {
                 countLines++;
             }

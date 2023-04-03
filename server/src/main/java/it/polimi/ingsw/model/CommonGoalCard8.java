@@ -17,25 +17,26 @@ public class CommonGoalCard8 extends CommonGoalCard {
      */
     @Override
     public boolean canObtainPoints(IBookshelf bookShelf) {
-        HashMap<TileType,Integer> countTileType = new HashMap<>();
-        int countLines=0;
-        int countTile;
+        HashMap<TileType,Integer> countTileType = new HashMap<>();  //counts the number of each type of tile
+        int countLines=0;   //counts the number of lines formed by 5 different types of tiles.
+        int countTiles;      //counts the number of tiles in a line
         for(TileType type : TileType.values())
         {
             countTileType.put(type,0);
         }
         for (int i = 0; i < bookShelf.getHeight(); i++)
         {
-            countTile=0;
+            countTiles=0;
             for (int j = 0; j < bookShelf.getWidth(); j++)
             {
                 if(bookShelf.hasTile(i,j))
                 {
-                    countTile++;
+                    countTiles++;
                     countTileType.computeIfPresent(bookShelf.getTileAt(i,j).getType(),(key, value) -> value + 1);
                 }
             }
-            if((countTileType.values().stream().filter(value->value==0).count()==1)&&(countTile==5))
+            //the number of tile types without elements must be 1 and has 5 tiles
+            if((countTileType.values().stream().filter(value->value==0).count()==1)&&(countTiles==5))
             {
                 countLines++;
             }
