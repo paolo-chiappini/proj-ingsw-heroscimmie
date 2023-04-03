@@ -59,11 +59,15 @@ public class DynamicTestBookshelf implements IBookshelf {
 
     @Override
     public boolean hasTile(int row, int column) {
-        return false;
+        return tiles[row][column]!=null;
     }
 
     @Override
     public boolean compareTiles(int row, int column, int row2, int column2) {
+        if (this.hasTile(row,column) && this.hasTile(row2,column2))
+        {
+            return tiles[row][column].getType().equals(tiles[row2][column2].getType());
+        }
         return false;
     }
 }
