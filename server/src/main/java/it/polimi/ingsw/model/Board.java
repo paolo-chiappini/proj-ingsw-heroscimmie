@@ -18,14 +18,15 @@ public class Board {
     public boolean needsRefill(){
         for(int i = 0; i < spaces.length; i++) {
             for(int j = 0; j < spaces[0].length; j++) {
-                if((i==0) || (j==0)) {
-                    if(spaces[i+1][j]!=null || spaces[i][j+1]!=null) return false;
-                }
-                else if((i==8) || (j==8)) {
-                    if(spaces[i-1][j]!=null || spaces[i][j-1]!=null) return false;
-                }
-                else {
-                    if(spaces[i+1][j]!=null || spaces[i-1][j]!=null || spaces[i][j+1]!=null || spaces[i][j-1]!=null) return false;
+                if(spaces[i][j].getTile() != null) {
+                    if ((i == 0) || (j == 0)) {
+                        if (spaces[i + 1][j].getTile() != null || spaces[i][j + 1].getTile() != null) return false;
+                    } else if ((i == 8) || (j == 8)) {
+                        if (spaces[i - 1][j].getTile() != null || spaces[i][j - 1].getTile() != null) return false;
+                    } else {
+                        if (spaces[i + 1][j].getTile() != null || spaces[i - 1][j].getTile() != null || spaces[i][j + 1].getTile() != null || spaces[i][j - 10].getTile() != null)
+                            return false;
+                    }
                 }
             }
         }
