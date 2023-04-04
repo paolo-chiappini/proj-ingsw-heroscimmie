@@ -3,19 +3,25 @@ package it.polimi.ingsw.model;
 import java.util.*;
 
 public class Board {
-    private TileSpace spaces[][];
+    private static final int BOARD_DIM = 9;
+    private TileSpace[][] spaces;
+
+    public Board(){
+
+
+    }
 
     /**
      * Check whether the board needs to be refilled or not
-     * @return true if board is empty
+     * @return true if board is empty or there's no adjacency among the cards left on the board
      */
     public boolean needsRefill(){
-        for(int i = 0; i < spaces.length; i++){
-            for(int j = 0; j < spaces[0].length; j++)
-                if(spaces[i][j] != null)
-                    return false;
+        for(int i = 1; i < spaces.length -1; i++){
+            for(int j = 1; j < spaces[0].length -1; j++)
+                if(spaces[i-1][j] == null && spaces[i][j-1] == null && spaces[i+1][j] == null && spaces[i][j+1] == null)
+                    return true;
         }
-        return true;
+        return false;
     }
 
     /**
@@ -24,7 +30,10 @@ public class Board {
      * Tiles are drawn from the bag and put on the board
      */
     public void refill(Bag bag){
-        bag.drawTile();
+        for(int i = 0; i < spaces.length; i++)
+            for(int j = 0; j < spaces[0].length; j++)
+                if(spaces[i][j].canPlaceTile())
+                    bag.drawTile();
     }
 
     /**
@@ -33,14 +42,54 @@ public class Board {
      * @param col1
      * @param row2
      * @param col2
-     * @return two tiles picked up from the board
+     * @return tiles picked up from the board. They can be one, two or three tiles
      */
     public List<TileSpace> pickUpTiles(int row1, int col1, int row2, int col2){
         List<TileSpace> myList = new LinkedList<>();
-        myList.add(spaces[row1][col1]);
-        //spaces.removeTile();
-        myList.add(spaces[row2][col2]);
-        //spaces.removeTile();
+        int numOfTilesPicked;
+
+        if(row1 == row2 && col1 == col2) {      //player wants to pick a single tile
+            myList.add(spaces[row1][col1]);
+            spaces[row1][col1].removeTile();
+        }
+
+        else if(row1 == row2 && col1 != col2){  //player wants to pick two or three tiles
+            if(col2 > col1){
+                numOfTilesPicked = col2 - col1 + 1;
+                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
+                    for(int i = 0; i < numOfTilesPicked; i++){
+                        myList.add(spaces[row1][col1 + i]);
+                        spaces[row1][col1 + i].removeTile();
+                    }
+            }
+            else if (col1 > col2) {
+                numOfTilesPicked = col1 - col2 + 1;
+                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
+                    for (int i = 0; i < numOfTilesPicked; i++) {
+                        myList.add(spaces[row1][col2 + i]);
+                        spaces[row1][col2 + i].removeTile();
+                    }
+            }
+
+        }
+        else if(row1 != row2 && col1 == col2){
+            if(row2 > row1){
+                numOfTilesPicked = row2 - row1 + 1;
+                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
+                    for(int i = 0; i < numOfTilesPicked; i++){
+                        myList.add(spaces[row1+i][col1]);
+                        spaces[row1 + i][col1].removeTile();
+                    }
+            }
+            else if (row1 > row2) {
+                numOfTilesPicked = row1 - row2 + 1;
+                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
+                    for (int i = 0; i < numOfTilesPicked; i++) {
+                        myList.add(spaces[row2 + i][col1]);
+                        spaces[row2 + i][col1].removeTile();
+                    }
+            }
+        }
         return myList;
     }
 
