@@ -75,7 +75,7 @@ public class Bookshelf implements IBookshelf {
      * @return true if you can insert the tiles
      */
     @Override
-    public boolean canDropTiles(int numOfTiles, int column) throws IllegalActionException
+    public boolean canDropTiles(int numOfTiles, int column)
     {
         int AvailableSpaces=0;
         if(numOfTiles>3)

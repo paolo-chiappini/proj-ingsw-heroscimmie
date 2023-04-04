@@ -16,7 +16,7 @@ public interface ITurnManager extends Serializable {
      * Progresses the turn (if possible) moving to the next player.
      * @throws IllegalActionException when trying to move to the next turn when game has ended.
      */
-    void nextTurn() throws IllegalActionException;
+    void nextTurn();
 
     /**
      * Get the current player playing the turn.
@@ -43,5 +43,5 @@ public interface ITurnManager extends Serializable {
      * @throws IllegalArgumentException when the turn value is either negative or greater
      * than the number of players.
      */
-    void setCurrentTurn(int turn) throws IllegalArgumentException;
+    void setCurrentTurn(int turn);
 }

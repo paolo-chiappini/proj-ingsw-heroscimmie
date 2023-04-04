@@ -45,7 +45,7 @@ public class TurnManager implements ITurnManager {
     }
 
     @Override
-    public void nextTurn() throws IllegalActionException {
+    public void nextTurn() {
         if (isGameOver()) {
             throw new IllegalActionException("The current game is over, there are no more turns to play. Please check with TurnManager.isGameOver().");
         }
@@ -71,7 +71,7 @@ public class TurnManager implements ITurnManager {
     }
 
     @Override
-    public void setCurrentTurn(int turn) throws IllegalArgumentException {
+    public void setCurrentTurn(int turn) {
         if (turn < 0 || turn > this.players.size()) {
             throw new IllegalArgumentException("Turn must be positive and less (or equal) to the number of players playing.");
         }

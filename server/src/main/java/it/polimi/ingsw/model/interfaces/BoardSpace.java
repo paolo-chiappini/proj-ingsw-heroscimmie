@@ -17,7 +17,7 @@ public interface BoardSpace {
      * @throws IllegalActionException throws when trying to set a new tile
      *      and the current space is either inactive or occupied.
      */
-    void setTile(GameTile tile) throws IllegalActionException;
+    void setTile(GameTile tile);
 
     /**
      * Check if the current space can be used.

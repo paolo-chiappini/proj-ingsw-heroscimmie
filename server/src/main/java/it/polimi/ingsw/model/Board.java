@@ -1,8 +1,11 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.util.IBoard;
+
 import java.util.*;
 
-public class Board {
+public class Board implements IBoard {
     private static final int BOARD_DIM = 9;
     private TileSpace[][] spaces;
 
@@ -15,6 +18,7 @@ public class Board {
      * Check whether the board needs to be refilled or not
      * @return true if board is empty or there's no adjacency among the cards left on the board
      */
+    @Override
     public boolean needsRefill(){
         for(int i = 1; i < spaces.length -1; i++){
             for(int j = 1; j < spaces[0].length -1; j++)
@@ -29,6 +33,7 @@ public class Board {
      * @param bag
      * Tiles are drawn from the bag and put on the board
      */
+    @Override
     public void refill(Bag bag){
         for(int i = 0; i < spaces.length; i++)
             for(int j = 0; j < spaces[0].length; j++)
@@ -44,6 +49,7 @@ public class Board {
      * @param col2
      * @return tiles picked up from the board. They can be one, two or three tiles
      */
+    @Override
     public List<TileSpace> pickUpTiles(int row1, int col1, int row2, int col2){
         List<TileSpace> myList = new LinkedList<>();
         int numOfTilesPicked;
@@ -102,9 +108,25 @@ public class Board {
      * @return true if player can pick up a tile; false if board in position [row1][col1]
      *          or [row2][col2] is empty
      */
+    @Override
     public boolean canPickUpTiles(int row1, int col1, int row2, int col2){
         if(spaces[row1][col1] !=null && spaces[row2][col2] != null)
             return true;
         return false;
+    }
+
+    @Override
+    public void setTileAt(int row, int col, GameTile tile) {
+
+    }
+
+    @Override
+    public GameTile getTileAt(int row, int col) {
+        return null;
+    }
+
+    @Override
+    public int getSize() {
+        return 0;
     }
 }

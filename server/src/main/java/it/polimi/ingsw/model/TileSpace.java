@@ -37,7 +37,7 @@ public class TileSpace implements BoardSpace {
     }
 
     @Override
-    public void setTile(GameTile tile) throws IllegalActionException {
+    public void setTile(GameTile tile) {
         if(!canPlaceTile()) {
             throw new IllegalActionException("The space is either inactive or full, please check availability with BoardSpace.canPlaceTile().");
         }
