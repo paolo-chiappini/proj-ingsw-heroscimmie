@@ -3,6 +3,9 @@ package it.polimi.ingsw.util;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Library class used for simple file IO operations.
+ */
 public abstract class FileIOManager {
     /**
      * Writes a string of data on the specified file.
