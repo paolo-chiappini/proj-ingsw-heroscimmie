@@ -39,7 +39,8 @@ public abstract class CommonGoalCard implements GoalCard {
      * @return the score of the common goal cards
      **/
     @Override
-    public int evaluatePoints(Player player) throws IllegalActionException{
+    public int evaluatePoints(Player player)
+    {
         if(players.contains(player.getUsername()))
             throw new IllegalActionException("You can only score points from the same common goal card once per game");
         else
