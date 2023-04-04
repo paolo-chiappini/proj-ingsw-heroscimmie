@@ -2,16 +2,10 @@ package it.polimi.ingsw.model;
 
 public class Player {
     private String username;
-    private int score;
+    private static int score = 0;
     private PersonalGoalCard personalGoalCard;
 
-    /*
-    private AdjacencyBonusGoal bonusGoal;
-    private Bookshelf bookshelf;
-    */
-
-    public Player(String username, int score){
-        this.score = score;
+    public Player(String username){
         this.username = username;
     }
 
@@ -38,10 +32,6 @@ public class Player {
      * @param points
      */
     public void addPointsToScore(int points){
-        /*
-        points+= bonusGoal.evaluatePoints(bookshelf);   //adjacency
-        points += personalGoalCard.evaluatePoints(bookshelf);   //personal goal
-        */
         score += points;
     }
 
