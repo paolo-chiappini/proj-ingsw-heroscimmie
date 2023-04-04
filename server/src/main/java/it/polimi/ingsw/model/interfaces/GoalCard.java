@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model.interfaces;
 
-import it.polimi.ingsw.model.Bookshelf;
-
 public interface GoalCard {
-    boolean canObtainPoints(Bookshelf bookShelf);
+    boolean canObtainPoints(IBookshelf bookShelf);
     int evaluatePoints();
 }

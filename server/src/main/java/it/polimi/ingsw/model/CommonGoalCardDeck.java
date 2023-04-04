@@ -6,20 +6,20 @@ public class CommonGoalCardDeck {
     private static final int NUMBER_OF_COMMON_CARD=2;
     private final ArrayList<CommonGoalCard> commonGoalCards;
 
-    public CommonGoalCardDeck(int numPlayer) {
+    public CommonGoalCardDeck(int numPlayers) {
         commonGoalCards=new ArrayList<>();
-        /*commonGoalCards.add(new CommonGoalCard1(numPlayer));
-        commonGoalCards.add(new CommonGoalCard2(numPlayer));
-        commonGoalCards.add(new CommonGoalCard3(numPlayer));
-        commonGoalCards.add(new CommonGoalCard4(numPlayer));
-        commonGoalCards.add(new CommonGoalCard5(numPlayer));
-        commonGoalCards.add(new CommonGoalCard6(numPlayer));
-        commonGoalCards.add(new CommonGoalCard7(numPlayer));
-        commonGoalCards.add(new CommonGoalCard8(numPlayer));
-        commonGoalCards.add(new CommonGoalCard9(numPlayer));
-        commonGoalCards.add(new CommonGoalCard10(numPlayer));
-        commonGoalCards.add(new CommonGoalCard11(numPlayer));
-        commonGoalCards.add(new CommonGoalCard12(numPlayer));*/
+        commonGoalCards.add(new CommonGoalCard1(numPlayers));
+        commonGoalCards.add(new CommonGoalCard2(numPlayers));
+        commonGoalCards.add(new CommonGoalCard3(numPlayers));
+        commonGoalCards.add(new CommonGoalCard4(numPlayers));
+        commonGoalCards.add(new CommonGoalCard5(numPlayers));
+        commonGoalCards.add(new CommonGoalCard6(numPlayers));
+        commonGoalCards.add(new CommonGoalCard7(numPlayers));
+        commonGoalCards.add(new CommonGoalCard8(numPlayers));
+        commonGoalCards.add(new CommonGoalCard9(numPlayers));
+        commonGoalCards.add(new CommonGoalCard10(numPlayers));
+        commonGoalCards.add(new CommonGoalCard11(numPlayers));
+        commonGoalCards.add(new CommonGoalCard12(numPlayers));
     }
 
     /**
@@ -35,7 +35,7 @@ public class CommonGoalCardDeck {
      * @return the deck of common goal cards
      **/
     public ArrayList<CommonGoalCard> getCommonGoalCards() {
-        return commonGoalCards;
+        return new ArrayList<>(commonGoalCards);
     }
 
     /**
