@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class Bag implements it.polimi.ingsw.model.interfaces.IBag {
+public class Bag {
     private final HashMap<TileType,Integer> tilesBag;
     private static final int NUM_OF_TILES=22;
 
@@ -18,7 +18,6 @@ public class Bag implements it.polimi.ingsw.model.interfaces.IBag {
         }
     }
 
-    @Override
     public HashMap<TileType, Integer> getTilesBag() {
         return new HashMap<>(tilesBag);
     }
@@ -27,7 +26,6 @@ public class Bag implements it.polimi.ingsw.model.interfaces.IBag {
      * Draw a tile from the bag
      * @return a tile
      */
-    @Override
     public GameTile drawTile()
     {
         if(tilesBag.isEmpty())
@@ -48,7 +46,6 @@ public class Bag implements it.polimi.ingsw.model.interfaces.IBag {
     /**
      * Add a tile to the bag
      */
-    @Override
     public void addTile(GameTile tile)
     {
         if(tilesBag.values().stream().reduce(0,Integer::sum)>=132)
