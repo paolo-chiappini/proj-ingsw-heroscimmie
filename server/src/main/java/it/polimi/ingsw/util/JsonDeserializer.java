@@ -2,6 +2,8 @@ package it.polimi.ingsw.util;
 
 import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.Player;
+import it.polimi.ingsw.model.Tile;
+import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -22,8 +24,24 @@ public class JsonDeserializer implements Deserializer {
     }
 
     @Override
-    public void deserializeBoard(String data) {
+    public void deserializeBoard(IBoard board, String data) {
+        JSONObject jsonObject = new JSONObject(data);
+        JSONArray boardArray = jsonObject.getJSONArray("board");
 
+        for (int i = 0; i < boardArray.length(); i++) {
+            JSONArray row = boardArray.getJSONArray(i);
+            for (int j = 0; j < row.length(); j++) {
+                // deserialize and set tile on board
+                int tileOrdinal = row.getInt(j);
+                if (tileOrdinal < 0) {
+                    board.setTileAt(i, j, null);
+                    continue;
+                }
+
+                TileType type = TileType.values()[tileOrdinal];
+                board.setTileAt(i, j, new Tile(type)); // TO FIX: Bag.getTileByType(type);
+            }
+        }
     }
 
     @Override
@@ -43,11 +61,6 @@ public class JsonDeserializer implements Deserializer {
 
     @Override
     public void deserializeBag(String data) {
-
-    }
-
-    @Override
-    public void deserializeBoardSpace(BoardSpace space, String data) {
 
     }
 

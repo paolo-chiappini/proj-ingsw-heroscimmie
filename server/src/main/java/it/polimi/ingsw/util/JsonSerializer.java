@@ -29,8 +29,26 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeBoard() {
-        return null;
+    public String serializeBoard(IBoard board) {
+        JSONArray rows = new JSONArray(); 
+        JSONObject jsonObject = new JSONObject();
+
+        for (int i = 0; i < board.getSize(); i++) {
+            JSONArray row = new JSONArray();
+            for (int j = 0; j < board.getSize(); j++) {
+                GameTile tile = board.getTileAt(i, j);
+                if (tile == null) {
+                    row.put(j, -1);
+                    continue;
+                }
+
+                row.put(j, tile.getType().ordinal());
+            }
+            rows.put(i, row);
+        }
+
+        jsonObject.put("board", rows);
+        return jsonObject.toString();
     }
 
     @Override
@@ -76,14 +94,6 @@ public class JsonSerializer implements Serializer {
     @Override
     public String serializeBag() {
         return null;
-    }
-
-    @Override
-    public String serializeBoardSpace(BoardSpace space) {
-        GameTile tile = space.getTile();
-        if (Objects.isNull(tile)) return "-1";
-
-        return tile.getType().ordinal() + "";
     }
 
     @Override
