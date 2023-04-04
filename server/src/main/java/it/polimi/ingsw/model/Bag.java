@@ -26,7 +26,7 @@ public class Bag {
      * Draw a tile from the bag
      * @return a tile
      */
-    public GameTile drawTile() throws IllegalActionException
+    public GameTile drawTile()
     {
         if(tilesBag.isEmpty())
         {
@@ -46,7 +46,7 @@ public class Bag {
     /**
      * Add a tile to the bag
      */
-    public void addTile(GameTile tile) throws IllegalActionException
+    public void addTile(GameTile tile)
     {
         if(tilesBag.values().stream().reduce(0,Integer::sum)>=132)
         {

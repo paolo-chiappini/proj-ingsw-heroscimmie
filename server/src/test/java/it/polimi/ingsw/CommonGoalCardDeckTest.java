@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -17,6 +18,11 @@ class CommonGoalCardDeckTest {
     CommonGoalCardDeck commonDeck;
     CommonGoalCardDeck commonDeck3Players;
     CommonGoalCardDeck commonDeck4Players;
+
+    Player player1 = new Player("Primo");
+    Player player2 = new Player("Secondo");
+    Player player3 = new Player("Terzo");
+    Player player4 = new Player("Quarto");
 
     @Nested
     @DisplayName("On common deck creation")
@@ -42,10 +48,10 @@ class CommonGoalCardDeckTest {
             void getPointsCard2Players() {
                 myCards=commonDeck.drawCards();
                 assertAll(
-                        () -> assertEquals(8,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(4,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(8,myCards.get(1).evaluatePoints()),
-                        () -> assertEquals(4,myCards.get(1).evaluatePoints())
+                        () -> assertEquals(8,myCards.get(0).evaluatePoints(player1)),
+                        () -> assertEquals(4,myCards.get(0).evaluatePoints(player2)),
+                        () -> assertEquals(8,myCards.get(1).evaluatePoints(player1)),
+                        () -> assertEquals(4,myCards.get(1).evaluatePoints(player2))
                 );
             }
             @Test
@@ -53,9 +59,9 @@ class CommonGoalCardDeckTest {
             void getPointsCard3Players() {
                 myCards = commonDeck3Players.drawCards();
                 assertAll(
-                        () -> assertEquals(8,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(6,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(4,myCards.get(0).evaluatePoints())
+                        () -> assertEquals(8,myCards.get(0).evaluatePoints(player1)),
+                        () -> assertEquals(6,myCards.get(0).evaluatePoints(player2)),
+                        () -> assertEquals(4,myCards.get(0).evaluatePoints(player3))
                 );
             }
             @Test
@@ -63,11 +69,19 @@ class CommonGoalCardDeckTest {
             void getPointsCard4Players() {
                 myCards = commonDeck4Players.drawCards();
                 assertAll(
-                        () -> assertEquals(8,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(6,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(4,myCards.get(0).evaluatePoints()),
-                        () -> assertEquals(2,myCards.get(0).evaluatePoints())
+                        () -> assertEquals(8,myCards.get(0).evaluatePoints(player1)),
+                        () -> assertEquals(6,myCards.get(0).evaluatePoints(player2)),
+                        () -> assertEquals(4,myCards.get(0).evaluatePoints(player3)),
+                        () -> assertEquals(2,myCards.get(0).evaluatePoints(player4))
                 );
+            }
+
+            @Test
+            @DisplayName("exception should be raised when a player gets points from the same common goal card twice per game")
+            void NotValidPlay() {
+                myCards=commonDeck.drawCards();
+                myCards.get(0).evaluatePoints(player1);
+                assertThrows(IllegalActionException.class,() -> myCards.get(0).evaluatePoints(player1));
             }
         }
 
