@@ -60,8 +60,13 @@ public class JsonDeserializer implements Deserializer {
     }
 
     @Override
-    public void deserializeBag(String data) {
+    public void deserializeBag(IBag bag, String data) {
+        JSONObject jsonObject = new JSONObject(data);
+        JSONArray tiles = jsonObject.getJSONArray("bag");
 
+        for (int i = 0; i < TileType.values().length; i++) {
+            bag.setRemainingTilesCount(TileType.values()[i], tiles.getInt(i));
+        }
     }
 
     @Override

@@ -10,6 +10,6 @@ public interface Serializer {
     String serializeBookshelf(IBookshelf bookshelf);
     String serializePersonalGoalCard();
     String serializeCommonGoalCard(CommonGoalCard commonGoalCard);
-    String serializeBag();
+    String serializeBag(IBag bag);
     String serializeTurn(ITurnManager turnManager);
 }

@@ -10,6 +10,6 @@ public interface Deserializer {
     void deserializeBookshelf(IBookshelf bookshelf, String data);
     void deserializePersonalGoalCard(String data);
     void deserializeCommonGoalCard(CommonGoalCard commonGoalCard, String data);
-    void deserializeBag(String data);
+    void deserializeBag(IBag bag, String data);
     void deserializeTurn(ITurnManager turnManager, String data);
 }

@@ -1,11 +1,14 @@
 package it.polimi.ingsw.util;
 
 import it.polimi.ingsw.model.CommonGoalCard;
+import it.polimi.ingsw.model.TileSpace;
+import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.*;
 import org.json.*;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
+import java.util.concurrent.TimeoutException;
 
 public class JsonSerializer implements Serializer {
     @Override
@@ -92,8 +95,15 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeBag() {
-        return null;
+    public String serializeBag(IBag bag) {
+        JSONArray jsonArray = new JSONArray();
+        HashMap<TileType, Integer> tilesCounts = bag.getTilesBag();
+
+        tilesCounts.forEach((key, value) -> {
+            jsonArray.put(value);
+        });
+
+        return jsonArray.toString();
     }
 
     @Override
