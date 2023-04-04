@@ -1,15 +1,17 @@
 package it.polimi.ingsw.util;
 
 import it.polimi.ingsw.model.CommonGoalCard;
-import it.polimi.ingsw.model.TileSpace;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.*;
-import org.json.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.TimeoutException;
 
+/**
+ * Represents a serializer using the JSON format.
+ */
 public class JsonSerializer implements Serializer {
     @Override
     public String serializeGame() {
@@ -73,11 +75,6 @@ public class JsonSerializer implements Serializer {
         }
 
         return grid.toString();
-    }
-
-    @Override
-    public String serializePersonalGoalCard() {
-        return null;
     }
 
     @Override

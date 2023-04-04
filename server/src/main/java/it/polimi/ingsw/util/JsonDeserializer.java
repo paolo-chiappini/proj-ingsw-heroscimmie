@@ -11,6 +11,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a deserializer using the JSON format.
+ */
 public class JsonDeserializer implements Deserializer {
 
     @Override
@@ -46,11 +49,6 @@ public class JsonDeserializer implements Deserializer {
 
     @Override
     public void deserializeBookshelf(IBookshelf bookshelf, String data) {
-
-    }
-
-    @Override
-    public void deserializePersonalGoalCard(String data) {
 
     }
 
