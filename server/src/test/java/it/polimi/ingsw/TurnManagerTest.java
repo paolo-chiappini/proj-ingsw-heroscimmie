@@ -1,11 +1,15 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
+import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.TurnManager;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 
+import it.polimi.ingsw.model.interfaces.ITurnManager;
+import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
+import it.polimi.ingsw.util.Deserializer;
 import it.polimi.ingsw.util.JsonDeserializer;
 import it.polimi.ingsw.util.JsonSerializer;
 import org.junit.jupiter.api.*;
@@ -145,7 +149,10 @@ public class TurnManagerTest {
             TurnManager turnManager = new TurnManager(player);
             turnManager.nextTurn();
 
-            assertTrue(turnManager.isGameOver());
+            assertAll(
+                    () -> assertTrue(turnManager.isLastLap()),
+                    () -> assertTrue(turnManager.isGameOver())
+            );
         }
 
         @Test
@@ -183,14 +190,15 @@ public class TurnManagerTest {
     }
 
     @Nested
-    @DisplayName("When restoring turn manager state through setters")
+    @DisplayName("When creating turn manager through builder")
     class TestSetters {
 
         @Test
         @DisplayName("turns should follow order of players")
         void orderOfPlayersShouldBeAsSpecified() {
-            TurnManager turnManager = new TurnManager();
-            turnManager.setPlayersOrder(players);
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            players.forEach(turnManagerBuilder::addPlayer);
+            ITurnManager turnManager = turnManagerBuilder.build();
 
             for (IPlayer player : players) {
                 assertEquals(player, turnManager.getCurrentPlayer());
@@ -201,34 +209,62 @@ public class TurnManagerTest {
         @Test
         @DisplayName("setting turn should start sequence at the given index")
         void turnShouldMatchWithParameter() {
-            TurnManager turnManager = new TurnManager();
-            turnManager.setPlayersOrder(players);
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            players.forEach(turnManagerBuilder::addPlayer);
 
             assertAll(
                     () -> {
-                        turnManager.setCurrentTurn(2);
-                        assertEquals(players.get(2), turnManager.getCurrentPlayer());
+                        turnManagerBuilder.setCurrentTurn(2);
+                        assertEquals(players.get(2), turnManagerBuilder.build().getCurrentPlayer());
                     },
                     () -> {
-                        turnManager.setCurrentTurn(1);
-                        assertEquals(players.get(1), turnManager.getCurrentPlayer());
+                        turnManagerBuilder.setCurrentTurn(1);
+                        assertEquals(players.get(1), turnManagerBuilder.build().getCurrentPlayer());
                     },
                     () -> {
-                        turnManager.setCurrentTurn(0);
-                        assertEquals(players.get(0), turnManager.getCurrentPlayer());
+                        turnManagerBuilder.setCurrentTurn(0);
+                        assertEquals(players.get(0), turnManagerBuilder.build().getCurrentPlayer());
                     }
             );
         }
 
         @Test
+        @DisplayName("setting endgame to true should terminate game")
+        void settingEndGameToTrue() {
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            ITurnManager turnManager = turnManagerBuilder.setIsEndGame(true).build();
+
+            assertTrue(turnManager.isLastLap());
+        }
+
+        @Test
         @DisplayName("setting an invalid index should throw an exception")
         void invalidTurnNumberShouldThrowException() {
-            TurnManager turnManager = new TurnManager();
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            players.forEach(turnManagerBuilder::addPlayer);
 
             assertAll(
-                    () -> assertThrows(IllegalArgumentException.class, () -> turnManager.setCurrentTurn(-1)),
-                    () -> assertThrows(IllegalArgumentException.class, () -> turnManager.setCurrentTurn(players.size()))
+                    () -> assertThrows(IllegalArgumentException.class, () -> turnManagerBuilder.setCurrentTurn(-1)),
+                    () -> assertThrows(IllegalArgumentException.class, () -> turnManagerBuilder.setCurrentTurn(players.size()))
             );
+        }
+
+        @Test
+        @DisplayName("trying to add a null player should throw an exception")
+        void addingNullPlayerShouldThrowException() {
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            assertThrows(IllegalArgumentException.class, () -> turnManagerBuilder.addPlayer(null));
+        }
+
+        @Test
+        @DisplayName("exceeding max number of player should throw an exception")
+        void exceedingMaxNumberOfPlayersShouldThrowException() {
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            for (int i = 0; i < 4; i++) {
+                turnManagerBuilder.addPlayer(new Player(""));
+            }
+
+            assertThrows(IllegalActionException.class, () -> turnManagerBuilder.addPlayer(new Player("")));
         }
     }
 
@@ -238,28 +274,30 @@ public class TurnManagerTest {
         @Test
         @DisplayName("serialization should return correct data")
         void turnManagerSerialization() {
-            TurnManager turnManager = new TurnManager();
-            turnManager.setPlayersOrder(players);
-            turnManager.setCurrentTurn(1);
+            ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
+            players.forEach(turnManagerBuilder::addPlayer);
+            turnManagerBuilder.setCurrentTurn(1);
+            ITurnManager turnManager = turnManagerBuilder.build();
 
             String serializedData = turnManager.serialize(new JsonSerializer());
-            String expected = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"]}";
+            String expected = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"is_end_game\":false}";
             assertEquals(expected, serializedData);
         }
 
         @Test
         @DisplayName("deserialization should set correct data")
         void turnManagerDeserialization() {
-            TurnManager turnManager = new TurnManager();
-            String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"]}";
+            String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"is_end_game\":true}";
+            Deserializer deserializer = new JsonDeserializer();
+            ITurnManager turnManager = deserializer.deserializeTurn(serializedData);
 
-            turnManager.deserialize(new JsonDeserializer(), serializedData);
             List<IPlayer> players = turnManager.getPlayersOrder();
             assertAll(
                     () -> assertEquals("a", players.get(0).getUsername()),
                     () -> assertEquals("b", players.get(1).getUsername()),
                     () -> assertEquals("c", players.get(2).getUsername()),
-                    () -> assertEquals(1, players.indexOf(turnManager.getCurrentPlayer()))
+                    () -> assertEquals(1, players.indexOf(turnManager.getCurrentPlayer())),
+                    () -> assertTrue(turnManager.isLastLap())
             );
         }
     }

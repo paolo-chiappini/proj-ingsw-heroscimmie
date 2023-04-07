@@ -7,6 +7,12 @@ import java.util.List;
 
 public interface ITurnManager extends Serializable {
     /**
+     * Returns whether the game is in the endgame phase.
+     * @return true if the game is in endgame, false otherwise.
+     */
+    boolean isLastLap();
+
+    /**
      * Checks whether the game has ended or turns can still be played.
      * @return true if the game has ended, false otherwise.
      */
@@ -30,18 +36,4 @@ public interface ITurnManager extends Serializable {
      * @return the list of players ordered by turn.
      */
     List<IPlayer> getPlayersOrder();
-
-    /**
-     * Set the order in which the players should play.
-     * @param players list of players in the order in which they play.
-     */
-    void setPlayersOrder(List<IPlayer> players);
-
-    /**
-     * Set the current turn to the parameter value.
-     * @param turn new value of turn.
-     * @throws IllegalArgumentException when the turn value is either negative or greater
-     * than the number of players.
-     */
-    void setCurrentTurn(int turn);
 }

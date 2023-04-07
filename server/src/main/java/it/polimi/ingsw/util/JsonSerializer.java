@@ -113,6 +113,7 @@ public class JsonSerializer implements Serializer {
         int currentTurn = players.indexOf(turnManager.getCurrentPlayer());
 
         jsonObject.put("players_turn", currentTurn);
+        jsonObject.put("is_end_game", turnManager.isLastLap());
         jsonObject.put("players_order", usernames);
 
         return jsonObject.toString();
