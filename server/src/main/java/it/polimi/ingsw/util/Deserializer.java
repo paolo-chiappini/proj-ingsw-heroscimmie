@@ -19,43 +19,43 @@ public interface Deserializer {
      * Deserializes a Player object.
      * Deserialization of player also deserializes objects
      * belonging to player.
-     * @param player Player object being deserialized.
      * @param data String of data to deserialize into player.
+     * @return instance of the deserialized player.
      */
-    void deserializePlayer(IPlayer player, String data);
+    IPlayer deserializePlayer(String data);
 
     /**
      * Deserializes a Board object.
-     * @param board Board object being deserialized.
      * @param data String of data to deserialize into board.
+     * @return instance of the deserialized board.
      */
-    void deserializeBoard(IBoard board, String data);
+    IBoard deserializeBoard(String data);
 
     /**
      * Deserializes a Bookshelf object.
-     * @param bookshelf Bookshelf object being deserialized.
      * @param data String of data to deserialize into bookshelf.
+     * @return instance of the deserialized bookshelf.
      */
-    void deserializeBookshelf(IBookshelf bookshelf, String data);
+    IBookshelf deserializeBookshelf(String data);
 
     /**
      * Deserializes a CommonGoalCard object.
-     * @param commonGoalCard Card object being deserialized.
      * @param data String of data to deserialize into card.
+     * @return instance of the deserialized card.
      */
-    void deserializeCommonGoalCard(CommonGoalCard commonGoalCard, String data);
+    CommonGoalCard deserializeCommonGoalCard(String data);
 
     /**
      * Deserializes a Bag object.
-     * @param bag bag object being deserialized.
      * @param data String of data to deserialize into bag.
+     * @return instance of the deserialized bag.
      */
-    void deserializeBag(IBag bag, String data);
+    IBag deserializeBag(String data);
 
     /**
      * Deserializes a turn into a TurnManger.
-     * @param turnManager TurnManager object responsible for managing turns.
      * @param data String of data to deserialize into turn manager.
+     * @return instance of a turn manager.
      */
-    void deserializeTurn(ITurnManager turnManager, String data);
+    ITurnManager deserializeTurn(String data);
 }

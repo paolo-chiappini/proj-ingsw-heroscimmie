@@ -11,11 +11,4 @@ public interface Serializable {
      * @return a String of data representing the serialized class.
      */
     String serialize(Serializer serializer);
-
-    /**
-     * Deserializes the object from a String of data.
-     * @param deserializer type of deserializer used to parse data.
-     * @param data String of data to deserialize.
-     */
-    void deserialize(Deserializer deserializer, String data);
 }
