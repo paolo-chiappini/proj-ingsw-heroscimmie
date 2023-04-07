@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -130,5 +131,28 @@ public class Bookshelf implements IBookshelf {
             return tiles[row][column].getType().equals(tiles[row2][column2].getType());
         }
         return false;
+    }
+
+    /**
+     * Chooses the order of the tiles
+     * @param tilesToDrop are the chosen tiles to insert
+     * @param position1 is the position of the first tile
+     * @param position2 is the position of the second tile
+     * @param position3 is the position of the third tile
+     * @return sorted tiles to insert in the bookshelf
+     */
+    public List<GameTile> sort(List<GameTile> tilesToDrop, int position1, int position2, int position3)
+    {
+        List<GameTile> order = new ArrayList<>();
+        if(tilesToDrop.size()==3){
+            order.add(tilesToDrop.get(position1-1));
+            order.add(tilesToDrop.get(position2-1));
+            order.add(tilesToDrop.get(position3-1));
+        }
+       if(tilesToDrop.size()==2) {
+            order.add(tilesToDrop.get(position1-1));
+            order.add(tilesToDrop.get(position2-1));
+        }
+        return order;
     }
 }
