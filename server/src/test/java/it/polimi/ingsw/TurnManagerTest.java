@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
+import it.polimi.ingsw.model.PersonalGoalCard;
 import it.polimi.ingsw.model.Player;
 import it.polimi.ingsw.model.TurnManager;
 import it.polimi.ingsw.model.interfaces.GameTile;
@@ -42,6 +43,12 @@ public class TurnManagerTest {
 
         @Override
         public IBookshelf getBookshelf() { return bookshelf; }
+
+        @Override
+        public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {}
+
+        @Override
+        public PersonalGoalCard getPersonalGoalCard() { return null; }
     }
 
     private static class TestBookshelf implements IBookshelf {
@@ -71,6 +78,7 @@ public class TurnManagerTest {
         players.add(new TestPlayer("a", new TestBookshelf(false)));
         players.add(new TestPlayer("b", new TestBookshelf(false)));
         players.add(new TestPlayer("c", new TestBookshelf(false)));
+        players.sort(Comparator.comparing(IPlayer::getUsername));
     }
 
     @Nested
@@ -81,23 +89,16 @@ public class TurnManagerTest {
         @DisplayName("player order should be a permutation of the given players")
         void playersArePermutation() {
             TurnManager turnManager = new TurnManager(players);
-            Set<IPlayer> playersSet = new HashSet<>();
+            List<IPlayer> registeredPlayers = turnManager.getPlayersOrder();
 
-            for (int i = 0; i < players.size(); i++) {
-                IPlayer currentPlayer = turnManager.getCurrentPlayer();
-                playersSet.add(currentPlayer);
-                turnManager.nextTurn();
-            }
+            registeredPlayers.sort(Comparator.comparing(IPlayer::getUsername));
 
-            // check if all players in Turn Manager are contained in "players"
-            for (IPlayer player : playersSet) {
-                assertTrue(players.contains(player));
-            }
-
-            // check if all players in "players" are contained in Turn Manager
-            for (IPlayer player : players) {
-                assertTrue(playersSet.contains(player));
-            }
+            assertAll(
+                    () -> assertEquals(players.size(), registeredPlayers.size()),
+                    () -> assertEquals(players.get(0), registeredPlayers.get(0)),
+                    () -> assertEquals(players.get(1), registeredPlayers.get(1)),
+                    () -> assertEquals(players.get(2), registeredPlayers.get(2))
+            );
         }
 
         @Test

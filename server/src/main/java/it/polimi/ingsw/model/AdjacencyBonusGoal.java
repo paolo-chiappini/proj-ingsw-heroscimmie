@@ -40,7 +40,7 @@ public class AdjacencyBonusGoal {
      *      <p>If the group's size is between the minimum and the threshold (both included),
      *      the amount of points to award will be chosen based on a points table.
      */
-    public int convertToPoints(int groupSize) {
+    private int convertToPoints(int groupSize) {
         if (groupSize < MIN_GROUP_SIZE) return 0;
 
         // Truncate all groups that exceed 6 in size to be exactly 6

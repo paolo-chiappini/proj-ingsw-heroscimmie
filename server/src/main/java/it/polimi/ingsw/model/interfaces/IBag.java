@@ -8,6 +8,5 @@ public interface IBag {
     HashMap<TileType, Integer> getTilesBag();
     GameTile drawTile();
     void addTile(GameTile tile);
-    void setRemainingTilesCount(TileType type, int count);
     GameTile getTileByType(TileType type);
 }
