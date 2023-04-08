@@ -13,7 +13,7 @@ public interface Serializer {
      * contained within.
      * @return serialized String representing Game.
      */
-    String serializeGame();
+    String serialize();
 
     /**
      * Serializes a Player object.
@@ -22,35 +22,35 @@ public interface Serializer {
      * @param player player to serialize.
      * @return serialized String representing Player.
      */
-    String serializePlayer(IPlayer player);
+    String serialize(IPlayer player);
 
     /**
      * Serializes a Board object.
      * @param board board to serialize.
      * @return serialized String representing Board.
      */
-    String serializeBoard(IBoard board);
+    String serialize(IBoard board);
 
     /**
      * Serializes a Bookshelf object.
      * @param bookshelf bookshelf to serialize.
      * @return serialized String representing Bookshelf.
      */
-    String serializeBookshelf(IBookshelf bookshelf);
+    String serialize(IBookshelf bookshelf);
 
     /**
      * Serializes a CommonGoalCard object.
      * @param commonGoalCard common goal card to serialize.
      * @return serialized String representing the card.
      */
-    String serializeCommonGoalCard(CommonGoalCard commonGoalCard);
+    String serialize(CommonGoalCard commonGoalCard);
 
     /**
      * Serializes a Bag object.
      * @param bag bag to serialize.
      * @return serialized String representing Bag.
      */
-    String serializeBag(IBag bag);
+    String serialize(IBag bag);
 
     /**
      * Serializes a turn from TurnManager object.
@@ -58,5 +58,5 @@ public interface Serializer {
      *                    turn to serialize.
      * @return serialized String representing a turn.
      */
-    String serializeTurn(ITurnManager turnManager);
+    String serialize(ITurnManager turnManager);
 }

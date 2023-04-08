@@ -14,16 +14,16 @@ import java.util.List;
  */
 public class JsonSerializer implements Serializer {
     @Override
-    public String serializeGame() {
+    public String serialize() {
         return null;
     }
 
     @Override
-    public String serializePlayer(IPlayer player) {
+    public String serialize(IPlayer player) {
         IBookshelf bookshelf = player.getBookshelf();
         JSONObject jsonObject = new JSONObject();
 
-        String serializedBookshelf = serializeBookshelf(bookshelf);
+        String serializedBookshelf = serialize(bookshelf);
         JSONObject jsonBookshelf = new JSONObject(serializedBookshelf);
 
         jsonObject.put("username", player.getUsername());
@@ -34,7 +34,7 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeBoard(IBoard board) {
+    public String serialize(IBoard board) {
         JSONArray rows = new JSONArray(); 
         JSONObject jsonObject = new JSONObject();
 
@@ -57,7 +57,7 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeBookshelf(IBookshelf bookshelf) {
+    public String serialize(IBookshelf bookshelf) {
         JSONArray grid = new JSONArray();
 
         for (int row = 0; row < bookshelf.getHeight(); row++) {
@@ -78,7 +78,7 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeCommonGoalCard(CommonGoalCard commonGoalCard) {
+    public String serialize(CommonGoalCard commonGoalCard) {
         JSONObject jsonObject = new JSONObject();
 
         List<Integer> points = commonGoalCard.getPoints();
@@ -92,7 +92,7 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeBag(IBag bag) {
+    public String serialize(IBag bag) {
         JSONArray jsonArray = new JSONArray();
         HashMap<TileType, Integer> tilesCounts = bag.getTilesBag();
 
@@ -104,7 +104,7 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serializeTurn(ITurnManager turnManager) {
+    public String serialize(ITurnManager turnManager) {
         List<IPlayer> players = turnManager.getPlayersOrder();
         JSONObject jsonObject = new JSONObject();
         JSONArray usernames = new JSONArray();
