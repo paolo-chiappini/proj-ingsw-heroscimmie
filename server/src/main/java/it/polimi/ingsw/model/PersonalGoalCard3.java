@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 public class PersonalGoalCard3  extends PersonalGoalCard{
     public PersonalGoalCard3() {
+        id = 3;
         pattern[2][2] = TileType.PLANT;
         pattern[1][0] = TileType.FRAME;
         pattern[3][1] = TileType.CAT;

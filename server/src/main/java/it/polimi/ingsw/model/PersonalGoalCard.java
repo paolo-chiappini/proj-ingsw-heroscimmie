@@ -6,6 +6,7 @@ public abstract class PersonalGoalCard {
     private static final int[] pointsTable = new int[]{1,2,4,6,9,12};
     protected TileType[][] pattern = new TileType[6][5];
     protected int id;
+
     public PersonalGoalCard() {}
 
     /**
