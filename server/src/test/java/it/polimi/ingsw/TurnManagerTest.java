@@ -45,10 +45,16 @@ public class TurnManagerTest {
         public IBookshelf getBookshelf() { return bookshelf; }
 
         @Override
+        public void setBookshelf(IBookshelf bookshelf) {}
+
+        @Override
         public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {}
 
         @Override
         public PersonalGoalCard getPersonalGoalCard() { return null; }
+
+        @Override
+        public void addPointsToScore(int points) {}
     }
 
     private static class TestBookshelf implements IBookshelf {
@@ -95,9 +101,7 @@ public class TurnManagerTest {
 
             assertAll(
                     () -> assertEquals(players.size(), registeredPlayers.size()),
-                    () -> assertEquals(players.get(0), registeredPlayers.get(0)),
-                    () -> assertEquals(players.get(1), registeredPlayers.get(1)),
-                    () -> assertEquals(players.get(2), registeredPlayers.get(2))
+                    () -> assertIterableEquals(players, registeredPlayers)
             );
         }
 
@@ -175,18 +179,13 @@ public class TurnManagerTest {
         @DisplayName("the sequence of players should be respected")
         void turnSequenceShouldBeRespected() {
             TurnManager turnManager = new TurnManager(players);
-            IPlayer p1, p2, p3;
-            p1 = turnManager.getCurrentPlayer();
-            turnManager.nextTurn();
-            p2 = turnManager.getCurrentPlayer();
-            turnManager.nextTurn();
-            p3 = turnManager.getCurrentPlayer();
+            List<IPlayer> turns = new ArrayList<>();
+            for (int i = 0; i < players.size(); i++) {
+                turns.add(turnManager.getCurrentPlayer());
+                turnManager.nextTurn();
+            }
 
-            assertAll(
-                    () -> assertEquals(turnManager.getPlayersOrder().get(0), p1),
-                    () -> assertEquals(turnManager.getPlayersOrder().get(1), p2),
-                    () -> assertEquals(turnManager.getPlayersOrder().get(2), p3)
-            );
+            assertIterableEquals(turnManager.getPlayersOrder(), turns);
         }
     }
 
@@ -201,10 +200,7 @@ public class TurnManagerTest {
             players.forEach(turnManagerBuilder::addPlayer);
             ITurnManager turnManager = turnManagerBuilder.build();
 
-            for (IPlayer player : players) {
-                assertEquals(player, turnManager.getCurrentPlayer());
-                turnManager.nextTurn();
-            }
+            assertIterableEquals(players, turnManager.getPlayersOrder());
         }
 
         @Test

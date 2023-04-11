@@ -16,6 +16,7 @@ import java.util.List;
  */
 public class TurnManager implements ITurnManager {
     private static final int MAX_PLAYERS_COUNT = 4;
+    private static final int FIRST_TO_END_BONUS_POINTS = 1;
     private int currentPlayerIndex;
     private boolean lastLap;
     private final List<IPlayer> players;
@@ -38,7 +39,10 @@ public class TurnManager implements ITurnManager {
      * Checks if the current player has met the end game condition.
      */
     private void checkEndCondition() {
+        if (lastLap) return;
         lastLap = players.get(currentPlayerIndex).getBookshelf().isFull();
+        // add bonus points to the first player with a full bookshelf
+        if (lastLap) players.get(currentPlayerIndex).addPointsToScore(FIRST_TO_END_BONUS_POINTS);
     }
 
     @Override
@@ -75,7 +79,7 @@ public class TurnManager implements ITurnManager {
 
     @Override
     public String serialize(Serializer serializer) {
-        return serializer.serializeTurn(this);
+        return serializer.serialize(this);
     }
 
     public static class TurnManagerBuilder implements ITurnManagerBuilder {
