@@ -1,6 +1,7 @@
-package it.polimi.ingsw.util;
+package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.CommonGoalCard;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.*;
 import org.json.JSONArray;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 public class JsonSerializer implements Serializer {
     @Override
-    public String serialize() {
+    public String serialize(Game game) {
         return null;
     }
 

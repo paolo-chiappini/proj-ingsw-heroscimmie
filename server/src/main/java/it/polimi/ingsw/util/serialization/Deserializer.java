@@ -1,4 +1,4 @@
-package it.polimi.ingsw.util;
+package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.interfaces.*;

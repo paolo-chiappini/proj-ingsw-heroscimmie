@@ -1,4 +1,4 @@
-package it.polimi.ingsw.util;
+package it.polimi.ingsw.util.serialization;
 
 /**
  * Represents an object that can be serialized and deserialized

@@ -1,6 +1,7 @@
-package it.polimi.ingsw.util;
+package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.CommonGoalCard;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.interfaces.*;
 
 /**
@@ -13,7 +14,7 @@ public interface Serializer {
      * contained within.
      * @return serialized String representing Game.
      */
-    String serialize();
+    String serialize(Game game);
 
     /**
      * Serializes a Player object.

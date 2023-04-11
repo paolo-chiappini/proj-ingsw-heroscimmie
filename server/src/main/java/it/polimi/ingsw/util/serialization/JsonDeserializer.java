@@ -1,13 +1,10 @@
-package it.polimi.ingsw.util;
+package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.interfaces.*;
 import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a deserializer using the JSON format.
