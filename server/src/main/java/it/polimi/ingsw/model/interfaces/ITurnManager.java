@@ -1,7 +1,7 @@
 package it.polimi.ingsw.model.interfaces;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
-import it.polimi.ingsw.util.Serializable;
+import it.polimi.ingsw.util.serialization.Serializable;
 
 import java.util.List;
 

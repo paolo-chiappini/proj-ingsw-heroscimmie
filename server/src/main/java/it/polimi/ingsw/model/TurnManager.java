@@ -4,7 +4,7 @@ import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.ITurnManager;
 import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
-import it.polimi.ingsw.util.Serializer;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.ArrayList;
 import java.util.Collections;

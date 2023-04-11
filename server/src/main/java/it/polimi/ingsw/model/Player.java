@@ -13,7 +13,7 @@ public class Player implements IPlayer {
 
     public Player(String username){
         this.username = username;
-        this.firstPlayer=false;
+        this.firstPlayer = false;
     }
 
     /**

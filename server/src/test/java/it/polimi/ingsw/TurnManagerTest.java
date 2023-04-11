@@ -10,9 +10,9 @@ import it.polimi.ingsw.model.interfaces.IBookshelf;
 
 import it.polimi.ingsw.model.interfaces.ITurnManager;
 import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
-import it.polimi.ingsw.util.Deserializer;
-import it.polimi.ingsw.util.JsonDeserializer;
-import it.polimi.ingsw.util.JsonSerializer;
+import it.polimi.ingsw.util.serialization.Deserializer;
+import it.polimi.ingsw.util.serialization.JsonDeserializer;
+import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
