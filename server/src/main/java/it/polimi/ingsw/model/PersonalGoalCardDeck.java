@@ -6,8 +6,6 @@ public class PersonalGoalCardDeck {
     private final ArrayList<PersonalGoalCard> personalGoalCards;
     public PersonalGoalCardDeck(){
         personalGoalCards = new ArrayList<>();
-
-        TileType[][] pattern = new TileType[6][5];
         personalGoalCards.add(new PersonalGoalCard1());
         personalGoalCards.add(new PersonalGoalCard2());
         personalGoalCards.add(new PersonalGoalCard3());
@@ -28,6 +26,6 @@ public class PersonalGoalCardDeck {
      */
     public PersonalGoalCard drawCard(){
         int randomCardDrawnId = (int)(Math.random()*personalGoalCards.size());
-        return personalGoalCards.get(randomCardDrawnId);
+        return personalGoalCards.remove(randomCardDrawnId);
     }
 }
