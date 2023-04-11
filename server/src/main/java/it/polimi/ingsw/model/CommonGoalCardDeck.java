@@ -40,7 +40,7 @@ public class CommonGoalCardDeck {
     }
 
     /**
-     * Draw 2 common goal cards from the deck
+     * Draws 2 common goal cards from the deck
      * @return 2 common goal cards
      **/
     public ArrayList<CommonGoalCard> drawCards(){

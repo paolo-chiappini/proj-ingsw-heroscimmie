@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GoalCard;
+import it.polimi.ingsw.model.interfaces.IPlayer;
 
 import java.util.ArrayList;
 
@@ -21,9 +22,7 @@ public abstract class CommonGoalCard implements GoalCard {
             points.add(2,6);
         }
         else if(numPlayer==3)
-        {
             points.add(1,6);
-        }
     }
 
     public int getId() {
@@ -35,11 +34,11 @@ public abstract class CommonGoalCard implements GoalCard {
     }
 
     /**
-     * evaluate the score of the cards
+     * evaluates the score of the cards
      * @return the score of the common goal cards
      **/
     @Override
-    public int evaluatePoints(Player player)
+    public int evaluatePoints(IPlayer player)
     {
         if(players.contains(player.getUsername()))
             throw new IllegalActionException("You can only score points from the same common goal card once per game");
