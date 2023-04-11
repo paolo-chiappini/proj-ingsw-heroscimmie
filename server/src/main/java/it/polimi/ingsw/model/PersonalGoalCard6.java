@@ -1,7 +1,6 @@
 package it.polimi.ingsw.model;
 
 public class PersonalGoalCard6 extends PersonalGoalCard{
-    TileType[][] pattern = new TileType[5][6];
     public PersonalGoalCard6(int id, TileType[][] pattern) {
         super(id, pattern);
         pattern[5][0] = TileType.PLANT;

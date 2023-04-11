@@ -6,9 +6,26 @@ public class Board {
     private static final int BOARD_DIM = 9;
     private TileSpace[][] spaces;
 
-    public Board(){
+    public Board(int playersPlaying){
         spaces = new TileSpace[BOARD_DIM][BOARD_DIM];
-
+        int[][] template = new int[][]{
+                {5, 5, 5, 3, 4, 5, 5, 5, 5},
+                {5, 5, 5, 2, 2, 4, 5, 5, 5},
+                {5, 5, 3, 2, 2, 2, 3, 5, 5},
+                {5, 4, 2, 2, 2, 2, 2, 2, 3},
+                {4, 2, 2, 2, 2, 2, 2, 2, 4},
+                {3, 2, 2, 2, 2, 2, 2, 4, 5},
+                {5, 5, 3, 2, 2, 2, 3, 5, 5},
+                {5, 5, 5, 4, 2, 2, 5, 5, 5},
+                {5, 5, 5, 5, 4, 3, 5, 5, 5}
+        };
+        for (int i=0;i<spaces.length;i++)
+        {
+            for(int j=0;j<spaces[0].length;j++)
+            {
+                spaces[i][j]=new TileSpace(template[i][j],playersPlaying);
+            }
+        }
     }
 
     /**
@@ -18,13 +35,11 @@ public class Board {
     public boolean needsRefill(){
         for(int i = 0; i < spaces.length; i++) {
             for(int j = 0; j < spaces[0].length; j++) {
-                if(spaces[i][j].getTile() != null) {
+                if(spaces[i][j].getTile()!= null) {
                     if ((i == 0) || (j == 0)) {
                         if (spaces[i + 1][j].getTile() != null || spaces[i][j + 1].getTile() != null) return false;
-                    } else if ((i == 8) || (j == 8)) {
-                        if (spaces[i - 1][j].getTile() != null || spaces[i][j - 1].getTile() != null) return false;
                     } else {
-                        if (spaces[i + 1][j].getTile() != null || spaces[i - 1][j].getTile() != null || spaces[i][j + 1].getTile() != null || spaces[i][j - 10].getTile() != null)
+                        if (spaces[i + 1][j].getTile()!= null || spaces[i - 1][j].getTile()!= null || spaces[i][j + 1].getTile()!= null || spaces[i][j - 1].getTile()!= null)
                             return false;
                     }
                 }
@@ -71,7 +86,7 @@ public class Board {
                     }
             }
             else {
-                numOfTilesPicked = col1 - col2 + 1;
+                numOfTilesPicked = Math.abs(col1 - col2) + 1;
                 if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
                     for (int i = 0; i < numOfTilesPicked; i++) {
                         myList.add(spaces[row1][col2 + i]);
@@ -90,7 +105,7 @@ public class Board {
                     }
             }
             else{
-                numOfTilesPicked = row1 - row2 + 1;
+                numOfTilesPicked = Math.abs(row1 - row2) + 1;
                 if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
                     for (int i = 0; i < numOfTilesPicked; i++) {
                         myList.add(spaces[row2 + i][col1]);
@@ -110,34 +125,51 @@ public class Board {
      * @return true if player can pick up a tile;
      */
     public boolean canPickUpTiles(int row1, int col1, int row2, int col2) {
-
-        if (row1 == row2) {
-            while (col1 <= col2) {
-                if (spaces[row1][col1] == null || hasFreeSide(row1, col1)) return false;
-                col1++;
-
+        int temp;
+        if(row1==row2)
+        {
+            if(col2<=col1)
+            {
+                temp=col1;
+                col1=col2;
+                col2=temp;
             }
+            while(col1<=col2)
+            {
+                if(spaces[row1][col1].getTile()==null || hasNotFreeSide(row1, col1))return false;
+                col1++;
+            }
+            return true;
         }
-        if (col1 == col2) {
-            while (row1 <= row2) {
-                if (spaces[row1][col1] == null || hasFreeSide(row1, col1)) return false;
+        else if(col1==col2)
+        {
+            if(row2<=row1)
+            {
+                temp=row1;
+                row1=row2;
+                row2=temp;
+            }
+            while(row1<=row2)
+            {
+                if(spaces[row1][col1].getTile()==null|| hasNotFreeSide(row1, col1))return false;
                 row1++;
             }
+            return true;
         }
-        return true;
+        return false;
     }
 
     /**
      * @param row1 is the row index of the tile to pick up
      * @param col1 is the column index of the tile to pick up
-     * @return true if the tile has at least one side free ;
+     * @return false if the tile has at least one side free ;
      */
-    public boolean hasFreeSide(int row1, int col1)
+    public boolean hasNotFreeSide(int row1, int col1)
     {
         if(row1>0 && row1<8 && col1>0 && col1<8)
         {
-            return spaces[row1 + 1][col1] != null || spaces[row1 - 1][col1] != null
-                    || spaces[row1][col1 + 1] != null || spaces[row1][col1 - 1] != null;
+            return (spaces[row1 + 1][col1].getTile() != null && spaces[row1 - 1][col1].getTile() != null
+                    && spaces[row1][col1 + 1].getTile() != null && spaces[row1][col1 - 1].getTile() != null);
         }
         return false;
     }
