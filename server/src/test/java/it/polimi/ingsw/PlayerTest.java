@@ -1,7 +1,6 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.model.PersonalGoalCard;
-import it.polimi.ingsw.model.PersonalGoalCard2;
+import it.polimi.ingsw.model.PersonalGoalCardDeck;
 import it.polimi.ingsw.model.Player;
 import org.junit.jupiter.api.*;
 
@@ -26,27 +25,44 @@ public class PlayerTest {
             assertEquals(player1.getUsername(), "TestPlayer");
         }
 
+        @DisplayName("Player is the first player of the game")
+        @Test
+        void isFirstPlayer() {
+            player1.setFirstPlayer(true);
+            assertTrue(player1.isFirstPlayer());
+        }
+
         @DisplayName("The initial score should be 0")
         @Test
         void isInitialScore0() {
             assertEquals(player1.getScore(), 0);
         }
 
-    }
-
-    @Nested
-    @DisplayName("Player methods used during the game")
-    class PlayerMethods{
-        @DisplayName("Assignment of personal goal card")
+        @DisplayName("Player should has a bookshelf")
         @Test
-        void isPersonalGoalCardCorrect(){
-
+        void hasBookshelf() {
+            assertNotNull(player1.getBookshelf());
         }
 
-        @DisplayName("Points are added correctly to the score")
-        @Test
-        void arePointsAddedToScore(){
+        @Nested
+        @DisplayName("Player methods used during the game")
+        class PlayerMethods {
+            @DisplayName("Assignment of personal goal card")
+            @Test
+            void isPersonalGoalCardCorrect() {
+                PersonalGoalCardDeck deck = new PersonalGoalCardDeck();
+                player1.setPersonalGoalCard(deck.drawCard());
+                assertNotNull(player1.getPersonalGoalCard());
+            }
 
+            @DisplayName("Points are added correctly to the score")
+            @Test
+            void arePointsAddedToScore() {
+                player1.addPointsToScore(8);
+                assertEquals(8,player1.getScore());
+                player1.addPointsToScore(3);
+                assertEquals(11,player1.getScore());
+            }
         }
     }
 }
