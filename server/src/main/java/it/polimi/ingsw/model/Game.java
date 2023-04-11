@@ -41,24 +41,6 @@ public class Game implements Serializable {
         commonGoals = new CommonGoalCardDeck(getPlayers().size()).drawCards();
     }
 
-    public void declareWinner() {
-        if (!turnManager.isGameOver()) return;
-        List<IPlayer> players = turnManager.getPlayersOrder();
-
-        IPlayer topPlayer = players.stream()
-                .max(Comparator.comparing(IPlayer::getScore))
-                .orElse(null);
-
-        List<IPlayer> playersWithHighestScores = players.stream()
-                .filter(p -> p.getScore() == topPlayer.getScore())
-                .toList();
-
-        winner = playersWithHighestScores.stream()
-                .sorted(Comparator.comparingInt(players::indexOf))
-                .reduce((first, second) -> second)
-                .orElse(null);
-    }
-
     public void evaluateFinalScores() {
         List<IPlayer> players = turnManager.getPlayersOrder();
         for (IPlayer player : players) {
@@ -69,6 +51,24 @@ public class Game implements Serializable {
     }
 
     public IPlayer getWinner() {
+        // if winner has already been declared, return it
+        if (winner != null) return winner;
+
+        List<IPlayer> players = turnManager.getPlayersOrder();
+
+        IPlayer topPlayer = players.stream()
+                .max(Comparator.comparingInt(IPlayer::getScore))
+                .orElse(null);
+
+        List<IPlayer> playersWithHighestScores = players.stream()
+                .filter(p -> p.getScore() == topPlayer.getScore())
+                .toList();
+
+        winner = playersWithHighestScores.stream()
+                .sorted(Comparator.comparingInt(players::indexOf))
+                .reduce((first, second) -> second)
+                .orElse(null);
+
         return winner;
     }
 

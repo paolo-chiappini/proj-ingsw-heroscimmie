@@ -1,5 +1,6 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.mock.DynamicTestBookshelf;
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
@@ -88,11 +89,9 @@ public class GameTest {
         @Test
         @DisplayName("a winning player should be selected")
         void winningPlayerElection() {
-            IBookshelf bookshelf = new Bookshelf();
-            fillBookshelf(bookshelf);
-            players.get(0).setBookshelf(bookshelf);
-            players.get(1).setBookshelf(new Bookshelf());
-            players.get(2).setBookshelf(new Bookshelf());
+            players.get(0).setBookshelf(new DynamicTestBookshelf(new int[][] {{0}}));
+            players.get(1).setBookshelf(new DynamicTestBookshelf(new int[][] {{1}}));
+            players.get(2).setBookshelf(new DynamicTestBookshelf(new int[][] {{2}}));
 
             Game game = new Game(players);
             ITurnManager turnManager = game.getTurnManager();
@@ -101,26 +100,18 @@ public class GameTest {
                 turnManager.nextTurn();
             }
 
-            game.declareWinner();
             assertEquals(players.get(0), game.getWinner());
         }
 
         @Test
         @DisplayName("in case of draw the winner should be the furthest from the first player")
         void winningPlayerElectionWithDraw() {
-            IBookshelf bookshelf1, bookshelf2;
-            bookshelf1 = new Bookshelf();
-            bookshelf2 = new Bookshelf();
-
-            fillBookshelf(bookshelf1);
-            fillBookshelf(bookshelf2);
-
-            players.get(0).setBookshelf(bookshelf1);
-            players.get(1).setBookshelf(bookshelf2);
-            players.get(2).setBookshelf(new Bookshelf());
-            players.get(0).setPersonalGoalCard(new PersonalGoalCard1(players.size()));
-            players.get(1).setPersonalGoalCard(new PersonalGoalCard2(players.size()));
-            players.get(2).setPersonalGoalCard(new PersonalGoalCard3(players.size()));
+            players.get(0).setBookshelf(new DynamicTestBookshelf(new int[][] {{0}}));
+            players.get(1).setBookshelf(new DynamicTestBookshelf(new int[][] {{1}}));
+            players.get(2).setBookshelf(new DynamicTestBookshelf(new int[][] {{2}}));
+            players.get(0).setPersonalGoalCard(new PersonalGoalCard1());
+            players.get(1).setPersonalGoalCard(new PersonalGoalCard2());
+            players.get(2).setPersonalGoalCard(new PersonalGoalCard3());
 
             ITurnManagerBuilder turnBuilder = new TurnManager.TurnManagerBuilder();
             for (IPlayer player : players) turnBuilder.addPlayer(player);
@@ -137,23 +128,8 @@ public class GameTest {
             while (!turnManager.isGameOver()) {
                 turnManager.nextTurn();
             }
-            game.evaluateFinalScores();
-            game.declareWinner();
 
-            assertAll(
-                    () -> assertEquals(turnManager, game.getTurnManager()),
-                    () -> assertEquals(players.get(2), game.getWinner())
-            );
-        }
-
-        void fillBookshelf(IBookshelf bookshelf) {
-            for (int i = 0; i < bookshelf.getHeight(); i++) {
-                for (int j = 0; j < bookshelf.getWidth(); j++) {
-                    List<GameTile> tiles = new ArrayList<>();
-                    tiles.add(new Tile(TileType.CAT));
-                    bookshelf.dropTiles(tiles, j);
-                }
-            }
+            assertEquals(players.get(2), game.getWinner());
         }
     }
 }

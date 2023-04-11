@@ -45,7 +45,12 @@ public class DynamicTestBookshelf implements IBookshelf {
 
     @Override
     public boolean isFull() {
-        return false;
+        for (int i = 0; i < getHeight(); i++) {
+            for (int j = 0; j < getWidth(); j++) {
+                if (tiles[i][j] == null) return false;
+            }
+        }
+        return true;
     }
 
     @Override

@@ -47,8 +47,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard1(1,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard1();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 2")
@@ -63,8 +63,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard2(2,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard2();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 3")
@@ -79,8 +79,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard3(3,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard3();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 4")
@@ -95,8 +95,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard4(4,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard4();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 5")
@@ -111,8 +111,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard5(5,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard5();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 6")
@@ -127,8 +127,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard6(6,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard6();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 7")
@@ -143,8 +143,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard7(7,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard7();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 8")
@@ -159,8 +159,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard8(8,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard8();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 9")
@@ -175,8 +175,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard9(9,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard9();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 10")
@@ -191,8 +191,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard10(10,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard10();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 11")
@@ -207,8 +207,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard11(11,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard11();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
             @Test
             @DisplayName("Persona goal card 12")
@@ -223,8 +223,8 @@ class PersonalGoalCardDeckTest {
                 };
                 TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
-                myCard=new PersonalGoalCard12(12,pattern);
-                assertEquals(12,myCard.evaluatePoints(bookshelf,myCard.getPattern()));
+                myCard=new PersonalGoalCard12();
+                assertEquals(12,myCard.evaluatePoints(bookshelf));
             }
         }
     }
