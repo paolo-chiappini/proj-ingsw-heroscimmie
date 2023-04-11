@@ -4,8 +4,8 @@ import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.ITurnManager;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.builders.IGameBuilder;
-import it.polimi.ingsw.util.Serializable;
-import it.polimi.ingsw.util.Serializer;
+import it.polimi.ingsw.util.serialization.Serializable;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -86,7 +86,7 @@ public class Game implements Serializable {
 
     @Override
     public String serialize(Serializer serializer) {
-        return null;
+        return serializer.serialize(this);
     }
 
     public static class GameBuilder implements IGameBuilder {

@@ -1,12 +1,9 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.mock.DynamicTestBookshelf;
+import it.polimi.ingsw.mock.*;
 import it.polimi.ingsw.model.*;
-import it.polimi.ingsw.model.interfaces.GameTile;
-import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.ITurnManager;
-import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
 import org.junit.jupiter.api.*;
 
 import java.util.ArrayList;
@@ -22,9 +19,9 @@ public class GameTest {
     @BeforeAll
     public static void initPlayers() {
         players = new ArrayList<>();
-        players.add(new Player("a"));
-        players.add(new Player("b"));
-        players.add(new Player("c"));
+        players.add(new PlayerMock("a", 0, new DynamicTestBookshelf(new int[][] {{0}}), new PersonalCardMock(0)));
+        players.add(new PlayerMock("b", 0, new DynamicTestBookshelf(new int[][] {{1}}), new PersonalCardMock(1)));
+        players.add(new PlayerMock("c", 0, new DynamicTestBookshelf(new int[][] {{2}}), new PersonalCardMock(2)));
         players.sort(Comparator.comparing(IPlayer::getUsername));
     }
 
@@ -36,7 +33,7 @@ public class GameTest {
         @DisplayName("a game cannot be created with less than 2 players")
         void createNewTurnManager() {
             List<IPlayer> singlePlayer = new ArrayList<>();
-            singlePlayer.add(new Player("test"));
+            singlePlayer.add(new PlayerMock("test", 0, null, null));
 
             assertThrows(IllegalArgumentException.class, () -> new Game(singlePlayer));
         }
@@ -70,7 +67,7 @@ public class GameTest {
                     () -> assertEquals(2, commonGoals.size()),
                     () -> assertNotNull(commonGoals.get(0)),
                     () -> assertNotNull(commonGoals.get(1)),
-                    () -> assertNotEquals(commonGoals.get(0), commonGoals.get(1))
+                    () -> assertNotEquals(commonGoals.get(0).getId(), commonGoals.get(1).getId())
             );
         }
     }
@@ -82,54 +79,108 @@ public class GameTest {
         @Test
         @DisplayName("players points should be evaluated")
         void playerPointsEvaluation() {
-            Game game = new Game(players);
+            IPlayer playerWithScore = new PlayerMock("test", 10, null, new PersonalCardMock(0, 4));
+            Game game = new Game.GameBuilder()
+                    .setTurnManager(new TurnManagerMock(List.of(playerWithScore), 0, true))
+                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0,0)))
+                    .build();
+
             game.evaluateFinalScores();
+
+            assertEquals(14, game.getWinner().getScore());
         }
 
         @Test
         @DisplayName("a winning player should be selected")
         void winningPlayerElection() {
-            players.get(0).setBookshelf(new DynamicTestBookshelf(new int[][] {{0}}));
-            players.get(1).setBookshelf(new DynamicTestBookshelf(new int[][] {{1}}));
-            players.get(2).setBookshelf(new DynamicTestBookshelf(new int[][] {{2}}));
-
-            Game game = new Game(players);
+            Game game = new Game.GameBuilder()
+                    .setCommonGoalCards(List.of(new CommonCardMock(0, 0), new CommonCardMock(0, 0)))
+                    .setTurnManager(new TurnManagerMock(List.of(players.get(0)), 0, true))
+                    .build();
             ITurnManager turnManager = game.getTurnManager();
 
             while (!turnManager.isGameOver()) {
                 turnManager.nextTurn();
             }
 
-            assertEquals(players.get(0), game.getWinner());
+            assertEquals(players.get(0).getUsername(), game.getWinner().getUsername());
         }
 
         @Test
         @DisplayName("in case of draw the winner should be the furthest from the first player")
         void winningPlayerElectionWithDraw() {
-            players.get(0).setBookshelf(new DynamicTestBookshelf(new int[][] {{0}}));
-            players.get(1).setBookshelf(new DynamicTestBookshelf(new int[][] {{1}}));
-            players.get(2).setBookshelf(new DynamicTestBookshelf(new int[][] {{2}}));
-            players.get(0).setPersonalGoalCard(new PersonalGoalCard1());
-            players.get(1).setPersonalGoalCard(new PersonalGoalCard2());
-            players.get(2).setPersonalGoalCard(new PersonalGoalCard3());
-
-            ITurnManagerBuilder turnBuilder = new TurnManager.TurnManagerBuilder();
-            for (IPlayer player : players) turnBuilder.addPlayer(player);
-            ITurnManager turnManager = turnBuilder
-                    .setIsEndGame(true)
-                    .setCurrentTurn(0)
-                    .build();
-
             Game game = new Game.GameBuilder()
-                    .setTurnManager(turnManager)
-                    .setCommonGoalCards(new CommonGoalCardDeck(players.size()).drawCards())
+                    .setTurnManager(new TurnManagerMock(players, 0, true))
+                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0, 0)))
                     .build();
+            ITurnManager turnManager = game.getTurnManager();
 
             while (!turnManager.isGameOver()) {
                 turnManager.nextTurn();
             }
 
-            assertEquals(players.get(2), game.getWinner());
+            assertEquals(players.get(2).getUsername(), game.getWinner().getUsername());
+        }
+    }
+
+    @Nested
+    @DisplayName("When creating a new game through a builder")
+    class TestBuilder {
+
+        @Test
+        @DisplayName("a turn manager should be set")
+        void setNewTurnManager() {
+            ITurnManager turnManager = new TurnManagerMock(players, 0, false);
+            Game game = new Game.GameBuilder()
+                    .setTurnManager(turnManager)
+                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0,0)))
+                    .build();
+
+            assertEquals(turnManager, game.getTurnManager());
+        }
+
+        @Test
+        @DisplayName("common goals should be set")
+        void setCommonGoalCards() {
+            ITurnManager turnManager = new TurnManagerMock(players, 0, false);
+            List<CommonGoalCard> commonGoalCards = List.of(
+                    new CommonCardMock(1, 2),
+                    new CommonCardMock(2, 2)
+            );
+
+            Game game = new Game.GameBuilder()
+                    .setTurnManager(turnManager)
+                    .setCommonGoalCards(commonGoalCards)
+                    .build();
+
+            assertIterableEquals(commonGoalCards, game.getCommonGoals());
+        }
+
+        @Test
+        @DisplayName("an exception should be thrown if common goals aren't exactly 2")
+        void commonGoalsShouldBe() {
+            ITurnManager turnManager = new TurnManagerMock(players, 0, false);
+
+            assertAll(
+                    () -> assertThrows(
+                            IllegalArgumentException.class,
+                            ()-> new Game.GameBuilder()
+                                    .setTurnManager(turnManager)
+                                    .setCommonGoalCards(null)
+                                    .build()
+                    ),
+                    () -> assertThrows(
+                            IllegalArgumentException.class,
+                            ()-> new Game.GameBuilder()
+                                    .setTurnManager(turnManager)
+                                    .setCommonGoalCards(List.of(
+                                            new CommonCardMock(1,0),
+                                            new CommonCardMock(2, 0),
+                                            new CommonCardMock(3, 0)
+                                    ))
+                                    .build()
+                    )
+            );
         }
     }
 }
