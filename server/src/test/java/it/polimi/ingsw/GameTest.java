@@ -2,13 +2,16 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.mock.*;
 import it.polimi.ingsw.model.*;
+import it.polimi.ingsw.model.interfaces.IBag;
+import it.polimi.ingsw.model.interfaces.IBoard;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.ITurnManager;
+import it.polimi.ingsw.util.serialization.Deserializer;
+import it.polimi.ingsw.util.serialization.JsonDeserializer;
+import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.junit.jupiter.api.*;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,15 +36,17 @@ public class GameTest {
         @DisplayName("a game cannot be created with less than 2 players")
         void createNewTurnManager() {
             List<IPlayer> singlePlayer = new ArrayList<>();
+            ITurnManager turnManager = new TurnManagerMock(players, 0, true);
             singlePlayer.add(new PlayerMock("test", 0, null, null));
 
-            assertThrows(IllegalArgumentException.class, () -> new Game(singlePlayer));
+            assertThrows(IllegalArgumentException.class, () -> new Game(singlePlayer, turnManager, null, null));
         }
 
         @Test
         @DisplayName("each player should get a different personal goal")
         void assignPersonalGoalCards() {
-            Game game = new Game(players);
+            ITurnManager turnManager = new TurnManagerMock(players, 0, true);
+            Game game = new Game(players, turnManager, null, null);
             List<IPlayer> inGamePlayers = game.getPlayers();
 
             inGamePlayers.sort(Comparator.comparing(IPlayer::getUsername));
@@ -60,7 +65,8 @@ public class GameTest {
         @Test
         @DisplayName("two different common goals should be set")
         void assignCommonGoalCards() {
-            Game game = new Game(players);
+            ITurnManager turnManager = new TurnManagerMock(players, 0, true);
+            Game game = new Game(players, turnManager, null, null);
             List<CommonGoalCard> commonGoals = game.getCommonGoals();
 
             assertAll(
@@ -158,7 +164,7 @@ public class GameTest {
 
         @Test
         @DisplayName("an exception should be thrown if common goals aren't exactly 2")
-        void commonGoalsShouldBe() {
+        void commonGoalsShouldBe2() {
             ITurnManager turnManager = new TurnManagerMock(players, 0, false);
 
             assertAll(
@@ -181,6 +187,57 @@ public class GameTest {
                                     .build()
                     )
             );
+        }
+
+        @Test
+        @DisplayName("an exception should be thrown if no turn manager is set")
+        void turnManagerShouldBeSet() {
+            assertAll(
+                    () -> assertThrows(
+                            IllegalArgumentException.class,
+                            ()-> new Game.GameBuilder()
+                                    .setTurnManager(null)
+                                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0,0)))
+                                    .build()
+                    )
+            );
+        }
+    }
+
+    @Nested
+    @DisplayName("When serializing/deserializing game")
+    class TestSerialization {
+        @Test
+        @DisplayName("serialization should return correct data")
+        void gameSerialization() {
+            IBag bag = new BagMock(Map.of(
+                    TileType.CAT, 10,
+                    TileType.BOOK, 13
+            ));
+
+            IBoard board = new BoardMock(3, new int[][] {
+                    {1, 2, 3},
+                    {3, 2, 1},
+                    {1, 2, 3}
+            });
+
+            Game game = new Game.GameBuilder()
+                    .setTurnManager(new TurnManagerMock(players, 1, true))
+                    .setTilesBag(bag)
+                    .setBoard(board)
+                    .setCommonGoalCards(List.of(new CommonCardMock(1, 3), new CommonCardMock(8, 3)))
+                    .build();
+
+            String serializedData = game.serialize(new JsonSerializer());
+            String expected = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"players\":[{\"score\":0,\"bookshelf\":[[0]],\"personal_card_id\":0,\"username\":\"a\"},{\"score\":0,\"bookshelf\":[[1]],\"personal_card_id\":1,\"username\":\"b\"},{\"score\":0,\"bookshelf\":[[2]],\"personal_card_id\":2,\"username\":\"c\"}],\"bag\":{\"tiles_count\":[10,13]},\"common_goals\":[{\"vaid_players\":[\"a\",\"b\",\"c\"],\"card_id\":1,\"points\":[4,6,8]},{\"valid_players\":[\"a\",\"b\",\"c\"],\"card_id\":8,\"points\":[4,6,8]}],\"board\":[[1,2,3],[3,2,1],[1,2,3]],\"is_end_game\":true}";
+
+            assertEquals(expected, serializedData);
+        }
+
+        @Test
+        @DisplayName("deserialization should set correct data")
+        void gameDeserialization() {
+
         }
     }
 }

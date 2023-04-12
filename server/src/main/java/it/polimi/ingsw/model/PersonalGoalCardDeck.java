@@ -1,9 +1,13 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class PersonalGoalCardDeck {
     private final ArrayList<PersonalGoalCard> personalGoalCards;
+    private final List<PersonalGoalCard> remainingCards;
+
     public PersonalGoalCardDeck(){
         personalGoalCards = new ArrayList<>();
         personalGoalCards.add(new PersonalGoalCard1());
@@ -18,6 +22,8 @@ public class PersonalGoalCardDeck {
         personalGoalCards.add(new PersonalGoalCard10());
         personalGoalCards.add(new PersonalGoalCard11());
         personalGoalCards.add(new PersonalGoalCard12());
+
+        remainingCards = new ArrayList<>(personalGoalCards);
     }
 
     /**
@@ -25,7 +31,11 @@ public class PersonalGoalCardDeck {
      * @return cardDrawn
      */
     public PersonalGoalCard drawCard(){
-        int randomCardDrawnId = (int)(Math.random()*personalGoalCards.size());
-        return personalGoalCards.remove(randomCardDrawnId);
+        int randomCardDrawnId = (int)(Math.random()*remainingCards.size());
+        return remainingCards.remove(randomCardDrawnId);
+    }
+
+    public PersonalGoalCard getCardById(int id){
+        return personalGoalCards.get(id);
     }
 }

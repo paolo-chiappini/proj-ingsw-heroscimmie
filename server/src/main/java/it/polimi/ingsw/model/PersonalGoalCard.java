@@ -29,4 +29,8 @@ public abstract class PersonalGoalCard {
     public TileType[][] getPattern() {
         return pattern;
     }
+
+    public int getId() {
+        return id;
+    }
 }

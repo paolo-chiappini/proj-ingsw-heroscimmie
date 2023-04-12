@@ -7,7 +7,9 @@ import it.polimi.ingsw.model.interfaces.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -16,7 +18,33 @@ import java.util.List;
 public class JsonSerializer implements Serializer {
     @Override
     public String serialize(Game game) {
-        return null;
+        List<IPlayer> players = game.getPlayers();
+        List<CommonGoalCard> commonGoalCards = game.getCommonGoals();
+        ITurnManager turnManager = game.getTurnManager();
+        IBag bag = game.getBag();
+        IBoard board = game.getBoard();
+
+        JSONArray jsonPlayersArray = new JSONArray();
+        players.forEach(p -> jsonPlayersArray.put(new JSONObject(serialize(p))));
+
+        JSONArray jsonCommonGoalsArray = new JSONArray();
+        commonGoalCards.forEach(c -> jsonCommonGoalsArray.put(new JSONObject(serialize(c))));
+
+        JSONArray jsonBagArray = new JSONArray(serialize(bag));
+        JSONArray jsonBoardArray = new JSONArray(serialize(board));
+
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("board", jsonBoardArray);
+        jsonObject.put("bag", jsonBagArray);
+        jsonObject.put("players", jsonPlayersArray);
+        jsonObject.put("common_goals", jsonCommonGoalsArray);
+
+        jsonObject = mergeJsonObjects(List.of(
+                new JSONObject(serialize(turnManager)),
+                jsonObject
+        ));
+
+        return jsonObject.toString();
     }
 
     @Override
@@ -25,36 +53,35 @@ public class JsonSerializer implements Serializer {
         JSONObject jsonObject = new JSONObject();
 
         String serializedBookshelf = serialize(bookshelf);
-        JSONObject jsonBookshelf = new JSONObject(serializedBookshelf);
+        JSONArray jsonBookshelf = new JSONArray(serializedBookshelf);
 
         jsonObject.put("username", player.getUsername());
         jsonObject.put("score", player.getScore());
         jsonObject.put("bookshelf", jsonBookshelf);
+        jsonObject.put("personal_card_id", player.getPersonalGoalCard().getId());
 
         return jsonObject.toString();
     }
 
     @Override
     public String serialize(IBoard board) {
-        JSONArray rows = new JSONArray(); 
-        JSONObject jsonObject = new JSONObject();
+        JSONArray rows = new JSONArray();
 
         for (int i = 0; i < board.getSize(); i++) {
             JSONArray row = new JSONArray();
             for (int j = 0; j < board.getSize(); j++) {
                 GameTile tile = board.getTileAt(i, j);
                 if (tile == null) {
-                    row.put(j, -1);
+                    row.put(-1);
                     continue;
                 }
 
-                row.put(j, tile.getType().ordinal());
+                row.put(tile.getType().ordinal());
             }
-            rows.put(i, row);
+            rows.put(row);
         }
 
-        jsonObject.put("board", rows);
-        return jsonObject.toString();
+        return rows.toString();
     }
 
     @Override
@@ -85,11 +112,14 @@ public class JsonSerializer implements Serializer {
         List<Integer> points = commonGoalCard.getPoints();
         JSONArray jsonPoints = new JSONArray(points);
 
+        /*List<String> playerNames = */
+        JSONArray jsonNamesArray = new JSONArray();
+
         jsonObject.put("card_id", commonGoalCard.getId());
         jsonObject.put("points", jsonPoints);
-        jsonObject.put("", 0);
+        jsonObject.put("valid_players", jsonNamesArray);
 
-        return null;
+        return jsonObject.toString();
     }
 
     @Override
@@ -118,5 +148,18 @@ public class JsonSerializer implements Serializer {
         jsonObject.put("players_order", usernames);
 
         return jsonObject.toString();
+    }
+
+    public JSONObject mergeJsonObjects(List<JSONObject> serializedObjects) {
+        JSONObject merged = new JSONObject();
+
+        for (JSONObject obj : serializedObjects) {
+            for (Iterator<String> it = obj.keys(); it.hasNext(); ) {
+                String key = it.next();
+                merged.put(key, obj.get(key));
+            }
+        }
+
+        return merged;
     }
 }

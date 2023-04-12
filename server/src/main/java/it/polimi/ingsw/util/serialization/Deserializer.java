@@ -1,6 +1,7 @@
 package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.CommonGoalCard;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.interfaces.*;
 
 /**
@@ -13,7 +14,7 @@ public interface Deserializer {
      * objects contained within.
      * @param data String of data to deserialize into game.
      */
-    void deserializeGame(String data);
+    Game deserializeGame(String data);
 
     /**
      * Deserializes a Player object.

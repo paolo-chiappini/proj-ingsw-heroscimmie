@@ -1,8 +1,6 @@
 package it.polimi.ingsw.model;
 
-import it.polimi.ingsw.model.interfaces.IPlayer;
-import it.polimi.ingsw.model.interfaces.ITurnManager;
-import it.polimi.ingsw.model.interfaces.IBookshelf;
+import it.polimi.ingsw.model.interfaces.*;
 import it.polimi.ingsw.model.interfaces.builders.IGameBuilder;
 import it.polimi.ingsw.util.serialization.Serializable;
 import it.polimi.ingsw.util.serialization.Serializer;
@@ -13,20 +11,27 @@ import java.util.List;
 
 public class Game implements Serializable {
     private final ITurnManager turnManager;
+    private final IBag bag;
+    private final IBoard board;
     private List<CommonGoalCard> commonGoals;
     private IPlayer winner;
 
-    public Game(List<IPlayer> players) {
+    public Game(List<IPlayer> players, ITurnManager turnManager, IBag bag, IBoard board) {
         if (players == null || players.size() < 2) {
             throw new IllegalArgumentException("There should be at least 2 players");
         }
-        turnManager = new TurnManager(players);
+        this.turnManager = turnManager;
+        this.bag = bag;
+        this.board = board;
+
         assignCommonGoals();
         assignPersonalGoals();
     }
 
     private Game(GameBuilder builder) {
         this.turnManager = builder.turnManager;
+        this.bag = builder.bag;
+        this.board = builder.board;
         this.commonGoals = new ArrayList<>(builder.commonGoals);
     }
 
@@ -84,6 +89,10 @@ public class Game implements Serializable {
         return turnManager;
     }
 
+    public IBag getBag() { return bag; }
+
+    public IBoard getBoard() { return board; }
+
     @Override
     public String serialize(Serializer serializer) {
         return serializer.serialize(this);
@@ -91,6 +100,8 @@ public class Game implements Serializable {
 
     public static class GameBuilder implements IGameBuilder {
         private ITurnManager turnManager;
+        private IBag bag;
+        private IBoard board;
         private List<CommonGoalCard> commonGoals;
 
         @Override
@@ -113,6 +124,24 @@ public class Game implements Serializable {
                 throw new IllegalArgumentException("Common goals should be 2");
             }
             this.commonGoals = new ArrayList<>(commonGoals);
+            return this;
+        }
+
+        @Override
+        public IGameBuilder setTilesBag(IBag bag) {
+            if (bag == null) {
+                throw new IllegalArgumentException("Bag cannot be null");
+            }
+            this.bag = bag;
+            return this;
+        }
+
+        @Override
+        public IGameBuilder setBoard(IBoard board) {
+            if (board == null) {
+                throw new IllegalArgumentException("Board cannot be null");
+            }
+            this.board = board;
             return this;
         }
     }
