@@ -4,5 +4,5 @@ import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.IBag;
 
 public interface IBagBuilder extends Builder<IBag> {
-    void setRemainingTilesCount(TileType type, int count);
+    IBagBuilder setRemainingTilesCount(TileType type, int count);
 }
