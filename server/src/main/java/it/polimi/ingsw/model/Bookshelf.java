@@ -4,6 +4,7 @@ import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -46,7 +47,7 @@ public class Bookshelf implements IBookshelf {
     }
 
     /**
-     * Drop the tiles into the BookShelf
+     * Drops the tiles into the bookshelf
      * @param column the column where you drop the tiles
      * @param tilesToDrop the chosen tiles to insert
     */
@@ -56,20 +57,17 @@ public class Bookshelf implements IBookshelf {
         int startRowInsert=0;
         for (int i = 0; i< HEIGHT; i++) {
             if (tiles[i][column]==null)
-            {
                 startRowInsert=i+1;
-            }
         }
         for (GameTile tile : tilesToDrop)
         {
             startRowInsert--;
             tiles[startRowInsert][column] = tile;
-
         }
     }
 
     /**
-     * check if the bookshelf has free spaces
+     * checks if the bookshelf has free spaces
      * @param column the column where you want to drop the tiles
      * @param numOfTiles the number of tiles to insert
      * @return true if you can insert the tiles
@@ -79,13 +77,9 @@ public class Bookshelf implements IBookshelf {
     {
         int AvailableSpaces=0;
         if(numOfTiles>3)
-        {
             throw new IllegalActionException("No more than 3 tiles can be inserted, please try again with fewer tiles");
-        }
         if(column>WIDTH-1 || column<0)
-        {
             throw new IllegalActionException("The chosen column is not valid, try again with another column");
-        }
         for(int i = 0; i< HEIGHT; i++)
         {
             if(tiles[i][column]==null)
@@ -95,7 +89,7 @@ public class Bookshelf implements IBookshelf {
     }
 
     /**
-     * Check if the bookshelf is full
+     * Checks if the bookshelf is full
      * @return true if the bookshelf has free spaces
      */
     @Override
@@ -105,7 +99,7 @@ public class Bookshelf implements IBookshelf {
     }
 
     /**
-     * Check if the shelf of the bookshelf has a tile
+     * Checks if the shelf of the bookshelf has a tile
      * @return true if the shelf has a tile
      */
     @Override
@@ -115,7 +109,7 @@ public class Bookshelf implements IBookshelf {
     }
 
     /**
-     * Compare two tile
+     * Compares two tiles
      * @param row is the row in which the first tile is located
      * @param column is the column in which the first tile is located
      * @param row2 is the row of the second tile
@@ -130,5 +124,28 @@ public class Bookshelf implements IBookshelf {
             return tiles[row][column].getType().equals(tiles[row2][column2].getType());
         }
         return false;
+    }
+
+    /**
+     * Chooses the order of the tiles
+     * @param tilesToDrop are the chosen tiles to insert
+     * @param position1 is the position of the first tile
+     * @param position2 is the position of the second tile
+     * @param position3 is the position of the third tile
+     * @return sorted tiles to insert in the bookshelf
+     */
+    public List<GameTile> sort(List<GameTile> tilesToDrop, int position1, int position2, int position3)
+    {
+        List<GameTile> order = new ArrayList<>();
+        if(tilesToDrop.size()==3){
+            order.add(tilesToDrop.get(position1-1));
+            order.add(tilesToDrop.get(position2-1));
+            order.add(tilesToDrop.get(position3-1));
+        }
+       if(tilesToDrop.size()==2) {
+            order.add(tilesToDrop.get(position1-1));
+            order.add(tilesToDrop.get(position2-1));
+        }
+        return order;
     }
 }

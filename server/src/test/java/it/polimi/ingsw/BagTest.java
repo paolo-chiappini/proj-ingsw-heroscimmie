@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.Bag;
 import it.polimi.ingsw.model.Tile;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBag;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -12,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Tests on Bag")
 class BagTest {
 
-    Bag bag;
+    IBag bag;
 
     @Nested
     @DisplayName("On bag creation")
@@ -49,6 +50,13 @@ class BagTest {
                 GameTile tile = bag.drawTile();
                 assertEquals(21,bag.getTilesBag().get(tile.getType()));
             }
+
+            @Test
+            @DisplayName("a tile of a chosen type should be removed from the bag")
+            void drawTileByType() {
+                GameTile tile = bag.getTileByType(TileType.TOY);
+                assertEquals(21,bag.getTilesBag().get(tile.getType()));
+            }
             @Test
             @DisplayName("a random number of tiles should be removed from the bag")
             void drawNTiles() {
@@ -71,12 +79,31 @@ class BagTest {
                 assertEquals(0,bag.getTilesBag().size());
                 assertTrue(bag.getTilesBag().isEmpty());
             }
+
+            @Test
+            @DisplayName("all tiles of a chosen type should be removed from the bag")
+            void drawAllTilesOfAType() {
+                for (int i = 0; i < 22; i++) {
+                    bag.getTileByType(TileType.BOOK);
+                }
+                assertEquals(110,bag.getTilesBag().values().stream().reduce(0, Integer::sum));
+            }
             @Test
             @DisplayName("exception should be raised when bag is empty")
-            void bagFull() {
+            void bagEmpty() {
                 drawAllTiles();
                 assertThrows(IllegalActionException.class,
                         () -> bag.drawTile());
+            }
+
+            @Test
+            @DisplayName("exception should be raised when bag is empty")
+            void CannotDrawTilesOfAType() {
+                for (TileType type: TileType.values())
+                    for (int i = 0; i < 22; i++)
+                        bag.getTileByType(type);
+                assertThrows(IllegalActionException.class,
+                        () -> bag.getTileByType(TileType.BOOK));
             }
         }
         @Nested
@@ -94,6 +121,17 @@ class BagTest {
             void bagFull() {
                 assertThrows(IllegalActionException.class,
                         () -> bag.addTile(new Tile(TileType.BOOK)));
+            }
+        }
+
+        @Nested
+        @DisplayName("When setting the number of remaining tiles of a type")
+        class SettingTests {
+            @Test
+            @DisplayName("bag should has a chosen number of tiles of a type")
+            void setRemainingTilesCount() {
+                bag.setRemainingTilesCount(TileType.CAT,20);
+                assertEquals(20,bag.getTilesBag().get(TileType.CAT));
             }
         }
     }

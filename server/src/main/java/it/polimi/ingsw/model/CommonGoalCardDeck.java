@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CommonGoalCardDeck {
     private static final int NUMBER_OF_COMMON_CARD=2;
@@ -39,14 +40,14 @@ public class CommonGoalCardDeck {
     }
 
     /**
-     * Draw 2 common goal cards from the deck
+     * Draws 2 common goal cards from the deck
      * @return 2 common goal cards
      **/
     public ArrayList<CommonGoalCard> drawCards(){
         ArrayList<CommonGoalCard> commonCards = new ArrayList<>(NUMBER_OF_COMMON_CARD);
+        Collections.shuffle(commonGoalCards);
         for(int i = 0; i < NUMBER_OF_COMMON_CARD; ++i) {
-            int randomID = (int)(Math.random()*commonGoalCards.size());
-            commonCards.add(commonGoalCards.get(randomID));
+            commonCards.add(commonGoalCards.get(i));
         }
         return commonCards;
     }

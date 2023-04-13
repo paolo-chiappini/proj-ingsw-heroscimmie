@@ -1,9 +1,13 @@
 package it.polimi.ingsw;
 import it.polimi.ingsw.model.Bag;
 import it.polimi.ingsw.model.Board;
+import it.polimi.ingsw.model.interfaces.GameTile;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BoardTest {
@@ -15,6 +19,15 @@ public class BoardTest {
         myBoard = new Board(2);
         myBoard4Player = new Board(4);
         bag=new Bag();
+    }
+
+    /**
+     * Test that board is 9x9
+     */
+    @Test
+    @DisplayName("Board is 9x9")
+    void boardSize(){
+        assertEquals(81,myBoard.getSize());
     }
 
     /**
@@ -78,13 +91,19 @@ public class BoardTest {
 
     /**
      * Test if player can pick up one tile from the board
+     * checks that the tile collected is actually the one that was on the board
      */
     @Test
     void tileCanBePickedUp(){
         myBoard.refill(new Bag());
         myBoard.pickUpTiles(6,3,6,3);
+        GameTile tileOnBoard = myBoard.getTileAt(5,3);
         assertTrue(myBoard.canPickUpTiles(5,3,5,3));
-        assertEquals(1,myBoard.pickUpTiles(5,3,5,3).size());
+        List<GameTile> tilesTaken = myBoard.pickUpTiles(5,3,5,3);
+        assertAll(
+                ()->assertEquals(tileOnBoard,tilesTaken.get(0)),
+                ()->assertEquals(1,tilesTaken.size())
+        );
     }
 
     /**
@@ -93,8 +112,10 @@ public class BoardTest {
     @Test
     void twoTilesColumnCanBePickedUp(){
         myBoard.refill(new Bag());
-        assertTrue(myBoard.canPickUpTiles(7,5,6,5));
-        assertEquals(2,myBoard.pickUpTiles(7,5,6,5).size());
+        assertAll(
+                ()->assertTrue(myBoard.canPickUpTiles(7,5,6,5)),
+                ()->assertEquals(2,myBoard.pickUpTiles(7,5,6,5).size())
+        );
     }
 
     /**
@@ -103,8 +124,10 @@ public class BoardTest {
     @Test
     void twoTilesLineCanBePickedUp(){
         myBoard.refill(new Bag());
-        assertTrue(myBoard.canPickUpTiles(7,5,7,4));
-        assertEquals(2,myBoard.pickUpTiles(7,4,7,5).size());
+        assertAll(
+                ()->assertTrue(myBoard.canPickUpTiles(7,5,7,4)),
+                ()->assertEquals(2,myBoard.pickUpTiles(7,4,7,5).size())
+        );
     }
 
     /**
@@ -114,8 +137,10 @@ public class BoardTest {
     void threeTilesLineCanBePickedUp(){
         myBoard.refill(new Bag());
         myBoard.pickUpTiles(1,3,1,4);
-        assertTrue(myBoard.canPickUpTiles(2,5,2,3));
-        assertEquals(3,myBoard.pickUpTiles(2,5,2,3).size());
+        assertAll(
+                ()->assertTrue(myBoard.canPickUpTiles(2,5,2,3)),
+                ()->assertEquals(3,myBoard.pickUpTiles(2,5,2,3).size())
+        );
     }
 
     /**
@@ -125,8 +150,10 @@ public class BoardTest {
     void threeTilesColumnCanBePickedUp(){
         myBoard.refill(new Bag());
         myBoard.pickUpTiles(4,7,4,7);
-        assertTrue(myBoard.canPickUpTiles(5,6,3,6));
-        assertEquals(3,myBoard.pickUpTiles(3,6,5,6).size());
+        assertAll(
+                ()->assertTrue(myBoard.canPickUpTiles(5,6,3,6)),
+                ()->assertEquals(3,myBoard.pickUpTiles(3,6,5,6).size())
+        );
     }
 
     /**
