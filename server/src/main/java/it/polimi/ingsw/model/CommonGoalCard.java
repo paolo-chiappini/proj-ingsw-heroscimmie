@@ -55,7 +55,7 @@ public abstract class CommonGoalCard implements GoalCard {
         private final CommonGoalCard instance;
 
         public CommonGoalCardBuilder(int id) {
-            instance = new CommonGoalCardDeck(0).getCommonGoalCards().get(id);
+            instance = new CommonGoalCardDeck(0).getCommonGoalCards().get(id - 1);
             instance.points = new ArrayList<>();
             instance.players = new ArrayList<>();
         }

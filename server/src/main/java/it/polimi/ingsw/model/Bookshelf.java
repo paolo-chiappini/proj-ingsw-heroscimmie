@@ -177,6 +177,7 @@ public class Bookshelf implements IBookshelf {
         public IBookshelfBuilder setTiles(TileType[][] tileTypes, IBag bag) {
             for (int i = 0; i < tileTypes.length; i++) {
                 for (int j = 0; j < tileTypes[i].length; j++) {
+                    if (tileTypes[i][j] == null) continue;
                     tiles[i][j] = bag.getTileByType(tileTypes[i][j]);
                 }
             }

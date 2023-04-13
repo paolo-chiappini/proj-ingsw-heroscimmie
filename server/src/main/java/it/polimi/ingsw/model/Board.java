@@ -50,7 +50,7 @@ public class Board implements IBoard {
 
     @Override
     public int getSize() {
-        return BOARD_DIM*BOARD_DIM;
+        return BOARD_DIM;
     }
 
     /**
@@ -216,13 +216,14 @@ public class Board implements IBoard {
 
         @Override
         public IBoard build() {
-            return null;
+            return new Board(this);
         }
 
         @Override
         public IBoardBuilder setTiles(TileType[][] tileTypes, IBag bag) {
             for (int i = 0; i < tileTypes.length; i++) {
                 for (int j = 0; j < tileTypes[i].length; j++) {
+                    if (tileTypes[i][j] == null) continue;
                     spaces[i][j].setTile(bag.getTileByType(tileTypes[i][j]));
                 }
             }

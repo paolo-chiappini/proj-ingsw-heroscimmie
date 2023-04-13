@@ -94,7 +94,8 @@ public class JsonDeserializer implements Deserializer {
             JSONArray row = jsonArray.getJSONArray(i);
             for (int j = 0; j < row.length(); j++) {
                 int tileOrdinal = row.getInt(j);
-                grid[i][j] = TileType.values()[tileOrdinal];
+                grid[i][j] = null;
+                if (tileOrdinal >= 0) grid[i][j] = TileType.values()[tileOrdinal];
             }
         }
 

@@ -36,6 +36,6 @@ public class PersonalGoalCardDeck {
     }
 
     public PersonalGoalCard getCardById(int id){
-        return personalGoalCards.get(id);
+        return personalGoalCards.get(id - 1);
     }
 }
