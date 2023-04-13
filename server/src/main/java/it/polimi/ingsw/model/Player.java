@@ -2,6 +2,7 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.IPlayer;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 public class Player implements IPlayer {
     private final String username;
@@ -79,5 +80,10 @@ public class Player implements IPlayer {
      */
     public boolean isFirstPlayer() {
         return firstPlayer;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.interfaces.IBookshelf;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.HashMap;
 
@@ -43,5 +44,10 @@ public class CommonGoalCard4 extends CommonGoalCard {
             countTileType.replaceAll((key, value)->0);
         }
         return countLines>=4;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }

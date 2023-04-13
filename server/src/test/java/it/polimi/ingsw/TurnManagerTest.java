@@ -13,6 +13,7 @@ import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
 import it.polimi.ingsw.util.serialization.Deserializer;
 import it.polimi.ingsw.util.serialization.JsonDeserializer;
 import it.polimi.ingsw.util.serialization.JsonSerializer;
+import it.polimi.ingsw.util.serialization.Serializer;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
@@ -55,6 +56,11 @@ public class TurnManagerTest {
 
         @Override
         public void addPointsToScore(int points) {}
+
+        @Override
+        public String serialize(Serializer serializer) {
+            return null;
+        }
     }
 
     private static class TestBookshelf implements IBookshelf {
@@ -74,6 +80,11 @@ public class TurnManagerTest {
         public boolean hasTile(int row, int column) { return false; }
         @Override
         public boolean compareTiles(int row, int column, int row2, int column2) { return false; }
+
+        @Override
+        public String serialize(Serializer serializer) {
+            return null;
+        }
     }
 
     private static List<IPlayer> players;

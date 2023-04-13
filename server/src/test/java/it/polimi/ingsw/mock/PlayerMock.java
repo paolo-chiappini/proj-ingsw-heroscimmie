@@ -3,6 +3,7 @@ package it.polimi.ingsw.mock;
 import it.polimi.ingsw.model.PersonalGoalCard;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.IPlayer;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 public class PlayerMock implements IPlayer {
     int score;
@@ -50,5 +51,10 @@ public class PlayerMock implements IPlayer {
     @Override
     public void addPointsToScore(int points) {
         score += points;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }

@@ -1,8 +1,9 @@
 package it.polimi.ingsw.model.interfaces;
 
 import it.polimi.ingsw.model.PersonalGoalCard;
+import it.polimi.ingsw.util.serialization.Serializable;
 
-public interface IPlayer {
+public interface IPlayer extends Serializable {
     String getUsername();
     int getScore();
     IBookshelf getBookshelf();

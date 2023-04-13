@@ -4,6 +4,7 @@ import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBag;
 import it.polimi.ingsw.model.interfaces.IBoard;
 import it.polimi.ingsw.model.interfaces.builders.IBoardBuilder;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.*;
 
@@ -199,6 +200,11 @@ public class Board implements IBoard {
                     && spaces[row1][col1 + 1].getTile() != null && spaces[row1][col1 - 1].getTile() != null);
         }
         return false;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 
     public static class BoardBuilder implements IBoardBuilder {

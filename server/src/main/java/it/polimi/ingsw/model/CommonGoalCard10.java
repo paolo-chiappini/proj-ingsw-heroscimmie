@@ -1,6 +1,7 @@
 package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.model.interfaces.IBookshelf;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 public class CommonGoalCard10 extends CommonGoalCard {
     public CommonGoalCard10(int numPlayers) {
@@ -28,5 +29,10 @@ public class CommonGoalCard10 extends CommonGoalCard {
             }
         }
         return false;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }

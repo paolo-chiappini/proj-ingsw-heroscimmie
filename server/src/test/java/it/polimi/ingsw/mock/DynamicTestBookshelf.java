@@ -3,6 +3,7 @@ package it.polimi.ingsw.mock;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.List;
 
@@ -74,5 +75,10 @@ public class DynamicTestBookshelf implements IBookshelf {
             return tiles[row][column].getType().equals(tiles[row2][column2].getType());
         }
         return false;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }

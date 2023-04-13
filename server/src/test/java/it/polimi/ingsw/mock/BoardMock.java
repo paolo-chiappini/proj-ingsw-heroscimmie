@@ -6,6 +6,7 @@ import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBag;
 import it.polimi.ingsw.model.interfaces.IBoard;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.List;
 
@@ -52,5 +53,10 @@ public class BoardMock implements IBoard {
     @Override
     public int getSize() {
         return size;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }

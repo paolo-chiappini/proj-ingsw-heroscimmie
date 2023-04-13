@@ -1,8 +1,10 @@
 package it.polimi.ingsw.model.interfaces;
 
+import it.polimi.ingsw.util.serialization.Serializable;
+
 import java.util.List;
 
-public interface IBookshelf {
+public interface IBookshelf extends Serializable {
     default GameTile getTileAt(int row, int column) { return null; }
     default int getWidth() { return 0; }
     default int getHeight() { return 0; }

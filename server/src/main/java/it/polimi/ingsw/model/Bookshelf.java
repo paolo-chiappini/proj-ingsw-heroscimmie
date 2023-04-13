@@ -5,6 +5,7 @@ import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBag;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.builders.IBookshelfBuilder;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,6 +154,11 @@ public class Bookshelf implements IBookshelf {
             order.add(tilesToDrop.get(position2-1));
         }
         return order;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 
     public static class BookshelfBuilder implements IBookshelfBuilder {
