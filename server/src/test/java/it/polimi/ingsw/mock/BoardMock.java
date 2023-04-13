@@ -35,7 +35,7 @@ public class BoardMock implements IBoard {
     }
 
     @Override
-    public List<TileSpace> pickUpTiles(int row1, int col1, int row2, int col2) {
+    public List<GameTile> pickUpTiles(int row1, int col1, int row2, int col2) {
         return null;
     }
 

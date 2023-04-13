@@ -43,11 +43,6 @@ public class Board implements IBoard {
     }
 
     @Override
-    public void setTileAt(int row, int col, GameTile tile) {
-        spaces[row][col].setTile(tile);
-    }
-
-    @Override
     public GameTile getTileAt(int row, int col) {
         return spaces[row][col].getTile();
     }

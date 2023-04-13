@@ -3,13 +3,12 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBag;
-import it.polimi.ingsw.model.interfaces.builders.IBagBuilder;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class Bag {
+public class Bag implements IBag {
     private final HashMap<TileType,Integer> tilesBag;
     private static final int NUM_OF_TILES=22;
 
@@ -18,10 +17,6 @@ public class Bag {
         for (TileType tile:TileType.values()) {
             tilesBag.put(tile,NUM_OF_TILES);
         }
-    }
-
-    private Bag(BagBuilder builder) {
-        this.tilesBag = new HashMap<>(builder.tilesBag);
     }
 
     @Override
@@ -76,29 +71,5 @@ public class Bag {
         if(tilesBag.get(type)==0)
             tilesBag.remove(type);
         return new Tile(type);
-    }
-
-    @Override
-    public GameTile getTileByType(TileType type) {
-        return null;
-    }
-
-    public static class BagBuilder implements IBagBuilder {
-        private final HashMap<TileType, Integer> tilesBag;
-
-        public BagBuilder() {
-            tilesBag = new HashMap<>();
-        }
-
-        @Override
-        public IBag build() {
-            return new Bag(this);
-        }
-
-        @Override
-        public IBagBuilder setRemainingTilesCount(TileType type, int count) {
-            tilesBag.put(type, count);
-            return this;
-        }
     }
 }
