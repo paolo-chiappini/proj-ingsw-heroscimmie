@@ -2,7 +2,7 @@ package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.*;
 import it.polimi.ingsw.model.interfaces.*;
-import it.polimi.ingsw.model.interfaces.builders.IBagBuilder;
+import it.polimi.ingsw.model.interfaces.builders.ICommonGoalCardBuilder;
 import it.polimi.ingsw.model.interfaces.builders.ITurnManagerBuilder;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -31,11 +31,17 @@ public class JsonDeserializer implements Deserializer {
         jsonPlayersArray = jsonObject.getJSONArray("players");
         jsonCommonGoalsArray = jsonGameState.getJSONArray("common_goals");
 
-        bag = deserializeBag(jsonObject.getJSONArray("bag").toString());
-        board = deserializeBoard(data);
+        bag = new Bag();
+        board = deserializeBoard(data, jsonPlayersArray.length(), bag);
         turnManager = deserializeTurn(jsonGameState.toString());
 
-        jsonPlayersArray.forEach(p -> turnManagerBuilder.addPlayer(deserializePlayer(p.toString())));
+        for (Object player : jsonPlayersArray) {
+            turnManagerBuilder.addPlayer(deserializePlayer(player.toString(), bag));
+        }
+
+        for (Object commonGoalCard : jsonCommonGoalsArray) {
+            commonGoalCards.add(deserializeCommonGoalCard(commonGoalCard.toString()));
+        }
 
         return new Game.GameBuilder()
                 .setCommonGoalCards(commonGoalCards)
@@ -46,12 +52,12 @@ public class JsonDeserializer implements Deserializer {
     }
 
     @Override
-    public IPlayer deserializePlayer(String data) {
+    public IPlayer deserializePlayer(String data, IBag bag) {
         JSONObject jsonObject = new JSONObject(data);
         String username = jsonObject.getString("username");
         int score = jsonObject.getInt("score");
         int personalCardId = jsonObject.getInt("personal_card_id");
-        IBookshelf bookshelf = deserializeBookshelf(jsonObject.getJSONArray("bookshelf").toString());
+        IBookshelf bookshelf = deserializeBookshelf(jsonObject.getJSONArray("bookshelf").toString(), bag);
 
         IPlayer player = new Player(username);
         player.setBookshelf(bookshelf);
@@ -62,29 +68,33 @@ public class JsonDeserializer implements Deserializer {
     }
 
     @Override
-    public IBoard deserializeBoard(String data) {
+    public IBoard deserializeBoard(String data, int playersCount, IBag bag) {
         JSONArray boardArray = new JSONArray(data);
-        int[][] boardTiles = deserializeTileGrid(boardArray);
+        TileType[][] boardTiles = deserializeTileGrid(boardArray);
 
-        return null;
+        return new Board.BoardBuilder(playersCount)
+                .setTiles(boardTiles, bag)
+                .build();
     }
 
     @Override
-    public IBookshelf deserializeBookshelf(String data) {
+    public IBookshelf deserializeBookshelf(String data, IBag bag) {
         JSONArray bookshelfArray = new JSONArray(data);
-        int [][] bookshelfTiles = deserializeTileGrid(bookshelfArray);
+        TileType [][] bookshelfTiles = deserializeTileGrid(bookshelfArray);
 
-        return null;
+        return new Bookshelf.BookshelfBuilder()
+                .setTiles(bookshelfTiles, bag)
+                .build();
     }
 
-    private int[][] deserializeTileGrid(JSONArray jsonArray) {
-        int[][] grid = new int[jsonArray.length()][jsonArray.getJSONArray(0).length()];
+    private TileType[][] deserializeTileGrid(JSONArray jsonArray) {
+        TileType[][] grid = new TileType[jsonArray.length()][jsonArray.getJSONArray(0).length()];
 
         for (int i = 0; i < jsonArray.length(); i++) {
             JSONArray row = jsonArray.getJSONArray(i);
             for (int j = 0; j < row.length(); j++) {
                 int tileOrdinal = row.getInt(j);
-                grid[i][j] = tileOrdinal;
+                grid[i][j] = TileType.values()[tileOrdinal];
             }
         }
 
@@ -93,17 +103,17 @@ public class JsonDeserializer implements Deserializer {
 
     @Override
     public CommonGoalCard deserializeCommonGoalCard(String data) {
-        return null;
-    }
-
-    @Override
-    public IBag deserializeBag(String data) {
         JSONObject jsonObject = new JSONObject(data);
-        JSONArray tiles = jsonObject.getJSONArray("bag");
-        IBagBuilder builder = new Bag.BagBuilder();
+        ICommonGoalCardBuilder builder = new CommonGoalCard.CommonGoalCardBuilder(jsonObject.getInt("card_id"));
+        JSONArray players = jsonObject.getJSONArray("valid_players");
+        JSONArray points = jsonObject.getJSONArray("points");
 
-        for (int i = 0; i < tiles.length(); i++) {
-            builder.setRemainingTilesCount(TileType.values()[i], tiles.getInt(i));
+        for (int i = 0; i < players.length(); i++) {
+            builder.addPlayer(players.getString(i));
+        }
+
+        for (int i = 0; i < points.length(); i++) {
+            builder.addPoints(points.getInt(i));
         }
 
         return builder.build();

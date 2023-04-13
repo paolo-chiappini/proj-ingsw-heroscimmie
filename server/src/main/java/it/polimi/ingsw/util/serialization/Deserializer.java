@@ -23,21 +23,21 @@ public interface Deserializer {
      * @param data String of data to deserialize into player.
      * @return instance of the deserialized player.
      */
-    IPlayer deserializePlayer(String data);
+    IPlayer deserializePlayer(String data, IBag bag);
 
     /**
      * Deserializes a Board object.
      * @param data String of data to deserialize into board.
      * @return instance of the deserialized board.
      */
-    IBoard deserializeBoard(String data);
+    IBoard deserializeBoard(String data, int playersCount, IBag bag);
 
     /**
      * Deserializes a Bookshelf object.
      * @param data String of data to deserialize into bookshelf.
      * @return instance of the deserialized bookshelf.
      */
-    IBookshelf deserializeBookshelf(String data);
+    IBookshelf deserializeBookshelf(String data, IBag bag);
 
     /**
      * Deserializes a CommonGoalCard object.
@@ -45,13 +45,6 @@ public interface Deserializer {
      * @return instance of the deserialized card.
      */
     CommonGoalCard deserializeCommonGoalCard(String data);
-
-    /**
-     * Deserializes a Bag object.
-     * @param data String of data to deserialize into bag.
-     * @return instance of the deserialized bag.
-     */
-    IBag deserializeBag(String data);
 
     /**
      * Deserializes a turn into a TurnManger.

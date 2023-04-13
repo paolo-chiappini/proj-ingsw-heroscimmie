@@ -21,21 +21,22 @@ public class JsonSerializer implements Serializer {
         List<IPlayer> players = game.getPlayers();
         List<CommonGoalCard> commonGoalCards = game.getCommonGoals();
         ITurnManager turnManager = game.getTurnManager();
-        IBag bag = game.getBag();
         IBoard board = game.getBoard();
 
         JSONArray jsonPlayersArray = new JSONArray();
-        players.forEach(p -> jsonPlayersArray.put(new JSONObject(serialize(p))));
+        for (IPlayer p : players) {
+            jsonPlayersArray.put(new JSONObject(serialize(p)));
+        }
 
         JSONArray jsonCommonGoalsArray = new JSONArray();
-        commonGoalCards.forEach(c -> jsonCommonGoalsArray.put(new JSONObject(serialize(c))));
+        for (CommonGoalCard c : commonGoalCards) {
+            jsonCommonGoalsArray.put(new JSONObject(serialize(c)));
+        }
 
-        JSONArray jsonBagArray = new JSONArray(serialize(bag));
         JSONArray jsonBoardArray = new JSONArray(serialize(board));
 
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("board", jsonBoardArray);
-        jsonObject.put("bag", jsonBagArray);
         jsonObject.put("players", jsonPlayersArray);
         jsonObject.put("common_goals", jsonCommonGoalsArray);
 
@@ -123,24 +124,14 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String serialize(IBag bag) {
-        JSONArray jsonArray = new JSONArray();
-        HashMap<TileType, Integer> tilesCounts = bag.getTilesBag();
-
-        tilesCounts.forEach((key, value) -> {
-            jsonArray.put(value);
-        });
-
-        return jsonArray.toString();
-    }
-
-    @Override
     public String serialize(ITurnManager turnManager) {
         List<IPlayer> players = turnManager.getPlayersOrder();
         JSONObject jsonObject = new JSONObject();
         JSONArray usernames = new JSONArray();
 
-        players.forEach(p -> usernames.put(p.getUsername()));
+        for (IPlayer p : players) {
+            usernames.put(p.getUsername());
+        }
         int currentTurn = players.indexOf(turnManager.getCurrentPlayer());
 
         jsonObject.put("players_turn", currentTurn);

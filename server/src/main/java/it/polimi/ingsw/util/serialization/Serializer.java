@@ -47,13 +47,6 @@ public interface Serializer {
     String serialize(CommonGoalCard commonGoalCard);
 
     /**
-     * Serializes a Bag object.
-     * @param bag bag to serialize.
-     * @return serialized String representing Bag.
-     */
-    String serialize(IBag bag);
-
-    /**
      * Serializes a turn from TurnManager object.
      * @param turnManager turn manger containing info regarding the
      *                    turn to serialize.
