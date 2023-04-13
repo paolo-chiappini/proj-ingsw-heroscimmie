@@ -1,5 +1,10 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBag;
+import it.polimi.ingsw.model.interfaces.IBoard;
+import it.polimi.ingsw.model.interfaces.builders.IBoardBuilder;
+
 import java.util.*;
 
 public class Board {
@@ -7,7 +12,15 @@ public class Board {
     private TileSpace[][] spaces;
 
     public Board(int playersPlaying){
-        spaces = new TileSpace[BOARD_DIM][BOARD_DIM];
+        this.spaces = createSpacesFromTemplate(playersPlaying);
+    }
+
+    private Board(BoardBuilder builder) {
+        this.spaces = builder.spaces;
+    }
+
+    private static TileSpace[][] createSpacesFromTemplate(int playersPlaying) {
+        TileSpace[][] grid = new TileSpace[BOARD_DIM][BOARD_DIM];
         int[][] template = new int[][]{
                 {5, 5, 5, 3, 4, 5, 5, 5, 5},
                 {5, 5, 5, 2, 2, 4, 5, 5, 5},
@@ -19,13 +32,14 @@ public class Board {
                 {5, 5, 5, 4, 2, 2, 5, 5, 5},
                 {5, 5, 5, 5, 4, 3, 5, 5, 5}
         };
-        for (int i=0;i<spaces.length;i++)
+        for (int i=0;i<grid.length;i++)
         {
-            for(int j=0;j<spaces[0].length;j++)
+            for(int j=0;j<grid[0].length;j++)
             {
-                spaces[i][j]=new TileSpace(template[i][j],playersPlaying);
+                grid[i][j]=new TileSpace(template[i][j],playersPlaying);
             }
         }
+        return grid;
     }
 
     /**
@@ -172,5 +186,28 @@ public class Board {
                     && spaces[row1][col1 + 1].getTile() != null && spaces[row1][col1 - 1].getTile() != null);
         }
         return false;
+    }
+
+    public static class BoardBuilder implements IBoardBuilder {
+        private final TileSpace[][] spaces;
+
+        public BoardBuilder(int playersPlaying) {
+            this.spaces = createSpacesFromTemplate(playersPlaying);
+        }
+
+        @Override
+        public IBoard build() {
+            return null;
+        }
+
+        @Override
+        public IBoardBuilder setTiles(TileType[][] tileTypes, IBag bag) {
+            for (int i = 0; i < tileTypes.length; i++) {
+                for (int j = 0; j < tileTypes[i].length; j++) {
+                    spaces[i][j].setTile(bag.getTileByType(tileTypes[i][j]));
+                }
+            }
+            return this;
+        }
     }
 }

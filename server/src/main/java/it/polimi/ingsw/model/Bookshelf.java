@@ -2,8 +2,11 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBag;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
+import it.polimi.ingsw.model.interfaces.builders.IBookshelfBuilder;
 
+import java.awt.print.Book;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -22,6 +25,10 @@ public class Bookshelf implements IBookshelf {
                 tiles[i][j] = null;
             }
         }
+    }
+
+    private Bookshelf(BookshelfBuilder builder) {
+        this.tiles = builder.tiles;
     }
 
     @Override
@@ -130,5 +137,28 @@ public class Bookshelf implements IBookshelf {
             return tiles[row][column].getType().equals(tiles[row2][column2].getType());
         }
         return false;
+    }
+
+    public static class BookshelfBuilder implements IBookshelfBuilder {
+        private final GameTile[][] tiles;
+
+        public BookshelfBuilder() {
+            tiles = new GameTile[HEIGHT][WIDTH];
+        }
+
+        @Override
+        public IBookshelf build() {
+            return new Bookshelf(this);
+        }
+
+        @Override
+        public IBookshelfBuilder setTiles(TileType[][] tileTypes, IBag bag) {
+            for (int i = 0; i < tileTypes.length; i++) {
+                for (int j = 0; j < tileTypes[i].length; j++) {
+                    tiles[i][j] = bag.getTileByType(tileTypes[i][j]);
+                }
+            }
+            return this;
+        }
     }
 }

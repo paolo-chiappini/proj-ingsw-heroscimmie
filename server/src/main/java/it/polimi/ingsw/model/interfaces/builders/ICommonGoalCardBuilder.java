@@ -5,5 +5,5 @@ import it.polimi.ingsw.model.interfaces.IPlayer;
 
 public interface ICommonGoalCardBuilder extends Builder<CommonGoalCard> {
     ICommonGoalCardBuilder addPoints(int points);
-    ICommonGoalCardBuilder addPlayer(IPlayer player);
+    ICommonGoalCardBuilder addPlayer(String playerName);
 }
