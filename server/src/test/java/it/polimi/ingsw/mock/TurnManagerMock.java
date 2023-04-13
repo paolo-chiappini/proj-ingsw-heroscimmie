@@ -47,6 +47,6 @@ public class TurnManagerMock implements ITurnManager {
 
     @Override
     public String serialize(Serializer serializer) {
-        return null;
+        return serializer.serialize(this);
     }
 }

@@ -20,6 +20,7 @@ public class BoardMock implements IBoard {
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
                 spaces[i][j] = new TileSpace(0, 0);
+                if (template[i][j] < 0) continue;
                 spaces[i][j].setTile(new Tile(TileType.values()[template[i][j]]));
             }
         }

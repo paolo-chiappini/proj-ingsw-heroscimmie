@@ -141,7 +141,7 @@ public class JsonSerializer implements Serializer {
         return jsonObject.toString();
     }
 
-    public JSONObject mergeJsonObjects(List<JSONObject> serializedObjects) {
+    private JSONObject mergeJsonObjects(List<JSONObject> serializedObjects) {
         JSONObject merged = new JSONObject();
 
         for (JSONObject obj : serializedObjects) {
