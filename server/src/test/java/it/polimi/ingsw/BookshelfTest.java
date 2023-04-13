@@ -128,8 +128,37 @@ class BookshelfTest {
                     }
                 }
                 assertTrue(bookshelf.isFull());
-        }
+            }
 
+            @Test
+            @DisplayName("two tiles should be added in the right order")
+            void isRightOrder2Tiles() {
+                List<GameTile> tiles=new ArrayList<>();
+                List<GameTile> orderTiles;
+                tiles.add(new Tile(TileType.PLANT));
+                tiles.add(new Tile(TileType.FRAME));
+                orderTiles=bookshelf.sort(tiles,2,1,0);
+                assertAll(
+                        ()-> assertEquals(orderTiles.get(0), tiles.get(1)),
+                        ()-> assertEquals(orderTiles.get(1), tiles.get(0))
+                );
+            }
+
+            @Test
+            @DisplayName("three tiles should be added in the right order")
+            void isRightOrder3Tiles() {
+                List<GameTile> tiles=new ArrayList<>();
+                List<GameTile> orderTiles;
+                tiles.add(new Tile(TileType.PLANT));
+                tiles.add(new Tile(TileType.FRAME));
+                tiles.add(new Tile(TileType.TOY));
+                orderTiles=bookshelf.sort(tiles,3,1,2);
+                assertAll(
+                        ()-> assertEquals(orderTiles.get(0), tiles.get(2)),
+                        ()-> assertEquals(orderTiles.get(1), tiles.get(0)),
+                        ()-> assertEquals(orderTiles.get(2), tiles.get(1))
+                );
+            }
         @Nested
         @DisplayName("When comparing tiles")
         class ComparingTests {

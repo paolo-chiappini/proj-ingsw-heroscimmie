@@ -9,10 +9,10 @@ public class CommonGoalCard12 extends CommonGoalCard {
 
     /**
      * @param bookShelf is the bookshelf on which the achievements of a goal are checked
-     *                  Pattern to achieve: five columns of increasing or decreasing height.
-     *                  Starting from the first column on the left or on the right,
-     *                  each next column must be made of exactly one more tile.
-     *                  Tiles can be of any type.
+     * Pattern to achieve: five columns of increasing or decreasing height.
+     * Starting from the first column on the left or on the right,
+     * each next column must be made of exactly one more tile.
+     * Tiles can be of any type.
      * @return true if the goal is achieved
      **/
     @Override
@@ -27,27 +27,15 @@ public class CommonGoalCard12 extends CommonGoalCard {
            countTiles = 0;
            for (int j = 0; j < bookShelf.getHeight(); j++)
            {
-               if (bookShelf.hasTile(j,i))
-               {
-                   countTiles++;
-               }
+               if (bookShelf.hasTile(j,i)) countTiles++;
            }
-           if (countTiles == (bookShelf.getHeight()-i))
-           {
-               diagonal1++;
-           }
-           if(countTiles == (bookShelf.getHeight()-1-i))
-           {
-               diagonal2++;
-           }
-           if (countTiles == (i + 1))
-           {
-               diagonal3++;
-           }
-           if(countTiles == (i + 2))
-           {
-               diagonal4++;
-           }
+           if (countTiles == (bookShelf.getHeight()-i)) diagonal1++;
+
+           if(countTiles == (bookShelf.getHeight()-1-i)) diagonal2++;
+
+           if (countTiles == (i + 1)) diagonal3++;
+
+           if(countTiles == (i + 2)) diagonal4++;
        }
        return diagonal1==bookShelf.getWidth() || diagonal2==bookShelf.getWidth()
                || diagonal3==bookShelf.getWidth() || diagonal4==bookShelf.getWidth();

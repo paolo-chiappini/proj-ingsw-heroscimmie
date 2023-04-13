@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 
-public class Bag implements IBag {
+public class Bag {
     private final HashMap<TileType,Integer> tilesBag;
     private static final int NUM_OF_TILES=22;
 
@@ -24,14 +24,16 @@ public class Bag implements IBag {
         this.tilesBag = new HashMap<>(builder.tilesBag);
     }
 
+    @Override
     public HashMap<TileType, Integer> getTilesBag() {
         return new HashMap<>(tilesBag);
     }
 
     /**
-     * Draw a tile from the bag
+     * Draws a tile from the bag
      * @return a tile
      */
+    @Override
     public GameTile drawTile()
     {
         if(tilesBag.isEmpty())
@@ -50,18 +52,30 @@ public class Bag implements IBag {
     }
 
     /**
-     * Add a tile to the bag
+     * Adds a tile to the bag
      */
+    @Override
     public void addTile(GameTile tile)
     {
         if(tilesBag.values().stream().reduce(0,Integer::sum)>=132)
-        {
             throw new IllegalActionException("The bag is full");
-        }
         else
-        {
             tilesBag.computeIfPresent(tile.getType(),(key, val) -> val + 1);
-        }
+    }
+
+    /**
+     * Draws a tile of a given type from the bag
+     * @return a tile
+     */
+    @Override
+    public GameTile getTileByType(TileType type) {
+        if(tilesBag.isEmpty())
+            throw new IllegalActionException("The bag is empty");
+        int initialNumber=tilesBag.get(type);
+        tilesBag.replace(type,initialNumber-1);
+        if(tilesBag.get(type)==0)
+            tilesBag.remove(type);
+        return new Tile(type);
     }
 
     @Override

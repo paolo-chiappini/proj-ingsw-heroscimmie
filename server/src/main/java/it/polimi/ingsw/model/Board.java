@@ -7,7 +7,7 @@ import it.polimi.ingsw.model.interfaces.builders.IBoardBuilder;
 
 import java.util.*;
 
-public class Board {
+public class Board implements IBoard {
     private static final int BOARD_DIM = 9;
     private TileSpace[][] spaces;
 
@@ -42,10 +42,26 @@ public class Board {
         return grid;
     }
 
+    @Override
+    public void setTileAt(int row, int col, GameTile tile) {
+        spaces[row][col].setTile(tile);
+    }
+
+    @Override
+    public GameTile getTileAt(int row, int col) {
+        return spaces[row][col].getTile();
+    }
+
+    @Override
+    public int getSize() {
+        return BOARD_DIM*BOARD_DIM;
+    }
+
     /**
-     * Check whether the board needs to be refilled or not
+     * Checks whether the board needs to be refilled or not
      * @return true if board is empty or there's no adjacency among the cards left on the board
      */
+    @Override
     public boolean needsRefill(){
         for(int i = 0; i < spaces.length; i++) {
             for(int j = 0; j < spaces[0].length; j++) {
@@ -63,11 +79,11 @@ public class Board {
     }
 
     /**
-     *
      * Tiles are drawn from the bag and put on the board
      * @param bag it is the bag from which the tiles are drawn
      */
-    public void refill(Bag bag){
+    @Override
+    public void refill(IBag bag){
         for (TileSpace[] space : spaces)
             for (int j = 0; j < spaces[0].length; j++)
                 if (space[j].canPlaceTile())
@@ -81,12 +97,13 @@ public class Board {
      * @param col2 is the column index of the last tile to pick up
      * @return the list of tiles picked up from the board
      */
-    public List<TileSpace> pickUpTiles(int row1, int col1, int row2, int col2){
-        List<TileSpace> myList = new LinkedList<>();
+    @Override
+    public List<GameTile> pickUpTiles(int row1, int col1, int row2, int col2){
+        List<GameTile> myList = new LinkedList<>();
         int numOfTilesPicked;
 
         if(row1 == row2 && col1 == col2) {      //player wants to pick a single tile
-            myList.add(spaces[row1][col1]);
+            myList.add(spaces[row1][col1].getTile());
             spaces[row1][col1].removeTile();
         }
 
@@ -95,7 +112,7 @@ public class Board {
                 numOfTilesPicked = col2 - col1 + 1;
                 if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
                     for(int i = 0; i < numOfTilesPicked; i++){
-                        myList.add(spaces[row1][col1 + i]);
+                        myList.add(spaces[row1][col1 + i].getTile());
                         spaces[row1][col1 + i].removeTile();
                     }
             }
@@ -103,7 +120,7 @@ public class Board {
                 numOfTilesPicked = Math.abs(col1 - col2) + 1;
                 if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
                     for (int i = 0; i < numOfTilesPicked; i++) {
-                        myList.add(spaces[row1][col2 + i]);
+                        myList.add(spaces[row1][col2 + i].getTile());
                         spaces[row1][col2 + i].removeTile();
                     }
             }
@@ -114,7 +131,7 @@ public class Board {
                 numOfTilesPicked = row2 - row1 + 1;
                 if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
                     for(int i = 0; i < numOfTilesPicked; i++){
-                        myList.add(spaces[row1+i][col1]);
+                        myList.add(spaces[row1+i][col1].getTile());
                         spaces[row1 + i][col1].removeTile();
                     }
             }
@@ -122,7 +139,7 @@ public class Board {
                 numOfTilesPicked = Math.abs(row1 - row2) + 1;
                 if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
                     for (int i = 0; i < numOfTilesPicked; i++) {
-                        myList.add(spaces[row2 + i][col1]);
+                        myList.add(spaces[row2 + i][col1].getTile());
                         spaces[row2 + i][col1].removeTile();
                     }
             }
@@ -138,6 +155,7 @@ public class Board {
      * @param col2 is the column index of the last tile to pick up
      * @return true if player can pick up a tile;
      */
+    @Override
     public boolean canPickUpTiles(int row1, int col1, int row2, int col2) {
         int temp;
         if(row1==row2)
