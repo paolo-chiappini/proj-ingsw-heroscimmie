@@ -107,21 +107,21 @@ public class JsonDeserializationTest {
     @Test
     @DisplayName("Test common goal card deserialization")
     public void testCommonGoalCardDeserialization() {
-        String serializedData = "{\"valid_players\":[\"a\",\"b\"],\"card_id\":4,\"points\":[4,6,8]}";
+        String serializedData = "{\"completed_by\":[\"a\",\"b\"],\"card_id\":4,\"points\":[4,6,8]}";
         CommonGoalCard commonGoalCard = new JsonDeserializer().deserializeCommonGoalCard(serializedData);
 
         assertAll (
                 () -> assertNotNull(commonGoalCard),
                 () -> assertEquals(4, commonGoalCard.getId()),
                 () -> assertIterableEquals(List.of(4, 6, 8), commonGoalCard.getPoints()),
-                () -> assertIterableEquals(List.of("a", "b"), null) // missing getter for players
+                () -> assertIterableEquals(List.of("a", "b"), commonGoalCard.getAwardedPlayers())
         );
     }
 
     @Test
     @DisplayName("Test game deserialization")
     public void testGameDeserialization() {
-        String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\"],\"players\":[{\"score\":12,\"bookshelf\":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],\"personal_card_id\":1,\"username\":\"b\"}],\"common_goals\":[{\"valid_players\":[\"a\"],\"card_id\":1,\"points\":[4]},{\"valid_players\":[\"a\",\"b\"],\"card_id\":12,\"points\":[4,8]}],\"board\":[[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1]],\"is_end_game\":true}";
+        String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\"],\"players\":[{\"score\":12,\"bookshelf\":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],\"personal_card_id\":1,\"username\":\"b\"}],\"common_goals\":[{\"completed_by\":[\"a\"],\"card_id\":1,\"points\":[4]},{\"completed_by\":[\"a\",\"b\"],\"card_id\":12,\"points\":[4,8]}],\"board\":[[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1]],\"is_end_game\":true}";
         Game game = new JsonDeserializer().deserializeGame(serializedData);
 
         assertAll (

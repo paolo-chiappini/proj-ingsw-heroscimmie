@@ -51,6 +51,10 @@ public abstract class CommonGoalCard implements GoalCard {
         }
     }
 
+    public List<String> getAwardedPlayers() {
+        return new ArrayList<>(players);
+    }
+
     /**
      * Builder used during the deserialization of a common goal card.
      */

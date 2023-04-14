@@ -89,7 +89,9 @@ public class GameTest {
             IPlayer playerWithScore = new PlayerMock("test", 10, new DynamicTestBookshelf(new int[][] {{1, 1, 1}}), new PersonalCardMock(0, 4));
             Game game = new Game.GameBuilder()
                     .setTurnManager(new TurnManagerMock(List.of(playerWithScore), 0, true))
-                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0,0)))
+                    .setCommonGoalCards(List.of(
+                            new CommonCardMock(0,0, new ArrayList<>()),
+                            new CommonCardMock(0,0, new ArrayList<>())))
                     .build();
 
             game.evaluateFinalScores();
@@ -102,7 +104,9 @@ public class GameTest {
         @DisplayName("a winning player should be selected")
         void winningPlayerElection() {
             Game game = new Game.GameBuilder()
-                    .setCommonGoalCards(List.of(new CommonCardMock(0, 0), new CommonCardMock(0, 0)))
+                    .setCommonGoalCards(List.of(
+                            new CommonCardMock(0, 0, new ArrayList<>()),
+                            new CommonCardMock(0, 0, new ArrayList<>())))
                     .setTurnManager(new TurnManagerMock(List.of(players.get(0)), 0, true))
                     .build();
             ITurnManager turnManager = game.getTurnManager();
@@ -119,7 +123,9 @@ public class GameTest {
         void winningPlayerElectionWithDraw() {
             Game game = new Game.GameBuilder()
                     .setTurnManager(new TurnManagerMock(players, 0, true))
-                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0, 0)))
+                    .setCommonGoalCards(List.of(
+                            new CommonCardMock(0,0, new ArrayList<>()),
+                            new CommonCardMock(0, 0, new ArrayList<>())))
                     .build();
             ITurnManager turnManager = game.getTurnManager();
 
@@ -141,7 +147,9 @@ public class GameTest {
             ITurnManager turnManager = new TurnManagerMock(players, 0, false);
             Game game = new Game.GameBuilder()
                     .setTurnManager(turnManager)
-                    .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0,0)))
+                    .setCommonGoalCards(List.of(
+                            new CommonCardMock(0,0, new ArrayList<>()),
+                            new CommonCardMock(0,0, new ArrayList<>())))
                     .build();
 
             assertEquals(turnManager, game.getTurnManager());
@@ -152,8 +160,8 @@ public class GameTest {
         void setCommonGoalCards() {
             ITurnManager turnManager = new TurnManagerMock(players, 0, false);
             List<CommonGoalCard> commonGoalCards = List.of(
-                    new CommonCardMock(1, 2),
-                    new CommonCardMock(2, 2)
+                    new CommonCardMock(1, 2, new ArrayList<>()),
+                    new CommonCardMock(2, 2, new ArrayList<>())
             );
 
             Game game = new Game.GameBuilder()
@@ -182,9 +190,9 @@ public class GameTest {
                             ()-> new Game.GameBuilder()
                                     .setTurnManager(turnManager)
                                     .setCommonGoalCards(List.of(
-                                            new CommonCardMock(1,0),
-                                            new CommonCardMock(2, 0),
-                                            new CommonCardMock(3, 0)
+                                            new CommonCardMock(1,0, new ArrayList<>()),
+                                            new CommonCardMock(2, 0, new ArrayList<>()),
+                                            new CommonCardMock(3, 0, new ArrayList<>())
                                     ))
                                     .build()
                     )

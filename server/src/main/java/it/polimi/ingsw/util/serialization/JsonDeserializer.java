@@ -103,7 +103,7 @@ public class JsonDeserializer implements Deserializer {
     public CommonGoalCard deserializeCommonGoalCard(String data) {
         JSONObject jsonObject = new JSONObject(data);
         ICommonGoalCardBuilder builder = new CommonGoalCard.CommonGoalCardBuilder(jsonObject.getInt("card_id"));
-        JSONArray players = jsonObject.getJSONArray("valid_players");
+        JSONArray players = jsonObject.getJSONArray("completed_by");
         JSONArray points = jsonObject.getJSONArray("points");
 
         for (int i = 0; i < players.length(); i++) {

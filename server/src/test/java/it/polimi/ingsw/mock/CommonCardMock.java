@@ -4,14 +4,32 @@ import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.util.serialization.Serializer;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class CommonCardMock extends CommonGoalCard {
-    public CommonCardMock(int id, int numPlayer) {
+    private final List<String> awardedPlayers;
+
+    public CommonCardMock(int id, int numPlayer, List<String> awardedPlayers) {
         super(id, numPlayer);
+        this.awardedPlayers = new ArrayList<>(awardedPlayers);
     }
 
     @Override
-    public boolean canObtainPoints(IBookshelf bookShelf) {
+    public boolean canObtainPoints(IBookshelf bookshelf) {
         return true;
+    }
+
+    @Override
+    public List<String> getAwardedPlayers() {
+        return awardedPlayers;
+    }
+
+    @Override
+    public ArrayList<Integer> getPoints() {
+        ArrayList<Integer> points = super.getPoints();
+        points = new ArrayList<>(points.subList(0, points.size() - awardedPlayers.size()));
+        return points;
     }
 
     @Override

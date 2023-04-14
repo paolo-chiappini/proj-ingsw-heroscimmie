@@ -12,6 +12,7 @@ import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -83,10 +84,10 @@ public class JsonSerializationTest {
                 new PlayerMock("a", 0, null, null),
                 new PlayerMock("b", 0, null, null)
         );
-        CommonGoalCard commonGoalCard = new CommonCardMock(4, 3);
+        CommonGoalCard commonGoalCard = new CommonCardMock(4, 2, players.stream().map(IPlayer::getUsername).toList());
 
         String serializedData = commonGoalCard.serialize(new JsonSerializer());
-        String expected = "{\"valid_players\":[\"a\",\"b\"],\"card_id\":4,\"points\":[4,6,8]}";
+        String expected = "{\"completed_by\":[\"a\",\"b\"],\"card_id\":4,\"points\":[]}";
 
         assertEquals(expected, serializedData);
     }
@@ -94,21 +95,23 @@ public class JsonSerializationTest {
     @Test
     @DisplayName("Test game serialization")
     public void testGameSerialization() {
-        Game game = new Game.GameBuilder()
-                .setTurnManager(new TurnManagerMock(List.of(
+        List<IPlayer> players = List.of(
                         new PlayerMock("a", 12, new DynamicTestBookshelf(new int[][] {{0}}), new PersonalCardMock(2)),
                         new PlayerMock("b", 5, new DynamicTestBookshelf(new int[][] {{1}}), new PersonalCardMock(1))
-                ), 1, false))
+        );
+        List<String> usernames = players.stream().map(IPlayer::getUsername).toList();
+        Game game = new Game.GameBuilder()
+                .setTurnManager(new TurnManagerMock(players, 1, false))
                 .setCommonGoalCards(List.of(
-                        new CommonCardMock(1, 2), // Missing getter for players
-                        new CommonCardMock(12, 2)
+                        new CommonCardMock(1, 2, List.of(usernames.get(0))),
+                        new CommonCardMock(12, 2, new ArrayList<>())
                 ))
                 .setBoard(new BoardMock(2, new int[][] {{0, 1},{5, 2}}))
                 .setTilesBag(new Bag())
                 .build();
 
         String serializedData = game.serialize(new JsonSerializer());
-        String expected = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\"],\"players\":[{\"score\":12,\"bookshelf\":[[0]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1]],\"personal_card_id\":1,\"username\":\"b\"}],\"common_goals\":[{\"valid_players\":[\"a\"],\"card_id\":1,\"points\":[4]},{\"valid_players\":[\"a\",\"b\"],\"card_id\":12,\"points\":[4,8]}],\"board\":[[0,1],[5,2]],\"is_end_game\":true}";
+        String expected = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\"],\"players\":[{\"score\":12,\"bookshelf\":[[0]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1]],\"personal_card_id\":1,\"username\":\"b\"}],\"common_goals\":[{\"completed_by\":[\"a\"],\"card_id\":1,\"points\":[4]},{\"completed_by\":[],\"card_id\":12,\"points\":[4,8]}],\"board\":[[0,1],[5,2]],\"is_end_game\":true}";
 
         assertEquals(expected, serializedData);
     }

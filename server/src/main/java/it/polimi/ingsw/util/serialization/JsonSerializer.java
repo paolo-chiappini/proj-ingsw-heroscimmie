@@ -2,13 +2,10 @@ package it.polimi.ingsw.util.serialization;
 
 import it.polimi.ingsw.model.CommonGoalCard;
 import it.polimi.ingsw.model.Game;
-import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -113,12 +110,15 @@ public class JsonSerializer implements Serializer {
         List<Integer> points = commonGoalCard.getPoints();
         JSONArray jsonPoints = new JSONArray(points);
 
-        /*List<String> playerNames = */
+        List<String> playerNames = commonGoalCard.getAwardedPlayers();
         JSONArray jsonNamesArray = new JSONArray();
+        for (String name : playerNames) {
+            jsonNamesArray.put(name);
+        }
 
         jsonObject.put("card_id", commonGoalCard.getId());
         jsonObject.put("points", jsonPoints);
-        jsonObject.put("valid_players", jsonNamesArray);
+        jsonObject.put("completed_by", jsonNamesArray);
 
         return jsonObject.toString();
     }
