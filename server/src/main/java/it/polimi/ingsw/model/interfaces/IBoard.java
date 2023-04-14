@@ -6,7 +6,7 @@ import it.polimi.ingsw.util.serialization.Serializable;
 import java.util.List;
 
 /**
- * Represents ad generic Board object.
+ * Represents a generic Board object.
  */
 public interface IBoard extends Serializable {
     /**

@@ -67,11 +67,13 @@ public class Game implements Serializable {
     }
 
     public void evaluateFinalScores() {
+        AdjacencyBonusGoal adjacencyBonusGoal = new AdjacencyBonusGoal();
         List<IPlayer> players = turnManager.getPlayersOrder();
         for (IPlayer player : players) {
             PersonalGoalCard personalCard = player.getPersonalGoalCard();
             IBookshelf bookshelf = player.getBookshelf();
             player.addPointsToScore(personalCard.evaluatePoints(bookshelf));
+            player.addPointsToScore(adjacencyBonusGoal.evaluatePoints(bookshelf));
         }
     }
 

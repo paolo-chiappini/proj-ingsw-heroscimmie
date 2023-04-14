@@ -86,7 +86,7 @@ public class GameTest {
         @Test
         @DisplayName("players points should be evaluated")
         void playerPointsEvaluation() {
-            IPlayer playerWithScore = new PlayerMock("test", 10, null, new PersonalCardMock(0, 4));
+            IPlayer playerWithScore = new PlayerMock("test", 10, new DynamicTestBookshelf(new int[][] {{1, 1, 1}}), new PersonalCardMock(0, 4));
             Game game = new Game.GameBuilder()
                     .setTurnManager(new TurnManagerMock(List.of(playerWithScore), 0, true))
                     .setCommonGoalCards(List.of(new CommonCardMock(0,0), new CommonCardMock(0,0)))
@@ -94,7 +94,8 @@ public class GameTest {
 
             game.evaluateFinalScores();
 
-            assertEquals(14, game.getWinner().getScore());
+            // 10 (base) + 4 (personal card) + 2 (adjacency)
+            assertEquals(16, game.getWinner().getScore());
         }
 
         @Test
