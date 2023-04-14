@@ -12,7 +12,7 @@ import java.util.List;
 
 /**
  * The class is responsible for handling the progression of turns
- * in a game. The class also checks whether
+ * in a game. The class also checks whether the game is over or not.
  */
 public class TurnManager implements ITurnManager {
     private static final int MAX_PLAYERS_COUNT = 4;
@@ -73,7 +73,7 @@ public class TurnManager implements ITurnManager {
     }
 
     @Override
-    public List<IPlayer> getPlayersOrder() {
+    public List<IPlayer> getPlayersInOrder() {
         return new ArrayList<>(players);
     }
 

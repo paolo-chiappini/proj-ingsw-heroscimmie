@@ -41,7 +41,7 @@ public class TurnManagerMock implements ITurnManager {
     }
 
     @Override
-    public List<IPlayer> getPlayersOrder() {
+    public List<IPlayer> getPlayersInOrder() {
         return new ArrayList<>(players);
     }
 

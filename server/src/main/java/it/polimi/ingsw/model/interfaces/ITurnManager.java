@@ -35,5 +35,5 @@ public interface ITurnManager extends Serializable {
      * play their turn.
      * @return the list of players ordered by turn.
      */
-    List<IPlayer> getPlayersOrder();
+    List<IPlayer> getPlayersInOrder();
 }

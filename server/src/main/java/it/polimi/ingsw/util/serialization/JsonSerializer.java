@@ -125,7 +125,7 @@ public class JsonSerializer implements Serializer {
 
     @Override
     public String serialize(ITurnManager turnManager) {
-        List<IPlayer> players = turnManager.getPlayersOrder();
+        List<IPlayer> players = turnManager.getPlayersInOrder();
         JSONObject jsonObject = new JSONObject();
         JSONArray usernames = new JSONArray();
 

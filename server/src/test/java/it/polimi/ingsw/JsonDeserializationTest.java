@@ -78,11 +78,11 @@ public class JsonDeserializationTest {
     public void testTurnManagerDeserialization() {
         String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"is_end_game\":true}";
         ITurnManager turnManager = new JsonDeserializer().deserializeTurn(serializedData);
-        List<String> usernames = turnManager.getPlayersOrder().stream().map(IPlayer::getUsername).toList();
+        List<String> usernames = turnManager.getPlayersInOrder().stream().map(IPlayer::getUsername).toList();
 
         assertAll (
                 () -> assertNotNull(turnManager),
-                () -> assertEquals(3, turnManager.getPlayersOrder().size()),
+                () -> assertEquals(3, turnManager.getPlayersInOrder().size()),
                 () -> assertIterableEquals(List.of("a", "b", "c"), usernames),
                 () -> assertEquals("b", turnManager.getCurrentPlayer().getUsername()),
                 () -> assertTrue(turnManager.isLastLap())

@@ -8,9 +8,9 @@ import java.util.Scanner;
  */
 public abstract class FileIOManager {
     /**
-     * Writes a string of data on the specified file.
+     * Writes a string of data to the specified file.
      * <p> The string replaces the contents of the file.
-     * @param filepath full or relative path to file.
+     * @param filepath absolute or relative path to file.
      * @param data data to write in the file.
      * @throws IOException  when the file cannot be written or the path does not exist.
      */
@@ -21,7 +21,7 @@ public abstract class FileIOManager {
     }
 
     /**
-     * Writes a string of data on the specified file.
+     * Writes a string of data to the specified file.
      * <p> The string replaces the contents of the file.
      * <p> Allows to choose a predefined path in a range of paths.
      * @param filename name of the file to write to.
@@ -36,7 +36,7 @@ public abstract class FileIOManager {
 
     /**
      * Reads from the specified file and returns all of its contents as a string.
-     * @param filepath full or relative path to file.
+     * @param filepath absolute or relative path to file.
      * @return a string containing all the contents read from the file.
      * @throws FileNotFoundException when the file does not exist.
      */

@@ -26,7 +26,7 @@ public class Game implements Serializable {
      * @param board board from which the players can pick up tiles during the game.
      */
     public Game(ITurnManager turnManager, IBag bag, IBoard board) {
-        if (turnManager.getPlayersOrder() == null || turnManager.getPlayersOrder().size() < 2) {
+        if (turnManager.getPlayersInOrder() == null || turnManager.getPlayersInOrder().size() < 2) {
             throw new IllegalArgumentException("There should be at least 2 players");
         }
         this.turnManager = turnManager;
@@ -68,7 +68,7 @@ public class Game implements Serializable {
 
     public void evaluateFinalScores() {
         AdjacencyBonusGoal adjacencyBonusGoal = new AdjacencyBonusGoal();
-        List<IPlayer> players = turnManager.getPlayersOrder();
+        List<IPlayer> players = turnManager.getPlayersInOrder();
         for (IPlayer player : players) {
             PersonalGoalCard personalCard = player.getPersonalGoalCard();
             IBookshelf bookshelf = player.getBookshelf();
@@ -90,7 +90,7 @@ public class Game implements Serializable {
         // if winner has already been declared, return it
         if (winner != null) return winner;
 
-        List<IPlayer> players = turnManager.getPlayersOrder();
+        List<IPlayer> players = turnManager.getPlayersInOrder();
 
         IPlayer topPlayer = players.stream()
                 .max(Comparator.comparingInt(IPlayer::getScore))
@@ -121,7 +121,7 @@ public class Game implements Serializable {
      * @return the list of players in the game.
      */
     public List<IPlayer> getPlayers() {
-        return new ArrayList<>(turnManager.getPlayersOrder());
+        return new ArrayList<>(turnManager.getPlayersInOrder());
     }
 
     /**

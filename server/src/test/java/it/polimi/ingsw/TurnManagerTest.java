@@ -106,7 +106,7 @@ public class TurnManagerTest {
         @DisplayName("player order should be a permutation of the given players")
         void playersArePermutation() {
             TurnManager turnManager = new TurnManager(players);
-            List<IPlayer> registeredPlayers = turnManager.getPlayersOrder();
+            List<IPlayer> registeredPlayers = turnManager.getPlayersInOrder();
 
             registeredPlayers.sort(Comparator.comparing(IPlayer::getUsername));
 
@@ -196,7 +196,7 @@ public class TurnManagerTest {
                 turnManager.nextTurn();
             }
 
-            assertIterableEquals(turnManager.getPlayersOrder(), turns);
+            assertIterableEquals(turnManager.getPlayersInOrder(), turns);
         }
     }
 
@@ -211,7 +211,7 @@ public class TurnManagerTest {
             players.forEach(turnManagerBuilder::addPlayer);
             ITurnManager turnManager = turnManagerBuilder.build();
 
-            assertIterableEquals(players, turnManager.getPlayersOrder());
+            assertIterableEquals(players, turnManager.getPlayersInOrder());
         }
 
         @Test
@@ -299,7 +299,7 @@ public class TurnManagerTest {
             Deserializer deserializer = new JsonDeserializer();
             ITurnManager turnManager = deserializer.deserializeTurn(serializedData);
 
-            List<IPlayer> players = turnManager.getPlayersOrder();
+            List<IPlayer> players = turnManager.getPlayersInOrder();
             assertAll(
                     () -> assertEquals("a", players.get(0).getUsername()),
                     () -> assertEquals("b", players.get(1).getUsername()),
