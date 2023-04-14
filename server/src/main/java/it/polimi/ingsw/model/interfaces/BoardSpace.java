@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.interfaces;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 
+/**
+ * Represents a generis Space on the board.
+ */
 public interface BoardSpace {
     /**
      * Get the tile that is placed in the space.

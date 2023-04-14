@@ -9,6 +9,10 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Represents the main game object responsible for managing the various
+ * components of the game.
+ */
 public class Game implements Serializable {
     private final ITurnManager turnManager;
     private final IBag bag;
@@ -16,8 +20,13 @@ public class Game implements Serializable {
     private List<CommonGoalCard> commonGoals;
     private IPlayer winner;
 
-    public Game(List<IPlayer> players, ITurnManager turnManager, IBag bag, IBoard board) {
-        if (players == null || players.size() < 2) {
+    /**
+     * @param turnManager turn manager responsible for managing the game turn progression.
+     * @param bag bag used to draw tiles during the game.
+     * @param board board from which the players can pick up tiles during the game.
+     */
+    public Game(ITurnManager turnManager, IBag bag, IBoard board) {
+        if (turnManager.getPlayersOrder() == null || turnManager.getPlayersOrder().size() < 2) {
             throw new IllegalArgumentException("There should be at least 2 players");
         }
         this.turnManager = turnManager;
@@ -28,6 +37,10 @@ public class Game implements Serializable {
         assignPersonalGoals();
     }
 
+    /**
+     * Creates a new instance of Game using a builder.
+     * @param builder builder used to create the instance.
+     */
     private Game(GameBuilder builder) {
         this.turnManager = builder.turnManager;
         this.bag = builder.bag;
@@ -35,6 +48,9 @@ public class Game implements Serializable {
         this.commonGoals = new ArrayList<>(builder.commonGoals);
     }
 
+    /**
+     * Assigns a (different) personal goal card to each player.
+     */
     private void assignPersonalGoals() {
         PersonalGoalCardDeck personalGoalsDeck = new PersonalGoalCardDeck();
         getPlayers().forEach(p -> {
@@ -42,6 +58,10 @@ public class Game implements Serializable {
         });
     }
 
+    /**
+     * Draws 2 random common goal cards from the deck and sets them as the common goals for
+     * all the players.
+     */
     private void assignCommonGoals() {
         commonGoals = new CommonGoalCardDeck(getPlayers().size()).drawCards();
     }
@@ -55,6 +75,15 @@ public class Game implements Serializable {
         }
     }
 
+    /**
+     * Selects a single players as the winner based on:
+     * <ul>
+     *     <li>the score: the player with the highest score wins;</li>
+     *     <li>the position relative to the first player: in case of draw (in terms of scores), the furthest player from
+     *     the first player wins.</li>
+     * </ul>
+     * @return the player that has been declared winner. Returns null if there's no player that can be declared winner.
+     */
     public IPlayer getWinner() {
         // if winner has already been declared, return it
         if (winner != null) return winner;
@@ -77,27 +106,55 @@ public class Game implements Serializable {
         return winner;
     }
 
+    /**
+     * Get the common goal cards set at the beginning of the game.
+     * @return the list of common goals.
+     */
     public List<CommonGoalCard> getCommonGoals() {
         return new ArrayList<>(commonGoals);
     }
 
+    /**
+     * Get the list of players in the current game.
+     * @return the list of players in the game.
+     */
     public List<IPlayer> getPlayers() {
         return new ArrayList<>(turnManager.getPlayersOrder());
     }
 
+    /**
+     * Get the turn manager currently handling the progression of the game.
+     * @return the turn manager.
+     */
     public ITurnManager getTurnManager() {
         return turnManager;
     }
 
+    /**
+     * Get the tiles bag currently being used in the game.
+     * @return the bag.
+     */
     public IBag getBag() { return bag; }
 
+    /**
+     * Get the board currently being used in the game.
+     * @return the board.
+     */
     public IBoard getBoard() { return board; }
 
+    /**
+     * Serializes the (current) state of the game to a string of data based on the type of serializer chosen.
+     * @param serializer type of serializer used to serialize data.
+     * @return the serialized string of data representing the current game state.
+     */
     @Override
     public String serialize(Serializer serializer) {
         return serializer.serialize(this);
     }
 
+    /**
+     * Builder used during the deserialization of the game state.
+     */
     public static class GameBuilder implements IGameBuilder {
         private ITurnManager turnManager;
         private IBag bag;

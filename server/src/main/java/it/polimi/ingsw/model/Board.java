@@ -16,10 +16,19 @@ public class Board implements IBoard {
         this.spaces = createSpacesFromTemplate(playersPlaying);
     }
 
+    /**
+     * Creates a new instance of Board using a builder.
+     * @param builder builder used to create the instance.
+     */
     private Board(BoardBuilder builder) {
         this.spaces = builder.spaces;
     }
 
+    /**
+     * Creates a new grid of spaces based on the number of players.
+     * @param playersPlaying number of players in the game.
+     * @return the grid of spaces.
+     */
     private static TileSpace[][] createSpacesFromTemplate(int playersPlaying) {
         TileSpace[][] grid = new TileSpace[BOARD_DIM][BOARD_DIM];
         int[][] template = new int[][]{
@@ -207,9 +216,15 @@ public class Board implements IBoard {
         return serializer.serialize(this);
     }
 
+    /**
+     * Builder used during the deserialization of a Board object.
+     */
     public static class BoardBuilder implements IBoardBuilder {
         private final TileSpace[][] spaces;
 
+        /**
+         * @param playersPlaying number of players in the game.
+         */
         public BoardBuilder(int playersPlaying) {
             this.spaces = createSpacesFromTemplate(playersPlaying);
         }

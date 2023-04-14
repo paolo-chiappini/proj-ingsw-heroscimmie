@@ -28,6 +28,10 @@ public class Bookshelf implements IBookshelf {
         }
     }
 
+    /**
+     * Creates a new instance of Bookshelf using a builder.
+     * @param builder builder used to create the instance.
+     */
     private Bookshelf(BookshelfBuilder builder) {
         this.tiles = builder.tiles;
     }
@@ -161,6 +165,9 @@ public class Bookshelf implements IBookshelf {
         return serializer.serialize(this);
     }
 
+    /**
+     * Builder used during the deserialization of a bookshelf object.
+     */
     public static class BookshelfBuilder implements IBookshelfBuilder {
         private final GameTile[][] tiles;
 

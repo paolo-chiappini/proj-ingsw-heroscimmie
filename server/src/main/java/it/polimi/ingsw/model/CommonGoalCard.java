@@ -51,9 +51,15 @@ public abstract class CommonGoalCard implements GoalCard {
         }
     }
 
+    /**
+     * Builder used during the deserialization of a common goal card.
+     */
     public static class CommonGoalCardBuilder implements ICommonGoalCardBuilder {
         private final CommonGoalCard instance;
 
+        /**
+         * @param id card id.
+         */
         public CommonGoalCardBuilder(int id) {
             instance = new CommonGoalCardDeck(0).getCommonGoalCards().get(id - 1);
             instance.points = new ArrayList<>();
