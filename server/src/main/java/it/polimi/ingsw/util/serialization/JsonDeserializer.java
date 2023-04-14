@@ -18,7 +18,6 @@ public class JsonDeserializer implements Deserializer {
     @Override
     public Game deserializeGame(String data) {
         JSONObject jsonObject = new JSONObject(data);
-        JSONObject jsonGameState;
         JSONArray jsonPlayersArray, jsonCommonGoalsArray;
         IBag bag;
         IBoard board;
@@ -26,14 +25,12 @@ public class JsonDeserializer implements Deserializer {
         ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
         List<CommonGoalCard> commonGoalCards = new ArrayList<>();
 
-        jsonGameState = jsonObject.getJSONObject("game");
-
         jsonPlayersArray = jsonObject.getJSONArray("players");
-        jsonCommonGoalsArray = jsonGameState.getJSONArray("common_goals");
+        jsonCommonGoalsArray = jsonObject.getJSONArray("common_goals");
 
         bag = new Bag();
-        board = deserializeBoard(data, jsonPlayersArray.length(), bag);
-        turnManager = deserializeTurn(jsonGameState.toString());
+        board = deserializeBoard(jsonObject.getJSONArray("board").toString(), jsonPlayersArray.length(), bag);
+        turnManager = deserializeTurn(jsonObject.toString());
 
         for (Object player : jsonPlayersArray) {
             turnManagerBuilder.addPlayer(deserializePlayer(player.toString(), bag));
@@ -80,7 +77,7 @@ public class JsonDeserializer implements Deserializer {
     @Override
     public IBookshelf deserializeBookshelf(String data, IBag bag) {
         JSONArray bookshelfArray = new JSONArray(data);
-        TileType [][] bookshelfTiles = deserializeTileGrid(bookshelfArray);
+        TileType[][] bookshelfTiles = deserializeTileGrid(bookshelfArray);
 
         return new Bookshelf.BookshelfBuilder()
                 .setTiles(bookshelfTiles, bag)

@@ -25,9 +25,9 @@ public class BoardTest {
      * Test that board is 9x9
      */
     @Test
-    @DisplayName("Board is 9x9")
+    @DisplayName("Board is 9x9, so size should be 9")
     void boardSize(){
-        assertEquals(81,myBoard.getSize());
+        assertEquals(9,myBoard.getSize());
     }
 
     /**

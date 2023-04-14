@@ -1,17 +1,16 @@
 package it.polimi.ingsw;
 
-import it.polimi.ingsw.mock.*;
 import it.polimi.ingsw.model.Bag;
 import it.polimi.ingsw.model.CommonGoalCard;
+import it.polimi.ingsw.model.Game;
 import it.polimi.ingsw.model.TileType;
 import it.polimi.ingsw.model.interfaces.IBoard;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.IPlayer;
 import it.polimi.ingsw.model.interfaces.ITurnManager;
 import it.polimi.ingsw.util.serialization.JsonDeserializer;
-import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
@@ -116,6 +115,24 @@ public class JsonDeserializationTest {
                 () -> assertEquals(4, commonGoalCard.getId()),
                 () -> assertIterableEquals(List.of(4, 6, 8), commonGoalCard.getPoints()),
                 () -> assertIterableEquals(List.of("a", "b"), null) // missing getter for players
+        );
+    }
+
+    @Test
+    @DisplayName("Test game deserialization")
+    public void testGameDeserialization() {
+        String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\"],\"players\":[{\"score\":12,\"bookshelf\":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],\"personal_card_id\":1,\"username\":\"b\"}],\"common_goals\":[{\"valid_players\":[\"a\"],\"card_id\":1,\"points\":[4]},{\"valid_players\":[\"a\",\"b\"],\"card_id\":12,\"points\":[4,8]}],\"board\":[[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1,-1,-1,-1,-1]],\"is_end_game\":true}";
+        Game game = new JsonDeserializer().deserializeGame(serializedData);
+
+        assertAll (
+                () -> assertNotNull(game),
+                () -> assertNotNull(game.getCommonGoals()),
+                () -> assertNotNull(game.getTurnManager()),
+                () -> assertNotNull(game.getBag()),
+                () -> assertNotNull(game.getBoard()),
+                () -> assertNotNull(game.getPlayers()),
+                () -> assertEquals(2, game.getPlayers().size()),
+                () -> assertEquals(2, game.getCommonGoals().size())
         );
     }
 }
