@@ -3,6 +3,8 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.model.interfaces.GameTile;
 import it.polimi.ingsw.model.interfaces.IBag;
 import it.polimi.ingsw.model.interfaces.IBoard;
+import it.polimi.ingsw.model.interfaces.builders.IBoardBuilder;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.*;
 
@@ -11,7 +13,24 @@ public class Board implements IBoard {
     private TileSpace[][] spaces;
 
     public Board(int playersPlaying){
-        spaces = new TileSpace[BOARD_DIM][BOARD_DIM];
+        this.spaces = createSpacesFromTemplate(playersPlaying);
+    }
+
+    /**
+     * Creates a new instance of Board using a builder.
+     * @param builder builder used to create the instance.
+     */
+    private Board(BoardBuilder builder) {
+        this.spaces = builder.spaces;
+    }
+
+    /**
+     * Creates a new grid of spaces based on the number of players.
+     * @param playersPlaying number of players in the game.
+     * @return the grid of spaces.
+     */
+    private static TileSpace[][] createSpacesFromTemplate(int playersPlaying) {
+        TileSpace[][] grid = new TileSpace[BOARD_DIM][BOARD_DIM];
         int[][] template = new int[][]{
                 {5, 5, 5, 3, 4, 5, 5, 5, 5},
                 {5, 5, 5, 2, 2, 4, 5, 5, 5},
@@ -23,18 +42,14 @@ public class Board implements IBoard {
                 {5, 5, 5, 4, 2, 2, 5, 5, 5},
                 {5, 5, 5, 5, 4, 3, 5, 5, 5}
         };
-        for (int i=0;i<spaces.length;i++)
+        for (int i=0;i<grid.length;i++)
         {
-            for(int j=0;j<spaces[0].length;j++)
+            for(int j=0;j<grid[0].length;j++)
             {
-                spaces[i][j]=new TileSpace(template[i][j],playersPlaying);
+                grid[i][j]=new TileSpace(template[i][j],playersPlaying);
             }
         }
-    }
-
-    @Override
-    public void setTileAt(int row, int col, GameTile tile) {
-        spaces[row][col].setTile(tile);
+        return grid;
     }
 
     @Override
@@ -44,7 +59,7 @@ public class Board implements IBoard {
 
     @Override
     public int getSize() {
-        return BOARD_DIM*BOARD_DIM;
+        return BOARD_DIM;
     }
 
     /**
@@ -194,5 +209,40 @@ public class Board implements IBoard {
                     && spaces[row1][col1 + 1].getTile() != null && spaces[row1][col1 - 1].getTile() != null);
         }
         return false;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
+    }
+
+    /**
+     * Builder used during the deserialization of a Board object.
+     */
+    public static class BoardBuilder implements IBoardBuilder {
+        private final TileSpace[][] spaces;
+
+        /**
+         * @param playersPlaying number of players in the game.
+         */
+        public BoardBuilder(int playersPlaying) {
+            this.spaces = createSpacesFromTemplate(playersPlaying);
+        }
+
+        @Override
+        public IBoard build() {
+            return new Board(this);
+        }
+
+        @Override
+        public IBoardBuilder setTiles(TileType[][] tileTypes, IBag bag) {
+            for (int i = 0; i < tileTypes.length; i++) {
+                for (int j = 0; j < tileTypes[i].length; j++) {
+                    if (tileTypes[i][j] == null) continue;
+                    spaces[i][j].setTile(bag.getTileByType(tileTypes[i][j]));
+                }
+            }
+            return this;
+        }
     }
 }

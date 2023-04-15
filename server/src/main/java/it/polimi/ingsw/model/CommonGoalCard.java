@@ -3,13 +3,15 @@ package it.polimi.ingsw.model;
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GoalCard;
 import it.polimi.ingsw.model.interfaces.IPlayer;
+import it.polimi.ingsw.model.interfaces.builders.ICommonGoalCardBuilder;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public abstract class CommonGoalCard implements GoalCard {
     private final int id;
-    private final ArrayList<Integer> points = new ArrayList<>();
-    private final ArrayList<String> players;
+    private List<Integer> points = new ArrayList<>();
+    private List<String> players;
 
     public CommonGoalCard(int id, int numPlayer) {
         this.id = id;
@@ -46,6 +48,43 @@ public abstract class CommonGoalCard implements GoalCard {
         {
             players.add(player.getUsername());
             return points.remove(points.size()-1);
+        }
+    }
+
+    public List<String> getAwardedPlayers() {
+        return new ArrayList<>(players);
+    }
+
+    /**
+     * Builder used during the deserialization of a common goal card.
+     */
+    public static class CommonGoalCardBuilder implements ICommonGoalCardBuilder {
+        private final CommonGoalCard instance;
+
+        /**
+         * @param id card id.
+         */
+        public CommonGoalCardBuilder(int id) {
+            instance = new CommonGoalCardDeck(0).getCommonGoalCards().get(id - 1);
+            instance.points = new ArrayList<>();
+            instance.players = new ArrayList<>();
+        }
+
+        @Override
+        public CommonGoalCard build() {
+            return instance;
+        }
+
+        @Override
+        public ICommonGoalCardBuilder addPoints(int points) {
+            instance.points.add(points);
+            return this;
+        }
+
+        @Override
+        public ICommonGoalCardBuilder addPlayer(String playerName) {
+            instance.players.add(playerName);
+            return this;
         }
     }
 }

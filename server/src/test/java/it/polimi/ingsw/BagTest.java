@@ -123,16 +123,5 @@ class BagTest {
                         () -> bag.addTile(new Tile(TileType.BOOK)));
             }
         }
-
-        @Nested
-        @DisplayName("When setting the number of remaining tiles of a type")
-        class SettingTests {
-            @Test
-            @DisplayName("bag should has a chosen number of tiles of a type")
-            void setRemainingTilesCount() {
-                bag.setRemainingTilesCount(TileType.CAT,20);
-                assertEquals(20,bag.getTilesBag().get(TileType.CAT));
-            }
-        }
     }
 }

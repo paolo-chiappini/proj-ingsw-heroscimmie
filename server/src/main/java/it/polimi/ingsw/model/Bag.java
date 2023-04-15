@@ -32,13 +32,17 @@ public class Bag implements IBag {
     public GameTile drawTile()
     {
         if(tilesBag.isEmpty())
+        {
             throw new IllegalActionException("The bag is empty");
+        }
         ArrayList<TileType> tileTypes = new ArrayList<>(tilesBag.keySet());
         Collections.shuffle(tileTypes);
         int initialNumber=tilesBag.get(tileTypes.get(0));
         tilesBag.replace(tileTypes.get(0),initialNumber-1);
         if(tilesBag.get(tileTypes.get(0))==0)
+        {
             tilesBag.remove(tileTypes.get(0));
+        }
         return new Tile(tileTypes.get(0));
     }
 
@@ -67,15 +71,5 @@ public class Bag implements IBag {
         if(tilesBag.get(type)==0)
             tilesBag.remove(type);
         return new Tile(type);
-    }
-
-    /**
-     * Sets the number of remaining tiles of a type
-     * @param type is the tile type to set
-     * @param count is the number of remaining tiles
-     */
-    @Override
-    public void setRemainingTilesCount(TileType type, int count) {
-        tilesBag.replace(type,count);
     }
 }

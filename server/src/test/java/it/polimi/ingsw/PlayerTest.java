@@ -1,12 +1,13 @@
 package it.polimi.ingsw;
 
+import it.polimi.ingsw.mock.DynamicTestBookshelf;
 import it.polimi.ingsw.model.PersonalGoalCardDeck;
 import it.polimi.ingsw.model.Player;
 import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-@DisplayName("Test on PLayer class")
+@DisplayName("Test on Player class")
 public class PlayerTest {
     Player player1;
 
@@ -38,9 +39,10 @@ public class PlayerTest {
             assertEquals(player1.getScore(), 0);
         }
 
-        @DisplayName("Player should has a bookshelf")
+        @DisplayName("Player should have a bookshelf")
         @Test
         void hasBookshelf() {
+            player1.setBookshelf(new DynamicTestBookshelf(new int[][] {{0}}));
             assertNotNull(player1.getBookshelf());
         }
 

@@ -1,8 +1,8 @@
 package it.polimi.ingsw.model;
 
 public class PersonalGoalCard9 extends PersonalGoalCard{
-    public PersonalGoalCard9(int id, TileType[][] pattern) {
-        super(id, pattern);
+    public PersonalGoalCard9() {
+        id = 9;
         pattern[4][4] = TileType.PLANT;
         pattern[5][0] = TileType.FRAME;
         pattern[2][2] = TileType.CAT;

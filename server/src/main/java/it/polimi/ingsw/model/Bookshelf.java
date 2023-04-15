@@ -2,7 +2,10 @@ package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.model.interfaces.GameTile;
+import it.polimi.ingsw.model.interfaces.IBag;
 import it.polimi.ingsw.model.interfaces.IBookshelf;
+import it.polimi.ingsw.model.interfaces.builders.IBookshelfBuilder;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,6 +26,14 @@ public class Bookshelf implements IBookshelf {
                 tiles[i][j] = null;
             }
         }
+    }
+
+    /**
+     * Creates a new instance of Bookshelf using a builder.
+     * @param builder builder used to create the instance.
+     */
+    private Bookshelf(BookshelfBuilder builder) {
+        this.tiles = builder.tiles;
     }
 
     @Override
@@ -147,5 +158,37 @@ public class Bookshelf implements IBookshelf {
             order.add(tilesToDrop.get(position2-1));
         }
         return order;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
+    }
+
+    /**
+     * Builder used during the deserialization of a bookshelf object.
+     */
+    public static class BookshelfBuilder implements IBookshelfBuilder {
+        private final GameTile[][] tiles;
+
+        public BookshelfBuilder() {
+            tiles = new GameTile[HEIGHT][WIDTH];
+        }
+
+        @Override
+        public IBookshelf build() {
+            return new Bookshelf(this);
+        }
+
+        @Override
+        public IBookshelfBuilder setTiles(TileType[][] tileTypes, IBag bag) {
+            for (int i = 0; i < tileTypes.length; i++) {
+                for (int j = 0; j < tileTypes[i].length; j++) {
+                    if (tileTypes[i][j] == null) continue;
+                    tiles[i][j] = bag.getTileByType(tileTypes[i][j]);
+                }
+            }
+            return this;
+        }
     }
 }

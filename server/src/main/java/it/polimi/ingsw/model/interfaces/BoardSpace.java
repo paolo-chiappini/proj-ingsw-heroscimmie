@@ -2,6 +2,9 @@ package it.polimi.ingsw.model.interfaces;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 
+/**
+ * Represents a generis Space on the board.
+ */
 public interface BoardSpace {
     /**
      * Get the tile that is placed in the space.
@@ -17,7 +20,7 @@ public interface BoardSpace {
      * @throws IllegalActionException throws when trying to set a new tile
      *      and the current space is either inactive or occupied.
      */
-    void setTile(GameTile tile) throws IllegalActionException;
+    void setTile(GameTile tile);
 
     /**
      * Check if the current space can be used.

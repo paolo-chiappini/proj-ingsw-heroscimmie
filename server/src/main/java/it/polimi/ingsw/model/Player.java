@@ -1,19 +1,20 @@
 package it.polimi.ingsw.model;
 
+import it.polimi.ingsw.model.interfaces.IBookshelf;
 import it.polimi.ingsw.model.interfaces.IPlayer;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 public class Player implements IPlayer {
     private final String username;
     private boolean firstPlayer;
-    private final Bookshelf bookshelf;
+    private IBookshelf bookshelf;
     private PersonalGoalCard personalGoalCard;
     private int score = 0;
 
 
     public Player(String username){
         this.username = username;
-        this.bookshelf=new Bookshelf();
-        this.firstPlayer=false;
+        this.firstPlayer = false;
     }
 
     /**
@@ -34,8 +35,13 @@ public class Player implements IPlayer {
      * @return player bookshelf
      */
     @Override
-    public Bookshelf getBookshelf() {
+    public IBookshelf getBookshelf() {
         return bookshelf;
+    }
+
+    @Override
+    public void setBookshelf(IBookshelf bookshelf) {
+        this.bookshelf = bookshelf;
     }
 
     /**
@@ -74,5 +80,10 @@ public class Player implements IPlayer {
      */
     public boolean isFirstPlayer() {
         return firstPlayer;
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 }
