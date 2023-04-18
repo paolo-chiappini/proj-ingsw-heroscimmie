@@ -9,27 +9,108 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="made suggested changes to documentation and names">
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard1.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard10.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard10.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard11.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard11.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard12.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard12.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard2.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard2.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard3.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard3.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard4.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard4.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard5.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard5.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard6.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard6.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard7.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard7.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard8.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard8.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard9.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard9.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PersonalGoalCardDeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PersonalGoalCardDeckTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/pom.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/exceptions/IllegalActionException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/exceptions/IllegalActionException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/AdjacencyBonusGoal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/AdjacencyBonusGoal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Bag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/bag/Bag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/board/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/bookshelf/Bookshelf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard10.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard11.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard12.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCard9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCard9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/CommonGoalCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/CommonGoalCardDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/game/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard1.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard1.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard10.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard10.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard11.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard12.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard12.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard2.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard2.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard3.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard3.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard4.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard4.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard6.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard6.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard7.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard7.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard8.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard8.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCard9.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard9.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/PersonalGoalCardDeck.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCardDeck.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/player/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/Tile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/tile/Tile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/TileSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/board/TileSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/TileType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/tile/TileType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/TurnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/turn/TurnManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/BoardSpace.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/board/BoardSpace.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/GameTile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/tile/GameTile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/GoalCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/GoalCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/IBag.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/bag/IBag.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/IBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/board/IBoard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/IBookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/bookshelf/IBookshelf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/IPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/player/IPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/ITurnManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/turn/ITurnManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/builders/Builder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/Builder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/builders/IBoardBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/board/IBoardBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/builders/IBookshelfBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/bookshelf/IBookshelfBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/builders/ICommonGoalCardBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/goals/common/ICommonGoalCardBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/builders/IGameBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/game/IGameBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/model/interfaces/builders/ITurnManagerBuilder.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/model/turn/ITurnManagerBuilder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/BookshelfFloodFill.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/BookshelfFloodFill.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/FileIOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/FilePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FilePath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/serialization/Deserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/serialization/Deserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/serialization/JsonDeserializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/serialization/JsonDeserializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/serialization/JsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/serialization/JsonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/serialization/Serializable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/serialization/Serializable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/main/java/it/polimi/ingsw/util/serialization/Serializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/serialization/Serializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/AdjacencyBonusTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/AdjacencyBonusTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BagTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/BagTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BoardTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/BoardTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BookshelfFloodFillTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/BookshelfFloodFillTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/BookshelfTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/BookshelfTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard10Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard10Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard11Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard11Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard12Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard12Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard1Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard1Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard2Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard2Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard3Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard3Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard4Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard4Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard5Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard5Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard6Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard6Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard7Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard7Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard8Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard8Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCard9Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCard9Test.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/CommonGoalCardDeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/CommonGoalCardDeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/GameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/GameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/JsonDeserializationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/JsonDeserializationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/JsonSerializationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/JsonSerializationTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PersonalGoalCardDeckTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/PersonalGoalCardDeckTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/PlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/PlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/TileSpaceTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/TileSpaceTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/TileTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/TileTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/TurnManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/TurnManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/BagMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/BagMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/BoardMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/BoardMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/CommonCardMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/CommonCardMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/DynamicTestBookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/DynamicTestBookshelf.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/PersonalCardMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/PersonalCardMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/PlayerMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/PlayerMock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/src/test/java/it/polimi/ingsw/mock/TurnManagerMock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/mock/TurnManagerMock.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +129,11 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="server" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -70,37 +156,30 @@
     <option name="flattenPackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">
-    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
-    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
-  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023" />
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\server" />
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\.idea" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
       <recent name="it.polimi.ingsw.model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.PlayerTest">
-    <configuration name="BagTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="server" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.BagTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie">
     <configuration name="BoardTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="server" />
       <extension name="coverage">
@@ -162,13 +241,27 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="it.polimi.ingsw in proj-ingsw-heroscimmie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.PlayerTest" />
         <item itemvalue="JUnit.PersonalGoalCardDeckTest" />
-        <item itemvalue="JUnit.BoardTest" />
         <item itemvalue="JUnit.BoardTest.tilesCanBePickedUp" />
-        <item itemvalue="JUnit.BagTest" />
+        <item itemvalue="JUnit.BoardTest" />
       </list>
     </recent_temporary>
   </component>
@@ -194,6 +287,11 @@
       <workItem from="1680552241065" duration="2406000" />
       <workItem from="1680608787381" duration="11648000" />
       <workItem from="1681197495199" duration="991000" />
+      <workItem from="1681544897073" duration="44000" />
+      <workItem from="1681544965403" duration="2900000" />
+      <workItem from="1681632637347" duration="721000" />
+      <workItem from="1681645418643" duration="78000" />
+      <workItem from="1681803519923" duration="11000" />
     </task>
     <servers />
   </component>
@@ -212,45 +310,72 @@
     </option>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680354353328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1680339350138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680622236802" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$TileSpaceTest.ic" NAME="TileSpaceTest Coverage Results" MODIFIED="1679835142807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680620156854" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680622213233" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1679606590329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$CommonGoalCardDeckTest_OnCommonGoalDeckCreationTests_GettingPointsTests_getPointsCard2Players.ic" NAME="CommonGoalCardDeckTest$OnCommonGoalDeckCreationTests$GettingPointsTests.getPointsCard2Players Coverage Results" MODIFIED="1680527192405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1681220954744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1681545970063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
   </component>
 </project>
