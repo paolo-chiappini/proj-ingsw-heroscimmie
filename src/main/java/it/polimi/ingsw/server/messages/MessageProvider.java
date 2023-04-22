@@ -3,7 +3,11 @@ package it.polimi.ingsw.server.messages;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * Message factory
+ */
 public class MessageProvider {
+
     public static Message getInstanceOf(MessageType messageType, Socket clientSocket, List<Socket> clientConnections, String inputData){
         Message instance = null;
 

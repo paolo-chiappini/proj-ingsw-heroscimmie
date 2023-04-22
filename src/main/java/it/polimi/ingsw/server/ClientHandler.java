@@ -9,26 +9,40 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 
+/**
+ * Contains all the logic responsible for handling a single client connection
+ */
 public class ClientHandler {
     private final Socket clientSocket;
     private final Server server;
     private final MessageType messageType;
+
+    /**
+     * @param clientSocket Socket to handle
+     * @param server Reference to the server
+     * @param messageType Message format used
+     */
     public ClientHandler(Socket clientSocket, Server server, MessageType messageType) {
         this.messageType = messageType;
         this.clientSocket = clientSocket;
         this.server = server;
     }
 
+
+    /**
+     * Starts a new thread to handle the client connection.
+     */
     public void start() {
        new Thread(this::handleClient).start();
     }
 
+
     private void handleClient() {
 
-        server.getActionOnConnection().accept(clientSocket); //Connection starts callback
+        server.getActionOnConnection().accept(clientSocket); //New connection event
 
         try{
-            clientSocket.setKeepAlive(true);
+            clientSocket.setKeepAlive(true); //For detecting unexpected disconnections
 
             var reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
@@ -38,7 +52,7 @@ public class ClientHandler {
 
                 if(clientData == null){ //Connection is closed by the client
                     server.closeConnection(clientSocket); //Notify server
-                    server.getActionOnConnectionClosed().accept(clientSocket); //Connection closed callback
+                    server.getActionOnConnectionClosed().accept(clientSocket); //Connection closed event
                     return;
                 }
 
@@ -52,7 +66,22 @@ public class ClientHandler {
                 var specificMiddleware = server.getMiddleware(method);
                 var globalMiddleware = server.getGlobalMiddleware();
 
-                //Callback pipeline. The middleware call is hidden from the user
+                /*
+                    Request pipeline:
+                    ┌───────────────────────────────────────┐
+                    │ Global Middleware                     │
+                    │       ┌────────────────────────────┐  │
+                    │       │ Specific Middleware        │  │
+                    │       │       ┌─────────────────┐  │  │
+                    │       │       │ Callback        │  │  │
+                    │       │       │                 │  │  │
+                    │       │       └─────────────────┘  │  │
+                    │       └────────────────────────────┘  │
+                    └───────────────────────────────────────┘
+                    The specific middleware call is hidden from the user by passing a wrapper Callback
+                    to the global middleware. By doing this, there's non need for the user to know
+                    exactly how the request pipeline is structured.
+                */
                 globalMiddleware.apply(request, response, (req, res)->{
                     specificMiddleware.apply(req, res, callback);
                 });
@@ -61,7 +90,7 @@ public class ClientHandler {
             }
         }catch (IOException e) { //When connection is interrupted
             server.closeConnection(clientSocket); //Notify server
-            server.getActionOnConnectionLost().accept(clientSocket); //Connection lost callback
+            server.getActionOnConnectionLost().accept(clientSocket); //Connection lost event
         }
     }
 }

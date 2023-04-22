@@ -6,6 +6,14 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * Message format that uses a simple JSON representation:
+ * <p>
+ * {
+ *     "method" : "",
+ *     "body"   : ""
+ * }
+ */
 public class JsonMessage extends Message{
     private final String EMPTY_JSON_MESSAGE = "{\"method\":\"\", \"body\":\"\"}";
     private final JSONObject jsonData;

@@ -5,6 +5,13 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * <b>
+ *     This class should only be used for testing
+ * </b>
+ * <p>
+ * Simple message format: method§body
+ */
 public class SimpleMessage extends Message{
     // Raw message format: method§body
 
