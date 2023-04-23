@@ -7,5 +7,5 @@ import it.polimi.ingsw.server.messages.Message;
  * response Message and returns nothing.
  */
 public interface Callback {
-    void apply(Message request, Message response);
+    void call(Message request, Message response);
 }

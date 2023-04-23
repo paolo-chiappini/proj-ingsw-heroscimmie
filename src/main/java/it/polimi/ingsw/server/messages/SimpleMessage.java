@@ -17,10 +17,9 @@ public class SimpleMessage extends Message{
 
     private String rawMessage;
 
-    public SimpleMessage(Socket socketWriter, List<Socket> clientConnections, String data) {
-        super(socketWriter, clientConnections,data);
+    private SimpleMessage(Socket socketWriter, List<Socket> clientConnections, String data) {
+        super(socketWriter, clientConnections);
         this.rawMessage = data;
-
     }
 
 
@@ -40,12 +39,12 @@ public class SimpleMessage extends Message{
 
     @Override
     public void send() {
-        writer.println(rawMessage);
+        clientWriter.println(rawMessage);
     }
 
     @Override
     public void send(String message) {
-        writer.println(message);
+        clientWriter.println(message);
     }
 
     @Override
@@ -76,4 +75,10 @@ public class SimpleMessage extends Message{
     }
 
 
+    public static class SimpleMessageBuilder extends Builder {
+        @Override
+        public Message build() {
+            return new SimpleMessage(clientSocket, clientConnections, data);
+        }
+    }
 }

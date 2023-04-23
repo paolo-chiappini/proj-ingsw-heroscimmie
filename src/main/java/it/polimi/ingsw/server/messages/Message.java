@@ -3,7 +3,6 @@ package it.polimi.ingsw.server.messages;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -11,14 +10,14 @@ import java.util.List;
  */
 public abstract class Message {
     protected final Socket clientSocket;
-    protected final PrintWriter writer;
-    protected List<Socket> clientConnections;
+    protected final PrintWriter clientWriter;
+    protected final List<Socket> clientConnections;
 
-    public Message(Socket clientSocket, List<Socket> clientConnections, String data){
+    public Message(Socket clientSocket, List<Socket> clientConnections){
         this.clientSocket = clientSocket;
-        this.clientConnections = new ArrayList<>();
+        this.clientConnections = clientConnections;
         try {
-            this.writer = new PrintWriter(clientSocket.getOutputStream(), true);
+            this.clientWriter = new PrintWriter(clientSocket.getOutputStream(), true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -83,5 +82,35 @@ public abstract class Message {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    protected abstract static class Builder {
+        protected Socket clientSocket;
+        protected List<Socket> clientConnections;
+        protected String data;
+
+        public Builder() {
+            this.clientSocket = null;
+            this.clientConnections = null;
+            this.data = "";
+        }
+
+        public Builder setClientSocket(Socket clientSocket) {
+            this.clientSocket = clientSocket;
+            return this;
+        }
+
+        public Builder setClientConnections(List<Socket> clientConnections) {
+            this.clientConnections = clientConnections;
+            return this;
+        }
+
+        public Builder setData(String data) {
+            this.data = data;
+            return this;
+        }
+
+        public abstract Message build();
+
     }
 }

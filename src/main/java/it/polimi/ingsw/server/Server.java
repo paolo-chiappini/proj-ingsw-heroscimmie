@@ -37,9 +37,12 @@ public class Server {
 
         clientConnections = new ArrayList<>();
         callbacks = new HashMap<>();
+        defaultCallback = (req, res)->{};
         middlewares = new HashMap<>();
-
-        globalMiddleware = (req, res, specificMiddleware) -> specificMiddleware.apply(req, res);
+        globalMiddleware = (req, res, specificMiddleware) -> specificMiddleware.call(req, res);
+        onConnection = (s)->{};
+        onConnectionLost = (s)->{};
+        onConnectionClosed = (s)->{};
     }
 
     /**
@@ -151,7 +154,7 @@ public class Server {
         var middleware = middlewares.get(method);
 
         if (middleware == null){
-            middleware = (req, res, callback) -> callback.apply(req, res);
+            middleware = (req, res, callback) -> callback.call(req, res);
         }
 
         return middleware;

@@ -16,12 +16,14 @@ import java.util.List;
  */
 public class JsonMessage extends Message{
     private final String EMPTY_JSON_MESSAGE = "{\"method\":\"\", \"body\":\"\"}";
-    private final JSONObject jsonData;
+    private JSONObject jsonData;
 
-    public JsonMessage(Socket clientSocket, List<Socket> clientConnections, String data) {
-        super(clientSocket, clientConnections, data);
-        if(data.isEmpty()) data = EMPTY_JSON_MESSAGE;
-        jsonData = new JSONObject(data);
+    private JsonMessage(Socket clientSocket, List<Socket> clientConnections, JSONObject data) {
+        super(clientSocket, clientConnections);
+        this.jsonData = data;
+
+        if(jsonData.isEmpty())
+            jsonData = new JSONObject(EMPTY_JSON_MESSAGE);
     }
 
     @Override
@@ -36,12 +38,12 @@ public class JsonMessage extends Message{
 
     @Override
     public void send() {
-        writer.println(jsonData);
+        clientWriter.println(jsonData);
     }
 
     @Override
     public void send(String message) {
-        writer.println(message);
+        clientWriter.println(message);
     }
 
     @Override
@@ -64,6 +66,14 @@ public class JsonMessage extends Message{
     @Override
     public void setBody(String body) {
         jsonData.put("body", body);
+    }
+
+    public static class JsonMessageBuilder extends Message.Builder{
+
+        @Override
+        public Message build() {
+            return new JsonMessage(clientSocket, clientConnections, new JSONObject(this.data));
+        }
     }
 
 }

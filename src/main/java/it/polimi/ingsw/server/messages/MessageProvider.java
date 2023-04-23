@@ -8,12 +8,20 @@ import java.util.List;
  */
 public class MessageProvider {
 
-    public static Message getInstanceOf(MessageType messageType, Socket clientSocket, List<Socket> clientConnections, String inputData){
-        Message instance = null;
+    private final MessageType messageType;
+    private final Message.Builder builder;
+
+    public MessageProvider(MessageType messageType) {
+        this.messageType = messageType;
+        this.builder = selectBuilder();
+    }
+
+    private Message.Builder selectBuilder(){
+        Message.Builder instance = null;
 
         switch (messageType) {
-            case JSON -> instance = new JsonMessage(clientSocket, clientConnections, inputData);
-            case SIMPLE -> instance = new SimpleMessage(clientSocket, clientConnections, inputData);
+            case JSON -> instance = new JsonMessage.JsonMessageBuilder();
+            case SIMPLE -> instance = new SimpleMessage.SimpleMessageBuilder();
         }
 
         if(instance == null) throw new RuntimeException(messageType + " does not exist");
@@ -21,16 +29,18 @@ public class MessageProvider {
         return instance;
     }
 
-    public static Message getInstanceOf(MessageType messageType, Socket clientSocket, List<Socket> clientConnections){
-        return getInstanceOf(messageType, clientSocket, clientConnections, "");
+    public Message getRequestInstance(Socket clientSocket, String clientData){
+        return builder.setClientSocket(clientSocket)
+                      .setData(clientData)
+                      .build();
     }
 
-    public static Message getInstanceOf(MessageType messageType, Socket clientSocket, String inputData){
-        return getInstanceOf(messageType, clientSocket, null, inputData);
+    public Message getResponseInstance(Socket clientSocket, List<Socket> clientConnections, String clientData){
+        return builder.setClientSocket(clientSocket)
+                .setClientConnections(clientConnections)
+                .setData(clientData)
+                .build();
     }
 
 
-    public static Message getInstanceOf(MessageType messageType, Socket socket) {
-        return getInstanceOf(messageType, socket, null, "");
-    }
 }
