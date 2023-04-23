@@ -1,7 +1,7 @@
 package it.polimi.ingsw.server.messages;
 
 /**
- * Represents a type of Message format
+ * Represents a Message format
  */
 public enum MessageType{
     JSON,

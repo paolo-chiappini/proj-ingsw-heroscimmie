@@ -14,7 +14,7 @@ import java.util.List;
  *     "body"   : ""
  * }
  */
-public class JsonMessage extends Message{
+class JsonMessage extends Message{
     private final String EMPTY_JSON_MESSAGE = "{\"method\":\"\", \"body\":\"\"}";
     private JSONObject jsonData;
 
@@ -68,10 +68,11 @@ public class JsonMessage extends Message{
         jsonData.put("body", body);
     }
 
-    public static class JsonMessageBuilder extends Message.Builder{
+    public static class JsonMessageBuilder extends MessageBuilder {
 
         @Override
         public Message build() {
+            if(this.data.isEmpty()) this.data = "{}";
             return new JsonMessage(clientSocket, clientConnections, new JSONObject(this.data));
         }
     }

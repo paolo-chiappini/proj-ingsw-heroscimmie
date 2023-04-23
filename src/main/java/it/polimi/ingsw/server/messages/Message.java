@@ -84,28 +84,31 @@ public abstract class Message {
         }
     }
 
-    protected abstract static class Builder {
+    /**
+     * Message builder
+     */
+    protected abstract static class MessageBuilder {
         protected Socket clientSocket;
         protected List<Socket> clientConnections;
         protected String data;
 
-        public Builder() {
+        public MessageBuilder() {
             this.clientSocket = null;
             this.clientConnections = null;
             this.data = "";
         }
 
-        public Builder setClientSocket(Socket clientSocket) {
+        public MessageBuilder setClientSocket(Socket clientSocket) {
             this.clientSocket = clientSocket;
             return this;
         }
 
-        public Builder setClientConnections(List<Socket> clientConnections) {
+        public MessageBuilder setClientConnections(List<Socket> clientConnections) {
             this.clientConnections = clientConnections;
             return this;
         }
 
-        public Builder setData(String data) {
+        public MessageBuilder setData(String data) {
             this.data = data;
             return this;
         }

@@ -59,8 +59,8 @@ public class ClientHandler {
                 var connections = server.getConnections();
 
                 MessageProvider factory = new MessageProvider(messageType);
-                Message request = factory.getRequestInstance(clientSocket, clientData);
-                Message response = factory.getResponseInstance(clientSocket, connections, clientData);
+                Message request = factory.getInstanceForRequest(clientSocket, clientData);
+                Message response = factory.getInstanceForResponse(clientSocket, connections);
 
                 String method = request.getMethod();
 

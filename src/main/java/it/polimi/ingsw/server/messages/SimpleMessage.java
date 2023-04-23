@@ -12,8 +12,7 @@ import java.util.List;
  * <p>
  * Simple message format: method§body
  */
-public class SimpleMessage extends Message{
-    // Raw message format: method§body
+class SimpleMessage extends Message{
 
     private String rawMessage;
 
@@ -75,7 +74,7 @@ public class SimpleMessage extends Message{
     }
 
 
-    public static class SimpleMessageBuilder extends Builder {
+    public static class SimpleMessageBuilder extends MessageBuilder {
         @Override
         public Message build() {
             return new SimpleMessage(clientSocket, clientConnections, data);
