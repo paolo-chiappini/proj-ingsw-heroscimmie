@@ -37,6 +37,12 @@ public abstract class CliElement implements ICliRenderable {
         return this.representation.get(y).get(x);
     }
 
+    /**
+     * @param y y index of the row.
+     * @return the width of the requested row.
+     */
+    public int getRowWidth(int y) { return this.representation.get(y).size(); }
+
     @Override
     public String render(ICliRenderer renderer) {
         return renderer.render(this);
