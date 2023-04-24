@@ -8,8 +8,8 @@ import it.polimi.ingsw.client.cli.graphics.simple.CliElement;
  */
 public interface ICliRenderer {
     /**
-     * @param cliElement element to render.
+     * @param cliElement element to draw.
      * @return the text representation of the element.
      */
-    String render(ICliRenderable cliElement);
+    String render(CliElement cliElement);
 }

@@ -7,7 +7,7 @@ package it.polimi.ingsw.client.cli.graphics.board;
  * FOUR_PLAYERS - Tile that requires 4 players;
  */
 public enum BoardTileType {
-    BLOCKED,
     THREE_PLAYERS,
-    FOUR_PLAYERS
+    FOUR_PLAYERS,
+    BLOCKED
 }

@@ -11,7 +11,7 @@ public record CliTextElement(char text, CliForeColors foregroundColor, CliBackCo
      * @return the colored text as a string.
      */
     public String getColoredText() {
-        return foregroundColor.getAnsiCode() + backgroundColor().getAnsiCode() + text + CliForeColors.DEFAULT;
+        return foregroundColor.getAnsiCode() + backgroundColor().getAnsiCode() + text + CliForeColors.DEFAULT.getAnsiCode();
     }
 
     /**

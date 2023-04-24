@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.cli.graphics.grids.GridCellElement;
 import it.polimi.ingsw.client.cli.graphics.simple.CliBackColors;
 import it.polimi.ingsw.client.cli.graphics.simple.CliForeColors;
 import it.polimi.ingsw.client.cli.graphics.simple.CliTextElement;
+import it.polimi.ingsw.client.cli.graphics.tiles.TileElement;
 
 import java.util.List;
 
@@ -16,6 +17,8 @@ public class BoardSpaceElement extends GridCellElement {
      * @param type type of board tile.
      */
     public BoardSpaceElement(BoardTileType type) {
+        super();
+
         CliTextElement singleCell;
         switch (type) {
             case BLOCKED -> {
@@ -27,16 +30,16 @@ public class BoardSpaceElement extends GridCellElement {
             }
             case THREE_PLAYERS -> {
                 singleCell = new CliTextElement('°', CliForeColors.DEFAULT, CliBackColors.DEFAULT);
-                setCell(0, 0, singleCell);
-                setCell(0, 2, singleCell);
-                setCell(1, 2, singleCell);
+                this.setCell(0, 0, singleCell);
+                this.setCell(2, 0, singleCell);
+                this.setCell(2, 1, singleCell);
             }
             case FOUR_PLAYERS -> {
                 singleCell = new CliTextElement('°', CliForeColors.DEFAULT, CliBackColors.DEFAULT);
-                setCell(0, 0, singleCell);
-                setCell(0, 2, singleCell);
-                setCell(1, 0, singleCell);
-                setCell(1, 2, singleCell);
+                this.setCell(0, 0, singleCell);
+                this.setCell(2, 0, singleCell);
+                this.setCell(0, 1, singleCell);
+                this.setCell(2, 1, singleCell);
             }
         }
     }
