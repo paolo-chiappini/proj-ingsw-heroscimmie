@@ -10,8 +10,8 @@ import java.util.LinkedList;
  * The element has size 2x1.
  */
 public abstract class SmallGridCellElement extends RectangleElement {
-    private static final int WIDTH = 2;
-    private static final int HEIGHT = 1;
+    public static final int WIDTH = 2;
+    public static final int HEIGHT = 1;
     public SmallGridCellElement() {
         super(WIDTH, HEIGHT);
     }

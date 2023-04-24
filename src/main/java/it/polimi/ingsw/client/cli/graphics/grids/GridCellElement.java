@@ -10,8 +10,8 @@ import java.util.LinkedList;
  * The element has size 3x2.
  */
 public abstract class GridCellElement extends RectangleElement {
-    private static final int WIDTH = 3;
-    private static final int HEIGHT = 2;
+    public static final int WIDTH = 3;
+    public static final int HEIGHT = 2;
     public GridCellElement() {
         super(WIDTH, HEIGHT);
     }
