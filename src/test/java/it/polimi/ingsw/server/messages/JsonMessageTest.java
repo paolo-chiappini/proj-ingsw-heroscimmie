@@ -16,24 +16,39 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
+/*
+    All tests are from the receiver's point of view:
+
+    Test(){
+        startSenderThread();
+        waitForSenderToInitialize();
+        connectToSender();
+        data = receiveDataFromSender();
+        assertEquals("expectedData", data);
+    }
+*/
+
 @DisplayName("Tests for sending and receiving JSON messages")
 class JsonMessageTest {
 
-    final CountDownLatch syncLatch = new CountDownLatch(1);
+    final CountDownLatch syncLatch = new CountDownLatch(1); //Used for synchronization
 
+    // ==================== SINGLE MESSAGE TESTS ====================
     @Test
     @DisplayName("Body and method should be sent and received correctly")
-    void singleSendTest() throws IOException, InterruptedException {
-        new Thread(this::simpleSenderTask).start();
-        syncLatch.await();
+    void singleMessageSendTest() throws IOException, InterruptedException {
+        new Thread(this::simpleSenderTask).start(); //Starts the sender
 
-        Socket receiver =  new Socket("localhost", 55555);
+        syncLatch.await(); //Waits for sender socket initialization...
+
+        Socket receiver =  new Socket("localhost", 55555); //... and then connects
 
         var reader = new BufferedReader(new InputStreamReader(receiver.getInputStream()));
         String senderData = reader.readLine();
 
         var factory = new MessageProvider(MessageType.JSON);
-        Message msg = factory.getInstanceForRequest(receiver, senderData);
+        Message msg = factory.getInstanceForIncomingRequest(receiver, senderData);
 
         String rcvdMethod = msg.getMethod();
         String rcvdBody = msg.getBody();
@@ -46,7 +61,7 @@ class JsonMessageTest {
 
     @Test
     @DisplayName("String should be sent and received correctly")
-    void simpleSingleSendTest() throws IOException, InterruptedException {
+    void simpleSingleMessageSendTest() throws IOException, InterruptedException {
         new Thread(this::simpleSenderTask).start();
         syncLatch.await();
 
@@ -62,24 +77,30 @@ class JsonMessageTest {
         assertEquals(expected.toString(), senderData);
     }
 
+    // ==================== BROADCAST TESTS ====================
+
     @Test
     @DisplayName("The same method and body should be received by every connected socket")
     void broadcastSendTest() throws IOException, InterruptedException {
         new Thread(this::broadcastSenderTask).start();
         syncLatch.await();
+
         List<Socket> connections = new ArrayList<>();
         var factory = new MessageProvider(MessageType.JSON);
 
+        //Creates 5 connections to the sender
         for (int i = 0; i < 5; i++){
             connections.add(new Socket("localhost", 44444));
         }
 
         List<Message> messages = new ArrayList<>();
 
+        //For every connection, save its input buffer
         for (Socket s : connections){
             var reader = new BufferedReader(new InputStreamReader(s.getInputStream()));
-            messages.add(factory.getInstanceForRequest(s, reader.readLine()));
+            messages.add(factory.getInstanceForIncomingRequest(s, reader.readLine()));
         }
+
 
         assertTrue(messages.stream().allMatch((m)->{
             return m.getMethod().equals("TEST") &&
@@ -88,7 +109,7 @@ class JsonMessageTest {
     }
 
     @Test
-    @DisplayName("String should be broadcast to everyone")
+    @DisplayName("String should be broadcast to every connected socket")
     void simpleBroadcastSendTest() throws IOException, InterruptedException {
         new Thread(this::broadcastSenderTask).start();
         syncLatch.await();
@@ -113,14 +134,17 @@ class JsonMessageTest {
         assertTrue(messages.stream().allMatch((m)->m.equals(expected.toString())));
     }
 
+
+    // ==================== SENDER THREAD TASKS ====================
+
     private void simpleSenderTask(){
         try {
             ServerSocket sender = new ServerSocket(55555);
-            syncLatch.countDown();
+            syncLatch.countDown(); //👌 Ready for connections
             Socket socket = sender.accept();
 
             var factory = new MessageProvider(MessageType.JSON);
-            Message msg = factory.getInstanceForResponse(socket);
+            Message msg = factory.getEmptyInstance(socket);
 
             msg.setMethod("TEST");
             msg.setBody("This is a test message");
@@ -138,14 +162,14 @@ class JsonMessageTest {
             ServerSocket sender = new ServerSocket(44444);
             List<Socket> connections = new ArrayList<>();
 
-            syncLatch.countDown();
+            syncLatch.countDown(); //👌 Ready for connections
 
             for (int i = 0; i < 5; i++){
                 connections.add(sender.accept());
             }
 
             var factory = new MessageProvider(MessageType.JSON);
-            Message msg = factory.getInstanceForResponse(connections.get(0), connections);
+            Message msg = factory.getInstanceForOutgoingResponse(connections.get(0), connections);
 
             msg.setMethod("TEST");
             msg.setBody("This is a test message");

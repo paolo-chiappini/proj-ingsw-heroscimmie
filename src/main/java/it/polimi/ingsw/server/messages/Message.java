@@ -9,20 +9,26 @@ import java.util.List;
  * Represents a Message that is used for communication between a client and the Server
  */
 public abstract class Message {
-    protected final Socket clientSocket;
+    protected final Socket socket;
     protected final PrintWriter clientWriter;
     protected final List<Socket> clientConnections;
 
-    public Message(Socket clientSocket, List<Socket> clientConnections){
-        this.clientSocket = clientSocket;
+    public Message(Socket socket, List<Socket> clientConnections){
+        this.socket = socket;
         this.clientConnections = clientConnections;
         try {
-            this.clientWriter = new PrintWriter(clientSocket.getOutputStream(), true);
+            this.clientWriter = new PrintWriter(socket.getOutputStream(), true);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
+    /**
+     * Returns the socket associated with the Message
+     */
+    public Socket getSocket(){
+        return socket;
+    }
 
     /**
      * Returns the method of the message

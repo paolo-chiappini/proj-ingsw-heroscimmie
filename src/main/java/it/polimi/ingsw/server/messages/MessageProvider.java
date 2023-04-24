@@ -30,36 +30,37 @@ public class MessageProvider {
     }
 
     /**
-     * Builds a Message instance initialized for containing a request type message
+     * Builds a Message instance initialized for containing an incoming client request
      * @param clientSocket socket of the client that made the request
      * @param clientData raw data from the client
      * @return A pre-initialized instance of Message
      */
-    public Message getInstanceForRequest(Socket clientSocket, String clientData){
+    public Message getInstanceForIncomingRequest(Socket clientSocket, String clientData){
         return builder.setClientSocket(clientSocket)
                       .setData(clientData)
                       .build();
     }
 
     /**
-     * Builds a Message instance initialized for containing a response type message
+     * Builds a Message instance initialized for containing a server response
      * @param clientSocket socket of the response recipient
      * @param clientConnections socket list to use when broadcasting the response
      * @return A pre-initialized instance of Message
      */
-    public Message getInstanceForResponse(Socket clientSocket, List<Socket> clientConnections){
+    public Message getInstanceForOutgoingResponse(Socket clientSocket, List<Socket> clientConnections){
         return builder.setClientSocket(clientSocket)
                 .setClientConnections(clientConnections)
                 .build();
     }
 
     /**
-     * Builds a Message instance initialized for containing a response type message
-     * @param clientSocket socket of the response recipient
+     * Builds a empty Message instance
+     * @param serverSocket socket of the response recipient
      * @return A pre-initialized instance of Message
      */
-    public Message getInstanceForResponse(Socket clientSocket){
-        return builder.setClientSocket(clientSocket)
+    public Message getEmptyInstance(Socket serverSocket){
+        return builder.setClientSocket(serverSocket)
                 .build();
     }
+
 }

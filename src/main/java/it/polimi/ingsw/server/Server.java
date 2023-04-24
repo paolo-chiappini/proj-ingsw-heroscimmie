@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server;
 
+import it.polimi.ingsw.server.messages.MessageProvider;
 import it.polimi.ingsw.server.messages.MessageType;
 
 import java.io.IOException;
@@ -15,6 +16,8 @@ public class Server {
     private final HashMap<String, Callback> callbacks;
     private final HashMap<String, Middleware> middlewares;
     private final MessageType messageType;
+    private boolean suppressStartupMessage;
+    private boolean running;
     private final List<Socket> clientConnections;
 
     private Consumer<Socket> onConnection;
@@ -24,8 +27,9 @@ public class Server {
     private Callback defaultCallback;
 
     /**
-     * @param port Socket port on which the server is listening
-     * @param messageType Message format used by the server
+     * Acquires network resources and creates a Server instance
+     * @param port TCP port on which the server is listening for connections
+     * @param messageType Format used by the server to send and receive messages
      */
     public Server(int port, MessageType messageType) {
         this.messageType = messageType;
@@ -37,8 +41,12 @@ public class Server {
 
         clientConnections = new ArrayList<>();
         callbacks = new HashMap<>();
-        defaultCallback = (req, res)->{};
         middlewares = new HashMap<>();
+
+        // Default values
+        suppressStartupMessage = false;
+        running = false;
+        defaultCallback = (req, res) -> res.send();
         globalMiddleware = (req, res, specificMiddleware) -> specificMiddleware.call(req, res);
         onConnection = (s)->{};
         onConnectionLost = (s)->{};
@@ -46,14 +54,29 @@ public class Server {
     }
 
     /**
+     * Acquires network resources and creates a Server instance
+     * @param port TCP port on which the server is listening for connections
+     * @param messageType Format used by the server to send and receive messages
+     * @param suppressStartupMessage Do not show startup message
+     */
+    public Server(int port, MessageType messageType, boolean suppressStartupMessage) {
+        this(port, messageType);
+        this.suppressStartupMessage = suppressStartupMessage;
+    }
+
+    /**
      * Starts the server. <b>This is a blocking function<b/>
      */
     public void start(){
         try{
-            System.out.printf("Server started on port %d at:\n", serverSocket.getLocalPort());
-            printNetworkInterfaces();
+            if(!suppressStartupMessage){
+                System.out.printf("Server started on port %d at:\n", serverSocket.getLocalPort());
+                printNetworkInterfaces();
+            }
 
-            while (true) { //Server accept infinite loop
+            running = true;
+
+            while (running) { //Server accept infinite loop
                 Socket clientSocket = serverSocket.accept();
                 clientConnections.add(clientSocket);
 
@@ -62,7 +85,20 @@ public class Server {
             }
 
         } catch (IOException e) {
+            if(!running) return; //If the Server isn't running, then the exception is expected
             e.printStackTrace();
+        }
+    }
+
+    /**
+     * Releases all resources and stops the server
+     */
+    public void stop() {
+        running = false;
+        try {
+            serverSocket.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -83,9 +119,6 @@ public class Server {
      * @param callback Callbacks function that handles the request
      */
     public void setCallback(String method, Callback callback){
-        if(callbacks.containsKey(method)){
-            throw new RuntimeException("Request method \"" + method + "\" is already bound to a callback");
-        }
         callbacks.put(method, callback);
     }
 
@@ -139,10 +172,7 @@ public class Server {
      */
     public void setMiddleware(String[] methods, Middleware function) {
         for(var method : methods){
-            if(!callbacks.containsKey(method)){
-                throw new RuntimeException("method \"%s\" not bound to a callback".formatted(method));
-            }
-            middlewares.put(method, function);
+            setMiddleware(method, function);
         }
     }
 
@@ -252,4 +282,5 @@ public class Server {
             }
         }
     }
+
 }
