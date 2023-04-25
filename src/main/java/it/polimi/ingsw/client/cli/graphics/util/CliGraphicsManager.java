@@ -217,7 +217,7 @@ public abstract class CliGraphicsManager {
      * Notifies the manager that the game has progressed
      * to the next turn.
      */
-    public static void notifyTNexTurn() {
+    public static void notifyNextTurn() {
         turnListElement.nextPlayer();
         applyChanges();
     }
