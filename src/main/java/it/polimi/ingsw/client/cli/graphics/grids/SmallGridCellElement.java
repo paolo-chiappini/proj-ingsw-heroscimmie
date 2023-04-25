@@ -1,9 +1,6 @@
 package it.polimi.ingsw.client.cli.graphics.grids;
 
-import it.polimi.ingsw.client.cli.graphics.simple.CliElement;
 import it.polimi.ingsw.client.cli.graphics.simple.RectangleElement;
-
-import java.util.LinkedList;
 
 /**
  * Represents a generic element that can be contained in a small grid.
