@@ -20,7 +20,7 @@ public class CommonGoalCard2 extends CommonGoalCard {
             int matches2 = 0;
             for (int j = 1; j < 5; j++) {
                 // compare the tile on the previous row and previous column with the current tile.
-                // i indicate a row offset from where the diagonal begins.
+                // 'i' indicates a row offset from where the diagonal begins.
                 if (bookshelf.compareTiles(i + j-1, j-1, i+j, j)) matches++;
                 if (bookshelf.compareTiles(i + j-1, bookshelf.getWidth()-j, i+j, bookshelf.getWidth()-j-1)) matches2++;
             }
