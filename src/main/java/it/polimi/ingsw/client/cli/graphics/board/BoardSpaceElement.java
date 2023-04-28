@@ -1,17 +1,16 @@
 package it.polimi.ingsw.client.cli.graphics.board;
 
-import it.polimi.ingsw.client.cli.graphics.grids.GridCellElement;
+import it.polimi.ingsw.client.cli.graphics.grids.CellElement;
 import it.polimi.ingsw.client.cli.graphics.simple.CliBackColors;
 import it.polimi.ingsw.client.cli.graphics.simple.CliForeColors;
 import it.polimi.ingsw.client.cli.graphics.simple.CliTextElement;
-import it.polimi.ingsw.client.cli.graphics.tiles.TileElement;
 
 import java.util.List;
 
 /**
  * Represents a single space on the game board.
  */
-public class BoardSpaceElement extends GridCellElement {
+public class BoardSpaceElement extends CellElement {
     /**
      * Creates a new tile space for the board.
      * @param type type of board tile.

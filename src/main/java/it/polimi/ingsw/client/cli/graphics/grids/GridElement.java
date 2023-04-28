@@ -13,9 +13,9 @@ import java.util.List;
 /**
  * Represents a generic grid element that can contain other GridCellElements.
  */
-public abstract class TileGridElement extends CliElement {
+public abstract class GridElement extends CliElement {
     public static final int PADDING = 2;
-    protected GridCellElement[][] contents;
+    protected CellElement[][] contents;
 
     /**
      * Sets an element in the grid.
@@ -23,7 +23,7 @@ public abstract class TileGridElement extends CliElement {
      * @param x x coordinate of the cell where to set the element.
      * @param y y coordinate of the cell where to set the element.
      */
-    public void setElement(GridCellElement element, int x, int y) {
+    public void setElement(CellElement element, int x, int y) {
         contents[y][x] = element;
         CliDrawer.superimposeElement(element, this, adaptXCoords(x), adaptYCoords(y), ReplaceTarget.ALL);
     }
@@ -34,7 +34,7 @@ public abstract class TileGridElement extends CliElement {
      * @return the adapted x coordinate.
      */
     protected static int adaptXCoords(int x) {
-        int cellWidth = GridCellElement.WIDTH + PADDING + 1;
+        int cellWidth = CellElement.WIDTH + PADDING + 1;
         return x * cellWidth + 2;
     }
 
@@ -44,7 +44,7 @@ public abstract class TileGridElement extends CliElement {
      * @return the adapted y coordinate.
      */
     protected static int adaptYCoords(int y) {
-        int cellHeight = GridCellElement.HEIGHT + 1;
+        int cellHeight = CellElement.HEIGHT + 1;
         return y * cellHeight + 1;
     }
 
@@ -55,10 +55,10 @@ public abstract class TileGridElement extends CliElement {
      * @return the row of coordinates.
      */
     public static RowElement generateCoordinatesRow(int cellsInRow) {
-        String cell = String.valueOf(TableChars.SPACE.getChar()).repeat((GridCellElement.WIDTH + PADDING + 1));
+        String cell = String.valueOf(TableChars.SPACE.getChar()).repeat((CellElement.WIDTH + PADDING + 1));
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         for (int i = 0; i < cellsInRow; i++) {
-            stringBuilder.setCharAt((GridCellElement.WIDTH + PADDING + 1) * i + (GridCellElement.WIDTH + PADDING + 2) / 2, Character.forDigit(i + 1, 10));
+            stringBuilder.setCharAt((CellElement.WIDTH + PADDING + 1) * i + (CellElement.WIDTH + PADDING + 2) / 2, Character.forDigit(i + 1, 10));
         }
         return new RowElement(stringBuilder.toString());
     }
@@ -70,10 +70,10 @@ public abstract class TileGridElement extends CliElement {
      * @return the column of coordinates.
      */
     public static ColumnElement generateCoordinatesColumn(int cellsInColumn) {
-        String cell = String.valueOf(TableChars.SPACE.getChar()).repeat((GridCellElement.HEIGHT + 1));
+        String cell = String.valueOf(TableChars.SPACE.getChar()).repeat((CellElement.HEIGHT + 1));
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInColumn));
         for (int i = 0; i < cellsInColumn; i++) {
-            stringBuilder.setCharAt((GridCellElement.HEIGHT + 1) * i + (GridCellElement.HEIGHT + 2) / 2, (char)('A' + i));
+            stringBuilder.setCharAt((CellElement.HEIGHT + 1) * i + (CellElement.HEIGHT + 2) / 2, (char)('A' + i));
         }
         return new ColumnElement(stringBuilder.toString());
     }
@@ -85,7 +85,7 @@ public abstract class TileGridElement extends CliElement {
      */
     public static List<CliTextElement> generateTopRow(int cellsInRow) {
         String cell = TableChars.TOP_T.getChar() +
-                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(GridCellElement.WIDTH + PADDING);
+                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(CellElement.WIDTH + PADDING);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.setCharAt(0, TableChars.TOP_LEFT_CORNER.getChar());
         stringBuilder.append(TableChars.TOP_RIGHT_CORNER.getChar());
@@ -99,7 +99,7 @@ public abstract class TileGridElement extends CliElement {
      */
     public static List<CliTextElement> generateCellsRow(int cellsInRow) {
         String cell = TableChars.VERTICAL_BAR.getChar() +
-                String.valueOf(TableChars.SPACE.getChar()).repeat(GridCellElement.WIDTH + PADDING);
+                String.valueOf(TableChars.SPACE.getChar()).repeat(CellElement.WIDTH + PADDING);
         String temp = (cell.repeat(cellsInRow) + TableChars.VERTICAL_BAR.getChar());
         return StringToCliTextConverter.convert(temp);
     }
@@ -111,7 +111,7 @@ public abstract class TileGridElement extends CliElement {
      */
     public static List<CliTextElement> generateMiddleRow(int cellsInRow) {
         String cell = TableChars.CROSS.getChar() +
-                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(GridCellElement.WIDTH + PADDING);
+                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(CellElement.WIDTH + PADDING);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.setCharAt(0, TableChars.LEFT_T.getChar());
         stringBuilder.append(TableChars.RIGHT_T.getChar());
@@ -125,7 +125,7 @@ public abstract class TileGridElement extends CliElement {
      */
     public static List<CliTextElement> generateBottomRow(int cellsInRow) {
         String cell = TableChars.BOTTOM_T.getChar() +
-                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(GridCellElement.WIDTH + PADDING);
+                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(CellElement.WIDTH + PADDING);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.setCharAt(0, TableChars.BOTTOM_LEFT_CORNER.getChar());
         stringBuilder.append(TableChars.BOTTOM_RIGHT_CORNER.getChar());

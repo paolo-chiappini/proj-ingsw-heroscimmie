@@ -1,11 +1,10 @@
 package it.polimi.ingsw.client.cli.graphics.bookshelf;
 
-import it.polimi.ingsw.client.cli.graphics.grids.GridCellElement;
+import it.polimi.ingsw.client.cli.graphics.grids.CellElement;
 import it.polimi.ingsw.client.cli.graphics.grids.TableChars;
-import it.polimi.ingsw.client.cli.graphics.grids.TileGridElement;
+import it.polimi.ingsw.client.cli.graphics.grids.GridElement;
 import it.polimi.ingsw.client.cli.graphics.simple.CliElement;
 import it.polimi.ingsw.client.cli.graphics.simple.CliTextElement;
-import it.polimi.ingsw.client.cli.graphics.simple.RowElement;
 import it.polimi.ingsw.client.cli.graphics.util.CliDrawer;
 import it.polimi.ingsw.client.cli.graphics.util.ReplaceTarget;
 import it.polimi.ingsw.client.cli.graphics.util.StringToCliTextConverter;
@@ -22,7 +21,7 @@ public class BookshelfBaseElement extends CliElement {
         this.representation.add(generateMiddleRow(bookshelfWidth));
         this.representation.add(generateBottomRow(bookshelfWidth));
         // add coordinates
-        CliDrawer.superimposeElement(TileGridElement.generateCoordinatesRow(bookshelfWidth), this, 1, 1, ReplaceTarget.EMPTY);
+        CliDrawer.superimposeElement(GridElement.generateCoordinatesRow(bookshelfWidth), this, 1, 1, ReplaceTarget.EMPTY);
     }
 
     /**
@@ -32,7 +31,7 @@ public class BookshelfBaseElement extends CliElement {
      */
     private List<CliTextElement> generateTopRow(int cellsInRow) {
         String cell = TableChars.BOTTOM_T.getChar() +
-                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(GridCellElement.WIDTH + TileGridElement.PADDING);
+                String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(CellElement.WIDTH + GridElement.PADDING);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.insert(0, TableChars.TOP_LEFT_CORNER.getChar());
         stringBuilder.append(TableChars.BOTTOM_T.getChar())
@@ -46,7 +45,7 @@ public class BookshelfBaseElement extends CliElement {
      * @return the top bottom of a bookshelf's base.
      */
     private List<CliTextElement> generateBottomRow(int cellsInRow) {
-        String cell = String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(GridCellElement.WIDTH + TileGridElement.PADDING + 1);
+        String cell = String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(CellElement.WIDTH + GridElement.PADDING + 1);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.insert(0, TableChars.BOTTOM_LEFT_CORNER.getChar());
         stringBuilder.append(TableChars.HORIZONTAL_BAR.getChar())
@@ -60,7 +59,7 @@ public class BookshelfBaseElement extends CliElement {
      * @return the central row of a bookshelf's base.
      */
     private List<CliTextElement> generateMiddleRow(int cellsInRow) {
-        String cell = String.valueOf(TableChars.SPACE.getChar()).repeat(GridCellElement.WIDTH + TileGridElement.PADDING + 1);
+        String cell = String.valueOf(TableChars.SPACE.getChar()).repeat(CellElement.WIDTH + GridElement.PADDING + 1);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.insert(0, TableChars.VERTICAL_BAR.getChar());
         stringBuilder.append(TableChars.SPACE.getChar())

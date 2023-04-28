@@ -1,21 +1,20 @@
 package it.polimi.ingsw.client.cli.graphics.bookshelf;
 
-import it.polimi.ingsw.client.cli.graphics.grids.SmallGridCellElement;
-import it.polimi.ingsw.client.cli.graphics.grids.SmallTileGridElement;
+import it.polimi.ingsw.client.cli.graphics.grids.SmallCellElement;
+import it.polimi.ingsw.client.cli.graphics.grids.SmallGridElement;
 import it.polimi.ingsw.client.cli.graphics.tiles.SmallTileElement;
-import it.polimi.ingsw.client.cli.graphics.tiles.TileElement;
 import it.polimi.ingsw.server.model.tile.TileType;
 
 /**
  * Represents a smaller version of the player's bookshelf.
  */
-public class SmallBookshelfElement extends SmallTileGridElement {
+public class SmallBookshelfElement extends SmallGridElement {
     private static final int WIDTH = 5;
     private static final int HEIGHT = 6;
     public SmallBookshelfElement() {
-        this.contents = new SmallGridCellElement[HEIGHT][WIDTH];
+        this.contents = new SmallCellElement[HEIGHT][WIDTH];
         for (int i = 0; i < HEIGHT; i++) {
-            this.representation.add(SmallTileGridElement.generateRow(WIDTH));
+            this.representation.add(SmallGridElement.generateRow(WIDTH));
         }
     }
 

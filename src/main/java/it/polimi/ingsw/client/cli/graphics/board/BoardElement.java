@@ -1,24 +1,24 @@
 package it.polimi.ingsw.client.cli.graphics.board;
 
-import it.polimi.ingsw.client.cli.graphics.grids.GridCellElement;
-import it.polimi.ingsw.client.cli.graphics.grids.TileGridElement;
+import it.polimi.ingsw.client.cli.graphics.grids.CellElement;
+import it.polimi.ingsw.client.cli.graphics.grids.GridElement;
 import it.polimi.ingsw.client.cli.graphics.tiles.TileElement;
 import it.polimi.ingsw.server.model.tile.TileType;
 
 /**
  * Represents the game board.
  */
-public class BoardElement extends TileGridElement {
+public class BoardElement extends GridElement {
     private static final int SIZE = 9;
 
     public BoardElement() {
-        this.contents = new GridCellElement[SIZE][SIZE];
+        this.contents = new CellElement[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
-            if (i == 0) this.representation.add(TileGridElement.generateTopRow(SIZE));
-            else this.representation.add(TileGridElement.generateMiddleRow(SIZE));
-            this.representation.add(TileGridElement.generateCellsRow(SIZE));
-            this.representation.add(TileGridElement.generateCellsRow(SIZE));
-            if (i == SIZE - 1) this.representation.add(TileGridElement.generateBottomRow(SIZE));
+            if (i == 0) this.representation.add(GridElement.generateTopRow(SIZE));
+            else this.representation.add(GridElement.generateMiddleRow(SIZE));
+            this.representation.add(GridElement.generateCellsRow(SIZE));
+            this.representation.add(GridElement.generateCellsRow(SIZE));
+            if (i == SIZE - 1) this.representation.add(GridElement.generateBottomRow(SIZE));
         }
     }
 

@@ -11,8 +11,8 @@ import java.util.List;
 /**
  * Represents a generic small grid element that can contain other SmallGridCellElements.
  */
-public abstract class SmallTileGridElement extends CliElement {
-    protected SmallGridCellElement[][] contents;
+public abstract class SmallGridElement extends CliElement {
+    protected SmallCellElement[][] contents;
 
     /**
      * Sets an element in the grid.
@@ -20,7 +20,7 @@ public abstract class SmallTileGridElement extends CliElement {
      * @param x x coordinate of the cell where to set the element.
      * @param y y coordinate of the cell where to set the element.
      */
-    public void setElement(SmallGridCellElement element, int x, int y) {
+    public void setElement(SmallCellElement element, int x, int y) {
         contents[y][x] = element;
         CliDrawer.superimposeElement(element, this, adaptXCoords(x), adaptYCoords(y), ReplaceTarget.ALL);
     }
@@ -31,7 +31,7 @@ public abstract class SmallTileGridElement extends CliElement {
      * @return the adapted x coordinate.
      */
     protected static int adaptXCoords(int x) {
-        int cellWidth = SmallGridCellElement.WIDTH + 1;
+        int cellWidth = SmallCellElement.WIDTH + 1;
         return x * cellWidth + 1;
     }
 
@@ -50,7 +50,7 @@ public abstract class SmallTileGridElement extends CliElement {
      * @return the (empty) cells of a small table.
      */
     public static List<CliTextElement> generateRow(int cellsInRow) {
-        String cell = "|" + (" ").repeat(SmallGridCellElement.WIDTH);
+        String cell = "|" + (" ").repeat(SmallCellElement.WIDTH);
         StringBuilder stringBuilder = new StringBuilder(cell.repeat(cellsInRow));
         stringBuilder.setCharAt(0, '[');
         stringBuilder.append(']');
