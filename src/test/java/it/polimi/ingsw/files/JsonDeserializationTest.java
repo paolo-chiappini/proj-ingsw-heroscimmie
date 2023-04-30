@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.files;
 
 import it.polimi.ingsw.server.model.bag.Bag;
 import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;

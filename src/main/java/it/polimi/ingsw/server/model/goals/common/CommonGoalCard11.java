@@ -1,8 +1,7 @@
 package it.polimi.ingsw.server.model.goals.common;
 
-import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
-import it.polimi.ingsw.util.serialization.Serializer;
+import it.polimi.ingsw.server.model.tile.TileType;
 
 import java.util.HashMap;
 
@@ -35,10 +34,5 @@ public class CommonGoalCard11 extends CommonGoalCard {
             }
         }
         return countTileType.values().stream().anyMatch(value->value>7);
-    }
-
-    @Override
-    public String serialize(Serializer serializer) {
-        return serializer.serialize(this);
     }
 }

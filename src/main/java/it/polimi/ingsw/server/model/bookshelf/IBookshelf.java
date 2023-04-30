@@ -15,25 +15,25 @@ public interface IBookshelf extends Serializable {
      * @param column the column to take the tile from.
      * @return the tile at the (row, column) coordinates.
      */
-    default GameTile getTileAt(int row, int column) { return null; }
+    GameTile getTileAt(int row, int column);
 
     /**
      * Get the with of the bookshelf.
      * @return the width of the bookshelf.
      */
-    default int getWidth() { return 0; }
+    int getWidth();
 
     /**
      * Get the height of the bookshelf.
      * @return the height of the bookshelf.
      */
-    default int getHeight() { return 0; }
+    int getHeight();
 
     /**
      * Checks if the bookshelf is full of tiles.
      * @return true if the bookshelf is full.
      */
-    default boolean isFull() { return false; }
+    boolean isFull();
 
     /**
      * Inserts tiles inside the bookshelf by occupying the first available spaces from the bottom.

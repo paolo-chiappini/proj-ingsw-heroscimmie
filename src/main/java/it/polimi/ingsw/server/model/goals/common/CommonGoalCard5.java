@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.model.goals.common;
 
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
-import it.polimi.ingsw.util.serialization.Serializer;
 
 public class CommonGoalCard5 extends CommonGoalCard {
     public CommonGoalCard5(int numPlayer) {
@@ -19,10 +18,5 @@ public class CommonGoalCard5 extends CommonGoalCard {
                 &&(bookShelf.compareTiles(0,bookShelf.getWidth()-1,bookShelf.getHeight()-1,bookShelf.getWidth()-1))
                 &&(bookShelf.compareTiles(bookShelf.getHeight()-1,bookShelf.getWidth()-1,bookShelf.getHeight()-1,0))
                 && bookShelf.hasTile(bookShelf.getHeight()-1,0));
-    }
-
-    @Override
-    public String serialize(Serializer serializer) {
-        return serializer.serialize(this);
     }
 }

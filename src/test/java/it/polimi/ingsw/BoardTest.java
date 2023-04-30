@@ -1,196 +1,343 @@
 package it.polimi.ingsw;
-import it.polimi.ingsw.server.model.bag.Bag;
+import it.polimi.ingsw.exceptions.IllegalActionException;
+import it.polimi.ingsw.mock.BagMock;
 import it.polimi.ingsw.server.model.board.Board;
 import it.polimi.ingsw.server.model.tile.GameTile;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import it.polimi.ingsw.server.model.tile.TileType;
+import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@DisplayName("Tests on Board")
 public class BoardTest {
-    Board myBoard;
-    Board myBoard4Player;
-    Bag bag;
-    @BeforeEach
-    void setUp(){
-        myBoard = new Board(2);
-        myBoard4Player = new Board(4);
-        bag=new Bag();
-    }
+    @Nested
+    @DisplayName("When creating a new board")
+    class SetupTests {
+        @Test
+        @DisplayName("board size should be 9")
+        void boardShouldHaveSize9(){
+            Board board = new Board(0);
+            assertEquals(9, board.getSize());
+        }
 
-    /**
-     * Test that board is 9x9
-     */
-    @Test
-    @DisplayName("Board is 9x9, so size should be 9")
-    void boardSize(){
-        assertEquals(9,myBoard.getSize());
-    }
+        @Test
+        @DisplayName("board should be empty")
+        void boardShouldBeEmpty(){
+            Board board = new Board(4);
+            int emptyCellsCount = 0;
+            for (int i = 0; i < board.getSize(); i++)
+                for (int j = 0; j < board.getSize(); j++) if (board.getTileAt(i, j) == null) emptyCellsCount++;
+            assertEquals(board.getSize() * board.getSize(), emptyCellsCount);
+        }
 
-    /**
-     * Test that board needs to be refilled because it's empty
-     */
-    @Test
-    @DisplayName("Board is empty")
-    void isBoardEmpty(){
-        assertTrue(myBoard.needsRefill());
-    }
+        @ParameterizedTest
+        @MethodSource("playersCountProvider")
+        @DisplayName("board should be full after initial refill with")
+        void isBoardFull(int playersCount){
+            Board board = new Board(playersCount);
+            board.refill(new BagMock(Map.of(TileType.CAT, 100)));
+            int[][] boardTemplate = new int[][]{
+                    {5, 5, 5, 3, 4, 5, 5, 5, 5},
+                    {5, 5, 5, 2, 2, 4, 5, 5, 5},
+                    {5, 5, 3, 2, 2, 2, 3, 5, 5},
+                    {5, 4, 2, 2, 2, 2, 2, 2, 3},
+                    {4, 2, 2, 2, 2, 2, 2, 2, 4},
+                    {3, 2, 2, 2, 2, 2, 2, 4, 5},
+                    {5, 5, 3, 2, 2, 2, 3, 5, 5},
+                    {5, 5, 5, 4, 2, 2, 5, 5, 5},
+                    {5, 5, 5, 5, 4, 3, 5, 5, 5}
+            };
 
-    /**
-     * Test that board doesn't need to be refilled because it's full
-     */
-    @Test
-    @DisplayName("Board is full")
-    void isBoardFull(){
-        myBoard.refill(bag);
-        assertFalse(myBoard.needsRefill());
-    }
-
-    /**
-     * Test that board doesn't need to be refilled because it's full (4 players)
-     */
-    @Test
-    @DisplayName("Board is full")
-    void isBoard4PlayersFull(){
-        myBoard4Player.refill(bag);
-        assertFalse(myBoard4Player.needsRefill());
-    }
-
-    /**
-     * Test that board needs to be refilled because there aren't cards with adjacency on the board
-     */
-    @Test
-    @DisplayName("On the board there are only item tiles without any other adjacent tile")
-    void noAdjacencyCards(){
-        myBoard.refill(bag);
-        for(int i = 0; i < 9; i++)
-            for(int j = 0; j < 9; j++)
-                if(myBoard.canPickUpTiles(i,j,i,j))
-                    myBoard.pickUpTiles(i,j,i,j);
-        assertTrue(myBoard.needsRefill());
-    }
-
-    /**
-     * Test that board doesn't need to be refilled because there are some cards with adjacency on the board
-     */
-    @Test
-    @DisplayName("On the board there are some item tiles without any other adjacent tile")
-    void AdjacencyCards(){
-        myBoard.refill(bag);
-        for(int i = 0; i < 9; i++)
-            for(int j = 0; j < 9; j++){
-                if(myBoard.canPickUpTiles(i,j,i,j))
-                    myBoard.pickUpTiles(i,j,i,j);
-                i++;
+            for (int i = 0; i < board.getSize(); i++) {
+                for (int j = 0; j < board.getSize(); j++) {
+                    if (playersCount < boardTemplate[i][j]) assertNull(board.getTileAt(i, j));
+                    else assertNotNull(board.getTileAt(i, j));
+                }
             }
-        assertFalse(myBoard.needsRefill());
+        }
+
+        static Stream<Arguments> playersCountProvider() {
+            return Stream.of(
+                    Arguments.of(Named.of("0 players", 0)),
+                    Arguments.of(Named.of("1 player", 1)),
+                    Arguments.of(Named.of("2 players", 2)),
+                    Arguments.of(Named.of("3 players", 3)),
+                    Arguments.of(Named.of("4 players", 4))
+            );
+        }
     }
 
-    /**
-     * Test if player can pick up one tile from the board
-     * checks that the tile collected is actually the one that was on the board
-     */
-    @Test
-    void tileCanBePickedUp(){
-        myBoard.refill(new Bag());
-        myBoard.pickUpTiles(6,3,6,3);
-        GameTile tileOnBoard = myBoard.getTileAt(5,3);
-        assertTrue(myBoard.canPickUpTiles(5,3,5,3));
-        List<GameTile> tilesTaken = myBoard.pickUpTiles(5,3,5,3);
-        assertAll(
-                ()->assertEquals(tileOnBoard,tilesTaken.get(0)),
-                ()->assertEquals(1,tilesTaken.size())
-        );
+    @Nested
+    @DisplayName("When checking if board needs refill")
+    class CheckRefillTests {
+        @Test
+        @DisplayName("when there are only tiles without any other adjacent tiles")
+        void noAdjacentTiles(){
+            Board boardBefore = new Board(2);
+            Board boardAfter = new Board(2);
+            boardBefore.refill(new BagMock(Map.of(TileType.FRAME, 5)));
+            boardAfter.refill(new BagMock(Map.of(TileType.FRAME, 5)));
+            boardAfter.pickUpTiles(1, 4, 2, 4);
+            boardAfter.pickUpTiles(2, 3, 2, 3);
+
+            assertAll(
+                    () -> assertFalse(boardBefore.needsRefill()),
+                    () -> assertTrue(boardAfter.needsRefill())
+            );
+        }
+
+        @Test
+        @DisplayName("when there are tiles with some other adjacent tiles")
+        void withAdjacentTiles() {
+            Board boardBefore = new Board(2);
+            Board boardAfter = new Board(2);
+            boardBefore.refill(new BagMock(Map.of(TileType.FRAME, 5)));
+            boardAfter.refill(new BagMock(Map.of(TileType.FRAME, 5)));
+            boardAfter.pickUpTiles(1, 4, 1, 4);
+            boardAfter.pickUpTiles(2, 3, 2, 3);
+
+            assertAll(
+                    () -> assertFalse(boardBefore.needsRefill()),
+                    () -> assertFalse(boardAfter.needsRefill())
+            );
+        }
     }
 
-    /**
-     * Test if player can pick up two tiles in column from the board
-     */
-    @Test
-    void twoTilesColumnCanBePickedUp(){
-        myBoard.refill(new Bag());
-        assertAll(
-                ()->assertTrue(myBoard.canPickUpTiles(7,5,6,5)),
-                ()->assertEquals(2,myBoard.pickUpTiles(7,5,6,5).size())
-        );
+    @Nested
+    @DisplayName("When picking up tiles from the board in a row")
+    class PickUpTilesInRowTests {
+        @Test
+        @DisplayName("pick up a single tile")
+        void pickUpSingleTile() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+            board.pickUpTiles(6,3,6,3);
+
+            GameTile tileOnBoard = board.getTileAt(5, 3);
+            List<GameTile> tilesTaken = board.pickUpTiles(5, 3 ,5, 3);
+            assertAll(
+                    () -> assertEquals(1, tilesTaken.size()),
+                    () -> assertEquals(tileOnBoard, tilesTaken.get(0)),
+                    () -> assertNull(board.getTileAt(5, 3))
+            );
+        }
+
+        @Test
+        @DisplayName("pick up two tiles")
+        void pickUpTwoTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+            board.pickUpTiles(7,4,7,5);
+
+            List<GameTile> tilesOnBoard = List.of(board.getTileAt(6, 4), board.getTileAt(6, 5));
+            List<GameTile> tilesTaken = board.pickUpTiles(6, 4 ,6, 5);
+            assertAll(
+                    () -> assertEquals(2, tilesTaken.size()),
+                    () -> assertIterableEquals(tilesOnBoard, tilesTaken),
+                    () -> assertNull(board.getTileAt(6, 4)),
+                    () -> assertNull(board.getTileAt(6, 5))
+            );
+        }
+
+        @Test
+        @DisplayName("pick up three tiles")
+        void pickUpThreeTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+            board.pickUpTiles(7,4,7,5);
+
+            List<GameTile> tilesOnBoard = List.of(
+                    board.getTileAt(6, 3),
+                    board.getTileAt(6, 4),
+                    board.getTileAt(6, 5));
+            List<GameTile> tilesTaken = board.pickUpTiles(6, 3 ,6, 5);
+            assertAll(
+                    () -> assertEquals(3, tilesTaken.size()),
+                    () -> assertIterableEquals(tilesOnBoard, tilesTaken),
+                    () -> assertNull(board.getTileAt(6, 3)),
+                    () -> assertNull(board.getTileAt(6, 4)),
+                    () -> assertNull(board.getTileAt(6, 5))
+            );
+        }
+
+        @Test
+        @DisplayName("pick up a single (blocked) tile")
+        void cannotPickUpSingleTile() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(5, 3, 5, 3)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(5, 3, 5, 3))
+            );
+        }
+
+        @Test
+        @DisplayName("cannot pick up a two (blocked) tiles")
+        void cannotPickUpTwoTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(6, 3, 6, 4)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(6, 3, 6, 4))
+            );
+        }
+
+        @Test
+        @DisplayName("cannot pick up three (blocked) tiles")
+        void cannotPickThreeTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(6, 3, 6, 5)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(6, 3, 6, 5))
+            );
+        }
+
     }
 
-    /**
-     * Test if player can pick up two tiles in line from the board
-     */
-    @Test
-    void twoTilesLineCanBePickedUp(){
-        myBoard.refill(new Bag());
-        assertAll(
-                ()->assertTrue(myBoard.canPickUpTiles(7,5,7,4)),
-                ()->assertEquals(2,myBoard.pickUpTiles(7,4,7,5).size())
-        );
+    @Nested
+    @DisplayName("When picking up tiles from the board in a column")
+    class PickUpTilesInColTests {
+        @Test
+        @DisplayName("pick up two tiles")
+        void pickUpTwoTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+            board.pickUpTiles(4,1,5,1);
+
+            List<GameTile> tilesOnBoard = List.of(board.getTileAt(4, 2), board.getTileAt(5, 2));
+            List<GameTile> tilesTaken = board.pickUpTiles(4, 2 ,5, 2);
+            assertAll(
+                    () -> assertEquals(2, tilesTaken.size()),
+                    () -> assertIterableEquals(tilesOnBoard, tilesTaken),
+                    () -> assertNull(board.getTileAt(4, 2)),
+                    () -> assertNull(board.getTileAt(5, 2))
+            );
+        }
+
+        @Test
+        @DisplayName("pick up three tiles")
+        void pickUpThreeTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+            board.pickUpTiles(4,1,5,1);
+
+            List<GameTile> tilesOnBoard = List.of(
+                    board.getTileAt(3, 2),
+                    board.getTileAt(4, 2),
+                    board.getTileAt(5, 2));
+            List<GameTile> tilesTaken = board.pickUpTiles(3, 2 ,5, 2);
+            assertAll(
+                    () -> assertEquals(3, tilesTaken.size()),
+                    () -> assertIterableEquals(tilesOnBoard, tilesTaken),
+                    () -> assertNull(board.getTileAt(3, 2)),
+                    () -> assertNull(board.getTileAt(4, 2)),
+                    () -> assertNull(board.getTileAt(5, 2))
+            );
+        }
+
+        @Test
+        @DisplayName("cannot pick up a two (blocked) tiles")
+        void cannotPickUpTwoTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(3, 6, 4, 6)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(3, 6, 4, 6))
+            );
+        }
+
+        @Test
+        @DisplayName("cannot pick up three (blocked) tiles")
+        void cannotPickThreeTiles() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.PLANT, 100)));
+
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(3, 6, 5, 6)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(3, 6, 5, 6))
+            );
+        }
+
     }
 
-    /**
-     * Test if player can pick up three tiles in line from the board
-     */
-    @Test
-    void threeTilesLineCanBePickedUp(){
-        myBoard.refill(new Bag());
-        myBoard.pickUpTiles(1,3,1,4);
-        assertAll(
-                ()->assertTrue(myBoard.canPickUpTiles(2,5,2,3)),
-                ()->assertEquals(3,myBoard.pickUpTiles(2,5,2,3).size())
-        );
+    @Nested
+    @DisplayName("When picking up tiles from the board in non permitted ways")
+    class InvalidPickUpTests {
+
+        @Test
+        @DisplayName("non straight range should throw an exception")
+        void cannotPickUpNonStraightRange() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.TROPHY, 100)));
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(3, 2, 4, 3)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(3, 2, 4, 3))
+            );
+        }
+
+        @Test
+        @DisplayName("out of bound index should throw an exception")
+        void outOfBoundRange() {
+            Board board = new Board(2);
+            board.refill(new BagMock(Map.of(TileType.TROPHY, 100)));
+            assertAll(
+                    () -> assertFalse(board.canPickUpTiles(-1, 2, 4, 3)),
+                    () -> assertThrows(
+                            IllegalActionException.class,
+                            () -> board.pickUpTiles(-1, 2, 4, 3))
+            );
+        }
     }
 
-    /**
-     * Test if player can pick up three tiles in column from the board
-     */
-    @Test
-    void threeTilesColumnCanBePickedUp(){
-        myBoard.refill(new Bag());
-        myBoard.pickUpTiles(4,7,4,7);
-        assertAll(
-                ()->assertTrue(myBoard.canPickUpTiles(5,6,3,6)),
-                ()->assertEquals(3,myBoard.pickUpTiles(3,6,5,6).size())
-        );
-    }
+    @Nested
+    @DisplayName("When testing if a tile has a free side")
+    class FreeSpacesTest {
+        @Test
+        @DisplayName("tile with four free sides")
+        void tileWithAllFreeSides() {
+            Board board = new Board(3);
+            board.refill(new BagMock(Map.of(TileType.CAT, 1)));
+            assertFalse(board.hasNoFreeSides(0, 3));
+        }
 
-    /**
-     * Test if player can't pick up three tiles from the board
-     */
-    @Test
-    void threeTilesCannotBePickedUp(){
-        myBoard.refill(new Bag());
-        assertFalse(myBoard.canPickUpTiles(4,4,4,6));
-    }
+        @Test
+        @DisplayName("tile with one free side")
+        void tileWithOneFreeSides() {
+            Board board = new Board(4);
+            board.refill(new BagMock(Map.of(TileType.CAT, 5)));
+            assertFalse(board.hasNoFreeSides(1, 4));
+        }
 
-    /**
-     * Test if player can't pick two tiles in diagonal from the board
-     */
-    @Test
-    void diagonalTilesCannotBePickedUp(){
-        myBoard.refill(new Bag());
-        assertFalse(myBoard.canPickUpTiles(3,1,4,0));
-    }
-
-    /**
-     * Test that player cannot pick up the same tile twice
-     */
-    @Test
-    void pickUp2SameTiles(){
-        myBoard.refill(new Bag());
-        assertTrue(myBoard.canPickUpTiles(6,5,7,5));
-        myBoard.pickUpTiles(6,5,7,5);
-        assertFalse(myBoard.canPickUpTiles(6,5,7,5));
-    }
-
-    /**
-     * Test that player can pick up the two tiles from spaces of 4 players
-     */
-    @Test
-    void pickUp2Tiles4Players(){
-        myBoard4Player.refill(new Bag());
-        assertTrue(myBoard4Player.canPickUpTiles(4,8,3,8));
+        @Test
+        @DisplayName("tile has no free sides")
+        void tileWithNoFreeSides() {
+            Board board = new Board(4);
+            board.refill(new BagMock(Map.of(TileType.CAT, 100)));
+            assertTrue(board.hasNoFreeSides(4, 4));
+        }
     }
 }

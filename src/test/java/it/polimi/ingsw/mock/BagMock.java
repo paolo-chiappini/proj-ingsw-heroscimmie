@@ -22,6 +22,12 @@ public class BagMock implements IBag {
 
     @Override
     public GameTile drawTile() {
+        for (Map.Entry<TileType, Integer> entry : tiles.entrySet()) {
+            if(entry.getValue() > 0) {
+                tiles.put(entry.getKey(), entry.getValue() - 1);
+                return new Tile(entry.getKey());
+            }
+        }
         return null;
     }
 

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.server.model.board;
 
+import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.server.model.tile.GameTile;
 import it.polimi.ingsw.server.model.bag.IBag;
 import it.polimi.ingsw.server.model.tile.TileType;
@@ -9,7 +10,7 @@ import java.util.*;
 
 public class Board implements IBoard {
     private static final int BOARD_DIM = 9;
-    private TileSpace[][] spaces;
+    private final TileSpace[][] spaces;
 
     public Board(int playersPlaying){
         this.spaces = createSpacesFromTemplate(playersPlaying);
@@ -103,53 +104,27 @@ public class Board implements IBoard {
      */
     @Override
     public List<GameTile> pickUpTiles(int row1, int col1, int row2, int col2){
-        List<GameTile> myList = new LinkedList<>();
-        int numOfTilesPicked;
-
-        if(row1 == row2 && col1 == col2) {      //player wants to pick a single tile
-            myList.add(spaces[row1][col1].getTile());
-            spaces[row1][col1].removeTile();
+        // check if range is valid
+        if(!canPickUpTiles(row1, col1, row2, col2)) {
+            throw new IllegalActionException("Range of tiles is not valid, please verify beforehand with the canPickUpTiles() method");
         }
 
-        else if(row1 == row2){  //player wants to pick two or three tiles
-            if(col2 > col1){
-                numOfTilesPicked = col2 - col1 + 1;
-                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
-                    for(int i = 0; i < numOfTilesPicked; i++){
-                        myList.add(spaces[row1][col1 + i].getTile());
-                        spaces[row1][col1 + i].removeTile();
-                    }
-            }
-            else {
-                numOfTilesPicked = Math.abs(col1 - col2) + 1;
-                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
-                    for (int i = 0; i < numOfTilesPicked; i++) {
-                        myList.add(spaces[row1][col2 + i].getTile());
-                        spaces[row1][col2 + i].removeTile();
-                    }
-            }
+        int startRow, startCol, endRow, endCol;
+        List<GameTile> tiles = new LinkedList<>();
 
-        }
-        else if(col1 == col2){
-            if(row2 > row1){
-                numOfTilesPicked = row2 - row1 + 1;
-                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
-                    for(int i = 0; i < numOfTilesPicked; i++){
-                        myList.add(spaces[row1+i][col1].getTile());
-                        spaces[row1 + i][col1].removeTile();
-                    }
-            }
-            else{
-                numOfTilesPicked = Math.abs(row1 - row2) + 1;
-                if(numOfTilesPicked == 2 || numOfTilesPicked == 3)
-                    for (int i = 0; i < numOfTilesPicked; i++) {
-                        myList.add(spaces[row2 + i][col1].getTile());
-                        spaces[row2 + i][col1].removeTile();
-                    }
+        startRow = Integer.min(row1, row2);
+        endRow = Integer.max(row1, row2);
+        startCol = Integer.min(col1, col2);
+        endCol = Integer.max(col1, col2);
+
+        for (int row = startRow; row <= endRow; row++) {
+            for (int col = startCol; col <= endCol; col++) {
+                tiles.add(spaces[row][col].getTile());
+                spaces[row][col].removeTile();
             }
         }
-        return myList;
 
+        return tiles;
     }
 
     /**
@@ -161,51 +136,45 @@ public class Board implements IBoard {
      */
     @Override
     public boolean canPickUpTiles(int row1, int col1, int row2, int col2) {
-        int temp;
-        if(row1==row2)
-        {
-            if(col2<=col1)
-            {
-                temp=col1;
-                col1=col2;
-                col2=temp;
+        if (row1 < 0 || row2 < 0 || col1 < 0 || col2 < 0 ||
+            row1 >= BOARD_DIM || row2 >= BOARD_DIM || col1 >= BOARD_DIM || col2 >= BOARD_DIM) return false;
+
+        int startRow, startCol, endRow, endCol;
+        startRow = Integer.min(row1, row2);
+        endRow = Integer.max(row1, row2);
+        startCol = Integer.min(col1, col2);
+        endCol = Integer.max(col1, col2);
+
+        // check if range is a straight line by ensuring that
+        // either row1 = row2 or col1 = col2
+        if (row1 != row2 && col1 != col2) return false;
+        // check if size of range is valid
+        if (endRow - startRow > 3 || endCol - startCol > 3) return false;
+
+        for (int row = startRow; row <= endRow; row++) {
+            for (int col = startCol; col <= endCol; col++) {
+                if (spaces[row][col].getTile() == null || hasNoFreeSides(row, col)) return false;
             }
-            while(col1<=col2)
-            {
-                if(spaces[row1][col1].getTile()==null || hasNotFreeSide(row1, col1))return false;
-                col1++;
-            }
-            return true;
         }
-        else if(col1==col2)
-        {
-            if(row2<=row1)
-            {
-                temp=row1;
-                row1=row2;
-                row2=temp;
-            }
-            while(row1<=row2)
-            {
-                if(spaces[row1][col1].getTile()==null|| hasNotFreeSide(row1, col1))return false;
-                row1++;
-            }
-            return true;
-        }
-        return false;
+        return true;
     }
 
     /**
-     * @param row1 is the row index of the tile to pick up
-     * @param col1 is the column index of the tile to pick up
-     * @return false if the tile has at least one side free ;
+     * @param row is the row index of the tile to pick up
+     * @param col is the column index of the tile to pick up
+     * @return false if the tile has at least one free side;
      */
-    public boolean hasNotFreeSide(int row1, int col1)
+    public boolean hasNoFreeSides(int row, int col)
     {
-        if(row1>0 && row1<8 && col1>0 && col1<8)
+        // check if the current space has a tile
+        if(spaces[row][col].getTile() == null) {
+            throw new IllegalActionException("Cannot check adjacency of empty tile");
+        }
+
+        if(row > 0 && row < 8 && col > 0 && col < 8)
         {
-            return (spaces[row1 + 1][col1].getTile() != null && spaces[row1 - 1][col1].getTile() != null
-                    && spaces[row1][col1 + 1].getTile() != null && spaces[row1][col1 - 1].getTile() != null);
+            return (spaces[row + 1][col].getTile() != null && spaces[row - 1][col].getTile() != null
+                    && spaces[row][col + 1].getTile() != null && spaces[row][col - 1].getTile() != null);
         }
         return false;
     }

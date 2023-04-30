@@ -2,6 +2,7 @@ package it.polimi.ingsw.server.model.goals.common;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.server.model.player.IPlayer;
+import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +52,11 @@ public abstract class CommonGoalCard implements GoalCard {
 
     public List<String> getAwardedPlayers() {
         return new ArrayList<>(players);
+    }
+
+    @Override
+    public String serialize(Serializer serializer) {
+        return serializer.serialize(this);
     }
 
     /**
