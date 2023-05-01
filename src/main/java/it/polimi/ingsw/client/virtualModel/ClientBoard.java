@@ -9,28 +9,17 @@ import org.json.JSONObject;
  */
 public class ClientBoard {
 
-    private ClientTileSpace[][] spaces;
-    private static final int BOARD_DIM = 9;
+    private int [][] spaces;
+    private int boardSize = 9;
 
-    public ClientBoard(int playersPlaying)
+    public ClientBoard()
     {
-        spaces = new ClientTileSpace[BOARD_DIM][BOARD_DIM];
-        int[][] template = new int[][]{
-                {5, 5, 5, 3, 4, 5, 5, 5, 5},
-                {5, 5, 5, 2, 2, 4, 5, 5, 5},
-                {5, 5, 3, 2, 2, 2, 3, 5, 5},
-                {5, 4, 2, 2, 2, 2, 2, 2, 3},
-                {4, 2, 2, 2, 2, 2, 2, 2, 4},
-                {3, 2, 2, 2, 2, 2, 2, 4, 5},
-                {5, 5, 3, 2, 2, 2, 3, 5, 5},
-                {5, 5, 5, 4, 2, 2, 5, 5, 5},
-                {5, 5, 5, 5, 4, 3, 5, 5, 5}
-        };
+        spaces = new int[boardSize][boardSize];
         for (int i=0;i<spaces.length;i++)
         {
             for(int j=0;j<spaces[0].length;j++)
             {
-                spaces[i][j]= new ClientTileSpace(template[i][j],playersPlaying);
+                spaces[i][j] = -1;
             }
         }
     }
@@ -42,7 +31,11 @@ public class ClientBoard {
      * @param tileType is the type of the tile to place
      */
     public void setTilesAt(int row, int column, int tileType) {
-        spaces[row][column].setTile(tileType);
+        spaces[row][column] = tileType;
+    }
+
+    public void setBoardSize(int boardSize) {
+        this.boardSize = boardSize;
     }
 
     /**
@@ -51,11 +44,14 @@ public class ClientBoard {
      * @param col is the number of column of the tile
      */
     public int getTileAt(int row, int col) {
-        return spaces[row][col].getTile();
+        return spaces[row][col];
     }
 
     public int getSize() {
-        return BOARD_DIM;
+        return boardSize;
+    }
+    public int[][] getSpaces() {
+        return spaces;
     }
 
     /**
@@ -66,7 +62,8 @@ public class ClientBoard {
     {
         JSONObject jsonObject = new JSONObject(data);
         JSONArray board = jsonObject.getJSONArray("board");
-        for(int i=0;i<board.length();i++)
+        setBoardSize(board.length());
+        for(int i=0;i<boardSize;i++)
         {
             for(int j=0; j< board.getJSONArray(i).length();j++)
             {

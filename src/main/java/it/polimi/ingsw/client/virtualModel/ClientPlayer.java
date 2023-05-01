@@ -20,12 +20,15 @@ public class ClientPlayer {
     }
 
     public void setUsername(String username){this.username = username;}
+
     public void setBookshelf(ClientBookshelf bookshelf) {
         this.bookshelf = bookshelf;
     }
+
     public void setIdPersonalGoalCard(int idPersonalGoalCard) {
         this.idPersonalGoalCard = idPersonalGoalCard;
     }
+
     public void setScore(int score) {
         this.score = score;
     }

@@ -9,11 +9,11 @@ import org.json.JSONObject;
  */
 public class ClientBookshelf {
     private int [][] tiles;
-    private static final int WIDTH = 5;
-    private static final int HEIGHT = 6;
+    private int width = 5;
+    private int height = 6;
 
     public ClientBookshelf() {
-        tiles = new int[HEIGHT][WIDTH];
+        tiles = new int[height][width];
     }
 
     /**
@@ -24,7 +24,14 @@ public class ClientBookshelf {
      */
     public void setTilesAt(int row, int column, int tileType) {
         tiles[row][column] = tileType;
+    }
 
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
     }
 
     /**
@@ -34,9 +41,9 @@ public class ClientBookshelf {
      */
     public int getTileAt(int row, int column) {return tiles[row][column];}
 
-    public int getWidth() {return WIDTH;}
+    public int getWidth() {return width;}
 
-    public int getHeight() {return HEIGHT;}
+    public int getHeight() {return height;}
 
     public int[][] getTiles() {
         return tiles;
@@ -50,9 +57,11 @@ public class ClientBookshelf {
     {
         JSONObject jsonObject = new JSONObject(data);
         JSONArray bookshelf = jsonObject.getJSONArray("bookshelf");
-        for(int i=0;i<bookshelf.length();i++)
+        setHeight(bookshelf.length());
+        for(int i=0;i<height;i++)
         {
-            for(int j=0; j<bookshelf.getJSONArray(i).length();j++)
+            setWidth(bookshelf.getJSONArray(i).length());
+            for(int j=0; j<width;j++)
             {
                 setTilesAt(i,j,bookshelf.getJSONArray(i).getInt(j));
             }

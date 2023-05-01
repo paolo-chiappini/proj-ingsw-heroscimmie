@@ -3,9 +3,6 @@ package it.polimi.ingsw.client.virtualModel;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * This class represents a single common goal card in the virtual model.
  * It aims to represent the state of the card in the client and update it if necessary
@@ -13,23 +10,11 @@ import java.util.List;
 public class ClientCommonGoalCard {
 
     private int id;
-    private int score; // represents the last point in points, i.e. the first to be obtained
-    private List<Integer> points = new ArrayList<>();
-    private List<String> players;
+    private int currPoints; // represents the maximum current score that can be obtained
 
-    public ClientCommonGoalCard(int numPlayer) {
+    public ClientCommonGoalCard() {
         this.id = 0;
-        score = 8;
-        players = new ArrayList<>();
-        points.add(4);
-        points.add(8);
-        if(numPlayer==4)
-        {
-            points.add(0,2);
-            points.add(2,6);
-        }
-        else if(numPlayer==3)
-            points.add(1,6);
+        currPoints = 8;
     }
 
     /**
@@ -41,27 +26,11 @@ public class ClientCommonGoalCard {
     }
 
     /**
-     * Set the list of awarded players
-     * @param players list of players who have already scored points from the card
-     */
-    public void setPlayers(List<String> players) {
-        this.players = players;
-    }
-
-    /**
-     * Set the list of points available for the card
-     * @param points list of points that can be obtained by completing a goal card
-     */
-    public void setPoints(List<Integer> points) {
-        this.points = points;
-    }
-
-    /**
      * Set the maximum current score that can be obtained
-     * @param points list of points that can be obtained by completing a goal card
+     * @param points points that can be obtained by completing a goal card
      */
-    public void setScore(List<Integer> points) {
-        this.score = points.get(points.size()-1);
+    public void setScore(int points) {
+        this.currPoints = points;
     }
 
     /**
@@ -73,27 +42,11 @@ public class ClientCommonGoalCard {
     }
 
     /**
-     * Get the list of awarded players
-     * @return a list of players who have already scored points from the card
-     */
-    public List<String> getPlayers() {
-        return new ArrayList<>(players);
-    }
-
-    /**
-     * Get the list of points available for the card
-     * @return a list of points that can be obtained by completing a goal card
-     */
-    public ArrayList<Integer> getPoints() {
-        return new ArrayList<>(points);
-    }
-
-    /**
      * Get the maximum current score that can be obtained
      * @return the score that a player can obtain by completing the card's goal
      */
     public int getScore() {
-        return score;
+        return currPoints;
     }
 
     /**
@@ -108,21 +61,6 @@ public class ClientCommonGoalCard {
     }
 
     /**
-     * Updates the awarded players
-     * @param data contains up-to-date card details
-     */
-    public void updateAwardedPlayers(String data)
-    {
-        JSONObject jsonObject = new JSONObject(data);
-        JSONArray players = jsonObject.getJSONArray("completed_by");
-        List<String> awardedPlayers= new ArrayList<>();
-        for (int i = 0; i < players.length(); i++) {
-            awardedPlayers.add(players.getString(i));
-        }
-        setPlayers(awardedPlayers);
-    }
-
-    /**
      * Updates available points
      * @param data contains up-to-date card details
      */
@@ -130,12 +68,7 @@ public class ClientCommonGoalCard {
     {
         JSONObject jsonObject = new JSONObject(data);
         JSONArray points = jsonObject.getJSONArray("points");
-        List<Integer> pointsCard = new ArrayList<>();
-        for (int i = 0; i < points.length(); i++) {
-            pointsCard.add(points.getInt(i));
-        }
-        score=pointsCard.get(pointsCard.size()-1);
-        setPoints(pointsCard);
-        setScore(pointsCard);
+        currPoints = points.getInt(points.length()-1);
+        setScore(currPoints);
     }
 }
