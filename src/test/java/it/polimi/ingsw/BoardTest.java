@@ -72,6 +72,28 @@ public class BoardTest {
                     Arguments.of(Named.of("4 players", 4))
             );
         }
+
+        @Test
+        @DisplayName("if bag has not enough tiles, board should be partially refilled")
+        void partiallyRefillBoard() {
+            int numOfAvailableTiles = 20;
+            int tilesOnBoard = 0;
+            int emptyTilesOnBoard = 0;
+            Board board = new Board(4);
+            board.refill(new BagMock(Map.of(TileType.TOY, numOfAvailableTiles)));
+
+            for (int i = 0; i < board.getSize(); i++)
+                for (int j = 0; j < board.getSize(); j++)
+                    if (board.getTileAt(i, j) != null) tilesOnBoard++;
+                    else emptyTilesOnBoard++;
+
+            int finalEmptyTilesOnBoard = emptyTilesOnBoard;
+            int finalTilesOnBoard = tilesOnBoard;
+            assertAll(
+                    () -> assertEquals(numOfAvailableTiles, finalTilesOnBoard),
+                    () -> assertEquals(board.getSize() * board.getSize() - numOfAvailableTiles, finalEmptyTilesOnBoard)
+            );
+        }
     }
 
     @Nested
