@@ -91,7 +91,8 @@ public class Board implements IBoard {
     public void refill(IBag bag){
         for (TileSpace[] space : spaces)
             for (int j = 0; j < spaces[0].length; j++)
-                if (space[j].canPlaceTile())
+                if (bag.getTilesBag().isEmpty()) break;
+                else if (space[j].canPlaceTile())
                     space[j].setTile(bag.drawTile());
     }
 
