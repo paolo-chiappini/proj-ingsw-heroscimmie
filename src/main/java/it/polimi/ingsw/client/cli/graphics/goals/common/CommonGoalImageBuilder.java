@@ -36,7 +36,6 @@ public abstract class CommonGoalImageBuilder {
      */
     public static JaggedElement getCommonGoalById(int id) {
         String requested = stringRepresentations[id];
-        System.out.println(requested);
         return new JaggedElement(requested);
     }
 }

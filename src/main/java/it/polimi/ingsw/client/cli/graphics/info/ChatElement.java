@@ -8,6 +8,8 @@ import it.polimi.ingsw.client.cli.graphics.util.CliDrawer;
 import it.polimi.ingsw.client.cli.graphics.util.ReplaceTarget;
 
 import java.util.ArrayDeque;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Queue;
 
 /**
@@ -17,6 +19,7 @@ public class ChatElement extends FramedElement {
     private static final int WIDTH = 54;
     private static final int HEIGHT = 8;
     private static final int MAX_MESSAGES = 6;
+    private static final int MAX_MESSAGE_LEN = 120;
 
     /**
      * Represents a single message in the chat.
@@ -26,12 +29,22 @@ public class ChatElement extends FramedElement {
      */
     private record ChatMessage(String sender, String message, boolean isWhisper) {
         private static final CliForeColors WHISPER_COLOR = CliForeColors.BRIGHT_BLACK;
-        public RowElement getMessage() {
+        public List<RowElement> getMessage() {
+            List<RowElement> msgRows = new LinkedList<>();
             CliForeColors color = isWhisper ? WHISPER_COLOR : CliForeColors.DEFAULT;
-            return new RowElement(sender + ": " + message, color, CliBackColors.DEFAULT);
+            String sender = this.sender + (isWhisper ? " whispers" : "");
+
+            String remainingMessage = sender + ": " + message;
+            while (remainingMessage.length() > WIDTH - 2) {
+                String substring = remainingMessage.substring(0, WIDTH - 2);
+                remainingMessage = remainingMessage.substring(WIDTH - 2, remainingMessage.length() - 1);
+                msgRows.add(new RowElement(substring, color, CliBackColors.DEFAULT));
+            }
+            msgRows.add(new RowElement(remainingMessage, color, CliBackColors.DEFAULT));
+            return msgRows;
         }
     }
-    private final Queue<ChatMessage> messages;
+    private final Queue<RowElement> messages;
 
     public ChatElement() {
         super(WIDTH, HEIGHT);
@@ -46,15 +59,22 @@ public class ChatElement extends FramedElement {
      * @param isWhisper true if the message is directed to the current player.
      */
     public void addMessage(String message, String from, boolean isWhisper) {
-        if (messages.size() == MAX_MESSAGES) messages.poll();
-        messages.add(new ChatMessage(from, message, isWhisper));
+        ChatMessage newMessage = new ChatMessage(
+                from,
+                message.substring(0, Integer.min(MAX_MESSAGE_LEN, message.length())),
+                isWhisper
+        );
+        List<RowElement> messageFormat = newMessage.getMessage();
+        for (RowElement rowElement : messageFormat) {
+            if (messages.size() == MAX_MESSAGES) messages.poll();
+            messages.add(rowElement);
+        }
 
-        CliDrawer.clearArea(this, 1, 1, WIDTH - 2, HEIGHT - 1);
+        CliDrawer.clearArea(this, 1, 1, WIDTH - 2, HEIGHT - 2);
         var messageIterator = messages.iterator();
         for (int i = 0; i < messages.size(); i++) {
             var currMessage = messageIterator.next();
-            CliDrawer.superimposeElement(currMessage.getMessage(),this, 1, 1 + i, ReplaceTarget.EMPTY);
+            CliDrawer.superimposeElement(currMessage,this, 1, 1 + i, ReplaceTarget.EMPTY);
         }
     }
-
 }

@@ -33,7 +33,7 @@ public class CommonGoalCardElement extends GoalCardBaseElement {
      */
     public void setPoints(int points) {
         // clear space
-        CliDrawer.clearArea(this, WIDTH - 2, HEIGHT - 2, WIDTH - 3, HEIGHT - 2);
+        CliDrawer.clearArea(this, WIDTH - 3, HEIGHT - 2, WIDTH - 2, HEIGHT - 2);
         // set points
         CliDrawer.superimposeElement(new RowElement(String.valueOf(points)),this,WIDTH - 3, HEIGHT - 2, ReplaceTarget.EMPTY);
     }

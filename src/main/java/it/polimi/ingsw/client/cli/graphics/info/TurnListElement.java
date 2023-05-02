@@ -26,7 +26,7 @@ public class TurnListElement extends FramedElement {
     private final List<PlayerRecord> players;
     private int currTurnIndex;
 
-    private class PlayerRecord {
+    private static class PlayerRecord {
         private final String username;
         private int score;
         private final boolean isClient;
@@ -108,7 +108,7 @@ public class TurnListElement extends FramedElement {
         final String blocked = "-------";
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
-            String line = "";
+            String line;
             if (i >= players.size()) line = blocked;
             else {
                 String username = players.get(i).getUsername();
@@ -149,10 +149,12 @@ public class TurnListElement extends FramedElement {
         drawTurnIndex();
     }
 
-    public void updateScores(int[] scores) {
-        for (int i = 0; i < scores.length; i++) {
-            players.get(i).setScore(scores[i]);
-        }
+    public void updatePlayerScore(String username, int score) {
+        players.stream()
+                .filter(p -> p.getUsername().equals(username))
+                .findFirst()
+                .orElseThrow()
+                .setScore(score);
         drawScores();
     }
 }
