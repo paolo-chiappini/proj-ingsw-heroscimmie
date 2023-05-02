@@ -27,6 +27,17 @@ public abstract class CliDrawer {
     }
 
     /**
+     * Composes two elements by adding one on top of the other (default replacement is "ALL").
+     * @param element element to superimpose.
+     * @param base base element to add the first to.
+     * @param x x coordinate to start superimposing element.
+     * @param y y coordinate to start superimposing element.
+     */
+    public static void superimposeElement(CliElement element, CliElement base, int x, int y) {
+        superimposeElement(element, base, x, y, ReplaceTarget.ALL);
+    }
+
+    /**
      * Clears the specified area by replacing it with empty cells.
      * @param element element to clear.
      * @param startX x coordinate of the top left corner of the area to clear.
@@ -35,9 +46,9 @@ public abstract class CliDrawer {
      * @param endY y coordinate of the bottom right corner of the area to clear.
      */
     public static void clearArea(CliElement element, int startX, int startY, int endX, int endY) {
-        for (int dy = startY; dy < endY; dy++) {
+        for (int dy = startY; dy <= endY; dy++) {
             if (dy >= element.getHeight()) break;
-            for (int dx = startX; dx < endX; dx++) {
+            for (int dx = startX; dx <= endX; dx++) {
                 if (dx >= element.getRowWidth(dy)) break;
                 element.setCell(dx, dy, null);
             }

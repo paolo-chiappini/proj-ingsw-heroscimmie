@@ -4,6 +4,10 @@ import it.polimi.ingsw.client.cli.graphics.grids.TableChars;
 import it.polimi.ingsw.client.cli.graphics.simple.*;
 import it.polimi.ingsw.client.cli.graphics.util.CliDrawer;
 import it.polimi.ingsw.client.cli.graphics.util.ReplaceTarget;
+import it.polimi.ingsw.exceptions.IllegalActionException;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Represents the list of players in the game, their scores
@@ -19,21 +23,32 @@ public class TurnListElement extends FramedElement {
             Turn Players            Scores
             """;
 
-    private final String[] players;
-    private int[] scores;
+    private final List<PlayerRecord> players;
     private int currTurnIndex;
-    private final int currPlayerIndex;
 
-    /**
-     * @param players players in the game.
-     * @param scores scores of the players.
-     * @param currPlayerIndex index of the player to whom the list is shown.
-     */
-    public TurnListElement(String[] players, int[] scores, int currPlayerIndex) {
+    private class PlayerRecord {
+        private final String username;
+        private int score;
+        private final boolean isClient;
+        private boolean isDisconnected;
+
+        public PlayerRecord(String username, int score, boolean isClient) {
+            this.username = username;
+            this.score = score;
+            this.isClient = isClient;
+            this.isDisconnected = false;
+        }
+        public void setConnectionStatus(boolean disconnected) { this.isDisconnected = disconnected; }
+        public void setScore(int score) { this.score = score; }
+        public String getUsername() { return username; }
+        public int getScore() { return score; }
+        public boolean isClient() { return isClient; }
+        public boolean isDisconnected() { return isDisconnected; }
+    }
+
+    public TurnListElement() {
         super(WIDTH, HEIGHT);
-        this.players = players;
-        this.scores = scores;
-        this.currPlayerIndex = currPlayerIndex;
+        this.players = new LinkedList<>();
 
         var templateToElement = new JaggedElement(template);
         CliDrawer.superimposeElement(templateToElement, this, 1,1, ReplaceTarget.EMPTY);
@@ -68,9 +83,8 @@ public class TurnListElement extends FramedElement {
         this.setCell(WIDTH - 8, 2, new CliTextElement(TableChars.CROSS.getChar(), CliForeColors.DEFAULT, CliBackColors.DEFAULT));
     }
 
-    public void nextPlayer() {
-        currTurnIndex++;
-        currTurnIndex = currTurnIndex % players.length;
+    public void setCurrTurnIndex(int currTurnIndex) {
+        this.currTurnIndex = currTurnIndex;
         drawTurnIndex();
     }
 
@@ -81,11 +95,11 @@ public class TurnListElement extends FramedElement {
         CliDrawer.clearArea(this, 1, 3, 4, HEIGHT - 2);
         for (int i = 0; i < MAX_PLAYERS; i++) {
             String line = "  ";
-            if (i >= players.length) line = blocked;
+            if (i >= players.size() || players.get(i).isDisconnected()) line = blocked;
             else if (i == currTurnIndex) line = arrow;
             CliDrawer.superimposeElement(
                     new RowElement(line + (i + 1) + "."),
-                    this, 1, 3 + i, ReplaceTarget.EMPTY
+                    this, 1, 3 + i
             );
         }
     }
@@ -95,9 +109,13 @@ public class TurnListElement extends FramedElement {
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
             String line = "";
-            if (i >= players.length) line = blocked;
-            else line = players[i].substring(0, Integer.min(players[i].length(), MAX_PLAYER_NAME_LENGTH));
-            CliDrawer.superimposeElement(new RowElement(line),this, 6, 3 + i, ReplaceTarget.EMPTY);
+            if (i >= players.size()) line = blocked;
+            else {
+                String username = players.get(i).getUsername();
+                line = username.substring(0, Integer.min(username.length(), MAX_PLAYER_NAME_LENGTH));
+            }
+            CliDrawer.clearArea(this, 6, 3 + i, WIDTH - 9, 3 + i);
+            CliDrawer.superimposeElement(new RowElement(line),this, 6, 3 + i);
         }
     }
 
@@ -106,15 +124,35 @@ public class TurnListElement extends FramedElement {
         final String blocked = "xxxx";
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
-            String line = "";
-            if (i >= players.length) line = blocked;
-            else if (i == currPlayerIndex) line = String.valueOf(scores[i]);
+            String line;
+            if (i >= players.size()) line = blocked;
+            else if (players.get(i).isClient()) line = String.valueOf(players.get(i).getScore());
             else line = hidden;
-            CliDrawer.superimposeElement(new RowElement(line),this, WIDTH - 6, 3 + i, ReplaceTarget.EMPTY);
+            CliDrawer.clearArea(this, WIDTH - 6, 3 + i, WIDTH - 2, 3 + i);
+            CliDrawer.superimposeElement(new RowElement(line),this, WIDTH - 6, 3 + i);
         }
     }
 
-    public void setScores(int[] scores) {
-        this.scores = scores;
+    public void addPlayer(String username, int score, boolean isClient) {
+        if (players.size() == MAX_PLAYERS) throw new IllegalActionException("Maximum amount of players reached");
+        players.add(new PlayerRecord(username, score, isClient));
+        drawPlayerNames();
+        drawScores();
+    }
+
+    public void updateConnectionStatus(String username, boolean isDisconnected) {
+        players.stream()
+                .filter(p -> p.getUsername().equals(username))
+                .findFirst()
+                .orElseThrow()
+                .setConnectionStatus(isDisconnected);
+        drawTurnIndex();
+    }
+
+    public void updateScores(int[] scores) {
+        for (int i = 0; i < scores.length; i++) {
+            players.get(i).setScore(scores[i]);
+        }
+        drawScores();
     }
 }
