@@ -25,6 +25,7 @@ public class TurnListElement extends FramedElement {
 
     private final List<PlayerRecord> players;
     private int currTurnIndex;
+    private boolean gameOver;
 
     private static class PlayerRecord {
         private final String username;
@@ -109,13 +110,17 @@ public class TurnListElement extends FramedElement {
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
             String line;
+            CliForeColors foreColors  = CliForeColors.DEFAULT;
+
             if (i >= players.size()) line = blocked;
             else {
+                if (players.get(i).isDisconnected) foreColors = CliForeColors.RED;
                 String username = players.get(i).getUsername();
                 line = username.substring(0, Integer.min(username.length(), MAX_PLAYER_NAME_LENGTH));
             }
+
             CliDrawer.clearArea(this, 6, 3 + i, WIDTH - 9, 3 + i);
-            CliDrawer.superimposeElement(new RowElement(line),this, 6, 3 + i);
+            CliDrawer.superimposeElement(new RowElement(line, foreColors, CliBackColors.DEFAULT),this, 6, 3 + i);
         }
     }
 
@@ -126,7 +131,7 @@ public class TurnListElement extends FramedElement {
         for (int i = 0; i < MAX_PLAYERS; i++) {
             String line;
             if (i >= players.size()) line = blocked;
-            else if (players.get(i).isClient()) line = String.valueOf(players.get(i).getScore());
+            else if (players.get(i).isClient() || gameOver) line = String.valueOf(players.get(i).getScore());
             else line = hidden;
             CliDrawer.clearArea(this, WIDTH - 6, 3 + i, WIDTH - 2, 3 + i);
             CliDrawer.superimposeElement(new RowElement(line),this, WIDTH - 6, 3 + i);
@@ -147,6 +152,7 @@ public class TurnListElement extends FramedElement {
                 .orElseThrow()
                 .setConnectionStatus(isDisconnected);
         drawTurnIndex();
+        drawPlayerNames();
     }
 
     public void updatePlayerScore(String username, int score) {
@@ -155,6 +161,11 @@ public class TurnListElement extends FramedElement {
                 .findFirst()
                 .orElseThrow()
                 .setScore(score);
+        drawScores();
+    }
+
+    public void updateGameState(boolean isGameOver) {
+        gameOver = isGameOver;
         drawScores();
     }
 }

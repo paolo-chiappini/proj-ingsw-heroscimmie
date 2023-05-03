@@ -20,6 +20,7 @@ import it.polimi.ingsw.client.cli.graphics.simple.RowElement;
 import it.polimi.ingsw.client.cli.graphics.tiles.SmallTileElement;
 import it.polimi.ingsw.client.cli.graphics.tiles.TileElement;
 import it.polimi.ingsw.client.cli.graphics.util.CliDrawer;
+import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
@@ -36,8 +37,6 @@ public class DefaultCliGraphics {
     private final BonusesInfoElement bonusesInfoElement;
     private final ChatElement chatElement;
     private final TurnListElement turnListElement;
-    private CommonGoalCardElement commonGoalElement1;
-    private CommonGoalCardElement commonGoalElement2;
     private PersonalGoalCardElement personalGoalCardElement;
     private final RowElement columnCoordinatesElement;
     private final ColumnElement rowCoordinatesElement;
@@ -46,11 +45,13 @@ public class DefaultCliGraphics {
     private final List<String> players;
     private int clientIndex;
     private final HashMap<String, SmallBookshelfElement> otherBookshelves;
+    private final HashMap<Integer, CommonGoalCardElement> commonGoalCardElements;
 
     private final RectangleElement mainPanel;
 
     public DefaultCliGraphics() {
         otherBookshelves = new HashMap<>();
+        commonGoalCardElements = new HashMap<>();
         players = new LinkedList<>();
         clientIndex = 0;
 
@@ -62,9 +63,6 @@ public class DefaultCliGraphics {
         bonusesInfoElement = new BonusesInfoElement();
         chatElement = new ChatElement();
         turnListElement = new TurnListElement();
-
-        commonGoalElement1 = new CommonGoalCardElement("", 0, 0);
-        commonGoalElement2 = new CommonGoalCardElement("", 0, 0);
 
         personalGoalCardElement = new PersonalGoalCardElement("", 0);
 
@@ -81,16 +79,15 @@ public class DefaultCliGraphics {
         addBookshelfToPanel();
         addBonusesInfoToPanel();
         addTurnsInfoToPanel();
-        addCommonGoalToPanel(0);
-        addCommonGoalToPanel(1);
+        addCommonGoalsToPanel();
         addPersonalGoalToPanel();
         addChatToPanel();
         addElementToPanel(columnCoordinatesElement, DefaultLayout.COL_COORDINATES_X, DefaultLayout.COL_COORDINATES_Y);
         addElementToPanel(rowCoordinatesElement, DefaultLayout.ROW_COORDINATES_X, DefaultLayout.ROW_COORDINATES_Y);
         addElementToPanel(bookshelfBaseElement, DefaultLayout.BOOKSHELF_BASE_X, DefaultLayout.BOOKSHELF_BASE_Y);
         addElementToPanel(
-                new RowElement(String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(commonGoalElement1.getWidth())),
-                DefaultLayout.HORIZONTAL_BREAK_X, DefaultLayout.HORIZONTAL_BREAK_Y
+                new RowElement(String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(new CommonGoalCardElement("", 0, 0).getWidth())),
+                DefaultLayout.GOAL_CARDS_X, DefaultLayout.HORIZONTAL_BREAK_Y
         );
         addElementToPanel(new RowElement("Bonus points"), DefaultLayout.BONUSES_X + 1, DefaultLayout.BONUSES_Y - 1);
         addElementToPanel(new RowElement("Chat"), DefaultLayout.CHAT_X + 1, DefaultLayout.CHAT_Y - 1);
@@ -116,15 +113,19 @@ public class DefaultCliGraphics {
         addElementToPanel(turnListElement, DefaultLayout.PLAYERS_X, DefaultLayout.PLAYERS_Y);
     }
 
-    private void addCommonGoalToPanel(int index) {
-        addElementToPanel(
-                List.of(commonGoalElement1, commonGoalElement2).get(index),
-                List.of(DefaultLayout.COMMON_GOAL_1_X, DefaultLayout.COMMON_GOAL_2_X).get(index),
-                List.of(DefaultLayout.COMMON_GOAL_1_Y, DefaultLayout.COMMON_GOAL_2_Y).get(index));
+    private void addCommonGoalsToPanel() {
+        var keys = commonGoalCardElements.keySet();
+        int index = 0;
+        for (var key : keys) {
+            addElementToPanel(commonGoalCardElements.get(key),
+                    DefaultLayout.GOAL_CARDS_X,
+                    DefaultLayout.COMMON_GOAL_1_Y + index * DefaultLayout.COMMON_GOALS_Y_OFFSET);
+            index++;
+        }
     }
 
     private void addPersonalGoalToPanel() {
-        addElementToPanel(personalGoalCardElement, DefaultLayout.PERSONAL_GOAL_X, DefaultLayout.PERSONAL_GOAL_Y);
+        addElementToPanel(personalGoalCardElement, DefaultLayout.GOAL_CARDS_X, DefaultLayout.PERSONAL_GOAL_Y);
     }
 
     private void addChatToPanel() {
@@ -196,9 +197,9 @@ public class DefaultCliGraphics {
         addTurnsInfoToPanel();
     }
 
-    public void updateCommonGoalPoints(int cardIndex, int points) {
-        List.of(commonGoalElement1, commonGoalElement2).get(cardIndex).setPoints(points);
-        addCommonGoalToPanel(cardIndex);
+    public void updateCommonGoalPoints(int cardId, int points) {
+        commonGoalCardElements.get(cardId).setPoints(points);
+        addCommonGoalsToPanel();
     }
 
     public void addMessage(String message, String sender, boolean isWhisper) {
@@ -206,12 +207,15 @@ public class DefaultCliGraphics {
         addChatToPanel();
     }
 
-    public void setCommonGoal(int cardIndex, int id, int points) {
-        switch (cardIndex) {
-            case 0 -> commonGoalElement1 = new CommonGoalCardElement("Common Goal 1", id, points);
-            case 1 -> commonGoalElement2 = new CommonGoalCardElement("Common Goal 2", id, points);
+    public void setCommonGoal(int id, int points) {
+        final int MAX_COMMON_GOALS = 2;
+        if (commonGoalCardElements.size() == MAX_COMMON_GOALS) {
+            throw new IllegalActionException("Maximum number of common goal cards already reached");
         }
-        addCommonGoalToPanel(cardIndex);
+
+        var newCardElement = new CommonGoalCardElement("Common Goal " + (commonGoalCardElements.size() + 1), id, points);
+        commonGoalCardElements.put(id, newCardElement);
+        addCommonGoalsToPanel();
     }
 
     public void setPersonalGoal(int id) {
@@ -226,6 +230,11 @@ public class DefaultCliGraphics {
 
     public void updatePlayerScore(String player, int score) {
         turnListElement.updatePlayerScore(player, score);
+        addTurnsInfoToPanel();
+    }
+
+    public void updateGameStatus(boolean isGameOver) {
+        turnListElement.updateGameState(isGameOver);
         addTurnsInfoToPanel();
     }
 
