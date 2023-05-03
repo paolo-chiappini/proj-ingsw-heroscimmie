@@ -35,12 +35,15 @@ public class ChatElement extends FramedElement {
             String sender = this.sender + (isWhisper ? " whispers" : "");
 
             String remainingMessage = sender + ": " + message;
+
+            // wrap message to fit chat width.
             while (remainingMessage.length() > WIDTH - 2) {
                 String substring = remainingMessage.substring(0, WIDTH - 2);
                 remainingMessage = remainingMessage.substring(WIDTH - 2, remainingMessage.length() - 1);
                 msgRows.add(new RowElement(substring, color, CliBackColors.DEFAULT));
             }
             msgRows.add(new RowElement(remainingMessage, color, CliBackColors.DEFAULT));
+
             return msgRows;
         }
     }
@@ -64,13 +67,16 @@ public class ChatElement extends FramedElement {
                 message.substring(0, Integer.min(MAX_MESSAGE_LEN, message.length())),
                 isWhisper
         );
+
         List<RowElement> messageFormat = newMessage.getMessage();
+        // make space for message and add it to the chat line by line.
         for (RowElement rowElement : messageFormat) {
             if (messages.size() == MAX_MESSAGES) messages.poll();
             messages.add(rowElement);
         }
 
         CliDrawer.clearArea(this, 1, 1, WIDTH - 2, HEIGHT - 2);
+        // compile chat element.
         var messageIterator = messages.iterator();
         for (int i = 0; i < messages.size(); i++) {
             var currMessage = messageIterator.next();

@@ -1,6 +1,10 @@
 package it.polimi.ingsw.client.view.cli;
 
-public class DefaultLayout {
+/**
+ * This class contains the values necessary to position graphic elements
+ * in the CLI as per the "default" layout.
+ */
+public abstract class DefaultLayout {
     public final static int PANEL_WIDTH = 150;
     public final static int PANEL_HEIGHT = 38;
     public final static int COL_COORDINATES_X = 1;

@@ -31,6 +31,11 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Represents the "default" CLI graphic view.
+ * The class contains both setup and update methods for the
+ * various CLI graphic elements.
+ */
 public class DefaultCliGraphics {
     private final BoardElement boardElement;
     private final BookshelfElement mainBookshelf;
@@ -74,6 +79,10 @@ public class DefaultCliGraphics {
         initPanel();
     }
 
+    /**
+     * Initializes the main panel object.
+     * The panel acts as a container for other elements.
+     */
     private void initPanel() {
         addBoardToPanel();
         addBookshelfToPanel();
@@ -82,17 +91,31 @@ public class DefaultCliGraphics {
         addCommonGoalsToPanel();
         addPersonalGoalToPanel();
         addChatToPanel();
+
+        // Board coordinates
         addElementToPanel(columnCoordinatesElement, DefaultLayout.COL_COORDINATES_X, DefaultLayout.COL_COORDINATES_Y);
         addElementToPanel(rowCoordinatesElement, DefaultLayout.ROW_COORDINATES_X, DefaultLayout.ROW_COORDINATES_Y);
+
+        // Bookshelf base (bookshelf coordinates)
         addElementToPanel(bookshelfBaseElement, DefaultLayout.BOOKSHELF_BASE_X, DefaultLayout.BOOKSHELF_BASE_Y);
+
+        // Horizontal break line
         addElementToPanel(
                 new RowElement(String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(new CommonGoalCardElement("", 0, 0).getWidth())),
                 DefaultLayout.GOAL_CARDS_X, DefaultLayout.HORIZONTAL_BREAK_Y
         );
+
+        // Titles
         addElementToPanel(new RowElement("Bonus points"), DefaultLayout.BONUSES_X + 1, DefaultLayout.BONUSES_Y - 1);
         addElementToPanel(new RowElement("Chat"), DefaultLayout.CHAT_X + 1, DefaultLayout.CHAT_Y - 1);
     }
 
+    /**
+     * Adds a generic cli element to the panel.
+     * @param element element to add.
+     * @param x x coordinate.
+     * @param y y coordinate.
+     */
     private void addElementToPanel(CliElement element, int x, int y) {
         CliDrawer.superimposeElement(element, mainPanel, x, y);
     }
@@ -141,17 +164,31 @@ public class DefaultCliGraphics {
                 otherBookshelves.get(player),
                 DefaultLayout.OTHER_BOOKSHELVES_X,
                 DefaultLayout.OTHER_BOOKSHELVES_Y + DefaultLayout.OTHER_BOOKSHELVES_Y_OFFSET * index);
+
+        // Name of the owner of the bookshelf
         addElementToPanel(new RowElement(player), DefaultLayout.OTHER_BOOKSHELVES_X,
                 DefaultLayout.OTHER_BOOKSHELVES_Y + DefaultLayout.OTHER_BOOKSHELVES_Y_OFFSET * index - 1);
+
+        // Small bookshelf base
         addElementToPanel(new RowElement(String.valueOf('▓').repeat(temp.getWidth() + 2)),
                 DefaultLayout.OTHER_BOOKSHELVES_X - 1,
                 DefaultLayout.OTHER_BOOKSHELVES_Y + DefaultLayout.OTHER_BOOKSHELVES_Y_OFFSET * index + temp.getHeight());
     }
 
+    /**
+     * Gets the main container element that can be rendered.
+     * @return the main container element.
+     */
     public CliElement getGraphics() {
         return this.mainPanel;
     }
 
+    /**
+     * Adds a new player to the list of players.
+     * @param username player's name.
+     * @param score player's score.
+     * @param isClient true if the player is the one viewing the CLI.
+     */
     public void addPlayer(String username, int score, boolean isClient) {
         players.add(username);
         if (isClient) clientIndex = players.indexOf(username);
@@ -163,21 +200,32 @@ public class DefaultCliGraphics {
         addTurnsInfoToPanel();
     }
 
+    /**
+     * Updates the player's bookshelf.
+     * @param player owner of the bookshelf.
+     * @param update updated state of the bookshelf.
+     */
     public void updateBookshelf(String player, int[][] update) {
         if (players.indexOf(player) == clientIndex) updateMainBookshelf(update);
         else updateOtherBookshelf(player, update);
     }
 
+    /**
+     * Updates the main game board.
+     * @param update updated state of the board.
+     */
     public void updateBoard(int[][] update) {
         updateGrid(boardElement, update);
         addBoardToPanel();
     }
 
+    // Updates the client's bookshelf.
     private void updateMainBookshelf(int[][] update) {
         updateGrid(mainBookshelf, update);
         addBookshelfToPanel();
     }
 
+    // Updates one of the smaller bookshelves belonging to other players.
     private void updateOtherBookshelf(String owner, int[][] update) {
         var currBookshelf = otherBookshelves.get(owner);
         for (int i = 0; i < update.length; i++)
@@ -192,21 +240,44 @@ public class DefaultCliGraphics {
                 if (update[i][j] >= 0) grid.setElement(new TileElement(TileType.values()[update[i][j]]), j, i);
     }
 
+    /**
+     * Updates the connection status of a player.
+     * @param player username of the player to update.
+     * @param isDisconnected true if the player has disconnected from the game.
+     */
     public void updatePlayerConnectionStatus(String player, boolean isDisconnected) {
         turnListElement.updateConnectionStatus(player, isDisconnected);
         addTurnsInfoToPanel();
     }
 
+    /**
+     * Updates the points on the specified common goal card.
+     * @param cardId id of the card to update.
+     * @param points updated points.
+     */
     public void updateCommonGoalPoints(int cardId, int points) {
         commonGoalCardElements.get(cardId).setPoints(points);
         addCommonGoalsToPanel();
     }
 
+    /**
+     * Adds a new message to the chat.
+     * @param message message to add.
+     * @param sender username of the player who sent the message.
+     * @param isWhisper true if the message is directed to the client,
+     *                  false if it's a broadcast message.
+     */
     public void addMessage(String message, String sender, boolean isWhisper) {
         chatElement.addMessage(message, sender, isWhisper);
         addChatToPanel();
     }
 
+    /**
+     * Sets a new common goal card.
+     * (maximum number of common goals is 2)
+     * @param id id of the card to set.
+     * @param points points shown on the card.
+     */
     public void setCommonGoal(int id, int points) {
         final int MAX_COMMON_GOALS = 2;
         if (commonGoalCardElements.size() == MAX_COMMON_GOALS) {
@@ -218,26 +289,45 @@ public class DefaultCliGraphics {
         addCommonGoalsToPanel();
     }
 
+    /**
+     * Sets the personal goal card.
+     * @param id id of the card.
+     */
     public void setPersonalGoal(int id) {
         personalGoalCardElement = new PersonalGoalCardElement("Personal Goal", id);
         addPersonalGoalToPanel();
     }
 
+    /**
+     * Sets the current turn in the turn list element.
+     * @param turn current turn index.
+     */
     public void setCurrentTurn(int turn) {
         turnListElement.setCurrTurnIndex(turn);
         addTurnsInfoToPanel();
     }
 
+    /**
+     * Updates the score of the specified player.
+     * @param player username of the player to update.
+     * @param score updated score.
+     */
     public void updatePlayerScore(String player, int score) {
         turnListElement.updatePlayerScore(player, score);
         addTurnsInfoToPanel();
     }
 
+    /**
+     * Updates the status of the game.
+     * If the game is over, shows all players' scores.
+     * @param isGameOver true if the game is over.
+     */
     public void updateGameStatus(boolean isGameOver) {
         turnListElement.updateGameState(isGameOver);
         addTurnsInfoToPanel();
     }
 
+    // Sets the base of the board.
     private void initBoard() {
         var template = getBoardTemplate();
         for (int i = 0; i < template.length; i++) {
@@ -247,6 +337,7 @@ public class DefaultCliGraphics {
         }
     }
 
+    // Fetches the board template from file
     private BoardTileType[][] getBoardTemplate() {
         final String BOARD_TEMPLATE_FILE = "board_template.json";
         String json;

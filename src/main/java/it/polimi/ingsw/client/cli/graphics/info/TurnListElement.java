@@ -27,6 +27,9 @@ public class TurnListElement extends FramedElement {
     private int currTurnIndex;
     private boolean gameOver;
 
+    /**
+     * Represents the state of a single player.
+     */
     private static class PlayerRecord {
         private final String username;
         private int score;
@@ -84,6 +87,10 @@ public class TurnListElement extends FramedElement {
         this.setCell(WIDTH - 8, 2, new CliTextElement(TableChars.CROSS.getChar(), CliForeColors.DEFAULT, CliBackColors.DEFAULT));
     }
 
+    /**
+     * Sets the current game turn.
+     * @param currTurnIndex current turn.
+     */
     public void setCurrTurnIndex(int currTurnIndex) {
         this.currTurnIndex = currTurnIndex;
         drawTurnIndex();
@@ -130,21 +137,38 @@ public class TurnListElement extends FramedElement {
 
         for (int i = 0; i < MAX_PLAYERS; i++) {
             String line;
+
             if (i >= players.size()) line = blocked;
             else if (players.get(i).isClient() || gameOver) line = String.valueOf(players.get(i).getScore());
             else line = hidden;
+
             CliDrawer.clearArea(this, WIDTH - 6, 3 + i, WIDTH - 2, 3 + i);
             CliDrawer.superimposeElement(new RowElement(line),this, WIDTH - 6, 3 + i);
         }
     }
 
+    /**
+     * Adds a new player to the list of players.
+     * @param username player's username.
+     * @param score player's score.
+     * @param isClient true if the player is the one viewing the CLI.
+     */
     public void addPlayer(String username, int score, boolean isClient) {
-        if (players.size() == MAX_PLAYERS) throw new IllegalActionException("Maximum amount of players reached");
+        if (players.size() == MAX_PLAYERS) {
+            throw new IllegalActionException("Maximum amount of players reached");
+        }
+
         players.add(new PlayerRecord(username, score, isClient));
+
         drawPlayerNames();
         drawScores();
     }
 
+    /**
+     * Updates the connection status of a player.
+     * @param username username of the player to update.
+     * @param isDisconnected true if the player has disconnected from the game.
+     */
     public void updateConnectionStatus(String username, boolean isDisconnected) {
         players.stream()
                 .filter(p -> p.getUsername().equals(username))
@@ -155,6 +179,11 @@ public class TurnListElement extends FramedElement {
         drawPlayerNames();
     }
 
+    /**
+     * Updates the score of the specified player.
+     * @param username username of the player to update.
+     * @param score updated score.
+     */
     public void updatePlayerScore(String username, int score) {
         players.stream()
                 .filter(p -> p.getUsername().equals(username))
@@ -164,6 +193,11 @@ public class TurnListElement extends FramedElement {
         drawScores();
     }
 
+    /**
+     * Updates the status of the game.
+     * If the game is over, shows all players' scores.
+     * @param isGameOver true if the game is over.
+     */
     public void updateGameState(boolean isGameOver) {
         gameOver = isGameOver;
         drawScores();
