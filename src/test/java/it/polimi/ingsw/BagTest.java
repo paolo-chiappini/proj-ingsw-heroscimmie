@@ -86,7 +86,10 @@ class BagTest {
                 for (int i = 0; i < 22; i++) {
                     bag.getTileByType(TileType.BOOK);
                 }
-                assertEquals(110,bag.getTilesBag().values().stream().reduce(0, Integer::sum));
+                assertAll(
+                        ()->assertEquals(110,bag.getTilesBag().values().stream().reduce(0, Integer::sum)),
+                        ()->assertNull(bag.getTileByType(TileType.BOOK))
+                );
             }
             @Test
             @DisplayName("exception should be raised when bag is empty")

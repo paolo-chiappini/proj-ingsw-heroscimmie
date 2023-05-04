@@ -67,7 +67,9 @@ public class Bag implements IBag {
     public GameTile getTileByType(TileType type) {
         if(tilesBag.isEmpty())
             throw new IllegalActionException("The bag is empty");
-        int initialNumber=tilesBag.get(type);
+        if(tilesBag.get(type)==null)
+            return null;
+        Integer initialNumber=tilesBag.get(type);
         tilesBag.replace(type,initialNumber-1);
         if(tilesBag.get(type)==0)
             tilesBag.remove(type);

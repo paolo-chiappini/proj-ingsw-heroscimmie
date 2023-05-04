@@ -1,6 +1,8 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.mock.DynamicTestBookshelf;
+import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCard;
+import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCard1;
 import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCardDeck;
 import it.polimi.ingsw.server.model.player.Player;
 import org.junit.jupiter.api.*;
@@ -55,6 +57,14 @@ public class PlayerTest {
                 PersonalGoalCardDeck deck = new PersonalGoalCardDeck();
                 player1.setPersonalGoalCard(deck.drawCard());
                 assertNotNull(player1.getPersonalGoalCard());
+            }
+
+            @DisplayName("Assignment of a specific personal goal card")
+            @Test
+            void isPersonalGoalCard1Correct() {
+                PersonalGoalCard card = new PersonalGoalCard1();
+                player1.setPersonalGoalCard(card);
+                assertEquals(card,player1.getPersonalGoalCard());
             }
 
             @DisplayName("Points are added correctly to the score")
