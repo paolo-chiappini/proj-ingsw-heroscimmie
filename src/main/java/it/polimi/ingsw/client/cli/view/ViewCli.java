@@ -15,12 +15,12 @@ public class ViewCli {
     private ArrayList<String> takenNicknames = new ArrayList<>();
 
     public ViewCli(/*List<String> playerNicknames, int numOfPlayers*/){
-        /* System.out.println("MyShelfie game");
+        /*System.out.println("MyShelfie game");
         System.out.println("Number of players:" + numOfPlayers);
         System.out.println("Nicknames: ");
         for(String p: playerNicknames)
             System.out.println(p + "\n");
-        */
+       */
     }
 
     /**
