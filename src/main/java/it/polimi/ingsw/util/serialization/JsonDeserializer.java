@@ -20,6 +20,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -34,7 +35,6 @@ public class JsonDeserializer implements Deserializer {
         IBag bag;
         IBoard board;
         ITurnManager turnManager;
-        ITurnManagerBuilder turnManagerBuilder = new TurnManager.TurnManagerBuilder();
         List<CommonGoalCard> commonGoalCards = new ArrayList<>();
 
         jsonPlayersArray = jsonObject.getJSONArray("players");
@@ -42,11 +42,7 @@ public class JsonDeserializer implements Deserializer {
 
         bag = new Bag();
         board = deserializeBoard(jsonObject.getJSONArray("board").toString(), jsonPlayersArray.length(), bag);
-        turnManager = deserializeTurn(jsonObject.toString());
-
-        for (Object player : jsonPlayersArray) {
-            turnManagerBuilder.addPlayer(deserializePlayer(player.toString(), bag));
-        }
+        turnManager = deserializeTurn(jsonObject.toString(), bag);
 
         for (Object commonGoalCard : jsonCommonGoalsArray) {
             commonGoalCards.add(deserializeCommonGoalCard(commonGoalCard.toString()));
@@ -130,13 +126,25 @@ public class JsonDeserializer implements Deserializer {
     }
 
     @Override
-    public ITurnManager deserializeTurn(String data) {
+    public ITurnManager deserializeTurn(String data, IBag bag) {
         JSONObject jsonObject = new JSONObject(data);
         ITurnManagerBuilder turnBuilder = new TurnManager.TurnManagerBuilder();
 
         JSONArray usernames = jsonObject.getJSONArray("players_order");
+        JSONArray jsonPlayers = jsonObject.getJSONArray("players");
+        List<IPlayer> players = new LinkedList<>();
+
+        for (int i = 0; i < jsonPlayers.length(); i++) {
+            players.add(deserializePlayer(jsonPlayers.getJSONObject(i).toString(), bag));
+        }
+
+        // add players based on specified order
         for (int i = 0; i < usernames.length(); i++) {
-            turnBuilder.addPlayer(new Player(usernames.getString(i)));
+            int currPlayerIndex = players.stream()
+                    .map(IPlayer::getUsername)
+                    .toList()
+                    .indexOf(usernames.getString(i));
+            turnBuilder.addPlayer(players.get(currPlayerIndex));
         }
 
         turnBuilder.setCurrentTurn(jsonObject.getInt("players_turn"));

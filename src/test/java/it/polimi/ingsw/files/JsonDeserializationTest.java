@@ -1,12 +1,12 @@
 package it.polimi.ingsw.files;
 
 import it.polimi.ingsw.server.model.bag.Bag;
-import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;
-import it.polimi.ingsw.server.model.game.Game;
-import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.server.model.board.IBoard;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
+import it.polimi.ingsw.server.model.game.Game;
+import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;
 import it.polimi.ingsw.server.model.player.IPlayer;
+import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.server.model.turn.ITurnManager;
 import it.polimi.ingsw.util.serialization.JsonDeserializer;
 import org.junit.jupiter.api.DisplayName;
@@ -76,8 +76,8 @@ public class JsonDeserializationTest {
     @Test
     @DisplayName("Test bookshelf deserialization")
     public void testTurnManagerDeserialization() {
-        String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"is_end_game\":true}";
-        ITurnManager turnManager = new JsonDeserializer().deserializeTurn(serializedData);
+        String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"is_end_game\":true,\"players\":[{\"score\":12,\"bookshelf\":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],\"personal_card_id\":1,\"username\":\"b\"},{\"score\":1,\"bookshelf\":[[4,4,4,4,4],[4,4,4,4,4],[4,4,4,4,4],[5,5,5,5,5],[-1,-1,-1,-1,-1],[-1,-1,-1,-1,-1]],\"personal_card_id\":6,\"username\":\"c\"}]}";
+        ITurnManager turnManager = new JsonDeserializer().deserializeTurn(serializedData, new Bag());
         List<String> usernames = turnManager.getPlayersInOrder().stream().map(IPlayer::getUsername).toList();
 
         assertAll (

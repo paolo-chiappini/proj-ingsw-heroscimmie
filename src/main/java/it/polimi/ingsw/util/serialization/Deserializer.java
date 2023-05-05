@@ -25,6 +25,7 @@ public interface Deserializer {
      * Deserialization of player also deserializes objects
      * belonging to player.
      * @param data String of data to deserialize into player.
+     * @param bag bag used to draw tiles.
      * @return instance of the deserialized player.
      */
     IPlayer deserializePlayer(String data, IBag bag);
@@ -32,6 +33,7 @@ public interface Deserializer {
     /**
      * Deserializes a Board object.
      * @param data String of data to deserialize into board.
+     * @param bag bag used to draw tiles.
      * @return instance of the deserialized board.
      */
     IBoard deserializeBoard(String data, int playersCount, IBag bag);
@@ -39,6 +41,7 @@ public interface Deserializer {
     /**
      * Deserializes a Bookshelf object.
      * @param data String of data to deserialize into bookshelf.
+     * @param bag bag used to draw tiles.
      * @return instance of the deserialized bookshelf.
      */
     IBookshelf deserializeBookshelf(String data, IBag bag);
@@ -53,7 +56,8 @@ public interface Deserializer {
     /**
      * Deserializes a turn into a TurnManger.
      * @param data String of data to deserialize into turn manager.
+     * @param bag bag used to draw tiles to rebuild player's bookshelf.
      * @return instance of a turn manager.
      */
-    ITurnManager deserializeTurn(String data);
+    ITurnManager deserializeTurn(String data, IBag bag);
 }
