@@ -2,10 +2,9 @@ package it.polimi.ingsw.client.view.cli.graphics.info;
 
 import it.polimi.ingsw.client.view.cli.graphics.bookshelf.BookshelfElement;
 import it.polimi.ingsw.client.view.cli.graphics.grids.TableChars;
-import it.polimi.ingsw.client.cli.graphics.simple.*;
+import it.polimi.ingsw.client.view.cli.graphics.simple.*;
 import it.polimi.ingsw.client.view.cli.graphics.util.CliDrawer;
 import it.polimi.ingsw.client.view.cli.graphics.util.ReplaceTarget;
-import it.polimi.ingsw.client.view.cli.graphics.simple.*;
 
 /**
  * Represents an element displaying information regarding

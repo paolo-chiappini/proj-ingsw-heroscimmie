@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.view.cli.graphics.goals.personal;
 
 import it.polimi.ingsw.client.view.cli.graphics.goals.GoalCardBaseElement;
 import it.polimi.ingsw.client.view.cli.graphics.grids.TableChars;
-import it.polimi.ingsw.client.cli.graphics.simple.*;
 import it.polimi.ingsw.client.view.cli.graphics.simple.*;
 import it.polimi.ingsw.client.view.cli.graphics.util.CliDrawer;
 import it.polimi.ingsw.client.view.cli.graphics.util.ReplaceTarget;
