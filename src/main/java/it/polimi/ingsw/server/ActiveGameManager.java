@@ -5,7 +5,7 @@ import it.polimi.ingsw.server.model.bag.Bag;
 import it.polimi.ingsw.server.model.board.Board;
 import it.polimi.ingsw.server.model.bookshelf.Bookshelf;
 import it.polimi.ingsw.server.model.game.Game;
-import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;
+import it.polimi.ingsw.server.model.goals.common.CommonGoalCardDeck;
 import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCardDeck;
 import it.polimi.ingsw.server.model.player.IPlayer;
 import it.polimi.ingsw.server.model.player.Player;
@@ -18,24 +18,28 @@ import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public abstract class ActiveGameManger {
+/**
+ * Class responsible for managing the active game running on the server.
+ */
+public abstract class ActiveGameManager {
     private static final int MAX_PLAYERS = 4;
     private static final int MIN_PLAYERS = 2;
     private static Game activeGameInstance = null;
     private static List<String> lobby;
     private static int lobbySize;
 
-    public ActiveGameManger() {}
-
+    /**
+     * Setups a brand-new instance of Game based on the players
+     * in the lobby.
+     * @return a new instance of Game.
+     */
     private static Game setupNewGame() {
         PersonalGoalCardDeck personalGoalsDeck = new PersonalGoalCardDeck();
+        CommonGoalCardDeck commonGoalsDeck = new CommonGoalCardDeck(lobbySize);
         List<IPlayer> players = new LinkedList<>();
 
         for (var username : lobby) {
@@ -45,54 +49,57 @@ public abstract class ActiveGameManger {
             players.add(player);
         }
 
-        return new Game (
-                new TurnManager(players),
-                new Bag(),
-                new Board(players.size())
-        );
+        return new Game.GameBuilder()
+                .setTurnManager(new TurnManager(players))
+                .setTilesBag(new Bag())
+                .setBoard(new Board(players.size()))
+                .setCommonGoalCards(commonGoalsDeck.drawCards())
+                .build();
     }
 
-    public static String saveGame() {
+    /**
+     * Saves the current active game state to a file.
+     * @throws IllegalActionException when trying to save a game that does not exist.
+     */
+    public static void saveGame() {
         if (activeGameInstance == null) {
             throw new IllegalActionException("No active game to save");
         }
 
         Calendar calendar = Calendar.getInstance();
         long currentTimeMs = calendar.getTimeInMillis();
-        DateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
-
-        JSONObject savedGame = new JSONObject();
-        String saveDate = formatter.format(new Date(currentTimeMs));
-        savedGame.put("save_date", saveDate);
 
         String serializedGame = activeGameInstance.serialize(new JsonSerializer());
-        savedGame.put("game_data", new JSONObject(serializedGame));
-
-        String filename = "game_" + currentTimeMs;
+        String filename = "game_" + currentTimeMs + ".json";
 
         try {
-            FileIOManager.writeToFile(filename, savedGame.toString(), FilePath.SAVED);
+            FileIOManager.writeToFile(filename, serializedGame, FilePath.SAVED);
         } catch (IOException e) {
             throw new RuntimeException("Unable to save game");
         }
-
-        return saveDate;
     }
 
+    /**
+     * Loads a saved game from file.
+     * @param gameName name of the file to load.
+     * @throws IllegalActionException when missing players in lobby.
+     */
     public static void loadGame(String gameName) {
         String data;
         try {
-            data = FileIOManager.readFromFile(gameName, FilePath.SAVED);
+            data = FileIOManager.readFromFile(gameName + ".json", FilePath.SAVED);
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Unable to load game " + gameName);
         }
 
         JSONObject jsonData = new JSONObject(data);
         JsonDeserializer deserializer = new JsonDeserializer();
-        Game game = deserializer.deserializeGame(jsonData.getJSONObject("game_data").toString());
+        Game game = deserializer.deserializeGame(jsonData.toString());
 
         List<IPlayer> players = game.getPlayers();
         List<String> missingPlayers = new LinkedList<>();
+
+        // check for missing players
         for (IPlayer player : players) {
             if (!lobby.contains(player.getUsername())) missingPlayers.add(player.getUsername());
         }
@@ -107,14 +114,29 @@ public abstract class ActiveGameManger {
         activeGameInstance = game;
     }
 
-    public static Game startGame() {
+    /**
+     * Starts a new game.
+     * @throws IllegalActionException when a game is already in progress or
+     * the lobby is not full.
+     */
+    public static void startGame() {
         if (!canStartGame()) {
             throw new IllegalActionException("Cannot start new game, either lobby is not full or a game is already in progress");
         }
         if (activeGameInstance == null) activeGameInstance = setupNewGame();
+    }
+
+    /**
+     * @return the current game running on the server.
+     */
+    public static Game getActiveGameInstance() {
         return activeGameInstance;
     }
 
+    /**
+     * Joins a player in the lobby.
+     * @param username player's username.
+     */
     public static void joinGame(String username) {
         if (lobby == null) {
             throw  new IllegalActionException("No lobby found");
@@ -131,6 +153,10 @@ public abstract class ActiveGameManger {
         lobby.add(username);
     }
 
+    /**
+     * Terminates the current game emptying the lobby.
+     * @throws IllegalActionException when trying to stop a game that doesn't exist.
+     */
     public static void stopGame() {
         if (activeGameInstance == null) {
             throw new IllegalActionException("No active game to stop");
@@ -140,6 +166,12 @@ public abstract class ActiveGameManger {
         lobby = new LinkedList<>();
     }
 
+    /**
+     * Sets the number of players necessary to start a game.
+     * @param size size of the lobby.
+     * @throws IllegalActionException when a game is already in progress or when
+     * the size is not within the acceptable range.
+     */
     public static void setLobbySize(int size) {
         if (lobby != null) {
             throw new IllegalActionException("Cannot create new lobby, game already in progress/setup");
@@ -153,23 +185,20 @@ public abstract class ActiveGameManger {
         lobby = new LinkedList<>();
     }
 
+    /**
+     * Check if a game can start.
+     * @return true if the game can be started, false if lobby is not full or
+     * if a game is already in progress.
+     */
     public static boolean canStartGame() {
         return lobby != null && lobby.size() == lobbySize;
     }
 
+    /**
+     * Checks if a game is in progress.
+     * @return true if a game is in progress.
+     */
     public static boolean isGameInProgress() {
         return activeGameInstance != null;
-    }
-
-    public static void dumpGame(Game game) {
-        var players = game.getPlayers();
-        for (IPlayer player : players) {
-            System.out.println("Player " + player.getUsername() + ", score " + player.getScore() + ", personal card " + player.getPersonalGoalCard().getId());
-        }
-
-        var commonGoals = game.getCommonGoals();
-        for (CommonGoalCard commonGoal : commonGoals) {
-            System.out.println("Common goal " + commonGoal.getId());
-        }
     }
 }
