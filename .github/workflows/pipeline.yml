@@ -29,4 +29,4 @@ jobs:
         run: mvn --batch-mode --update-snapshots verify
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots package
-  timeout-minutes: 3
+        timeout-minutes: 3
