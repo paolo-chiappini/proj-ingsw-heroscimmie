@@ -5,7 +5,6 @@ import it.polimi.ingsw.server.messages.MessageProvider;
 import it.polimi.ingsw.server.messages.MessageType;
 import org.json.JSONArray;
 import org.json.JSONObject;
-import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,9 +12,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.time.Duration;
 import java.util.concurrent.*;
-import org.junit.rules.Timeout;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -192,9 +189,7 @@ class JSONServerCommunicationTest {
 
         syncLatch.countDown(); //👌 Ready for connections
 
-        s.onConnectionClosed((socket)->{
-            s.stop();
-        });
+        s.onConnectionClosed((socket)-> s.stop());
 
         s.setCallback("ECHO", (request, response) -> {
             response = request;
@@ -209,9 +204,7 @@ class JSONServerCommunicationTest {
 
         syncLatch.countDown(); //👌 Ready for connections
 
-        s.onConnectionClosed((socket)->{
-            s.stop();
-        });
+        s.onConnectionClosed((socket)-> s.stop());
 
         s.setCallback("CAP", (request, response) -> {
             response.setBody(response.getBody().toUpperCase());
