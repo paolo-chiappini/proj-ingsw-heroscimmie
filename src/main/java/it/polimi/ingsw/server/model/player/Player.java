@@ -48,14 +48,14 @@ public class Player implements IPlayer {
      * Add points to the total amount if player scores
      * Points are awarded by adjacency among the cards on the bookshelf
      * personal goals and scoring tokens on the common goal cards
-     * @param points ar the points to add to the score
+     * @param points are the points to add to the score
      */
     public void addPointsToScore(int points){
         score += points;
     }
 
     /**
-     * @param personalGoalCard is the personal goal card drowned by the player
+     * @param personalGoalCard is the personal goal card drawn by the player
      */
     public void setPersonalGoalCard(PersonalGoalCard personalGoalCard) {
         this.personalGoalCard = personalGoalCard;

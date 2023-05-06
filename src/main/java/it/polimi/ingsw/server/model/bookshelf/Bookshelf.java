@@ -144,7 +144,7 @@ public class Bookshelf implements IBookshelf {
      * @param position3 is the position of the third tile
      * @return sorted tiles to insert in the bookshelf
      */
-    public List<GameTile> sort(List<GameTile> tilesToDrop, int position1, int position2, int position3)
+    public List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3)
     {
         List<GameTile> order = new ArrayList<>();
         if(tilesToDrop.size()==3){

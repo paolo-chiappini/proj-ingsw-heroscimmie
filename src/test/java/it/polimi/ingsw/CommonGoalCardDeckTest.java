@@ -91,21 +91,13 @@ class CommonGoalCardDeckTest {
         @DisplayName("When drawing cards")
         class DrawingTests {
             @Test
-            @DisplayName("should get 2 cards")
+            @DisplayName("my cards should contain two of the cards in the deck")
             void draw2Cards() {
                 myCards = commonDeck.drawCards();
-                assertEquals(2, myCards.size());
-            }
-            @Test
-            @DisplayName("my cards contains two of the cards in the deck")
-            void myCards() {
-                myCards = commonDeck.drawCards();
-                assertTrue(myCards.contains(commonDeck.getCard(1)) || myCards.contains(commonDeck.getCard(2)) ||
-                        myCards.contains(commonDeck.getCard(3)) || myCards.contains(commonDeck.getCard(4)) ||
-                        myCards.contains(commonDeck.getCard(5)) || myCards.contains(commonDeck.getCard(6)) ||
-                        myCards.contains(commonDeck.getCard(7)) || myCards.contains(commonDeck.getCard(8)) ||
-                        myCards.contains(commonDeck.getCard(9)) || myCards.contains(commonDeck.getCard(10)) ||
-                        myCards.contains(commonDeck.getCard(11)) || myCards.contains(commonDeck.getCard(12)));
+                assertAll(
+                        ()->assertTrue(commonDeck.getCommonGoalCards().stream().anyMatch(myCards::contains)),
+                        ()->assertEquals(2, myCards.size())
+                );
             }
         }
     }
