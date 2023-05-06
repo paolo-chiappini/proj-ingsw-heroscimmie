@@ -3,6 +3,9 @@ package it.polimi.ingsw.server;
 import it.polimi.ingsw.server.messages.Message;
 import it.polimi.ingsw.server.messages.MessageProvider;
 import it.polimi.ingsw.server.messages.MessageType;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.junit.Rule;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -10,8 +13,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
-import java.util.concurrent.CountDownLatch;
-
+import java.time.Duration;
+import java.util.concurrent.*;
+import org.junit.rules.Timeout;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -37,9 +41,10 @@ class JSONServerCommunicationTest {
     void echoTest() throws IOException, InterruptedException{
         new Thread(this::simpleEchoServer).start(); // Start the server
 
-        syncLatch.await(); // Wait for server initialization...
+        var timeout = !syncLatch.await(4, TimeUnit.SECONDS); // Wait for server initialization...
+        if(timeout) throw new RuntimeException("Server timed out");
 
-        Socket server =  new Socket("localhost", 33333); // ...and then connect
+        Socket server =  new Socket("localhost", 49152); // ...and then connect
 
         Message response = makeRequest(server, "ECHO", "Please repeat");
 
@@ -59,9 +64,10 @@ class JSONServerCommunicationTest {
     void middlewareTest() throws IOException, InterruptedException{
         new Thread(this::middlewareServer).start(); // Start the server
 
-        syncLatch.await(); // Wait for server initialization...
+        var timeout = !syncLatch.await(4, TimeUnit.SECONDS); // Wait for server initialization...
+        if(timeout) throw new RuntimeException("Server timed out");
 
-        Socket server =  new Socket("localhost", 33333); // ...and then connect
+        Socket server =  new Socket("localhost", 34567); // ...and then connect
 
         Message hello = makeRequest(server, "HELO", "");
         Message cap = makeRequest(server, "CAP", "maximize me!");
@@ -71,7 +77,7 @@ class JSONServerCommunicationTest {
 
         assertAll(
                 ()->assertEquals("GLOBAL MIDDLEWARE", hello.getMethod()),
-                ()->assertEquals("Hello, World!", hello.getBody()),
+                ()->assertEquals("{\"from\":\"Server\",\"message\":\"Hello, World!\"}", hello.getBody()),
                 ()->assertEquals("SPECIFIC MIDDLEWARE", cap.getMethod()),
                 ()->assertEquals("MAXIMIZE ME!", cap.getBody()),
                 ()->assertEquals("SPECIFIC MIDDLEWARE", min.getMethod()),
@@ -79,11 +85,110 @@ class JSONServerCommunicationTest {
         );
     }
 
+    @Test
+    @DisplayName("An ECHO request with JSONObject body should be handled correctly")
+    void jsonObjectEchoTest() throws IOException, InterruptedException{
+        new Thread(this::simpleEchoServer).start(); // Start the server
+
+        var timeout = !syncLatch.await(4, TimeUnit.SECONDS); // Wait for server initialization...
+        if(timeout) throw new RuntimeException("Server timed out");
+
+        Socket server =  new Socket("localhost", 49152); // ...and then connect
+
+        JSONObject body = new JSONObject();
+        body.put("name", "Cristina");
+        body.put("surname", "D'Avena");
+
+        JSONArray songs = new JSONArray();
+
+        JSONObject s1 = new JSONObject();
+        s1.put("title", "Occhi di gatto");
+        s1.put("date", 1985);
+        songs.put(s1);
+
+        JSONObject s2 = new JSONObject();
+        s2.put("title", "Kiss me Licia");
+        s2.put("date", 1983);
+        songs.put(s2);
+
+        body.put("songs", songs);
+
+        Message response = makeRequest(server, "ECHO", body.toString());
+
+        server.close();
+
+        JSONObject receivedJSON = new JSONObject();
+        receivedJSON.put("method", response.getMethod());
+
+        receivedJSON.put("body", new JSONObject(response.getBody()));
+
+
+        JSONObject expectedJSON = new JSONObject("""
+                {
+                "method":"ECHO",
+                "body":{
+                    "name": "Cristina",
+                    "surname": "D'Avena",
+                    "songs": [
+                        {
+                            "title": "Occhi di gatto",
+                            "date": 1985
+                        },
+                        {
+                            "title": "Kiss me Licia",
+                            "date": 1983
+                        }
+                    ]
+                  }
+                }
+                """);
+
+        assertEquals(expectedJSON.toString(), receivedJSON.toString());
+    }
+
+    @Test
+    @DisplayName("An ECHO request with JSONArray body should be handled correctly")
+    void jsonArrayEchoTest() throws IOException, InterruptedException{
+        new Thread(this::simpleEchoServer).start(); // Start the server
+
+        var timeout = !syncLatch.await(4, TimeUnit.SECONDS); // Wait for server initialization...
+        if(timeout) throw new RuntimeException("Server timed out");
+
+        Socket server =  new Socket("localhost", 49152); // ...and then connect
+
+        JSONArray songs = new JSONArray();
+
+        JSONObject s1 = new JSONObject();
+        s1.put("title", "Occhi di gatto");
+        s1.put("date", 1985);
+        songs.put(s1);
+
+        JSONObject s2 = new JSONObject();
+        s2.put("title", "Kiss me Licia");
+        s2.put("date", 1983);
+        songs.put(s2);
+
+
+        Message response = makeRequest(server, "ECHO", songs.toString());
+
+        server.close();
+
+        String rcvdMethod = response.getMethod();
+        String rcvdBody = response.getBody();
+
+        String expectedString ="[{\"date\":1985,\"title\":\"Occhi di gatto\"},{\"date\":1983,\"title\":\"Kiss me Licia\"}]";
+
+        assertAll(
+                ()->assertEquals("ECHO", rcvdMethod),
+                ()->assertEquals(expectedString, rcvdBody)
+        );
+    }
+
 
     // ==================== SERVER CONFIGURATIONS ====================
 
     private void simpleEchoServer(){
-        Server s = new Server(33333, MessageType.JSON, true);
+        Server s = new Server(49152, MessageType.JSON, true);
 
         syncLatch.countDown(); //👌 Ready for connections
 
@@ -100,7 +205,7 @@ class JSONServerCommunicationTest {
     }
 
     private void middlewareServer(){
-        Server s = new Server(33333, MessageType.JSON, true);
+        Server s = new Server(34567, MessageType.JSON, true);
 
         syncLatch.countDown(); //👌 Ready for connections
 
@@ -119,7 +224,10 @@ class JSONServerCommunicationTest {
         });
 
         s.setCallback("HELO", (request, response) -> {
-            response.setBody("Hello, World!");
+            JSONObject body = new JSONObject();
+            body.put("from", "Server");
+            body.put("message", "Hello, World!");
+            response.setBody(body.toString());
             response.send();
         });
 
@@ -136,8 +244,8 @@ class JSONServerCommunicationTest {
         s.start();
     }
 
-    // ==================== REQUEST UTILS ====================
-    private Message makeRequest(Socket server, String method, String body){
+    // ==================== UTILS ====================
+    private Message makeRequest(Socket server, String method, String body) {
         try {
             var reader = new BufferedReader(new InputStreamReader(server.getInputStream()));
 
@@ -147,12 +255,14 @@ class JSONServerCommunicationTest {
 
             request.setMethod(method);
             request.setBody(body);
-
             request.send();
 
-            return factory.getInstanceForIncomingRequest(server, reader.readLine());
+            String response = reader.readLine();
 
-        } catch (IOException e) {
+            return factory.getInstanceForIncomingRequest(server, response);
+
+        }
+        catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
