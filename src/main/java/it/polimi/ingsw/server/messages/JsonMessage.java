@@ -33,7 +33,7 @@ class JsonMessage extends Message{
 
     @Override
     public String getBody() {
-        return jsonData.getString("body");
+        return jsonData.get("body").toString();
     }
 
     @Override
