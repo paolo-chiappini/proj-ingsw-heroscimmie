@@ -1,6 +1,7 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
+import it.polimi.ingsw.server.model.bag.Bag;
 import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCard;
 import it.polimi.ingsw.server.model.player.Player;
 import it.polimi.ingsw.server.model.turn.TurnManager;
@@ -68,6 +69,21 @@ public class TurnManagerTest {
 
         public TestBookshelf(boolean full) {
             this.full = full;
+        }
+
+        @Override
+        public GameTile getTileAt(int row, int column) {
+            return null;
+        }
+
+        @Override
+        public int getWidth() {
+            return 0;
+        }
+
+        @Override
+        public int getHeight() {
+            return 0;
         }
 
         @Override
@@ -295,15 +311,14 @@ public class TurnManagerTest {
         @Test
         @DisplayName("deserialization should set correct data")
         void turnManagerDeserialization() {
-            String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\",\"c\"],\"is_end_game\":true}";
+            String serializedData = "{\"players_turn\":1,\"players_order\":[\"a\",\"b\"],\"is_end_game\":true,\"players\":[{\"score\":12,\"bookshelf\":[[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[3,3,3,3,3],[3,3,3,3,3],[3,3,3,3,3]],\"personal_card_id\":2,\"username\":\"a\"},{\"score\":5,\"bookshelf\":[[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[2,2,2,2,2],[2,2,2,2,2],[2,2,2,2,2]],\"personal_card_id\":1,\"username\":\"b\"}]}";
             Deserializer deserializer = new JsonDeserializer();
-            ITurnManager turnManager = deserializer.deserializeTurn(serializedData);
+            ITurnManager turnManager = deserializer.deserializeTurn(serializedData, new Bag());
 
             List<IPlayer> players = turnManager.getPlayersInOrder();
             assertAll(
                     () -> assertEquals("a", players.get(0).getUsername()),
                     () -> assertEquals("b", players.get(1).getUsername()),
-                    () -> assertEquals("c", players.get(2).getUsername()),
                     () -> assertEquals(1, players.indexOf(turnManager.getCurrentPlayer())),
                     () -> assertTrue(turnManager.isLastLap())
             );

@@ -40,4 +40,45 @@ public class BookshelfFloodFillTest {
                 () -> assertEquals(expectedSize, sizes.get(0))
         );
     }
+
+    @Test
+    @DisplayName("Found groups have correct size")
+    void multipleGroups() {
+        IBookshelf bookshelf = new DynamicTestBookshelf(new int[][] {
+                { 1, 1, 0, 1, 2},
+                { 1, 1, 0, 4, 2},
+                { 1, 0, 0, 3, 2},
+                { 1, 1, 2, 2, 2},
+                { 5, 5, 5, 5, 2},
+                { 1, 1, 0, 1, 2}
+        });
+
+        final List<Integer> expectedSizes = List.of(7, 4, 1, 8, 1, 1, 4, 2, 1, 1);
+
+        List<Integer> sizes = BookshelfFloodFill.getTileGroupsSizes(bookshelf);
+
+        assertAll(
+                () -> assertEquals(expectedSizes.size(), sizes.size()),
+                () -> assertIterableEquals(expectedSizes, sizes)
+        );
+    }
+
+    /**
+     * Needed to check if the flood-fill algorithm works in all directions and
+     * with concave shapes and loops.
+    */
+    @Test
+    @DisplayName("Irregular group should be filled correctly")
+    void evaluateConcaveGroup() {
+        IBookshelf bookshelf = new DynamicTestBookshelf(new int[][] {
+                { -1, -1,  0, -1, -1},
+                {  0, -1,  0, -1,  0},
+                {  0, -1,  0,  0,  0},
+                {  0,  0,  0, -1,  0},
+                { -1,  0, -1,  0,  0},
+                { -1,  0,  0,  0, -1}
+        });
+
+        assertEquals(18, BookshelfFloodFill.getTileGroupsSizes(bookshelf).get(0));
+    }
 }

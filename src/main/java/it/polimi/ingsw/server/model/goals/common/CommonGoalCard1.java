@@ -2,7 +2,6 @@ package it.polimi.ingsw.server.model.goals.common;
 
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
 import it.polimi.ingsw.util.BookshelfFloodFill;
-import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.List;
 
@@ -23,10 +22,5 @@ public class CommonGoalCard1 extends CommonGoalCard{
         List<Integer> groupsAdjacency;
         groupsAdjacency= BookshelfFloodFill.getTileGroupsSizes(bookshelf);
         return groupsAdjacency.stream().filter(size -> size >= 2).count()>= 6;
-    }
-
-    @Override
-    public String serialize(Serializer serializer) {
-        return serializer.serialize(this);
     }
 }
