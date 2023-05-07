@@ -196,6 +196,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="ProgettoIngSoftware" />
       <method v="2">
@@ -261,7 +277,18 @@
       <workItem from="1682240331574" duration="6361000" />
       <workItem from="1682268565380" duration="10105000" />
       <workItem from="1682279568022" duration="966000" />
-      <workItem from="1682322319302" duration="10255000" />
+      <workItem from="1682322319302" duration="10316000" />
+      <workItem from="1682369854709" duration="143000" />
+      <workItem from="1682370042186" duration="236000" />
+      <workItem from="1682370346350" duration="191000" />
+      <workItem from="1683036482400" duration="63000" />
+      <workItem from="1683036726135" duration="640000" />
+      <workItem from="1683037411591" duration="143000" />
+      <workItem from="1683306980204" duration="9202000" />
+      <workItem from="1683377528488" duration="29000" />
+      <workItem from="1683378375090" duration="863000" />
+      <workItem from="1683379308220" duration="195000" />
+      <workItem from="1683402892318" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
