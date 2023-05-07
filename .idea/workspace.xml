@@ -12,15 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Added some tests for Messages (didn't test SimpleMessage)">
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server/JSONServerCommunicationTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server/ServerConfigurationTest.java" afterDir="false" />
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Changed a test">
+      <change beforePath="$PROJECT_DIR$/.github/workflows/pipeline.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/pipeline.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/Server.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/messages/Message.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/messages/Message.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/messages/MessageProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/messages/MessageProvider.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server/messages/JsonMessageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server/messages/JsonMessageTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server/JSONServerCommunicationTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server/JSONServerCommunicationTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,7 +36,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="server" />
+        <entry key="$PROJECT_DIR$" value="main" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -66,7 +61,6 @@
   </component>
   <component name="ProjectViewState">
     <option name="flattenModules" value="true" />
-    <option name="flattenPackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
@@ -111,7 +105,7 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.All in proj-ingsw-heroscimmie">
+  <component name="RunManager" selected="JUnit.RunServerNetworkTestManyTimes">
     <configuration name="SimpleStart" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
@@ -119,72 +113,97 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="All in proj-ingsw-heroscimmie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="JSONServerCommunicationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="proj-ingsw-heroscimmie" />
-      <option name="PACKAGE_NAME" value="" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.JSONServerCommunicationTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JSONServerCommunicationTest.echoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.JSONServerCommunicationTest" />
+      <option name="METHOD_NAME" value="echoTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JSONServerCommunicationTest.jsonArrayEchoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.JSONServerCommunicationTest" />
+      <option name="METHOD_NAME" value="jsonArrayEchoTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JSONServerCommunicationTest.jsonObjectEchoTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.JSONServerCommunicationTest" />
+      <option name="METHOD_NAME" value="jsonObjectEchoTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="JSONServerCommunicationTest.middlewareTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.JSONServerCommunicationTest" />
+      <option name="METHOD_NAME" value="middlewareTest" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="JsonMessageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.server.messages.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server.messages" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.messages.JsonMessageTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerConfigurationTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerConfigurationTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerConfigurationTest.connectionLostMessageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerConfigurationTest" />
-      <option name="METHOD_NAME" value="connectionLostMessageTest" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="ServerConfigurationTest.connectionMessageTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerConfigurationTest" />
-      <option name="METHOD_NAME" value="connectionMessageTest" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -204,19 +223,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.SimpleStart" />
-      <item itemvalue="JUnit.ServerConfigurationTest" />
-      <item itemvalue="JUnit.ServerConfigurationTest.connectionLostMessageTest" />
-      <item itemvalue="JUnit.ServerConfigurationTest.connectionMessageTest" />
-      <item itemvalue="JUnit.All in proj-ingsw-heroscimmie" />
-      <item itemvalue="JUnit.JsonMessageTest" />
+      <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
+      <item itemvalue="JUnit.JSONServerCommunicationTest.jsonObjectEchoTest" />
+      <item itemvalue="JUnit.JSONServerCommunicationTest.jsonArrayEchoTest" />
+      <item itemvalue="JUnit.JSONServerCommunicationTest.middlewareTest" />
+      <item itemvalue="JUnit.JSONServerCommunicationTest.echoTest" />
+      <item itemvalue="JUnit.JSONServerCommunicationTest" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.All in proj-ingsw-heroscimmie" />
-        <item itemvalue="JUnit.JsonMessageTest" />
-        <item itemvalue="JUnit.ServerConfigurationTest.connectionLostMessageTest" />
-        <item itemvalue="JUnit.ServerConfigurationTest.connectionMessageTest" />
-        <item itemvalue="JUnit.ServerConfigurationTest" />
+        <item itemvalue="JUnit.JSONServerCommunicationTest.middlewareTest" />
+        <item itemvalue="JUnit.JSONServerCommunicationTest.jsonObjectEchoTest" />
+        <item itemvalue="JUnit.JSONServerCommunicationTest.jsonArrayEchoTest" />
+        <item itemvalue="JUnit.JSONServerCommunicationTest.echoTest" />
+        <item itemvalue="JUnit.JSONServerCommunicationTest" />
       </list>
     </recent_temporary>
   </component>
@@ -254,7 +274,18 @@
       <workItem from="1682240331574" duration="6361000" />
       <workItem from="1682268565380" duration="10105000" />
       <workItem from="1682279568022" duration="966000" />
-      <workItem from="1682322319302" duration="10255000" />
+      <workItem from="1682322319302" duration="10316000" />
+      <workItem from="1682369854709" duration="143000" />
+      <workItem from="1682370042186" duration="236000" />
+      <workItem from="1682370346350" duration="191000" />
+      <workItem from="1683036482400" duration="63000" />
+      <workItem from="1683036726135" duration="640000" />
+      <workItem from="1683037411591" duration="143000" />
+      <workItem from="1683306980204" duration="9202000" />
+      <workItem from="1683377528488" duration="29000" />
+      <workItem from="1683378375090" duration="863000" />
+      <workItem from="1683379308220" duration="195000" />
+      <workItem from="1683402892318" duration="1509000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -284,7 +315,28 @@
       <option name="project" value="LOCAL" />
       <updated>1682280523568</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Added tests for various use cases of the Server class">
+      <created>1682333306449</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1682333306449</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Fixed some bugs with network tests (hopefully)">
+      <created>1683321368806</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1683321368806</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Changed a test">
+      <created>1683379496604</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1683379496604</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,7 +358,11 @@
     <MESSAGE value="First iteration of javadoc." />
     <MESSAGE value="Reworked Messages by using the Builder pattern" />
     <MESSAGE value="Added some tests for Messages (didn't test SimpleMessage)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added some tests for Messages (didn't test SimpleMessage)" />
+    <MESSAGE value="Added tests for various use cases of the Server class" />
+    <MESSAGE value="Added overloaded setBody methods in JsonMessage for JSONObject and JSONArray data" />
+    <MESSAGE value="Fixed some bugs with network tests (hopefully)" />
+    <MESSAGE value="Changed a test" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed a test" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
@@ -350,7 +406,7 @@
     <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333185145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333256733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
