@@ -5,18 +5,20 @@ import it.polimi.ingsw.server.model.tile.GameTile;
 import it.polimi.ingsw.server.model.tile.Tile;
 import it.polimi.ingsw.server.model.tile.TileType;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
+import java.util.*;
 
 public class Bag implements IBag {
-    private final HashMap<TileType,Integer> tilesBag;
-    private static final int NUM_OF_TILES=22;
+    private final HashMap<TileType, Integer> tilesBag;
+    private final HashMap<TileType, GameTile> tileInstances;
+    private static final int NUM_OF_TILES = 22;
 
     public Bag() {
         this.tilesBag = new HashMap<>();
-        for (TileType tile:TileType.values()) {
-            tilesBag.put(tile,NUM_OF_TILES);
+        this.tileInstances = new HashMap<>();
+
+        for (TileType tile : TileType.values()) {
+            tilesBag.put(tile, NUM_OF_TILES);
+            tileInstances.put(tile, new Tile(tile));
         }
     }
 
@@ -36,15 +38,15 @@ public class Bag implements IBag {
         {
             throw new IllegalActionException("The bag is empty");
         }
-        ArrayList<TileType> tileTypes = new ArrayList<>(tilesBag.keySet());
+        LinkedList<TileType> tileTypes = new LinkedList<>(tilesBag.keySet());
         Collections.shuffle(tileTypes);
-        int initialNumber=tilesBag.get(tileTypes.get(0));
-        tilesBag.replace(tileTypes.get(0),initialNumber-1);
-        if(tilesBag.get(tileTypes.get(0))==0)
+        int initialNumber=tilesBag.get(tileTypes.getFirst());
+        tilesBag.replace(tileTypes.getFirst(),initialNumber-1);
+        if(tilesBag.get(tileTypes.getFirst()) == 0)
         {
-            tilesBag.remove(tileTypes.get(0));
+            tilesBag.remove(tileTypes.getFirst());
         }
-        return new Tile(tileTypes.get(0));
+        return tileInstances.get(tileTypes.getFirst());
     }
 
     /**

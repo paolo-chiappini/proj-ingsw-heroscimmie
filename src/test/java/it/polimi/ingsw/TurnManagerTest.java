@@ -72,6 +72,21 @@ public class TurnManagerTest {
         }
 
         @Override
+        public GameTile getTileAt(int row, int column) {
+            return null;
+        }
+
+        @Override
+        public int getWidth() {
+            return 0;
+        }
+
+        @Override
+        public int getHeight() {
+            return 0;
+        }
+
+        @Override
         public boolean isFull() { return full; }
         @Override
         public void dropTiles(List<GameTile> tilesToDrop, int column) {}

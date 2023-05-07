@@ -1,7 +1,6 @@
 package it.polimi.ingsw.server.model.goals.common;
 
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
-import it.polimi.ingsw.util.serialization.Serializer;
 
 public class CommonGoalCard2 extends CommonGoalCard {
     public CommonGoalCard2(int numPlayer) {
@@ -28,10 +27,5 @@ public class CommonGoalCard2 extends CommonGoalCard {
             if ((matches >= 4) || (matches2 >= 4)) return true;
         }
         return false;
-    }
-
-    @Override
-    public String serialize(Serializer serializer) {
-        return serializer.serialize(this);
     }
 }

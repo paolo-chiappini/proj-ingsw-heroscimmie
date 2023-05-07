@@ -6,7 +6,8 @@ package it.polimi.ingsw.util;
 public enum FilePath {
     DEFAULT("./resources/data"),
     TEMPLATES(DEFAULT.getPath() + "/templates"),
-    SAVED(DEFAULT.getPath() + "/saved");
+    SAVED(DEFAULT.getPath() + "/saved"),
+    TEST("./src/test/test_files");
 
     private final String path;
     FilePath(String path) {
