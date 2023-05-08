@@ -65,7 +65,19 @@ class JsonMessage extends Message{
 
     @Override
     public void setBody(String body) {
-        jsonData.put("body", body);
+        JSONObject jsonObject;
+        JSONArray jsonArray;
+        try {
+            jsonObject = new JSONObject(body);
+            jsonData.put("body", jsonObject);
+        }catch (JSONException notObjectException){
+            try {
+                jsonArray = new JSONArray(body);
+                jsonData.put("body", jsonArray);
+            }catch (JSONException notArrayException){
+                jsonData.put("body", body);
+            }
+        }
     }
 
     public static class JsonMessageBuilder extends MessageBuilder {

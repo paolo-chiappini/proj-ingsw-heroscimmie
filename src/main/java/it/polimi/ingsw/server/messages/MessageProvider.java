@@ -2,7 +2,7 @@ package it.polimi.ingsw.server.messages;
 
 import java.net.Socket;
 import java.util.List;
-
+//TODO Aliases for Methods
 /**
  * Message factory.
  */
