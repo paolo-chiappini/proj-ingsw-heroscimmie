@@ -2,6 +2,8 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.server.messages.Message;
+import it.polimi.ingsw.server.messages.MessageProvider;
+import it.polimi.ingsw.server.messages.MessageType;
 import it.polimi.ingsw.server.model.bag.IBag;
 import it.polimi.ingsw.server.model.board.IBoard;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
@@ -14,18 +16,21 @@ import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.server.model.turn.ITurnManager;
 import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
-import it.polimi.ingsw.util.serialization.JsonDeserializer;
 import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 // TO DO: methods are missing checks on fields.
+// TO DO: check if username in request matches socket.
 public abstract class ServerHandlers {
     private static final JsonSerializer jsonSerializer = new JsonSerializer();
-    private static final JsonDeserializer jsonDeserializer = new JsonDeserializer();
+    private static final Map<Socket, String> playerSockets = new HashMap<>();
 
     public static void notifyError(Message res, String errorMessage) {
         notifyMessage(res, "ERR", errorMessage);
@@ -48,7 +53,7 @@ public abstract class ServerHandlers {
     private static void setupRes(Message res, String method, String message) {
         res.setMethod(method);
         if (message == null) message = "{}";
-        res.setBody(message);
+        res.setBody(String.format("{msg: \"%s\"}", message));
     }
 
     private static void sendUpdate(Message response, JSONObject update) {
@@ -58,21 +63,22 @@ public abstract class ServerHandlers {
     }
 
     public static void handleJoinGame(Message req, Message res) {
-        if (ActiveGameManager.isGameInProgress()) {
-            notifyError(res, "Game already in progress, cannot join");
-            return;
-        }
-
         JSONObject body = new JSONObject(req.getBody());
 
         if (!body.has("username")) {
             notifyError(res, "Missing field username");
             return;
         }
-
         String username = body.getString("username");
+
+        if (ActiveGameManager.isGameInProgress() && !ActiveGameManager.getDisconnectedPlayers().contains(username)) {
+            notifyError(res, "Game already in progress, cannot join");
+            return;
+        }
+
         try {
             ActiveGameManager.joinGame(username);
+            playerSockets.put(req.getSocket(), username);
             notifySuccess(res, "Joined game");
         } catch (IllegalActionException iae) {
             notifyError(res, iae.getMessage());
@@ -96,7 +102,7 @@ public abstract class ServerHandlers {
         }
     }
 
-    public static void handleGameStart(Message req, Message res) {
+    public static void handleGameStart(Message ignore, Message res) {
         if (ActiveGameManager.canStartGame())  {
             ActiveGameManager.startGame();
             notifyAll(res, "START", "Game started");
@@ -108,8 +114,12 @@ public abstract class ServerHandlers {
         String saveName = body.getString("save_name");
         String username = body.getString("username");
 
-        ActiveGameManager.loadGame(saveName, username);
-        notifySuccess(res, "Loaded game " + saveName);
+        try {
+            ActiveGameManager.loadGame(saveName, username);
+            notifySuccess(res, "Loaded game " + saveName);
+        } catch (IllegalActionException iae) {
+            notifyError(res, iae.getMessage());
+        }
     }
 
     public static void handleSaveGame(Message req, Message res) {
@@ -276,18 +286,43 @@ public abstract class ServerHandlers {
         return null;
     }
 
-    public static void handleDisconnection(Message req, Message res) {}
+    public static void handleDisconnection(Socket socket) {
+        System.out.println(socket.getInetAddress() + " disconnected");
+        if (playerSockets.containsKey(socket)) {
+            String player = playerSockets.remove(socket);
+
+            var sockets = playerSockets.keySet().stream().toList();
+            if (sockets.size() == 0) return;
+
+            MessageProvider msgProvider = new MessageProvider(MessageType.JSON);
+            var res = msgProvider.getInstanceForOutgoingResponse(sockets.get(0), sockets);
+
+            JSONObject dummyRequestBody = new JSONObject();
+            dummyRequestBody.put("body", new JSONObject().put("username", player));
+            handlePlayerLeaving(
+                    msgProvider.getInstanceForIncomingRequest(sockets.get(0), dummyRequestBody.toString()),
+                    res
+            );
+
+            notifyAll(res, "LEFT",player + " left the game");
+        }
+    }
 
     public static void handlePlayerLeaving(Message req, Message res) {
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
-        ActiveGameManager.leaveGame(username);
 
-        if (ActiveGameManager.getConnectedPlayers().size() == 1) {
-            ActiveGameManager.stopGame();
+        try {
+            ActiveGameManager.leaveGame(username);
+        } catch (IllegalActionException iae) {
+            return;
+        }
 
+        if (ActiveGameManager.isGameInProgress() && ActiveGameManager.getConnectedPlayers().size() == 1) {
             JSONObject resBody = new JSONObject();
-            resBody.put("winner", ActiveGameManager.getConnectedPlayers());
+            resBody.put("winner", ActiveGameManager.getConnectedPlayers().stream().findFirst().orElse(""));
+
+            ActiveGameManager.stopGame();
             sendUpdate(res, resBody);
         }
     }

@@ -16,7 +16,6 @@ import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
 import it.polimi.ingsw.util.serialization.JsonDeserializer;
 import it.polimi.ingsw.util.serialization.JsonSerializer;
-import org.json.JSONObject;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -155,6 +154,12 @@ public abstract class ActiveGameManager {
      * </ul>
      */
     public static void joinGame(String username) {
+        // handle reconnection
+        if (disconnectedPlayers.contains(username)) {
+            disconnectedPlayers.remove(username);
+            return;
+        }
+
         if (lobby == null) {
             throw  new IllegalActionException("No lobby found");
         }
@@ -205,6 +210,7 @@ public abstract class ActiveGameManager {
      * @return the set of connected players.
      */
     public static Set<String> getConnectedPlayers() {
+        if (lobby == null) return new HashSet<>();
         Set<String> connectedPlayers = new HashSet<>(lobby);
         connectedPlayers.removeAll(disconnectedPlayers);
         return connectedPlayers;
@@ -224,7 +230,7 @@ public abstract class ActiveGameManager {
 
     private static void resetGame() {
         activeGameInstance = null;
-        lobby = new LinkedList<>();
+        lobby = null;
         whitelistedPlayers = null;
         disconnectedPlayers = new HashSet<>();
         gameStarted = false;
