@@ -105,7 +105,11 @@ public abstract class ServerHandlers {
     public static void handleGameStart(Message ignore, Message res) {
         if (ActiveGameManager.canStartGame())  {
             ActiveGameManager.startGame();
-            notifyAll(res, "START", "Game started");
+            JSONObject body = new JSONObject();
+            body.put("serialized", new JSONObject(ActiveGameManager.getActiveGameInstance().serialize(jsonSerializer)));
+            res.setMethod("START");
+            res.setBody(body.toString());
+            res.sendToAll();
         }
     }
 
@@ -209,7 +213,7 @@ public abstract class ServerHandlers {
             for (GameTile tile : tiles) tilesArray.put(tile.getType().ordinal());
 
             JSONObject responseBody = new JSONObject();
-            responseBody.put("serialized", currentGame.serialize(jsonSerializer));
+            responseBody.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
             responseBody.put("picked_tiles", tilesArray);
             sendUpdate(res, responseBody);
         }
@@ -251,7 +255,7 @@ public abstract class ServerHandlers {
         } else {
             bookshelf.dropTiles(tiles, col);
             JSONObject update = new JSONObject();
-            update.put("serialize", currentGame.serialize(jsonSerializer));
+            update.put("serialize", new JSONObject(currentGame.serialize(jsonSerializer)));
             sendUpdate(res, update);
         }
     }
@@ -276,7 +280,7 @@ public abstract class ServerHandlers {
         turnManager.nextTurn();
 
         JSONObject update = new JSONObject();
-        update.put("serialized", game.serialize(jsonSerializer));
+        update.put("serialized", new JSONObject(game.serialize(jsonSerializer)));
         sendUpdate(res, update);
     }
 
