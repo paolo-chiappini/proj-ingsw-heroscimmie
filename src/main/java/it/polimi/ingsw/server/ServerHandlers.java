@@ -53,6 +53,11 @@ public abstract class ServerHandlers {
         response.sendToAll();
     }
 
+    /**
+     * Handles when a player tries to join a game.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleJoinGame(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username"), req, res)) return;
 
@@ -80,6 +85,11 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the creation of a new game.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleNewGame(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username", "lobby_size"), req, res)) return;
 
@@ -94,6 +104,11 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the start of a new game.
+     * @param ignore ignored request message
+     * @param res response message
+     */
     public static void handleGameStart(Message ignore, Message res) {
         if (ActiveGameManager.canStartGame())  {
             ActiveGameManager.startGame();
@@ -105,6 +120,11 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the loading of a saved game.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleLoadGame(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username", "save_name"), req, res)) return;
 
@@ -120,6 +140,11 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the saving of a game instance.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleSaveGame(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username"), req, res)) return;
 
@@ -153,6 +178,11 @@ public abstract class ServerHandlers {
     }
 
 
+    /**
+     * Sends to the client the list of all saved games.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleShowSavedGames(Message req, Message res) {
         var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
 
@@ -168,6 +198,12 @@ public abstract class ServerHandlers {
         res.send();
     }
 
+    /**
+     * Validates a request body by checking if the format is correct.
+     * @param req request message
+     * @param res response message
+     * @return true if the message body is in JSON format, false otherwise.
+     */
     public static boolean validateRequestBody(Message req, Message res) {
         try {
             new JSONObject(req.getBody());
@@ -178,6 +214,12 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the picking of tiles from the board.
+     * Does not respond with an update.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleBoardTilePickUp(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username", "row1", "col1", "row2", "col2"), req, res)) return;
 
@@ -207,6 +249,12 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the dropping of tiles in the bookshelf.
+     * Sends the updated state.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleDropTiles(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username", "tiles", "column", "row1", "row2", "col1", "col2"), req, res)) return;
 
@@ -241,6 +289,12 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles the end of a player's turn.
+     * Sends the updated state.
+     * @param req request message
+     * @param res response message
+     */
     public static void handleEndTurn(Message req, Message res) {
         JSONObject body = new JSONObject(req.getBody());
 
@@ -272,6 +326,10 @@ public abstract class ServerHandlers {
         return null;
     }
 
+    /**
+     * Handles the disconnection of a socket.
+     * @param socket disconnected socket
+     */
     public static void handleDisconnection(Socket socket) {
         System.out.println(socket.getInetAddress() + " disconnected");
         if (playerSockets.containsKey(socket)) {
@@ -290,6 +348,11 @@ public abstract class ServerHandlers {
         }
     }
 
+    /**
+     * Handles when a player disconnects from/leaves the game.
+     * @param req request message
+     * @param res response message
+     */
     public static void handlePlayerLeaving(Message req, Message res) {
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
@@ -331,6 +394,12 @@ public abstract class ServerHandlers {
         return false;
     }
 
+    /**
+     * Method used to determine the maximum amount of tiles that
+     * can be inserted in the bookshelf.
+     * @param bookshelf bookshelf to evaluate
+     * @return the depths of the columns of the bookshelf.
+     */
     private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
         List<Integer> depths = new LinkedList<>();
         for (int i = 0; i < bookshelf.getWidth(); i++) {
@@ -344,6 +413,17 @@ public abstract class ServerHandlers {
         return depths;
     }
 
+    /**
+     * Validates the incoming request by checking if the player that
+     * sent the message is impersonating another client.
+     * Used to prevent "sabotage" through impersonation of other clients:
+     * ie: (player1) -> {"method": "quit", "username": "player3"} would lead to the disconnection of
+     * player3, but the message was sent by player1.
+     * @param req request message
+     * @param res response message
+     * @return true if the client's username matches the bound socket, false
+     * if the client is trying to impersonate another player.
+     */
     public static boolean validateSocketUsername(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username"), req, res)) return false;
         JSONObject body = new JSONObject(req.getBody());
