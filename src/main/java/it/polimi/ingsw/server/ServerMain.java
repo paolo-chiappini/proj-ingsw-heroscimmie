@@ -23,6 +23,7 @@ public abstract class ServerMain {
 
 
         server.onConnectionLost(ServerHandlers::handleDisconnection);
+        server.onConnectionClosed(ServerHandlers::handleDisconnection);
 
         server.setMiddleware("JOIN", (req, res, callback) -> {
             callback.call(req, res);

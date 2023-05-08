@@ -24,6 +24,7 @@ import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
+import it.polimi.ingsw.util.observer.ViewObserver;
 import org.json.JSONArray;
 
 import java.io.FileNotFoundException;
@@ -36,7 +37,7 @@ import java.util.List;
  * The class contains both setup and update methods for the
  * various CLI graphic elements.
  */
-public class DefaultCliGraphics {
+public class DefaultCliGraphics implements ViewObserver {
     private final BoardElement boardElement;
     private final BookshelfElement mainBookshelf;
     private final BonusesInfoElement bonusesInfoElement;
@@ -53,8 +54,8 @@ public class DefaultCliGraphics {
     private final HashMap<Integer, CommonGoalCardElement> commonGoalCardElements;
 
     private final RectangleElement mainPanel;
-
     public DefaultCliGraphics() {
+
         otherBookshelves = new HashMap<>();
         commonGoalCardElements = new HashMap<>();
         players = new LinkedList<>();
@@ -96,9 +97,6 @@ public class DefaultCliGraphics {
         addElementToPanel(columnCoordinatesElement, DefaultLayout.COL_COORDINATES_X, DefaultLayout.COL_COORDINATES_Y);
         addElementToPanel(rowCoordinatesElement, DefaultLayout.ROW_COORDINATES_X, DefaultLayout.ROW_COORDINATES_Y);
 
-        // Bookshelf base (bookshelf coordinates)
-        addElementToPanel(bookshelfBaseElement, DefaultLayout.BOOKSHELF_BASE_X, DefaultLayout.BOOKSHELF_BASE_Y);
-
         // Horizontal break line
         addElementToPanel(
                 new RowElement(String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(new CommonGoalCardElement("", 0, 0).getWidth())),
@@ -126,6 +124,8 @@ public class DefaultCliGraphics {
 
     private void addBookshelfToPanel() {
         addElementToPanel(mainBookshelf, DefaultLayout.BOOKSHELF_X, DefaultLayout.BOOKSHELF_Y);
+        // Bookshelf base (bookshelf coordinates)
+        addElementToPanel(bookshelfBaseElement, DefaultLayout.BOOKSHELF_BASE_X, DefaultLayout.BOOKSHELF_BASE_Y);
     }
 
     private void addBonusesInfoToPanel() {
@@ -205,6 +205,7 @@ public class DefaultCliGraphics {
      * @param player owner of the bookshelf.
      * @param update updated state of the bookshelf.
      */
+    @Override
     public void updateBookshelf(String player, int[][] update) {
         if (players.indexOf(player) == clientIndex) updateMainBookshelf(update);
         else updateOtherBookshelf(player, update);
@@ -214,6 +215,7 @@ public class DefaultCliGraphics {
      * Updates the main game board.
      * @param update updated state of the board.
      */
+    @Override
     public void updateBoard(int[][] update) {
         updateGrid(boardElement, update);
         addBoardToPanel();
@@ -228,6 +230,7 @@ public class DefaultCliGraphics {
     // Updates one of the smaller bookshelves belonging to other players.
     private void updateOtherBookshelf(String owner, int[][] update) {
         var currBookshelf = otherBookshelves.get(owner);
+        if (owner == null) return;
         for (int i = 0; i < update.length; i++)
             for (int j = 0; j < update[i].length; j++)
                 if (update[i][j] >= 0) currBookshelf.setElement(new SmallTileElement(TileType.values()[update[i][j]]), j, i);
@@ -245,6 +248,7 @@ public class DefaultCliGraphics {
      * @param player username of the player to update.
      * @param isDisconnected true if the player has disconnected from the game.
      */
+    @Override
     public void updatePlayerConnectionStatus(String player, boolean isDisconnected) {
         turnListElement.updateConnectionStatus(player, isDisconnected);
         addTurnsInfoToPanel();
@@ -255,6 +259,7 @@ public class DefaultCliGraphics {
      * @param cardId id of the card to update.
      * @param points updated points.
      */
+    @Override
     public void updateCommonGoalPoints(int cardId, int points) {
         commonGoalCardElements.get(cardId).setPoints(points);
         addCommonGoalsToPanel();
@@ -312,6 +317,7 @@ public class DefaultCliGraphics {
      * @param player username of the player to update.
      * @param score updated score.
      */
+    @Override
     public void updatePlayerScore(String player, int score) {
         turnListElement.updatePlayerScore(player, score);
         addTurnsInfoToPanel();
@@ -322,6 +328,7 @@ public class DefaultCliGraphics {
      * If the game is over, shows all players' scores.
      * @param isGameOver true if the game is over.
      */
+    @Override
     public void updateGameStatus(boolean isGameOver) {
         turnListElement.updateGameState(isGameOver);
         addTurnsInfoToPanel();
