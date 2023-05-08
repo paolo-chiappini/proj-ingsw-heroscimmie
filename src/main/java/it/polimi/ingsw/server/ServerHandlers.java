@@ -11,8 +11,6 @@ import it.polimi.ingsw.server.model.game.Game;
 import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;
 import it.polimi.ingsw.server.model.player.IPlayer;
 import it.polimi.ingsw.server.model.tile.GameTile;
-import it.polimi.ingsw.server.model.tile.Tile;
-import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.server.model.turn.ITurnManager;
 import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
@@ -21,13 +19,11 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-// TO DO: methods are missing checks on fields.
-// TO DO: check if username in request matches socket.
 public abstract class ServerHandlers {
     private static final JsonSerializer jsonSerializer = new JsonSerializer();
     private static final Map<Socket, String> playerSockets = new HashMap<>();
@@ -41,16 +37,11 @@ public abstract class ServerHandlers {
     }
 
     private static void notifyMessage(Message res, String method, String message) {
-        setupRes(res, method, message);
+        setupResponse(res, method, message);
         res.send();
     }
 
-    private static void notifyAll(Message res, String method, String message) {
-        setupRes(res, method, message);
-        res.sendToAll();
-    }
-
-    private static void setupRes(Message res, String method, String message) {
+    private static void setupResponse(Message res, String method, String message) {
         res.setMethod(method);
         if (message == null) message = "{}";
         res.setBody(String.format("{msg: \"%s\"}", message));
@@ -63,12 +54,9 @@ public abstract class ServerHandlers {
     }
 
     public static void handleJoinGame(Message req, Message res) {
-        JSONObject body = new JSONObject(req.getBody());
+        if (missingPropertiesInBody(List.of("username"), req, res)) return;
 
-        if (!body.has("username")) {
-            notifyError(res, "Missing field username");
-            return;
-        }
+        JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
 
         if (ActiveGameManager.isGameInProgress() && !ActiveGameManager.getDisconnectedPlayers().contains(username)) {
@@ -80,18 +68,22 @@ public abstract class ServerHandlers {
             ActiveGameManager.joinGame(username);
             playerSockets.put(req.getSocket(), username);
             notifySuccess(res, "Joined game");
+
+            // in case of reconnection send update to client
+            if (ActiveGameManager.isGameInProgress()) {
+                JSONObject update = new JSONObject();
+                update.put("serialized", new JSONObject(ActiveGameManager.getActiveGameInstance().serialize(jsonSerializer)));
+                sendUpdate(res, update);
+            }
         } catch (IllegalActionException iae) {
             notifyError(res, iae.getMessage());
         }
     }
 
     public static void handleNewGame(Message req, Message res) {
-        JSONObject body = new JSONObject(req.getBody());
+        if (missingPropertiesInBody(List.of("username", "lobby_size"), req, res)) return;
 
-        if (!body.has("lobby_size")) {
-            notifyError(res, "Missing field lobby_size");
-            return;
-        }
+        JSONObject body = new JSONObject(req.getBody());
         int lobbySize = body.getInt("lobby_size");
 
         try {
@@ -114,6 +106,8 @@ public abstract class ServerHandlers {
     }
 
     public static void handleLoadGame(Message req, Message res) {
+        if (missingPropertiesInBody(List.of("username", "save_name"), req, res)) return;
+
         JSONObject body = new JSONObject(req.getBody());
         String saveName = body.getString("save_name");
         String username = body.getString("username");
@@ -127,6 +121,8 @@ public abstract class ServerHandlers {
     }
 
     public static void handleSaveGame(Message req, Message res) {
+        if (missingPropertiesInBody(List.of("username"), req, res)) return;
+
         Game game = ActiveGameManager.getActiveGameInstance();
         if (game == null) {
             notifyError(res, "No active game");
@@ -134,10 +130,6 @@ public abstract class ServerHandlers {
         }
 
         JSONObject body = new JSONObject(req.getBody());
-        if (!body.has("username")) {
-            notifyError(res, "Missing field username");
-            return;
-        }
 
         String username = body.getString("username");
         if (!game.getPlayers().stream()
@@ -150,7 +142,11 @@ public abstract class ServerHandlers {
 
         try {
             ActiveGameManager.saveGame();
-            notifyAll(res, "SAVE", "Game successfully saved");
+            JSONObject resBody = new JSONObject();
+            resBody.put("msg", "Game successfully saved");
+            res.setBody(resBody.toString());
+            res.setMethod("SAVE");
+            res.sendToAll();
         } catch (IllegalActionException iae) {
             notifyError(res, iae.getMessage());
         }
@@ -183,21 +179,15 @@ public abstract class ServerHandlers {
     }
 
     public static void handleBoardTilePickUp(Message req, Message res) {
+        if (missingPropertiesInBody(List.of("username", "row1", "col1", "row2", "col2"), req, res)) return;
+
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBoard board = currentGame.getBoard();
+        IBookshelf bookshelf;
 
         JSONObject body = new JSONObject(req.getBody());
-
-        if (!body.has("row1") || !body.has("row2") ||
-            !body.has("col1") || !body.has("col2")) {
-            notifyError(res, "Missing range parameter");
-            return;
-        }
-
-        if (!body.has("username")) {
-            notifyError(res, "Missing player username");
-            return;
-        }
+        String username = body.getString("username");
+        bookshelf = getPlayerByUsername(username, currentGame.getPlayers()).getBookshelf();
 
         int row1, row2, col1, col2;
         row1 = body.getInt("row1");
@@ -205,50 +195,41 @@ public abstract class ServerHandlers {
         col1 = body.getInt("col1");
         col2 = body.getInt("col2");
 
+        var depths = bookshelfColumnsDepths(bookshelf);
+        JSONArray colDepths = new JSONArray(depths);
+
         if (!board.canPickUpTiles(row1, col1, row2, col2)) {
             notifyError(res, "Invalid tile range");
         } else {
-            List<GameTile> tiles = board.pickUpTiles(row1, col1, row2, col2);
-            JSONArray tilesArray = new JSONArray();
-            for (GameTile tile : tiles) tilesArray.put(tile.getType().ordinal());
-
             JSONObject responseBody = new JSONObject();
-            responseBody.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
-            responseBody.put("picked_tiles", tilesArray);
+            responseBody.put("bookshelf_columns_depths", colDepths);
             sendUpdate(res, responseBody);
         }
     }
 
     public static void handleDropTiles(Message req, Message res) {
+        if (missingPropertiesInBody(List.of("username", "tiles", "column", "row1", "row2", "col1", "col2"), req, res)) return;
+
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBookshelf bookshelf;
         IPlayer player;
         String username;
-        int col;
-        JSONArray tilesArray;
-        List<GameTile> tiles = new ArrayList<>();
+        int row1, row2, col1, col2, col;
+        List<GameTile> tiles;
 
         JSONObject body = new JSONObject(req.getBody());
 
-        if (!body.has("username")) {
-            notifyError(res, "Missing player username");
-            return;
-        }
-
-        // TO DO
-        // Check other fields
-
         username = body.getString("username");
-        tilesArray = body.getJSONArray("tiles");
         col = body.getInt("column");
+        row1 = body.getInt("row1");
+        row2 = body.getInt("row2");
+        col1 = body.getInt("col1");
+        col2 = body.getInt("col2");
 
         player = getPlayerByUsername(username, currentGame.getPlayers());
-
         bookshelf = player.getBookshelf();
 
-        for (int i = 0; i < tilesArray.length(); i++) {
-            tiles.add(new Tile(TileType.values()[tilesArray.getInt(i)]));
-        }
+        tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
 
         if (!bookshelf.canDropTiles(tiles.size(), col)) {
             notifyError(res, "Cannot drop tiles at specified location");
@@ -268,6 +249,7 @@ public abstract class ServerHandlers {
         IBag bag = game.getBag();
         ITurnManager turnManager = game.getTurnManager();
         List<CommonGoalCard> commonGoals = game.getCommonGoals();
+
         String username = body.getString("username");
         IPlayer player = getPlayerByUsername(username, game.getPlayers());
 
@@ -299,16 +281,12 @@ public abstract class ServerHandlers {
             if (sockets.size() == 0) return;
 
             MessageProvider msgProvider = new MessageProvider(MessageType.JSON);
-            var res = msgProvider.getInstanceForOutgoingResponse(sockets.get(0), sockets);
-
             JSONObject dummyRequestBody = new JSONObject();
             dummyRequestBody.put("body", new JSONObject().put("username", player));
-            handlePlayerLeaving(
-                    msgProvider.getInstanceForIncomingRequest(sockets.get(0), dummyRequestBody.toString()),
-                    res
-            );
+            var res = msgProvider.getInstanceForOutgoingResponse(sockets.get(0), sockets);
+            var req = msgProvider.getInstanceForIncomingRequest(sockets.get(0), dummyRequestBody.toString());
 
-            notifyAll(res, "LEFT",player + " left the game");
+            handlePlayerLeaving(req, res);
         }
     }
 
@@ -318,6 +296,11 @@ public abstract class ServerHandlers {
 
         try {
             ActiveGameManager.leaveGame(username);
+            res.setMethod("LEFT");
+            JSONObject resBody = new JSONObject();
+            resBody.put("username", username);
+            res.setBody(resBody.toString());
+            res.sendToAll();
         } catch (IllegalActionException iae) {
             return;
         }
@@ -329,5 +312,46 @@ public abstract class ServerHandlers {
             ActiveGameManager.stopGame();
             sendUpdate(res, resBody);
         }
+    }
+
+    private static List<String> getMissingProperties(List<String> propertiesToCheck, JSONObject obj) {
+        List<String> missingProperties = new LinkedList<>();
+        for (String prop : propertiesToCheck) {
+            if (!obj.has(prop)) missingProperties.add(prop);
+        }
+        return  missingProperties;
+    }
+
+    private static boolean missingPropertiesInBody(List<String> properties, Message req, Message res) {
+        var missingProperties = getMissingProperties(properties, new JSONObject(req.getBody()));
+        if (missingProperties.size() > 0) {
+            notifyError(res, "Missing properties: " + String.join(", ", missingProperties));
+            return true;
+        }
+        return false;
+    }
+
+    private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
+        List<Integer> depths = new LinkedList<>();
+        for (int i = 0; i < bookshelf.getWidth(); i++) {
+            int depth = 0;
+            for (int j = 0; j < bookshelf.getHeight(); j++) {
+                if (bookshelf.getTileAt(i, j) == null) depth++;
+                else break;
+            }
+            depths.add(depth);
+        }
+        return depths;
+    }
+
+    public static boolean validateSocketUsername(Message req, Message res) {
+        if (missingPropertiesInBody(List.of("username"), req, res)) return false;
+        JSONObject body = new JSONObject(req.getBody());
+        String username = body.getString("username");
+        if (playerSockets.containsKey(req.getSocket()) && !playerSockets.get(req.getSocket()).equals(username)) {
+            notifyError(res, "Username does not match with socket");
+            return false;
+        }
+        return true;
     }
 }
