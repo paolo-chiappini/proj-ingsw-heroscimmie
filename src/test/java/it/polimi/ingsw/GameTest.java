@@ -40,14 +40,14 @@ public class GameTest {
             ITurnManager turnManager = new TurnManagerMock(singlePlayer, 0, true);
             singlePlayer.add(new PlayerMock("test", 0, null, null));
 
-            assertThrows(IllegalArgumentException.class, () -> new Game(turnManager, null, null));
+            assertThrows(IllegalArgumentException.class, () -> Game.getInstance(turnManager,null,null));
         }
 
         @Test
         @DisplayName("each player should get a different personal goal")
         void assignPersonalGoalCards() {
             ITurnManager turnManager = new TurnManagerMock(players, 0, true);
-            Game game = new Game(turnManager, null, null);
+            Game game = Game.getInstance(turnManager,null,null);
             List<IPlayer> inGamePlayers = game.getPlayers();
 
             inGamePlayers.sort(Comparator.comparing(IPlayer::getUsername));
@@ -67,7 +67,7 @@ public class GameTest {
         @DisplayName("two different common goals should be set")
         void assignCommonGoalCards() {
             ITurnManager turnManager = new TurnManagerMock(players, 0, true);
-            Game game = new Game(turnManager, null, null);
+            Game game = Game.getInstance(turnManager,null,null);
             List<CommonGoalCard> commonGoals = game.getCommonGoals();
 
             assertAll(

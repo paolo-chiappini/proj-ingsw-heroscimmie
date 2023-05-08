@@ -22,6 +22,7 @@ import java.util.List;
  * components of the game.
  */
 public class Game implements Serializable {
+    private static Game instance;
     private final ITurnManager turnManager;
     private final IBag bag;
     private final IBoard board;
@@ -33,7 +34,7 @@ public class Game implements Serializable {
      * @param bag bag used to draw tiles during the game.
      * @param board board from which the players can pick up tiles during the game.
      */
-    public Game(ITurnManager turnManager, IBag bag, IBoard board) {
+    private Game(ITurnManager turnManager, IBag bag, IBoard board) {
         if (turnManager.getPlayersInOrder() == null || turnManager.getPlayersInOrder().size() < 2) {
             throw new IllegalArgumentException("There should be at least 2 players");
         }
@@ -43,6 +44,13 @@ public class Game implements Serializable {
 
         assignCommonGoals();
         assignPersonalGoals();
+    }
+
+    public static Game getInstance(ITurnManager turnManager, IBag bag, IBoard board)
+    {
+        if(instance == null)
+            instance = new Game(turnManager,bag,board);
+        return instance;
     }
 
     /**
@@ -61,9 +69,7 @@ public class Game implements Serializable {
      */
     private void assignPersonalGoals() {
         PersonalGoalCardDeck personalGoalsDeck = new PersonalGoalCardDeck();
-        getPlayers().forEach(p -> {
-            p.setPersonalGoalCard(personalGoalsDeck.drawCard());
-        });
+        getPlayers().forEach(p -> p.setPersonalGoalCard(personalGoalsDeck.drawCard()));
     }
 
     /**
