@@ -1,7 +1,7 @@
 package it.polimi.ingsw.util;
 
 import java.io.*;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -66,5 +66,35 @@ public abstract class FileIOManager {
     public static String readFromFile(String filename, FilePath path) throws FileNotFoundException {
         String fullPath = String.format("%s/%s", path.getPath(), filename);
         return readFromFile(fullPath);
+    }
+
+    /**
+     * Reads the names of the files in the specified directory.
+     * @param directoryPath absolute path to directory.
+     * @return returns the list of names of the files contained in the directory
+     * (null if directory is empty).
+     */
+    public static List<String> getFilesInDirectory(String directoryPath) {
+        List<String> files;
+        File directory = new File(directoryPath);
+
+        if (!directory.isDirectory()) {
+            throw new IllegalArgumentException("Given path is not a directory");
+        }
+
+        File[] filesArr = directory.listFiles();
+        if (filesArr == null) return null;
+        files = Arrays.stream(filesArr).map(File::getName).toList();
+        return files;
+    }
+
+    /**
+     * Reads the names of the files in the specified directory.
+     * @param path default path to directory.
+     * @return returns the list of names of the files contained in the directory
+     * (null if directory is empty).
+     */
+    public static List<String> getFilesInDirectory(FilePath path) {
+        return getFilesInDirectory(path.getPath());
     }
 }

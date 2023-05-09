@@ -5,9 +5,7 @@ import it.polimi.ingsw.server.model.board.IBoard;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
 import it.polimi.ingsw.server.model.goals.AdjacencyBonusGoal;
 import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;
-import it.polimi.ingsw.server.model.goals.common.CommonGoalCardDeck;
 import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCard;
-import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCardDeck;
 import it.polimi.ingsw.server.model.player.IPlayer;
 import it.polimi.ingsw.server.model.turn.ITurnManager;
 import it.polimi.ingsw.util.serialization.Serializable;
@@ -26,32 +24,8 @@ public class Game implements Serializable {
     private final ITurnManager turnManager;
     private final IBag bag;
     private final IBoard board;
-    private List<CommonGoalCard> commonGoals;
+    private final List<CommonGoalCard> commonGoals;
     private IPlayer winner;
-
-    /**
-     * @param turnManager turn manager responsible for managing the game turn progression.
-     * @param bag bag used to draw tiles during the game.
-     * @param board board from which the players can pick up tiles during the game.
-     */
-    private Game(ITurnManager turnManager, IBag bag, IBoard board) {
-        if (turnManager.getPlayersInOrder() == null || turnManager.getPlayersInOrder().size() < 2) {
-            throw new IllegalArgumentException("There should be at least 2 players");
-        }
-        this.turnManager = turnManager;
-        this.bag = bag;
-        this.board = board;
-
-        assignCommonGoals();
-        assignPersonalGoals();
-    }
-
-    public static Game getInstance(ITurnManager turnManager, IBag bag, IBoard board)
-    {
-        if(instance == null)
-            instance = new Game(turnManager,bag,board);
-        return instance;
-    }
 
     /**
      * Creates a new instance of Game using a builder.
@@ -62,22 +36,6 @@ public class Game implements Serializable {
         this.bag = builder.bag;
         this.board = builder.board;
         this.commonGoals = new ArrayList<>(builder.commonGoals);
-    }
-
-    /**
-     * Assigns a (different) personal goal card to each player.
-     */
-    private void assignPersonalGoals() {
-        PersonalGoalCardDeck personalGoalsDeck = new PersonalGoalCardDeck();
-        getPlayers().forEach(p -> p.setPersonalGoalCard(personalGoalsDeck.drawCard()));
-    }
-
-    /**
-     * Draws 2 random common goal cards from the deck and sets them as the common goals for
-     * all the players.
-     */
-    private void assignCommonGoals() {
-        commonGoals = new CommonGoalCardDeck(getPlayers().size()).drawCards();
     }
 
     public void evaluateFinalScores() {

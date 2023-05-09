@@ -111,7 +111,7 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SimpleStart">
+  <component name="RunManager" selected="JUnit.server in proj-ingsw-heroscimmie">
     <configuration name="SimpleStart" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
@@ -135,18 +135,18 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonDeserializationTest.testPlayerDeserialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
       <module name="proj-ingsw-heroscimmie" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.JsonDeserializationTest" />
-      <option name="METHOD_NAME" value="testPlayerDeserialization" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
+      <option name="MAIN_CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="TEST_OBJECT" value="package" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -196,18 +196,10 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
+    <configuration name="server in proj-ingsw-heroscimmie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.server" />
-      <option name="MAIN_CLASS_NAME" value="" />
-      <option name="METHOD_NAME" value="" />
-      <option name="TEST_OBJECT" value="package" />
+      <option name="TEST_OBJECT" value="directory" />
+      <dir value="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -227,19 +219,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.SimpleStart" />
+      <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
+      <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
       <item itemvalue="JUnit.JsonDeserializationTest.testBoardDeserialization" />
-      <item itemvalue="JUnit.JsonDeserializationTest.testPlayerDeserialization" />
       <item itemvalue="JUnit.TurnManagerTest" />
       <item itemvalue="JUnit.TurnManagerTest$TestSerialization.turnManagerDeserialization" />
       <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.TurnManagerTest$TestSerialization.turnManagerDeserialization" />
         <item itemvalue="JUnit.TurnManagerTest" />
         <item itemvalue="JUnit.JsonDeserializationTest.testBoardDeserialization" />
-        <item itemvalue="JUnit.JsonDeserializationTest.testPlayerDeserialization" />
       </list>
     </recent_temporary>
   </component>
