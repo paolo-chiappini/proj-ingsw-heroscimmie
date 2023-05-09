@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.virtualModel;
 
+import it.polimi.ingsw.util.observer.ModelObservable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,11 +8,10 @@ import org.json.JSONObject;
  * This class represents a bookshelf in the virtual model.
  * It aims to represent the state of the bookshelf in the client and update it if necessary
  */
-public class ClientBookshelf {
+public class ClientBookshelf extends ModelObservable {
     private int [][] tiles;
     private int width = 5;
     private int height = 6;
-
     public ClientBookshelf() {
         tiles = new int[height][width];
     }

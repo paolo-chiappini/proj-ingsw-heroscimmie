@@ -1,36 +1,47 @@
 package it.polimi.ingsw.client.virtualModel;
 
+import it.polimi.ingsw.util.observer.ModelObservable;
 import org.json.JSONObject;
 
 /**
  * This class represents a single player in the virtual model.
  * It aims to represent the state of a player in the client and update it if necessary
  */
-public class ClientPlayer {
+public class ClientPlayer extends ModelObservable {
     private String username;
     private ClientBookshelf bookshelf;
     private int idPersonalGoalCard;
     private int score;
+    private boolean isDisconnected;
 
     public ClientPlayer(String username){
         this.username = username;
         this.bookshelf = new ClientBookshelf();
         this.idPersonalGoalCard = 0;
         this.score = 0;
+        this.isDisconnected = false;
     }
 
     public void setUsername(String username){this.username = username;}
 
     public void setBookshelf(ClientBookshelf bookshelf) {
         this.bookshelf = bookshelf;
+        notifyObservers(obs->obs.updateBookshelf(getUsername(), getBookshelf().getTiles()));
     }
 
     public void setIdPersonalGoalCard(int idPersonalGoalCard) {
         this.idPersonalGoalCard = idPersonalGoalCard;
+        notifyObservers(obs->obs.setPersonalGoal(idPersonalGoalCard));
     }
 
     public void setScore(int score) {
         this.score = score;
+        notifyObservers(obs->obs.updatePlayerScore(getUsername(),getScore()));
+    }
+
+    public void setDisconnected(boolean disconnected) {
+        isDisconnected = disconnected;
+        notifyObservers(obs->obs.updatePlayerConnectionStatus(username,disconnected));
     }
 
     public ClientBookshelf getBookshelf() {
@@ -49,14 +60,16 @@ public class ClientPlayer {
         return username;
     }
 
+    public boolean isDisconnected() {
+        return isDisconnected;
+    }
+
     /**
-     * Updates all the information of a player (bookshelf, personal goal card and score)
+     * Updates all the information of a player (bookshelf and score)
      * @param data contains up-to-date player details
      */
     public void updatePlayer(String data){
-        this.updateUsername(data);
         this.getBookshelf().updateBookshelf(data);
-        this.updateId(data);
         this.updateScore(data);
     }
 

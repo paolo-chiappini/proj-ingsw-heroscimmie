@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.virtualModel;
 
+import it.polimi.ingsw.util.observer.ModelObservable;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -7,7 +8,7 @@ import org.json.JSONObject;
  * This class represents the board in the virtual model.
  * It aims to represent the state of the board in the client and update it if necessary
  */
-public class ClientBoard {
+public class ClientBoard extends ModelObservable {
 
     private int [][] spaces;
     private int boardSize = 9;
@@ -32,6 +33,7 @@ public class ClientBoard {
      */
     public void setTilesAt(int row, int column, int tileType) {
         spaces[row][column] = tileType;
+        notifyObservers(obs->obs.updateBoard(getSpaces()));
     }
 
     public void setBoardSize(int boardSize) {

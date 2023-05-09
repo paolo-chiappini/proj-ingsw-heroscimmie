@@ -67,4 +67,14 @@ public interface IBookshelf extends Serializable {
      * @return true if the tiles at the specified coordinates are the same.
      */
     boolean compareTiles(int row, int column, int row2, int column2);
+
+    /**
+     * Chooses the order of the tiles
+     * @param tilesToDrop are the chosen tiles to insert
+     * @param position1 is the position of the first tile
+     * @param position2 is the position of the second tile
+     * @param position3 is the position of the third tile
+     * @return sorted tiles to insert in the bookshelf
+     */
+     List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3);
 }

@@ -78,6 +78,11 @@ public class DynamicTestBookshelf implements IBookshelf {
     }
 
     @Override
+    public List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3) {
+        return null;
+    }
+
+    @Override
     public String serialize(Serializer serializer) {
         return serializer.serialize(this);
     }

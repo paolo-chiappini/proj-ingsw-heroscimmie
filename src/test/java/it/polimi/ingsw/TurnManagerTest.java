@@ -98,6 +98,11 @@ public class TurnManagerTest {
         public boolean compareTiles(int row, int column, int row2, int column2) { return false; }
 
         @Override
+        public List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3) {
+            return null;
+        }
+
+        @Override
         public String serialize(Serializer serializer) {
             return null;
         }

@@ -20,6 +20,7 @@ import java.util.List;
  * components of the game.
  */
 public class Game implements Serializable {
+    private static Game instance;
     private final ITurnManager turnManager;
     private final IBag bag;
     private final IBoard board;
