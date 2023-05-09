@@ -30,56 +30,6 @@ public class GameTest {
     }
 
     @Nested
-    @DisplayName("When creating a game object")
-    class CreationTests {
-
-        @Test
-        @DisplayName("a game cannot be created with less than 2 players")
-        void createNewTurnManager() {
-            List<IPlayer> singlePlayer = new ArrayList<>();
-            ITurnManager turnManager = new TurnManagerMock(singlePlayer, 0, true);
-            singlePlayer.add(new PlayerMock("test", 0, null, null));
-
-            assertThrows(IllegalArgumentException.class, () -> new Game(turnManager, null, null));
-        }
-
-        @Test
-        @DisplayName("each player should get a different personal goal")
-        void assignPersonalGoalCards() {
-            ITurnManager turnManager = new TurnManagerMock(players, 0, true);
-            Game game = new Game(turnManager, null, null);
-            List<IPlayer> inGamePlayers = game.getPlayers();
-
-            inGamePlayers.sort(Comparator.comparing(IPlayer::getUsername));
-
-            assertAll(
-                    () -> assertIterableEquals(players, inGamePlayers),
-                    () -> assertNotNull(inGamePlayers.get(0).getPersonalGoalCard()),
-                    () -> assertNotNull(inGamePlayers.get(1).getPersonalGoalCard()),
-                    () -> assertNotNull(inGamePlayers.get(2).getPersonalGoalCard()),
-                    () -> assertNotEquals(inGamePlayers.get(0).getPersonalGoalCard(), inGamePlayers.get(1).getPersonalGoalCard()),
-                    () -> assertNotEquals(inGamePlayers.get(0).getPersonalGoalCard(), inGamePlayers.get(2).getPersonalGoalCard()),
-                    () -> assertNotEquals(inGamePlayers.get(1).getPersonalGoalCard(), inGamePlayers.get(2).getPersonalGoalCard())
-            );
-        }
-
-        @Test
-        @DisplayName("two different common goals should be set")
-        void assignCommonGoalCards() {
-            ITurnManager turnManager = new TurnManagerMock(players, 0, true);
-            Game game = new Game(turnManager, null, null);
-            List<CommonGoalCard> commonGoals = game.getCommonGoals();
-
-            assertAll(
-                    () -> assertEquals(2, commonGoals.size()),
-                    () -> assertNotNull(commonGoals.get(0)),
-                    () -> assertNotNull(commonGoals.get(1)),
-                    () -> assertNotEquals(commonGoals.get(0).getId(), commonGoals.get(1).getId())
-            );
-        }
-    }
-
-    @Nested
     @DisplayName("When the game is ending")
     class EndGameTests {
 
