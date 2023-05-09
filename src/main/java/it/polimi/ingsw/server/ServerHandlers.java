@@ -256,7 +256,7 @@ public abstract class ServerHandlers {
      * @param res response message
      */
     public static void handleDropTiles(Message req, Message res) {
-        if (missingPropertiesInBody(List.of("username", "tiles", "column", "row1", "row2", "col1", "col2"), req, res)) return;
+        if (missingPropertiesInBody(List.of("username", "column", "row1", "row2", "col1", "col2"), req, res)) return;
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBookshelf bookshelf;
@@ -284,7 +284,7 @@ public abstract class ServerHandlers {
         } else {
             bookshelf.dropTiles(tiles, col);
             JSONObject update = new JSONObject();
-            update.put("serialize", new JSONObject(currentGame.serialize(jsonSerializer)));
+            update.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
             sendUpdate(res, update);
         }
     }
@@ -402,9 +402,9 @@ public abstract class ServerHandlers {
      */
     private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
         List<Integer> depths = new LinkedList<>();
-        for (int i = 0; i < bookshelf.getWidth(); i++) {
+        for (int i = 0; i < bookshelf.getHeight(); i++) {
             int depth = 0;
-            for (int j = 0; j < bookshelf.getHeight(); j++) {
+            for (int j = 0; j < bookshelf.getWidth(); j++) {
                 if (bookshelf.getTileAt(i, j) == null) depth++;
                 else break;
             }

@@ -43,6 +43,7 @@ public class ClientController implements ControllerObserver {
             case "UPDATE" -> update(message);
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
+            case "LEFT" -> System.out.println(new JSONObject(message.getBody()).getString("username") + " left the game");
             case "OK", "ERR" -> System.out.println(new JSONObject(message.getBody()).getString("msg"));
             default -> {}
         }
@@ -64,12 +65,21 @@ public class ClientController implements ControllerObserver {
         String recipient = null;
         if (body.has("recipient")) recipient = body.getString("recipient");
 
-        view.addMessage(chatMessage, sender, recipient.equals(myUsername));
+        if (recipient != null && recipient.equals(myUsername)) view.addMessage(chatMessage, sender, true);
+        else if (recipient == null) view.addMessage(chatMessage, sender, false);
+
+        view.drawGraphics();
     }
 
     @Override
     public void update(Message message) {
         JSONObject body = new JSONObject(message.getBody());
+
+        if (!body.has("serialized")) {
+            System.out.println("Ue guarda che non c'è serialized");
+            return;
+        }
+
         JSONObject serialized = body.getJSONObject("serialized");
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
@@ -176,7 +186,15 @@ public class ClientController implements ControllerObserver {
 
     @Override
     public void onChooseColumnOfBookshelf(int numberOfColumn) {
-
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("row1", row1);
+        body.put("row2", row2);
+        body.put("col1", col1);
+        body.put("col2", col2);
+        body.put("column", numberOfColumn);
+        System.out.println("sending message");
+        client.sendRequest("DROP", body.toString());
     }
 
     @Override
@@ -184,8 +202,40 @@ public class ClientController implements ControllerObserver {
 
     }
 
+    private int row1, row2, col1, col2;
+
     @Override
     public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("row1", row1);
+        body.put("row2", row2);
+        body.put("col1", col1);
+        body.put("col2", col2);
+        this.row1 = row1;
+        this.col1 = col1;
+        this.row2 = row2;
+        this.col2 = col2;
+        System.out.println("sending message");
+        client.sendRequest("PICK", body.toString());
+    }
 
+    @Override
+    public void onChatMessageSent(String message) {
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("message", message);
+        System.out.println("sending message");
+        client.sendRequest("CHAT", body.toString());
+    }
+
+    @Override
+    public void onChatWhisperSent(String message, String recipient) {
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("message", message);
+        body.put("recipient", recipient);
+        System.out.println("sending whisper");
+        client.sendRequest("CHAT", body.toString());
     }
 }

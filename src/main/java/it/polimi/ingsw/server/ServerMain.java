@@ -17,7 +17,9 @@ public abstract class ServerMain {
         server.setCallback("DROP", ServerHandlers::handleDropTiles);
         server.setCallback("NEXT", ServerHandlers::handleEndTurn);
         server.setCallback("CHAT", (request, response) -> {
-            response = request;
+            System.out.println(request.getBody());
+            response.setBody(request.getBody());
+            response.setMethod("CHAT");
             response.sendToAll();
         });
 

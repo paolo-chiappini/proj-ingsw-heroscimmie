@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CliView extends ViewObservable implements ViewObserver, Runnable {
@@ -222,19 +223,53 @@ public class CliView extends ViewObservable implements ViewObserver, Runnable {
     public void run() {
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
-        // TODO : JESUS CHRIST VAMPIRE HUNTER AL MANNAGGIA FC.
         while (true) {
             try {
                 String line = reader.readLine();
-                switch (line) {
-                    case "quit" -> notifyObservers(ControllerObserver::quitGame);
-                    case "join" -> notifyObservers(ControllerObserver::joinGame);
-                    case "new" -> notifyObservers(obs -> obs.newGame(2));
-                    default -> notifyObservers(obs -> obs.onChooseUsername(line));
-                }
+                Input input = parseInputString(line);
+                parseInput(input);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    private record Input(String command, String[] args) {}
+
+    private Input parseInputString(String input) {
+        String[] tokens = input.split(" ");
+        String[] args = null;
+        if (tokens.length > 1) args = Arrays.copyOfRange(tokens, 1, tokens.length);
+        return new Input(tokens[0], args);
+    }
+
+    private void parseInput(Input input) {
+        switch (input.command()) {
+            case "name" -> notifyObservers(o -> o.onChooseUsername(input.args[0]));
+            case "new"  -> notifyObservers(o -> o.newGame(Integer.parseInt(input.args[0])));
+            case "join" -> notifyObservers(ControllerObserver::joinGame);
+            case "quit" -> notifyObservers(ControllerObserver::quitGame);
+            case "load" -> notifyObservers(o -> o.loadSavedGame(input.args[0]));
+            case "save" -> notifyObservers(ControllerObserver::saveCurrentGame);
+            case "/m" -> notifyObservers(o -> o.onChatMessageSent(String.join(" ", input.args)));
+            case "/w" -> notifyObservers(o -> o.onChatWhisperSent(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]));
+            case "pick" -> {
+                int[] coords1, coords2;
+                coords1 = parseBoardCoordinates(input.args[0]);
+                coords2 = parseBoardCoordinates(input.args[1]);
+                notifyObservers(o -> o.onChooseTilesOnBoard(coords1[0], coords1[1], coords2[0], coords2[1]));
+            }
+            case "drop" -> notifyObservers(o -> o.onChooseColumnOfBookshelf(Integer.parseInt(input.args[0])));
+        }
+    }
+
+    private int[] parseBoardCoordinates(String input) {
+        char rowChar = input.charAt(0);
+        int row, col;
+
+        row = rowChar - 'A';
+        col = Integer.parseInt(input.substring(1));
+
+        return new int[] {row, col};
     }
 }

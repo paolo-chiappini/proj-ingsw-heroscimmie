@@ -25,7 +25,12 @@ public abstract class GridElement extends CliElement {
      */
     public void setElement(CellElement element, int x, int y) {
         contents[y][x] = element;
-        CliDrawer.superimposeElement(element, this, adaptXCoords(x), adaptYCoords(y), ReplaceTarget.ALL);
+        if (element == null) {
+            CliDrawer.clearArea(this,
+                    adaptXCoords(x), adaptYCoords(y),
+                    adaptXCoords(x) + CellElement.WIDTH - 1, adaptYCoords(y) + CellElement.HEIGHT - 1);
+        }
+        else CliDrawer.superimposeElement(element, this, adaptXCoords(x), adaptYCoords(y), ReplaceTarget.ALL);
     }
 
     /**

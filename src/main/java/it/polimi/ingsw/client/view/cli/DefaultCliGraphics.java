@@ -119,6 +119,12 @@ public class DefaultCliGraphics implements ViewObserver {
     }
 
     private void addBoardToPanel() {
+        if (boardElement != null) {
+            CliDrawer.clearArea(mainPanel,
+                    DefaultLayout.BOARD_X, DefaultLayout.BOARD_Y,
+                    DefaultLayout.BOARD_X + boardElement.getWidth() - 1, DefaultLayout.BOARD_Y + boardElement.getHeight() - 1
+            );
+        }
         addElementToPanel(boardElement, DefaultLayout.BOARD_X, DefaultLayout.BOARD_Y);
     }
 
@@ -241,6 +247,7 @@ public class DefaultCliGraphics implements ViewObserver {
         for (int i = 0; i < update.length; i++)
             for (int j = 0; j < update[i].length; j++)
                 if (update[i][j] >= 0) grid.setElement(new TileElement(TileType.values()[update[i][j]]), j, i);
+                else grid.setElement(null, j, i);
     }
 
     /**

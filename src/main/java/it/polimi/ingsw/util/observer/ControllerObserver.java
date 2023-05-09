@@ -30,4 +30,6 @@ public interface ControllerObserver {
     void onChooseColumnOfBookshelf(int numberOfColumn);
     void onChooseTilesOrder(int first, int second, int third);
     void onChooseTilesOnBoard(int row1, int col1, int row2, int col2);
+    void onChatMessageSent(String message);
+    void onChatWhisperSent(String message, String recipient);
 }
