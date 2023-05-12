@@ -31,6 +31,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Represents the "default" CLI graphic view.
@@ -51,14 +52,18 @@ public class DefaultCliGraphics implements ViewObserver {
     private final List<String> players;
     private int clientIndex;
     private final HashMap<String, SmallBookshelfElement> otherBookshelves;
-    private final HashMap<Integer, CommonGoalCardElement> commonGoalCardElements;
+    private final List<Map.Entry<Integer, CommonGoalCardElement>> commonGoalCardElements;
+
+    private BoardTileType[][] boardTemplate;
 
     private final RectangleElement mainPanel;
+
     public DefaultCliGraphics() {
 
         otherBookshelves = new HashMap<>();
-        commonGoalCardElements = new HashMap<>();
+        commonGoalCardElements = new LinkedList<>();
         players = new LinkedList<>();
+        boardTemplate = null;
         clientIndex = 0;
 
         boardElement = new BoardElement();
@@ -97,9 +102,6 @@ public class DefaultCliGraphics implements ViewObserver {
         addElementToPanel(columnCoordinatesElement, DefaultLayout.COL_COORDINATES_X, DefaultLayout.COL_COORDINATES_Y);
         addElementToPanel(rowCoordinatesElement, DefaultLayout.ROW_COORDINATES_X, DefaultLayout.ROW_COORDINATES_Y);
 
-        // Bookshelf base (bookshelf coordinates)
-        addElementToPanel(bookshelfBaseElement, DefaultLayout.BOOKSHELF_BASE_X, DefaultLayout.BOOKSHELF_BASE_Y);
-
         // Horizontal break line
         addElementToPanel(
                 new RowElement(String.valueOf(TableChars.HORIZONTAL_BAR.getChar()).repeat(new CommonGoalCardElement("", 0, 0).getWidth())),
@@ -127,6 +129,8 @@ public class DefaultCliGraphics implements ViewObserver {
 
     private void addBookshelfToPanel() {
         addElementToPanel(mainBookshelf, DefaultLayout.BOOKSHELF_X, DefaultLayout.BOOKSHELF_Y);
+        // Bookshelf base (bookshelf coordinates)
+        addElementToPanel(bookshelfBaseElement, DefaultLayout.BOOKSHELF_BASE_X, DefaultLayout.BOOKSHELF_BASE_Y);
     }
 
     private void addBonusesInfoToPanel() {
@@ -138,13 +142,10 @@ public class DefaultCliGraphics implements ViewObserver {
     }
 
     private void addCommonGoalsToPanel() {
-        var keys = commonGoalCardElements.keySet();
-        int index = 0;
-        for (var key : keys) {
-            addElementToPanel(commonGoalCardElements.get(key),
+        for (int i = 0; i < commonGoalCardElements.size(); i++) {
+            addElementToPanel(commonGoalCardElements.get(i).getValue(),
                     DefaultLayout.GOAL_CARDS_X,
-                    DefaultLayout.COMMON_GOAL_1_Y + index * DefaultLayout.COMMON_GOALS_Y_OFFSET);
-            index++;
+                    DefaultLayout.COMMON_GOAL_1_Y + i * DefaultLayout.COMMON_GOALS_Y_OFFSET);
         }
     }
 
@@ -218,6 +219,9 @@ public class DefaultCliGraphics implements ViewObserver {
      */
     @Override
     public void updateBoard(int[][] update) {
+        // Restore board base
+        initBoard();
+
         updateGrid(boardElement, update);
         addBoardToPanel();
     }
@@ -241,6 +245,8 @@ public class DefaultCliGraphics implements ViewObserver {
         for (int i = 0; i < update.length; i++)
             for (int j = 0; j < update[i].length; j++)
                 if (update[i][j] >= 0) grid.setElement(new TileElement(TileType.values()[update[i][j]]), j, i);
+                else if (update[i][j] < 0 && !(grid.getElement(i, j) instanceof BoardSpaceElement))
+                    grid.setElement(null, j, i);
     }
 
     /**
@@ -261,7 +267,12 @@ public class DefaultCliGraphics implements ViewObserver {
      */
     @Override
     public void updateCommonGoalPoints(int cardId, int points) {
-        commonGoalCardElements.get(cardId).setPoints(points);
+        commonGoalCardElements.stream()
+                .filter(pair -> pair.getKey() == cardId)
+                .findFirst()
+                .orElseThrow()
+                .getValue()
+                .setPoints(points);
         addCommonGoalsToPanel();
     }
 
@@ -290,7 +301,7 @@ public class DefaultCliGraphics implements ViewObserver {
         }
 
         var newCardElement = new CommonGoalCardElement("Common Goal " + (commonGoalCardElements.size() + 1), id, points);
-        commonGoalCardElements.put(id, newCardElement);
+        commonGoalCardElements.add(Map.entry(id, newCardElement));
         addCommonGoalsToPanel();
     }
 
@@ -336,10 +347,11 @@ public class DefaultCliGraphics implements ViewObserver {
 
     // Sets the base of the board.
     private void initBoard() {
-        var template = getBoardTemplate();
-        for (int i = 0; i < template.length; i++) {
-            for (int j = 0; j < template[i].length; j++) {
-                if (template[i][j] != null) boardElement.setElement(new BoardSpaceElement(template[i][j]), j, i);
+        if (boardTemplate == null) boardTemplate = getBoardTemplate();
+        for (int i = 0; i < boardTemplate.length; i++) {
+            for (int j = 0; j < boardTemplate[i].length; j++) {
+                if (boardTemplate[i][j] != null)
+                    boardElement.setElement(new BoardSpaceElement(boardTemplate[i][j]), j, i);
             }
         }
     }
