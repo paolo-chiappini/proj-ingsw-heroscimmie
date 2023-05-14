@@ -36,7 +36,7 @@ public abstract class ServerHandlers {
         notifyMessage(res, "OK", successMessage);
     }
 
-    private static void notifyMessage(Message res, String method, String message) {
+    public static void notifyMessage(Message res, String method, String message) {
         setupResponse(res, method, message);
         res.send();
     }
@@ -63,6 +63,11 @@ public abstract class ServerHandlers {
 
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
+
+        if (username.isEmpty()) {
+            notifyError(res, "Invalid username, username cannot be empty");
+            return;
+        }
 
         if (ActiveGameManager.isGameInProgress() && !ActiveGameManager.getDisconnectedPlayers().contains(username)) {
             notifyError(res, "Game already in progress, cannot join");
@@ -240,12 +245,17 @@ public abstract class ServerHandlers {
         var depths = bookshelfColumnsDepths(bookshelf);
         JSONArray colDepths = new JSONArray(depths);
 
-        if (!board.canPickUpTiles(row1, col1, row2, col2)) {
-            notifyError(res, "Invalid tile range");
-        } else {
-            JSONObject responseBody = new JSONObject();
-            responseBody.put("bookshelf_columns_depths", colDepths);
-            sendUpdate(res, responseBody);
+        try {
+            if (!board.canPickUpTiles(row1, col1, row2, col2)) {
+                notifyError(res, "Invalid tile range");
+            } else {
+                JSONObject responseBody = new JSONObject();
+                responseBody.put("bookshelf_columns_depths", colDepths);
+                responseBody.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
+                sendUpdate(res, responseBody);
+            }
+        } catch (RuntimeException re) {
+            notifyError(res, re.getMessage());
         }
     }
 
@@ -256,18 +266,17 @@ public abstract class ServerHandlers {
      * @param res response message
      */
     public static void handleDropTiles(Message req, Message res) {
-        if (missingPropertiesInBody(List.of("username", "tiles", "column", "row1", "row2", "col1", "col2"), req, res)) return;
+        if (missingPropertiesInBody(List.of("username", "column", "row1", "row2", "col1", "col2"), req, res)) return;
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBookshelf bookshelf;
         IPlayer player;
-        String username;
-        int row1, row2, col1, col2, col;
         List<GameTile> tiles;
 
         JSONObject body = new JSONObject(req.getBody());
+        String username = body.getString("username");
 
-        username = body.getString("username");
+        int row1, row2, col1, col2, col;
         col = body.getInt("column");
         row1 = body.getInt("row1");
         row2 = body.getInt("row2");
@@ -279,13 +288,17 @@ public abstract class ServerHandlers {
 
         tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
 
-        if (!bookshelf.canDropTiles(tiles.size(), col)) {
-            notifyError(res, "Cannot drop tiles at specified location");
-        } else {
-            bookshelf.dropTiles(tiles, col);
-            JSONObject update = new JSONObject();
-            update.put("serialize", new JSONObject(currentGame.serialize(jsonSerializer)));
-            sendUpdate(res, update);
+        try {
+            if (!bookshelf.canDropTiles(tiles.size(), col)) {
+                notifyError(res, "Cannot drop tiles at specified location");
+            } else {
+                bookshelf.dropTiles(tiles, col);
+                JSONObject update = new JSONObject();
+                update.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
+                sendUpdate(res, update);
+            }
+        } catch (RuntimeException re) {
+            notifyError(res, re.getMessage());
         }
     }
 
@@ -313,13 +326,25 @@ public abstract class ServerHandlers {
             player.addPointsToScore(commonGoal.evaluatePoints(player));
         }
 
-        turnManager.nextTurn();
+        try {
+            turnManager.nextTurn();
+        } catch (IllegalActionException iae) {
+            notifyError(res, iae.getMessage());
+        }
 
         JSONObject update = new JSONObject();
         update.put("serialized", new JSONObject(game.serialize(jsonSerializer)));
         sendUpdate(res, update);
     }
 
+    /**
+     * Finds the corresponding player object given the username.
+     *
+     * @param username player's username to find
+     * @param players  list of players to search
+     * @return the player object with the requested username. Returns null if no
+     * object with the specified username is found.
+     */
     private static IPlayer getPlayerByUsername(String username, List<IPlayer> players) {
         for (IPlayer player : players)
             if (player.getUsername().equals(username)) return player;
@@ -328,6 +353,7 @@ public abstract class ServerHandlers {
 
     /**
      * Handles the disconnection of a socket.
+     *
      * @param socket disconnected socket
      */
     public static void handleDisconnection(Socket socket) {
@@ -340,7 +366,9 @@ public abstract class ServerHandlers {
 
             MessageProvider msgProvider = new MessageProvider(MessageType.JSON);
             JSONObject dummyRequestBody = new JSONObject();
+
             dummyRequestBody.put("body", new JSONObject().put("username", player));
+
             var res = msgProvider.getInstanceForOutgoingResponse(sockets.get(0), sockets);
             var req = msgProvider.getInstanceForIncomingRequest(sockets.get(0), dummyRequestBody.toString());
 
@@ -360,6 +388,7 @@ public abstract class ServerHandlers {
         try {
             ActiveGameManager.leaveGame(username);
             res.setMethod("LEFT");
+
             JSONObject resBody = new JSONObject();
             resBody.put("username", username);
             res.setBody(resBody.toString());
@@ -368,23 +397,45 @@ public abstract class ServerHandlers {
             return;
         }
 
+        // If a player is still connected to the game, notify winner.
         if (ActiveGameManager.isGameInProgress() && ActiveGameManager.getConnectedPlayers().size() == 1) {
-            JSONObject resBody = new JSONObject();
-            resBody.put("winner", ActiveGameManager.getConnectedPlayers().stream().findFirst().orElse(""));
+            JSONObject responseBody = new JSONObject();
+            responseBody.put("winner", ActiveGameManager.getConnectedPlayers().stream().findFirst().orElse(""));
+            responseBody.put("serialized", new JSONObject(ActiveGameManager.getActiveGameInstance().serialize(jsonSerializer)));
 
-            ActiveGameManager.stopGame();
-            sendUpdate(res, resBody);
+            try {
+                ActiveGameManager.stopGame();
+            } catch (IllegalActionException iae) {
+                notifyError(res, iae.getMessage());
+            }
+            sendUpdate(res, responseBody);
         }
     }
 
+    /**
+     * Support method used to get all missing properties in a json object.
+     *
+     * @param propertiesToCheck list of names of properties to check
+     * @param obj               json object to verify
+     * @return the list of missing properties expected in said object.
+     */
     private static List<String> getMissingProperties(List<String> propertiesToCheck, JSONObject obj) {
         List<String> missingProperties = new LinkedList<>();
         for (String prop : propertiesToCheck) {
             if (!obj.has(prop)) missingProperties.add(prop);
         }
-        return  missingProperties;
+        return missingProperties;
     }
 
+    /**
+     * Check whether the body of a request contains all expected properties.
+     *
+     * @param properties list of expected properties
+     * @param req        request message
+     * @param res        response message
+     * @return returns true if there are missing properties in the request body, also notifies the client
+     * with a message. Returns false if all expected properties have been found in the request body.
+     */
     private static boolean missingPropertiesInBody(List<String> properties, Message req, Message res) {
         var missingProperties = getMissingProperties(properties, new JSONObject(req.getBody()));
         if (missingProperties.size() > 0) {
@@ -426,8 +477,10 @@ public abstract class ServerHandlers {
      */
     public static boolean validateSocketUsername(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username"), req, res)) return false;
+
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
+
         if (playerSockets.containsKey(req.getSocket()) && !playerSockets.get(req.getSocket()).equals(username)) {
             notifyError(res, "Username does not match with socket");
             return false;
