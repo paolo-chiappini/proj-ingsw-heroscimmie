@@ -22,7 +22,9 @@ public class ClientPlayer extends ModelObservable {
         this.isDisconnected = false;
     }
 
-    public void setUsername(String username){this.username = username;}
+    public void setUsername(String username){
+        this.username = username;
+    }
 
     public void setBookshelf(ClientBookshelf bookshelf) {
         this.bookshelf = bookshelf;
@@ -71,6 +73,7 @@ public class ClientPlayer extends ModelObservable {
     public void updatePlayer(String data){
         this.getBookshelf().updateBookshelf(data);
         this.updateScore(data);
+        notifyObservers(obs->obs.updateBookshelf(getUsername(), getBookshelf().getTiles()));
     }
 
     /**

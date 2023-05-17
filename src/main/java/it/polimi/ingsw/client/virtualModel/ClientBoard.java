@@ -33,7 +33,6 @@ public class ClientBoard extends ModelObservable {
      */
     public void setTilesAt(int row, int column, int tileType) {
         spaces[row][column] = tileType;
-        notifyObservers(obs->obs.updateBoard(getSpaces()));
     }
 
     public void setBoardSize(int boardSize) {
@@ -72,5 +71,6 @@ public class ClientBoard extends ModelObservable {
                 setTilesAt(i,j,board.getJSONArray(i).getInt(j));
             }
         }
+        notifyObservers(viewObserver -> viewObserver.updateBoard(getSpaces()));
     }
 }
