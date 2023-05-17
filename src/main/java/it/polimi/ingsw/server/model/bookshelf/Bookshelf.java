@@ -156,7 +156,10 @@ public class Bookshelf implements IBookshelf {
             order.add(tilesToDrop.get(position1-1));
             order.add(tilesToDrop.get(position2-1));
         }
-        return order;
+       else
+           order.add(tilesToDrop.get(position1-1));
+
+       return order;
     }
 
     @Override
