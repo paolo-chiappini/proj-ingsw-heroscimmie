@@ -1,49 +1,57 @@
 package it.polimi.ingsw.client;
 
 import it.polimi.ingsw.server.messages.Message;
-import it.polimi.ingsw.server.messages.MessageProvider;
-import it.polimi.ingsw.server.messages.MessageType;
 import it.polimi.ingsw.util.observer.ClientObservable;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.util.function.Consumer;
 
 public class Client extends ClientObservable {
 
     private final Socket socket;
-    private final BufferedReader fromServer;
+    private ObjectOutputStream toServer;
+    private ObjectInputStream fromServer;
+    private String username;
 
     protected Message message;
-    private final MessageProvider messageProvider = new MessageProvider(MessageType.JSON);
-    private Consumer<Message> callback;
-    private static final int SERVER_PORT=49152;
 
-    public Client(String address){
+    public Client(String address, int port){
+        this.socket = new Socket();
         try {
-            this.socket = new Socket(address, SERVER_PORT);
-            fromServer = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
+            this.socket.connect(new InetSocketAddress(address,port));
+            this.toServer = new ObjectOutputStream(socket.getOutputStream());
+            this.fromServer = new ObjectInputStream(socket.getInputStream());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
-        // default callback
-        callback = (msg) -> {};
     }
 
-    public void sendRequest(String method, String body) {
-        Message request = messageProvider.getEmptyInstance(socket);
-        request.setMethod(method);
-        request.setBody(body);
-        request.send();
+    public void readMessageFromServer() {
+        new Thread(() -> {
+            while(socket.isConnected())
+            {
+                try{
+                    Message message = (Message) fromServer.readObject();
+                    notifyObservers(obs->obs.update(message));
+                }catch(Exception e){
+                    endConnection();
+                }
+            }
+
+        }).start();
     }
 
-    public Message readFromServer() {
+    public void sendMessageToServer(Message message) {
         try {
-            return messageProvider.getInstanceForIncomingRequest(this.socket, fromServer.readLine());
+            toServer.writeObject(message);
+            toServer.flush();
         } catch (IOException e) {
+            e.printStackTrace();
             endConnection();
         }
-        return null;
     }
 
     public void endConnection() {
@@ -56,18 +64,16 @@ public class Client extends ClientObservable {
         }
     }
 
-    private void run() {
-        while (true) {
-            Message serverMessage = readFromServer();
-            callback.accept(serverMessage);
-        }
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public void setOnMessageReceivedCallback(Consumer<Message> callback) {
-        this.callback = callback;
+    public String getUsername() {
+        return username;
     }
 
-    public void start() {
-        new Thread(this::run).start();
+    public Socket getSocket() {
+        return socket;
     }
 }
+
