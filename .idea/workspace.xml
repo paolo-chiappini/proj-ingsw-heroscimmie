@@ -13,12 +13,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="fixed bug in deserializer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHooks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/Cli.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ControllerObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ControllerObserver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,26 +111,23 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.server in proj-ingsw-heroscimmie">
-    <configuration name="SimpleStart" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
+  <component name="RunManager" selected="Application.ServerMain">
+    <configuration name="ServerMain" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.server.ServerMain" />
       <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.server.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonDeserializationTest.testBoardDeserialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SimpleStart" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.JsonDeserializationTest" />
-      <option name="METHOD_NAME" value="testBoardDeserialization" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -219,20 +216,20 @@
     </configuration>
     <list>
       <item itemvalue="Application.SimpleStart" />
+      <item itemvalue="Application.ServerMain" />
       <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
       <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
-      <item itemvalue="JUnit.JsonDeserializationTest.testBoardDeserialization" />
       <item itemvalue="JUnit.TurnManagerTest" />
       <item itemvalue="JUnit.TurnManagerTest$TestSerialization.turnManagerDeserialization" />
       <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.ServerMain" />
         <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.TurnManagerTest$TestSerialization.turnManagerDeserialization" />
         <item itemvalue="JUnit.TurnManagerTest" />
-        <item itemvalue="JUnit.JsonDeserializationTest.testBoardDeserialization" />
       </list>
     </recent_temporary>
   </component>
@@ -348,23 +345,17 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680354353328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1680339350138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1682874151594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682882899306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$TileSpaceTest.ic" NAME="TileSpaceTest Coverage Results" MODIFIED="1679835142807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
@@ -373,72 +364,78 @@
     <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$CommonGoalCardDeckTest_OnCommonGoalDeckCreationTests_GettingPointsTests_getPointsCard2Players.ic" NAME="CommonGoalCardDeckTest$OnCommonGoalDeckCreationTests$GettingPointsTests.getPointsCard2Players Coverage Results" MODIFIED="1680527192405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1681220954744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$it_polimi_ingsw_server_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw.server in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682329659742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683202340877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$FileManagerTest.ic" NAME="FileManagerTest Coverage Results" MODIFIED="1682885455980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.files.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JSONServerTest.ic" NAME="JSONServerTest Coverage Results" MODIFIED="1682327536667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ProgettoIngSoftware$ServerConfigurationTest.ic" NAME="ServerConfigurationTest Coverage Results" MODIFIED="1682329568194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.server.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333185145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$it_in_proj_ingsw_heroscimmie.ic" NAME="it in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683036158569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333185145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1682874151594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683202340877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680354353328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$FileManagerTest.ic" NAME="FileManagerTest Coverage Results" MODIFIED="1682885455980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.files.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$it_polimi_ingsw_server_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw.server in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682329659742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1680339350138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JSONServerTest.ic" NAME="JSONServerTest Coverage Results" MODIFIED="1682327536667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
     </SUITE>
   </component>
 </project>
