@@ -230,11 +230,8 @@ public abstract class ServerHandlers {
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBoard board = currentGame.getBoard();
-        IBookshelf bookshelf;
 
         JSONObject body = new JSONObject(req.getBody());
-        String username = body.getString("username");
-        bookshelf = getPlayerByUsername(username, currentGame.getPlayers()).getBookshelf();
 
         int row1, row2, col1, col2;
         row1 = body.getInt("row1");
@@ -242,17 +239,9 @@ public abstract class ServerHandlers {
         col1 = body.getInt("col1");
         col2 = body.getInt("col2");
 
-        var depths = bookshelfColumnsDepths(bookshelf);
-        JSONArray colDepths = new JSONArray(depths);
-
         try {
             if (!board.canPickUpTiles(row1, col1, row2, col2)) {
                 notifyError(res, "Invalid tile range");
-            } else {
-                JSONObject responseBody = new JSONObject();
-                responseBody.put("bookshelf_columns_depths", colDepths);
-                responseBody.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
-                sendUpdate(res, responseBody);
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());
@@ -266,7 +255,7 @@ public abstract class ServerHandlers {
      * @param res response message
      */
     public static void handleDropTiles(Message req, Message res) {
-        if (missingPropertiesInBody(List.of("username", "column", "row1", "row2", "col1", "col2"), req, res)) return;
+        if (missingPropertiesInBody(List.of("username", "column", "row1", "row2", "col1", "col2", "first_tile", "second_tile", "third_tile"), req, res)) return;
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBookshelf bookshelf;
@@ -276,12 +265,15 @@ public abstract class ServerHandlers {
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
 
-        int row1, row2, col1, col2, col;
+        int row1, row2, col1, col2, col, first, second, third;
         col = body.getInt("column");
         row1 = body.getInt("row1");
         row2 = body.getInt("row2");
         col1 = body.getInt("col1");
         col2 = body.getInt("col2");
+        first = body.getInt("first_tile");
+        second = body.getInt("second_tile");
+        third = body.getInt("third_tile");
 
         player = getPlayerByUsername(username, currentGame.getPlayers());
         bookshelf = player.getBookshelf();
@@ -292,7 +284,7 @@ public abstract class ServerHandlers {
             if (!bookshelf.canDropTiles(tiles.size(), col)) {
                 notifyError(res, "Cannot drop tiles at specified location");
             } else {
-                bookshelf.dropTiles(tiles, col);
+                bookshelf.dropTiles(bookshelf.decideTilesOrder(tiles,first,second,third), col);
                 JSONObject update = new JSONObject();
                 update.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
                 sendUpdate(res, update);
@@ -323,11 +315,15 @@ public abstract class ServerHandlers {
         if (board.needsRefill()) board.refill(bag);
 
         for (CommonGoalCard commonGoal : commonGoals) {
-            player.addPointsToScore(commonGoal.evaluatePoints(player));
+            if (commonGoal.canObtainPoints(player.getBookshelf()))
+                player.addPointsToScore(commonGoal.evaluatePoints(player));
         }
 
         try {
-            turnManager.nextTurn();
+            if(turnManager.isGameOver())
+                game.evaluateFinalScores();
+            else
+                turnManager.nextTurn();
         } catch (IllegalActionException iae) {
             notifyError(res, iae.getMessage());
         }
@@ -443,25 +439,6 @@ public abstract class ServerHandlers {
             return true;
         }
         return false;
-    }
-
-    /**
-     * Method used to determine the maximum amount of tiles that
-     * can be inserted in the bookshelf.
-     * @param bookshelf bookshelf to evaluate
-     * @return the depths of the columns of the bookshelf.
-     */
-    private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
-        List<Integer> depths = new LinkedList<>();
-        for (int i = 0; i < bookshelf.getWidth(); i++) {
-            int depth = 0;
-            for (int j = 0; j < bookshelf.getHeight(); j++) {
-                if (bookshelf.getTileAt(i, j) == null) depth++;
-                else break;
-            }
-            depths.add(depth);
-        }
-        return depths;
     }
 
     /**
