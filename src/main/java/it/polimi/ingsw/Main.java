@@ -44,7 +44,7 @@ public class Main {
         }
 
         if (startupMode == null) {
-            System.out.println("Unable to start application, no startup mode provided. Please choose one between --sever, --cli and --gui");
+            System.out.println("Unable to start application, no startup mode provided. Please choose one between --server, --cli and --gui");
             return;
         }
 
