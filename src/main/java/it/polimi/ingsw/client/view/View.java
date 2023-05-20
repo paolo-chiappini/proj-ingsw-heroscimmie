@@ -37,6 +37,9 @@ public abstract class View
      */
     public abstract void showServerConnectionError();
 
+    public abstract void handleSuccessMessage(String message);
+    public abstract  void handleErrorMessage(String message);
+
     /**
      * Notifies all listeners that the player has changed username.
      * @param name player's username.

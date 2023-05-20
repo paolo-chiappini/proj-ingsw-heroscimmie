@@ -170,11 +170,12 @@ public class TurnListElement extends FramedElement {
      * @param isDisconnected true if the player has disconnected from the game.
      */
     public void updateConnectionStatus(String username, boolean isDisconnected) {
-        players.stream()
-                .filter(p -> p.getUsername().equals(username))
-                .findFirst()
-                .orElseThrow()
-                .setConnectionStatus(isDisconnected);
+        for (PlayerRecord playerRecord : players) {
+            if (playerRecord.getUsername().equals(username)) {
+                playerRecord.setConnectionStatus(isDisconnected);
+                break;
+            }
+        }
         drawTurnIndex();
         drawPlayerNames();
     }
@@ -185,11 +186,12 @@ public class TurnListElement extends FramedElement {
      * @param score updated score.
      */
     public void updatePlayerScore(String username, int score) {
-        players.stream()
-                .filter(p -> p.getUsername().equals(username))
-                .findFirst()
-                .orElseThrow()
-                .setScore(score);
+        for (PlayerRecord playerRecord : players) {
+            if (playerRecord.getUsername().equals(username)) {
+                playerRecord.setScore(score);
+                break;
+            }
+        }
         drawScores();
     }
 

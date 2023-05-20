@@ -26,10 +26,12 @@ public class ClientController implements ViewListener {
     private ClientTurnState turnState;
     private final View view;
     private int row1, row2, col1, col2, first, second, third;
+    private boolean clientIsInGame;
 
 
     public ClientController(View view, String serverAddress) {
         this.view = view;
+        clientIsInGame = false;
 
         try {
             client = new Client(serverAddress);
@@ -47,7 +49,6 @@ public class ClientController implements ViewListener {
         new Thread(view).start();
     }
 
-
     public void onMessageReceived(Message message) {
         if (message == null) {
             view.showServerConnectionError();
@@ -60,15 +61,26 @@ public class ClientController implements ViewListener {
             case "UPDATE" -> update(message);
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
-            case "LEFT" -> onPlayerConnectionChange(message, true);
-            case "RECONNECT" -> onPlayerConnectionChange(message, false);
-            default -> {}
+            case "LEFT" -> onPlayerDisconnection(message);
+            case "OK" -> view.handleSuccessMessage(new JSONObject(message.getBody()).getString("msg"));
+            case "ERR" -> view.handleErrorMessage(new JSONObject(message.getBody()).getString("msg"));
         }
     }
 
-    public void onPlayerConnectionChange(Message message, boolean disconnected) {
+    public void onPlayerReconnection(Message message) {
+        // TODO: fix
         String username = new JSONObject(message.getBody()).getString("username");
-        view.updatePlayerConnectionStatus(username, disconnected);
+        view.updatePlayerConnectionStatus(username, false);
+    }
+
+    public void onPlayerDisconnection(Message message) {
+        // TODO: fix
+        String username = new JSONObject(message.getBody()).getString("username");
+        if (username.equals(myUsername)) {
+            clientIsInGame = false;
+            return;
+        }
+        view.updatePlayerConnectionStatus(username, true);
     }
 
     public void onListReceived(Message message) {
@@ -94,6 +106,8 @@ public class ClientController implements ViewListener {
     }
 
     public void onChatMessageReceived(Message message) {
+        if (!clientIsInGame) return;
+
         JSONObject body = new JSONObject(message.getBody());
         String chatMessage = body.getString("message");
         String sender = body.getString("username");
@@ -110,8 +124,9 @@ public class ClientController implements ViewListener {
 
 
     public void update(Message message) {
-        JSONObject body = new JSONObject(message.getBody());
+        if (!clientIsInGame) return;
 
+        JSONObject body = new JSONObject(message.getBody());
         JSONObject serialized = body.getJSONObject("serialized");
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
@@ -130,50 +145,88 @@ public class ClientController implements ViewListener {
         view.finalizeUpdate();
     }
 
-    private void handleGameEndAndReset() {
-    }
-
     private void handleTurnChange(int turnIndex) {
-        if (players.get(turnIndex).getUsername().equals(myUsername)) {
-            return;
-        }
+        // TODO: implement
     }
 
     public void onGameStart(Message message) {
         JSONObject body = new JSONObject(message.getBody());
-        JSONObject serialized = body.getJSONObject("serialized");
-        JSONArray jsonPlayers = serialized.getJSONArray("players");
-        JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
-
-        this.board = new ClientBoard();
-        this.players = new LinkedList<>();
-        this.commonGoalCards = new LinkedList<>();
-        this.turnState = new ClientTurnState();
-
-        this.board.addListener(view);
-        this.turnState.addListener(view);
-
-        for (int i = 0; i < jsonPlayers.length(); i++) {
-            JSONObject player = jsonPlayers.getJSONObject(i);
-            this.players.add(new ClientPlayer(player.getString("username")));
-            this.players.get(i).addListener(view);
-            view.addPlayer(player.getString("username"), player.getInt("score"), player.getString("username").equals(myUsername));
-            if (player.getString("username").equals(myUsername))
-                this.players.get(i).updateId(player.toString());
+        JSONArray players = body.getJSONObject("serialized").getJSONArray("players_order");
+        for (int i = 0; i < players.length(); i++) {
+            if (players.getString(i).equals(myUsername)) {
+                clientIsInGame = true;
+                break;
+            }
         }
 
-        for (int i = 0; i < jsonCommonGoals.length(); i++) {
-            this.commonGoalCards.add(new ClientCommonGoalCard());
-            this.commonGoalCards.get(i).addListener(view);
-            commonGoalCards.get(i).updateId(jsonCommonGoals.getJSONObject(i).toString());
-        }
-        this.board.updateBoard(serialized.toString());
+        if (!clientIsInGame) return;
+
+        initVirtualModelAndView();
+        setupGameFromJson(body);
+        setupModelListeners();
 
         update(message);
     }
 
+    private void initVirtualModelAndView() {
+        board = new ClientBoard();
+        turnState = new ClientTurnState();
+        players = new LinkedList<>();
+        commonGoalCards = new LinkedList<>();
+
+        view.reset();
+    }
+
+    private void setupModelListeners() {
+        board.addListener(view);
+        turnState.addListener(view);
+        players.forEach(player -> player.addListener(view));
+        commonGoalCards.forEach(goal -> goal.addListener(view));
+    }
+
+    private void setupGameFromJson(JSONObject gameState) {
+        JSONObject serialized = gameState.getJSONObject("serialized");
+        JSONArray jsonPlayers = serialized.getJSONArray("players");
+        JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
+
+        addPlayers(jsonPlayers);
+        addCommonGoals(jsonCommonGoals);
+    }
+
+    private void addPlayers(JSONArray jsonPlayers) {
+        for (int i = 0; i < jsonPlayers.length(); i++) {
+            JSONObject playerObject = jsonPlayers.getJSONObject(i);
+            String username = playerObject.getString("username");
+            boolean isCurrentClient = username.equals(myUsername);
+
+            ClientPlayer virtualPlayer = new ClientPlayer(username);
+            virtualPlayer.updatePlayer(playerObject.toString());
+            virtualPlayer.updatePersonalCardId(playerObject.toString());
+
+            players.add(virtualPlayer);
+            view.addPlayer(username, 0, isCurrentClient);
+            if (isCurrentClient) view.setPersonalGoal(virtualPlayer.getPersonalCardId());
+        }
+    }
+
+    private void addCommonGoals(JSONArray jsonCommonGoals) {
+        for (int i = 0; i < jsonCommonGoals.length(); i++) {
+            JSONObject goalObject = jsonCommonGoals.getJSONObject(i);
+
+            ClientCommonGoalCard virtualCommonGoal = new ClientCommonGoalCard();
+            virtualCommonGoal.updateId(goalObject.toString());
+
+            commonGoalCards.add(virtualCommonGoal);
+            view.setCommonGoal(virtualCommonGoal.getId(), 0);
+        }
+    }
 
     public void onJoinGame() {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("JOIN", body.toString());
@@ -181,6 +234,11 @@ public class ClientController implements ViewListener {
 
 
     public void onNewGame(int lobbySize) {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("lobby_size", lobbySize);
@@ -189,6 +247,11 @@ public class ClientController implements ViewListener {
 
 
     public void onListSavedGames() {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("LIST", body.toString());
@@ -196,6 +259,11 @@ public class ClientController implements ViewListener {
 
 
     public void onLoadSavedGame(String saveName) {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("save_name", saveName);
@@ -204,6 +272,11 @@ public class ClientController implements ViewListener {
 
 
     public void onSaveCurrentGame() {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("SAVE", body.toString());
@@ -211,6 +284,11 @@ public class ClientController implements ViewListener {
 
 
     public void onQuitGame() {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("QUIT", body.toString());
@@ -218,10 +296,20 @@ public class ClientController implements ViewListener {
 
 
     public void onChooseUsername(String username) {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         this.myUsername = username;
     }
 
     public void onChooseColumnOfBookshelf(int numberOfColumn) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("row1", row1);
@@ -237,12 +325,22 @@ public class ClientController implements ViewListener {
 
 
     public void onChooseTilesOrder(int first, int second, int third) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         this.first = first;
         this.second = second;
         this.third = third;
     }
 
     public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("row1", row1);
@@ -258,6 +356,11 @@ public class ClientController implements ViewListener {
 
 
     public void onChatMessageSent(String message) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot send a message when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("message", message);
@@ -266,6 +369,11 @@ public class ClientController implements ViewListener {
 
 
     public void onChatWhisperSent(String message, String recipient) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot send a message when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("message", message);
@@ -274,6 +382,8 @@ public class ClientController implements ViewListener {
     }
 
     public void onEndOfTurn() {
+        if (!clientIsInGame) return;
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("NEXT", body.toString());

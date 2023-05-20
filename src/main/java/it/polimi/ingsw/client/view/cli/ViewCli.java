@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.ViewMessage;
 import it.polimi.ingsw.client.view.cli.graphics.util.ICliRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
@@ -259,5 +260,15 @@ public class ViewCli extends View {
     public void showServerConnectionError() {
         // TODO: implement reconnection to server (?)
         System.out.println("Unable to connect to the sever, client shutting down.");
+    }
+
+    @Override
+    public void handleErrorMessage(String message) {
+        System.out.println(message);
+    }
+
+    @Override
+    public void handleSuccessMessage(String message) {
+        System.out.println(message);
     }
 }

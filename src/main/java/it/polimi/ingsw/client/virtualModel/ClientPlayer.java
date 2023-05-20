@@ -51,7 +51,7 @@ public class ClientPlayer extends ObservableObject<ModelListener> {
         return bookshelf;
     }
 
-    public int getId() {
+    public int getPersonalCardId() {
         return idPersonalGoalCard;
     }
 
@@ -91,7 +91,7 @@ public class ClientPlayer extends ObservableObject<ModelListener> {
      * Updates the card's ID
      * @param data contains up-to-date card details
      */
-    public void updateId(String data)
+    public void updatePersonalCardId(String data)
     {
         JSONObject jsonObject = new JSONObject(data);
         int idCard = jsonObject.getInt("personal_card_id");

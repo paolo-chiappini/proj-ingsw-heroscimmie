@@ -267,12 +267,12 @@ public class DefaultCliGraphics implements ModelListener {
      */
     @Override
     public void updateCommonGoalPoints(int cardId, int points) {
-        commonGoalCardElements.stream()
-                .filter(pair -> pair.getKey() == cardId)
-                .findFirst()
-                .orElseThrow()
-                .getValue()
-                .setPoints(points);
+        for (var commonGoal : commonGoalCardElements) {
+            if (commonGoal.getKey() == cardId) {
+                commonGoal.getValue().setPoints(points);
+                break;
+            }
+        }
         addCommonGoalsToPanel();
     }
 
