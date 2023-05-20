@@ -11,6 +11,9 @@ import it.polimi.ingsw.util.observer.ViewListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,7 +34,7 @@ public class ClientController implements ViewListener {
         try {
             client = new Client(serverAddress);
         } catch (RuntimeException re) {
-            System.out.println("Unable to establish connection to server, exiting");
+            view.showServerConnectionError();
             return;
         }
 
@@ -46,32 +49,49 @@ public class ClientController implements ViewListener {
 
 
     public void onMessageReceived(Message message) {
+        if (message == null) {
+            view.showServerConnectionError();
+            return;
+        }
+
         String method = message.getMethod();
         switch (method) {
             case "START" -> onGameStart(message);
             case "UPDATE" -> update(message);
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
-            case "LEFT" ->
-                    System.out.println(new JSONObject(message.getBody()).getString("username") + " left the game");
-            case "OK", "ERR" -> System.out.println(new JSONObject(message.getBody()).getString("msg"));
-            default -> {
-            }
+            case "LEFT" -> onPlayerConnectionChange(message, true);
+            case "RECONNECT" -> onPlayerConnectionChange(message, false);
+            default -> {}
         }
     }
 
+    public void onPlayerConnectionChange(Message message, boolean disconnected) {
+        String username = new JSONObject(message.getBody()).getString("username");
+        view.updatePlayerConnectionStatus(username, disconnected);
+    }
 
     public void onListReceived(Message message) {
         JSONObject body = new JSONObject(message.getBody());
         JSONArray files = body.getJSONArray("files");
-        if (files.isEmpty()) System.out.println("There are no files");
+        if (files.isEmpty()) view.showListOfSavedGames(null);
         else {
-            System.out.println("List of saved files");
-            for (int i = 0; i < files.length(); i++)
-                System.out.println(files.get(i).toString());
+            String[] parsedFiles = new String[files.length()];
+            for (int i = 0; i < parsedFiles.length; i++) {
+                parsedFiles[i] = "Saved game " + parseSavedGameDateFormat(files.getString(i));
+            }
+            view.showListOfSavedGames(parsedFiles);
         }
     }
 
+    private String parseSavedGameDateFormat(String filename) {
+        String millisecondsString = filename.substring(filename.indexOf("_") + 1, filename.indexOf(".json"));
+        long millis = Long.parseLong(millisecondsString);
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+        Date date = new Date(millis);
+
+        return dateFormat.format(date);
+    }
 
     public void onChatMessageReceived(Message message) {
         JSONObject body = new JSONObject(message.getBody());
@@ -198,7 +218,6 @@ public class ClientController implements ViewListener {
 
 
     public void onChooseUsername(String username) {
-        System.out.println("updated username : " + username);
         this.myUsername = username;
     }
 
@@ -213,7 +232,6 @@ public class ClientController implements ViewListener {
         body.put("second_tile", second);
         body.put("third_tile", third);
         body.put("column", numberOfColumn);
-        System.out.println("sending message");
         client.sendRequest("DROP", body.toString());
     }
 
@@ -235,7 +253,6 @@ public class ClientController implements ViewListener {
         this.col1 = col1;
         this.row2 = row2;
         this.col2 = col2;
-        System.out.println("sending message");
         client.sendRequest("PICK", body.toString());
     }
 
@@ -244,7 +261,6 @@ public class ClientController implements ViewListener {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("message", message);
-        System.out.println("sending message");
         client.sendRequest("CHAT", body.toString());
     }
 
@@ -254,7 +270,6 @@ public class ClientController implements ViewListener {
         body.put("username", myUsername);
         body.put("message", message);
         body.put("recipient", recipient);
-        System.out.println("sending whisper");
         client.sendRequest("CHAT", body.toString());
     }
 

@@ -27,6 +27,17 @@ public abstract class View
     public abstract void finalizeUpdate();
 
     /**
+     * Shows the list of saved games to the user.
+     * @param savedGames collection of saved games.
+     */
+    public abstract void showListOfSavedGames(String[] savedGames);
+
+    /**
+     * Shows a server connection error message to the user.
+     */
+    public abstract void showServerConnectionError();
+
+    /**
      * Notifies all listeners that the player has changed username.
      * @param name player's username.
      */

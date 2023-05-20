@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.cli.graphics.util.ICliRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
 import it.polimi.ingsw.util.observer.ViewListener;
@@ -232,9 +233,31 @@ public class ViewCli extends View {
         out.print("\033[H\033[2J");
         out.flush();
 
-        String renderedGraphics = "";
-        if (System.getProperty("os.name").contains("win")) renderedGraphics = graphics.getGraphics().render(textRenderer);
-        else renderedGraphics = graphics.getGraphics().render(colorRenderer);
-        out.println(renderedGraphics);
+        ICliRenderer renderer = colorRenderer;
+
+        // Check if view is running in a windows' console, in that case don't use colors
+        // (ANSI codes are not supported by windows' powershell)
+        if (System.getProperty("os.name").contains("win")) renderer = textRenderer;
+
+        out.println(graphics.getGraphics().render(renderer));
+    }
+
+    @Override
+    public void showListOfSavedGames(String[] savedGames) {
+        System.out.println("Saved games:");
+        if (savedGames == null) {
+            System.out.println("No saved games found");
+            return;
+        }
+
+        for (int i = 0; i < savedGames.length; i++) {
+            System.out.printf("%d. %s%n", (i+1), savedGames[i]);
+        }
+    }
+
+    @Override
+    public void showServerConnectionError() {
+        // TODO: implement reconnection to server (?)
+        System.out.println("Unable to connect to the sever, client shutting down.");
     }
 }
