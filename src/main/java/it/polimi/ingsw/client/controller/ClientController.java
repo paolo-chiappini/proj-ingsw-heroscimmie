@@ -1,7 +1,7 @@
 package it.polimi.ingsw.client.controller;
 
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.client.view.cli.ViewCli;
+import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.virtualModel.ClientBoard;
 import it.polimi.ingsw.client.virtualModel.ClientCommonGoalCard;
 import it.polimi.ingsw.client.virtualModel.ClientPlayer;
@@ -18,19 +18,15 @@ public class ClientController implements ViewListener {
     private Client client;
     private String myUsername;
     private ClientBoard board;
-    private final List<ClientPlayer> players;
-    private final List<ClientCommonGoalCard> commonGoalCards;
-    private final ClientTurnState turnState;
-    private final ViewCli view;
+    private List<ClientPlayer> players;
+    private List<ClientCommonGoalCard> commonGoalCards;
+    private ClientTurnState turnState;
+    private final View view;
     private int row1, row2, col1, col2, first, second, third;
 
 
-    public ClientController(ViewCli view, String serverAddress){
+    public ClientController(View view, String serverAddress) {
         this.view = view;
-        board = new ClientBoard();
-        players = new LinkedList<>();
-        commonGoalCards = new LinkedList<>();
-        turnState = new ClientTurnState();
 
         try {
             client = new Client(serverAddress);
@@ -40,10 +36,11 @@ public class ClientController implements ViewListener {
         }
 
         view.addListener(this);
-        board.addListener(view.getGraphics());
 
         client.setOnMessageReceivedCallback(this::onMessageReceived);
         client.start();
+
+        // Start view on a different tread
         new Thread(view).start();
     }
 
@@ -55,9 +52,11 @@ public class ClientController implements ViewListener {
             case "UPDATE" -> update(message);
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
-            case "LEFT" -> System.out.println(new JSONObject(message.getBody()).getString("username") + " left the game");
+            case "LEFT" ->
+                    System.out.println(new JSONObject(message.getBody()).getString("username") + " left the game");
             case "OK", "ERR" -> System.out.println(new JSONObject(message.getBody()).getString("msg"));
-            default -> {}
+            default -> {
+            }
         }
     }
 
@@ -66,9 +65,9 @@ public class ClientController implements ViewListener {
         JSONObject body = new JSONObject(message.getBody());
         JSONArray files = body.getJSONArray("files");
         if (files.isEmpty()) System.out.println("There are no files");
-        else{
+        else {
             System.out.println("List of saved files");
-            for(int i=0; i< files.length();i++)
+            for (int i = 0; i < files.length(); i++)
                 System.out.println(files.get(i).toString());
         }
     }
@@ -81,12 +80,12 @@ public class ClientController implements ViewListener {
         String recipient = null;
         if (body.has("recipient")) recipient = body.getString("recipient");
 
-        if (recipient != null && recipient.equals(myUsername))
-            view.getGraphics().addMessage(chatMessage, sender, true);
+        if (recipient != null && (recipient.equals(myUsername) || sender.equals(myUsername)))
+            view.addMessage(chatMessage, sender, true);
         else if (recipient == null)
-            view.getGraphics().addMessage(chatMessage, sender, false);
+            view.addMessage(chatMessage, sender, false);
 
-        view.drawGraphics();
+        view.finalizeUpdate();
     }
 
 
@@ -108,36 +107,46 @@ public class ClientController implements ViewListener {
             commonGoalCards.get(i).updatePoints(jsonCommonGoals.getJSONObject(i).toString());
         }
 
-        view.drawGraphics();
+        view.finalizeUpdate();
     }
 
-    private void handleGameEndAndReset() {}
+    private void handleGameEndAndReset() {
+    }
 
     private void handleTurnChange(int turnIndex) {
-        if (players.get(turnIndex).getUsername().equals(myUsername)) { return; }
+        if (players.get(turnIndex).getUsername().equals(myUsername)) {
+            return;
+        }
     }
 
     public void onGameStart(Message message) {
         JSONObject body = new JSONObject(message.getBody());
         JSONObject serialized = body.getJSONObject("serialized");
-        JSONArray players = serialized.getJSONArray("players");
-        JSONArray commonGoals = serialized.getJSONArray("common_goals");
+        JSONArray jsonPlayers = serialized.getJSONArray("players");
+        JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
 
-        for (int i = 0; i < players.length(); i++) {
-            JSONObject player = players.getJSONObject(i);
+        this.board = new ClientBoard();
+        this.players = new LinkedList<>();
+        this.commonGoalCards = new LinkedList<>();
+        this.turnState = new ClientTurnState();
+
+        this.board.addListener(view);
+        this.turnState.addListener(view);
+
+        for (int i = 0; i < jsonPlayers.length(); i++) {
+            JSONObject player = jsonPlayers.getJSONObject(i);
             this.players.add(new ClientPlayer(player.getString("username")));
-            this.players.get(i).addListener(view.getGraphics());
-            view.getGraphics().addPlayer(player.getString("username"), player.getInt("score"), player.getString("username").equals(myUsername));
+            this.players.get(i).addListener(view);
+            view.addPlayer(player.getString("username"), player.getInt("score"), player.getString("username").equals(myUsername));
             if (player.getString("username").equals(myUsername))
                 this.players.get(i).updateId(player.toString());
         }
 
-        for (int i = 0; i < commonGoals.length(); i++) {
+        for (int i = 0; i < jsonCommonGoals.length(); i++) {
             this.commonGoalCards.add(new ClientCommonGoalCard());
-            this.commonGoalCards.get(i).addListener(view.getGraphics());
-            commonGoalCards.get(i).updateId(commonGoals.getJSONObject(i).toString());
+            this.commonGoalCards.get(i).addListener(view);
+            commonGoalCards.get(i).updateId(jsonCommonGoals.getJSONObject(i).toString());
         }
-
         this.board.updateBoard(serialized.toString());
 
         update(message);
@@ -201,8 +210,8 @@ public class ClientController implements ViewListener {
         body.put("col1", col1);
         body.put("col2", col2);
         body.put("first_tile", first);
-        body.put("second_tile",second);
-        body.put("third_tile",third);
+        body.put("second_tile", second);
+        body.put("third_tile", third);
         body.put("column", numberOfColumn);
         System.out.println("sending message");
         client.sendRequest("DROP", body.toString());
@@ -210,9 +219,9 @@ public class ClientController implements ViewListener {
 
 
     public void onChooseTilesOrder(int first, int second, int third) {
-        this.first=first;
-        this.second=second;
-        this.third=third;
+        this.first = first;
+        this.second = second;
+        this.third = third;
     }
 
     public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
@@ -252,6 +261,6 @@ public class ClientController implements ViewListener {
     public void onEndOfTurn() {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
-        client.sendRequest("NEXT",body.toString());
+        client.sendRequest("NEXT", body.toString());
     }
 }

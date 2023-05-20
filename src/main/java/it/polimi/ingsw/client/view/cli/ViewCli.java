@@ -1,7 +1,8 @@
 package it.polimi.ingsw.client.view.cli;
 
+import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
-import it.polimi.ingsw.util.observer.ObservableObject;
+import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
 import it.polimi.ingsw.util.observer.ViewListener;
 
 import java.io.BufferedReader;
@@ -10,12 +11,20 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-public class ViewCli extends ObservableObject<ViewListener> implements Runnable {
+// TODO
+public class ViewCli extends View {
     private final PrintStream out = new PrintStream(System.out);
-    private final DefaultCliGraphics graphics = new DefaultCliGraphics();
+    private DefaultCliGraphics graphics = new DefaultCliGraphics();
+    private final static SimpleColorRenderer colorRenderer = new SimpleColorRenderer();
+    private final static SimpleTextRenderer textRenderer = new SimpleTextRenderer();
 
     public ViewCli() {
         this.init();
+    }
+
+    @Override
+    public void reset() {
+        graphics = new DefaultCliGraphics();
     }
 
     @Override
@@ -47,27 +56,27 @@ public class ViewCli extends ObservableObject<ViewListener> implements Runnable 
         int row, col;
 
         row = rowChar - 'A';
-        col = Integer.parseInt(input.substring(1))-1;
+        col = Integer.parseInt(input.substring(1)) - 1;
 
-        return new int[] {row, col};
+        return new int[]{row, col};
     }
 
-    public void init(){
+    public void init() {
         out.println("Welcome to MyShelfie game!");
         this.askUsername();
     }
 
-    public void askUsername(){
+    public void askUsername() {
         out.print("Enter your nickname (type name + your name):\n");
     }
 
-    public void askTypeOfGame(){
+    public void askTypeOfGame() {
         out.println("""
-                        Please enter:
-                        'load' + the name of the file if you want to load a saved game
-                        'new' + the number of players to create a new game
-                        'join' if you want to join a game in progress
-                        'list' if you want to list all saved games"""
+                Please enter:
+                'load' + the name of the file if you want to load a saved game
+                'new' + the number of players to create a new game
+                'join' if you want to join a game in progress
+                'list' if you want to list all saved games"""
         );
     }
 
@@ -75,7 +84,7 @@ public class ViewCli extends ObservableObject<ViewListener> implements Runnable 
         try {
             int number = Integer.parseInt(input);
             if ((number < inferior) || (number > superior)) {
-                System.out.println("Invalid input, please enter a number from "+inferior+" to "+superior);
+                System.out.println("Invalid input, please enter a number from " + inferior + " to " + superior);
             } else {
                 return true;
             }
@@ -85,12 +94,12 @@ public class ViewCli extends ObservableObject<ViewListener> implements Runnable 
         return false;
     }
 
-    public void askCoordinatesTilesOnBoard(){
+    public void askCoordinatesTilesOnBoard() {
         out.println("Enter 'pick' + row coordinate (you can select a char among A and I)" +
                 " + column number (you can select a number among 1 and 9)\nExample: pick A1 A3");
     }
 
-    public void askOrderTiles(){
+    public void askOrderTiles() {
         out.println("""
                 Enter 'order' + the number of the tile you want to put in first position
                  + the number of the tile you want to put in second position
@@ -99,75 +108,133 @@ public class ViewCli extends ObservableObject<ViewListener> implements Runnable 
                 If you have only 1 or 2 tiles put 0""");
     }
 
-    public void askNumberOfColumn(){
+    public void askNumberOfColumn() {
         out.println("Enter 'drop' + column number (you can select a number among 1 and 5)\nExample: drop 1");
     }
 
     private void parseInput(Input input) {
         switch (input.command().toLowerCase()) {
             case "name" -> {
-                if(!input.args[0].isEmpty()){
-                    notifyListeners(listener -> listener.onChooseUsername(input.args[0]));
+                if (!input.args[0].isEmpty()) {
+                    notifyNameChange(input.args[0]);
                     askTypeOfGame();
                 }
             }
             case "list" -> notifyListeners(ViewListener::onListSavedGames);
             case "new" -> {
-                if(checkInput(input.args[0],2,4))
-                    notifyListeners(listener -> listener.onNewGame(Integer.parseInt(input.args[0])));
+                if (checkInput(input.args[0], 2, 4))
+                    notifyNewGameCommand(Integer.parseInt(input.args[0]));
             }
-            case "join" -> notifyListeners(ViewListener::onJoinGame);
-            case "quit" -> notifyListeners(ViewListener::onQuitGame);
-            case "load" -> notifyListeners(listener -> listener.onLoadSavedGame(input.args[0]));
-            case "save" -> notifyListeners(ViewListener::onSaveCurrentGame);
-            case "/m" -> notifyListeners(listener -> listener.onChatMessageSent(String.join(" ", input.args)));
-            case "/w" -> notifyListeners(listener -> listener.onChatWhisperSent(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]));
+            case "join" -> notifyJoinGameCommand();
+            case "quit" -> notifyQuitGameCommand();
+            case "load" -> notifyLoadCommand(Integer.parseInt(input.args[0])); // TODO: this will crash (see other todos)
+            case "save" -> notifySaveCommand();
+            case "/m" -> notifyNewChatMessage(String.join(" ", input.args));
+            case "/w" ->
+                    notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
             case "pick" -> {
-                if(input.args.length>1) {
+                if (input.args.length > 1) {
                     int[] coords1, coords2;
                     coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                     coords2 = parseBoardCoordinates(input.args[1].toUpperCase());
-                    notifyListeners(listener -> listener.onChooseTilesOnBoard(coords1[0], coords1[1], coords2[0], coords2[1]));
+                    notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
                     askOrderTiles();
                 }
             }
             case "order" -> {
-                if(input.args.length == 3 && checkInput(input.args[0],1,3) && checkInput(input.args[1],0,3)&& checkInput(input.args[2],0,3)){
-                    notifyListeners(listener -> listener.onChooseTilesOrder(Integer.parseInt(input.args[0]),Integer.parseInt(input.args[1]),Integer.parseInt(input.args[2])));
+                if (input.args.length == 3 && checkInput(input.args[0], 1, 3) && checkInput(input.args[1], 0, 3) && checkInput(input.args[2], 0, 3)) {
+                    notifyOrderCommand(Integer.parseInt(input.args[0]), Integer.parseInt(input.args[1]), Integer.parseInt(input.args[2]));
                     askNumberOfColumn();
                 }
             }
             case "drop" -> {
-                if(checkInput(input.args[0],1,5)){
-                    notifyListeners(listener -> listener.onChooseColumnOfBookshelf(Integer.parseInt(input.args[0])-1));
+                if (checkInput(input.args[0], 1, 5)) {
+                    notifyDropCommand(Integer.parseInt(input.args[0]) - 1);
                     notifyListeners(ViewListener::onEndOfTurn);
                 }
             }
             case "help" -> System.out.println("""
-                 Possible commands:
-                  - name + username          | set the name of the player
-                  - list                     | show a list of saved games
-                  - new + number of players  | start a new game with N players
-                  - join                     | join a game
-                  - quit                     | quit game
-                  - load + name of saved game| load a saved game
-                  - save                     | save the game
-                  - /m + message             | send a message to the others players
-                  - /w + username + message  | send a message to another player
-                  - pick + A1 + A1           | pick up tiles in the chosen range
-                  - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
-                  - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
+                    Possible commands:
+                     - name + username          | set the name of the player
+                     - list                     | show a list of saved games
+                     - new + number of players  | start a new game with N players
+                     - join                     | join a game
+                     - quit                     | quit game
+                     - load + name of saved game| load a saved game
+                     - save                     | save the game
+                     - /m + message             | send a message to the others players
+                     - /w + username + message  | send a message to another player
+                     - pick + A1 + A1           | pick up tiles in the chosen range
+                     - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
+                     - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
             default -> System.out.println("No command" + input.command + "found");
         }
     }
 
-    public DefaultCliGraphics getGraphics() {
-        return graphics;
+    @Override
+    public void updateGameStatus(boolean isGameOver) {
+        graphics.updateGameStatus(isGameOver);
     }
 
-    public void drawGraphics() {
+    @Override
+    public void updatePlayerScore(String player, int score) {
+        graphics.updatePlayerScore(player, score);
+    }
+
+    @Override
+    public void updateBookshelf(String player, int[][] update) {
+        graphics.updateBookshelf(player, update);
+    }
+
+    @Override
+    public void updateBoard(int[][] update) {
+        graphics.updateBoard(update);
+    }
+
+    @Override
+    public void updatePlayerConnectionStatus(String player, boolean isDisconnected) {
+        graphics.updatePlayerConnectionStatus(player, isDisconnected);
+    }
+
+    @Override
+    public void updateCommonGoalPoints(int cardId, int points) {
+        graphics.updateCommonGoalPoints(cardId, points);
+    }
+
+    @Override
+    public void setCommonGoal(int id, int points) {
+        graphics.setCommonGoal(id, points);
+    }
+
+    @Override
+    public void setPersonalGoal(int id) {
+        graphics.setPersonalGoal(id);
+    }
+
+    @Override
+    public void setCurrentTurn(int turn) {
+        graphics.setCurrentTurn(turn);
+    }
+
+    @Override
+    public void addMessage(String message, String sender, boolean isWhisper) {
+        graphics.addMessage(message, sender, isWhisper);
+    }
+
+    @Override
+    public void addPlayer(String username, int score, boolean isClient) {
+        graphics.addPlayer(username, score, isClient);
+    }
+
+    @Override
+    public void finalizeUpdate() {
+        // Clear console
         out.print("\033[H\033[2J");
         out.flush();
-        out.println(graphics.getGraphics().render(new SimpleColorRenderer()));
+
+        String renderedGraphics = "";
+        if (System.getProperty("os.name").contains("win")) renderedGraphics = graphics.getGraphics().render(textRenderer);
+        else renderedGraphics = graphics.getGraphics().render(colorRenderer);
+        out.println(renderedGraphics);
     }
 }
