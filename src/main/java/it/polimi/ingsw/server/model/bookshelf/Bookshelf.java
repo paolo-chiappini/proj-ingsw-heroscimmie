@@ -147,18 +147,9 @@ public class Bookshelf implements IBookshelf {
     public List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3)
     {
         List<GameTile> order = new ArrayList<>();
-        if(tilesToDrop.size()==3){
-            order.add(tilesToDrop.get(position1-1));
-            order.add(tilesToDrop.get(position2-1));
-            order.add(tilesToDrop.get(position3-1));
-        }
-       if(tilesToDrop.size()==2) {
-            order.add(tilesToDrop.get(position1-1));
-            order.add(tilesToDrop.get(position2-1));
-        }
-       else
-           order.add(tilesToDrop.get(position1-1));
-
+        if (tilesToDrop.size() >= 1) order.add(tilesToDrop.get(position1 - 1));
+        if (tilesToDrop.size() >= 2) order.add(tilesToDrop.get(position2 - 1));
+        if (tilesToDrop.size() >= 3) order.add(tilesToDrop.get(position3 - 1));
        return order;
     }
 

@@ -20,13 +20,21 @@ public class ClientController implements ControllerObserver {
     private final List<ClientPlayer> players;
     private final List<ClientCommonGoalCard> commonGoalCards;
     private final ViewCli view;
+    private int row1, row2, col1, col2, first, second, third;
+
 
     public ClientController(ViewCli view, String serverAddress){
         this.view = view;
-        client = new Client(serverAddress);
         board = new ClientBoard();
         players = new LinkedList<>();
         commonGoalCards = new LinkedList<>();
+
+        try {
+            client = new Client(serverAddress);
+        } catch (RuntimeException re) {
+            System.out.println("Unable to establish connection to server, exiting");
+            return;
+        }
 
         client.addObserver(this);
         view.addObserver(this);
@@ -196,20 +204,10 @@ public class ClientController implements ControllerObserver {
 
 
     public void onChooseTilesOrder(int first, int second, int third) {
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        body.put("first_tile", first);
-        body.put("second_tile",second);
-        body.put("third_tile",third);
         this.first=first;
         this.second=second;
         this.third=third;
-        System.out.println("sending message");
-        client.sendRequest("ORDER", body.toString());
     }
-
-    private int row1, row2, col1, col2, first, second, third;
-
 
     public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
         JSONObject body = new JSONObject();

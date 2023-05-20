@@ -11,7 +11,7 @@ import java.io.PrintStream;
 import java.util.Arrays;
 
 public class ViewCli extends ViewObservable implements Runnable {
-    private PrintStream out = new PrintStream(System.out);
+    private final PrintStream out = new PrintStream(System.out);
     private final DefaultCliGraphics graphics = new DefaultCliGraphics();
 
     public ViewCli(){
@@ -66,7 +66,8 @@ public class ViewCli extends ViewObservable implements Runnable {
                         Please enter:
                         'load' + the name of the file if you want to load a saved game
                         'new' + the number of players to create a new game
-                        'join' if you want to join a game in progress"""
+                        'join' if you want to join a game in progress
+                        'list' if you want to list all saved games"""
         );
     }
 
@@ -131,7 +132,7 @@ public class ViewCli extends ViewObservable implements Runnable {
                 }
             }
             case "order" -> {
-                if(input.args.length>3 && checkInput(input.args[0],1,3) && checkInput(input.args[1],0,3)&& checkInput(input.args[2],0,3)){
+                if(input.args.length == 3 && checkInput(input.args[0],1,3) && checkInput(input.args[1],0,3)&& checkInput(input.args[2],0,3)){
                     notifyObservers(controllerObserver -> controllerObserver.onChooseTilesOrder(Integer.parseInt(input.args[0]),Integer.parseInt(input.args[1]),Integer.parseInt(input.args[2])));
                     askNumberOfColumn();
                 }
@@ -156,6 +157,7 @@ public class ViewCli extends ViewObservable implements Runnable {
                   - pick + A1 + A1           | pick up tiles in the chosen range
                   - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
                   - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
+            default -> System.out.println("No command" + input.command + "found");
         }
     }
 

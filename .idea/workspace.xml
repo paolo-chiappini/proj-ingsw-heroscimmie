@@ -12,13 +12,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="fixed bug in deserializer">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHooks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="fixed drop tiles bug">
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/IObservable.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/IObserver.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/ClientMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ClientObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ClientObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ControllerObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ControllerObserver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ModelObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ModelObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewObservable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewObservable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewObserver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewObserver.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +40,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -44,6 +53,11 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
       <filtered-out-file-type name="LOCAL_BRANCH" />
@@ -51,6 +65,20 @@
       <filtered-out-file-type name="TAG" />
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
+  </component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="paolo-chiappini" />
+        <option name="repository" value="proj-ingsw-heroscimmie" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="3c3aa3d0-210c-4794-9f86-c61601d6b7f7" />
+        <option name="url" value="https://github.com/paolo-chiappini/proj-ingsw-heroscimmie" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -88,6 +116,9 @@
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="it.polimi.ingsw.util.observer" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\ProgettoIngSoftware\src\main\java" />
     </key>
@@ -111,26 +142,34 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.server in proj-ingsw-heroscimmie">
-    <configuration name="SimpleStart" type="Application" factoryName="Application">
+  <component name="RunManager" selected="Application.Run Server">
+    <configuration name="Run Client [CLI]" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
+      <module name="proj-ingsw-heroscimmie" />
+      <option name="PROGRAM_PARAMETERS" value="--cli --server-addr localhost" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run Client [GUI]" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
+      <module name="proj-ingsw-heroscimmie" />
+      <option name="PROGRAM_PARAMETERS" value="--gui --server-addr localhost" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Run Main" type="Application" factoryName="Application">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="JsonDeserializationTest.testBoardDeserialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="Run Server" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.JsonDeserializationTest" />
-      <option name="METHOD_NAME" value="testBoardDeserialization" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="PROGRAM_PARAMETERS" value="--server" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -147,37 +186,6 @@
       <option name="MAIN_CLASS_NAME" value="" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="package" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TurnManagerTest$TestSerialization.turnManagerDeserialization" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw.TurnManagerTest" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.TurnManagerTest$TestSerialization" />
-      <option name="METHOD_NAME" value="turnManagerDeserialization" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="TurnManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="it.polimi.ingsw.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="it.polimi.ingsw" />
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.TurnManagerTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -218,21 +226,18 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.SimpleStart" />
+      <item itemvalue="Application.Run Server" />
+      <item itemvalue="Application.Run Main" />
+      <item itemvalue="Application.Run Client [CLI]" />
+      <item itemvalue="Application.Run Client [GUI]" />
       <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
       <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
-      <item itemvalue="JUnit.JsonDeserializationTest.testBoardDeserialization" />
-      <item itemvalue="JUnit.TurnManagerTest" />
-      <item itemvalue="JUnit.TurnManagerTest$TestSerialization.turnManagerDeserialization" />
       <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
-        <item itemvalue="JUnit.TurnManagerTest$TestSerialization.turnManagerDeserialization" />
-        <item itemvalue="JUnit.TurnManagerTest" />
-        <item itemvalue="JUnit.JsonDeserializationTest.testBoardDeserialization" />
       </list>
     </recent_temporary>
   </component>
@@ -282,6 +287,7 @@
       <workItem from="1683378375090" duration="863000" />
       <workItem from="1683379308220" duration="195000" />
       <workItem from="1683402892318" duration="1509000" />
+      <workItem from="1684429787960" duration="3005000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>

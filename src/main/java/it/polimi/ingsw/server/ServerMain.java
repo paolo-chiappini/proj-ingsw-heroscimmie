@@ -16,12 +16,13 @@ public class ServerMain {
         server.setCallback("PICK", ServerHandlers::handleBoardTilePickUp);
         server.setCallback("DROP", ServerHandlers::handleDropTiles);
         server.setCallback("NEXT", ServerHandlers::handleEndTurn);
-        server.setCallback("CHAT", (request, response) -> {
-            response.setBody(request.getBody());
-            response.setMethod(request.getMethod());
-            response.sendToAll();
+        server.setCallback("CHAT", (req, res) -> {
+            if (ServerHandlers.validateRequestBody(req, res) && ServerHandlers.validateSocketUsername(req, res)) {
+                res.setBody(req.getBody());
+                res.setMethod(req.getMethod());
+                res.sendToAll();
+            }
         });
-
 
         server.onConnectionLost(ServerHandlers::handleDisconnection);
 
