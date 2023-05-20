@@ -71,6 +71,7 @@ public class ClientController implements ViewListener {
         // TODO: fix
         String username = new JSONObject(message.getBody()).getString("username");
         view.updatePlayerConnectionStatus(username, false);
+        view.finalizeUpdate();
     }
 
     public void onPlayerDisconnection(Message message) {
@@ -80,7 +81,10 @@ public class ClientController implements ViewListener {
             clientIsInGame = false;
             return;
         }
+
+        if (!clientIsInGame) return;
         view.updatePlayerConnectionStatus(username, true);
+        view.finalizeUpdate();
     }
 
     public void onListReceived(Message message) {
@@ -131,7 +135,11 @@ public class ClientController implements ViewListener {
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
 
+        System.out.println(serialized);
+
         board.updateBoard(serialized.toString());
+        turnState.updateTurnState(serialized.toString());
+        System.out.println(turnState.getCurrentTurn());
 
         for (int i = 0; i < jsonPlayers.length(); i++) {
             ClientPlayer player = players.get(i);
@@ -142,11 +150,15 @@ public class ClientController implements ViewListener {
             commonGoalCards.get(i).updatePoints(jsonCommonGoals.getJSONObject(i).toString());
         }
 
-        view.finalizeUpdate();
-    }
+        // if it's the client's turn, allow commands
+        if (turnState.getCurrentPlayer().equals(myUsername)) {
+            view.allowUsersGameCommands();
+            view.handleSuccessMessage("Your turn to play");
+        } else {
+            view.blockUsersGameCommands();
+        }
 
-    private void handleTurnChange(int turnIndex) {
-        // TODO: implement
+        view.finalizeUpdate();
     }
 
     public void onGameStart(Message message) {
@@ -292,6 +304,10 @@ public class ClientController implements ViewListener {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("QUIT", body.toString());
+
+        // reset local data
+        initVirtualModelAndView();
+        clientIsInGame = false;
     }
 
 
@@ -351,6 +367,9 @@ public class ClientController implements ViewListener {
         this.col1 = col1;
         this.row2 = row2;
         this.col2 = col2;
+        this.first = 1;
+        this.second = 2;
+        this.third = 3;
         client.sendRequest("PICK", body.toString());
     }
 

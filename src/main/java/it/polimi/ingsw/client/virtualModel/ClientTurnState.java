@@ -2,6 +2,8 @@ package it.polimi.ingsw.client.virtualModel;
 
 import it.polimi.ingsw.util.observer.ModelListener;
 import it.polimi.ingsw.util.observer.ObservableObject;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * This class represents a turn in the virtual model.
@@ -9,6 +11,7 @@ import it.polimi.ingsw.util.observer.ObservableObject;
  */
 public class ClientTurnState extends ObservableObject<ModelListener> {
     int currentTurn;
+    String currentPlayer;
     boolean gameStatus;
 
     public ClientTurnState(){
@@ -26,11 +29,28 @@ public class ClientTurnState extends ObservableObject<ModelListener> {
         notifyListeners(listener -> listener.updateGameStatus(gameStatus));
     }
 
+    public void setCurrentPlayer(String player) {
+        this.currentPlayer = player;
+    }
+
     public int getCurrentTurn() {
         return currentTurn;
     }
 
-    public boolean isGameStatus() {
+    public boolean isGameOver() {
         return gameStatus;
+    }
+
+    public String getCurrentPlayer() { return currentPlayer; }
+
+    public void updateTurnState(String data) {
+        JSONObject json = new JSONObject(data);
+        JSONArray playersOrder = json.getJSONArray("players_order");
+        int currTurn = json.getInt("players_turn"); 
+        boolean isLastLap = json.getBoolean("is_end_game");
+
+        setGameStatus(isLastLap && currTurn == 0);
+        setCurrentTurn(currTurn);
+        setCurrentPlayer(playersOrder.getString(currTurn));
     }
 }

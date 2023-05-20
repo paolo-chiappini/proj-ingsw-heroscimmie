@@ -83,6 +83,7 @@ public abstract class ServerHandlers {
             if (ActiveGameManager.isGameInProgress()) {
                 JSONObject update = new JSONObject();
                 update.put("serialized", new JSONObject(ActiveGameManager.getActiveGameInstance().serialize(jsonSerializer)));
+                update.put("reconnected", true);
                 sendUpdate(res, update);
             }
         } catch (IllegalActionException iae) {
@@ -285,9 +286,7 @@ public abstract class ServerHandlers {
                 notifyError(res, "Cannot drop tiles at specified location");
             } else {
                 bookshelf.dropTiles(bookshelf.decideTilesOrder(tiles,first,second,third), col);
-                JSONObject update = new JSONObject();
-                update.put("serialized", new JSONObject(currentGame.serialize(jsonSerializer)));
-                sendUpdate(res, update);
+                handleEndTurn(req, res);
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());
@@ -322,14 +321,19 @@ public abstract class ServerHandlers {
         try {
             if(turnManager.isGameOver())
                 game.evaluateFinalScores();
-            else
-                turnManager.nextTurn();
+            else {
+                // Skip turns until the first player that can play
+                do {
+                    turnManager.nextTurn();
+                } while (ActiveGameManager.getDisconnectedPlayers().contains(turnManager.getCurrentPlayer().getUsername()));
+            }
         } catch (IllegalActionException iae) {
             notifyError(res, iae.getMessage());
         }
 
         JSONObject update = new JSONObject();
         update.put("serialized", new JSONObject(game.serialize(jsonSerializer)));
+        if (turnManager.isGameOver()) update.put("winner", game.getWinner());
         sendUpdate(res, update);
     }
 

@@ -13,6 +13,10 @@ public abstract class View
         extends ObservableObject<ViewListener>
         implements ModelListener, Runnable {
 
+    protected boolean canSendCommands;
+
+    public View() { canSendCommands = false; }
+
     /**
      * Method used to restore a "reset" state for the current view.
      */
@@ -38,7 +42,10 @@ public abstract class View
     public abstract void showServerConnectionError();
 
     public abstract void handleSuccessMessage(String message);
-    public abstract  void handleErrorMessage(String message);
+    public abstract void handleErrorMessage(String message);
+
+    public void blockUsersGameCommands() { this.canSendCommands = false; }
+    public void allowUsersGameCommands() { this.canSendCommands = true; }
 
     /**
      * Notifies all listeners that the player has changed username.
@@ -119,6 +126,10 @@ public abstract class View
      * @param col2 column coordinate of the second tile in the range.
      */
     public void notifyPickCommand(int row1, int col1, int row2, int col2) {
+        if (!canSendCommands) {
+            this.handleErrorMessage("This action cannot be performed at the moment");
+            return;
+        }
         notifyListeners(listener -> listener.onChooseTilesOnBoard(row1, col1, row2, col2));
     }
 
@@ -129,6 +140,10 @@ public abstract class View
      * @param third index of the third tile to drop.
      */
     public void notifyOrderCommand(int first, int second, int third) {
+        if (!canSendCommands) {
+            this.handleErrorMessage("This action cannot be performed at the moment");
+            return;
+        }
         notifyListeners(listener -> listener.onChooseTilesOrder(first, second, third));
     }
 
@@ -137,6 +152,10 @@ public abstract class View
      * @param column column of the bookshelf where to drop the tiles.
      */
     public void notifyDropCommand(int column) {
+        if (!canSendCommands) {
+            this.handleErrorMessage("This action cannot be performed at the moment");
+            return;
+        }
         notifyListeners(listener -> listener.onChooseColumnOfBookshelf(column));
     }
 }
