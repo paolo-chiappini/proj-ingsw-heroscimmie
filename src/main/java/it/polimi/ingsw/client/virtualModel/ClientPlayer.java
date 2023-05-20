@@ -1,13 +1,14 @@
 package it.polimi.ingsw.client.virtualModel;
 
-import it.polimi.ingsw.util.observer.ModelObservable;
+import it.polimi.ingsw.util.observer.ModelListener;
+import it.polimi.ingsw.util.observer.ObservableObject;
 import org.json.JSONObject;
 
 /**
  * This class represents a single player in the virtual model.
  * It aims to represent the state of a player in the client and update it if necessary
  */
-public class ClientPlayer extends ModelObservable {
+public class ClientPlayer extends ObservableObject<ModelListener> {
     private String username;
     private ClientBookshelf bookshelf;
     private int idPersonalGoalCard;
@@ -28,22 +29,22 @@ public class ClientPlayer extends ModelObservable {
 
     public void setBookshelf(ClientBookshelf bookshelf) {
         this.bookshelf = bookshelf;
-        notifyObservers(obs->obs.updateBookshelf(getUsername(), getBookshelf().getTiles()));
+        notifyListeners(listener->listener.updateBookshelf(getUsername(), getBookshelf().getTiles()));
     }
 
     public void setIdPersonalGoalCard(int idPersonalGoalCard) {
         this.idPersonalGoalCard = idPersonalGoalCard;
-        notifyObservers(obs->obs.setPersonalGoal(idPersonalGoalCard));
+        notifyListeners(listener->listener.setPersonalGoal(idPersonalGoalCard));
     }
 
     public void setScore(int score) {
         this.score = score;
-        notifyObservers(obs->obs.updatePlayerScore(getUsername(),getScore()));
+        notifyListeners(listener->listener.updatePlayerScore(getUsername(),getScore()));
     }
 
     public void setDisconnected(boolean disconnected) {
         isDisconnected = disconnected;
-        notifyObservers(obs->obs.updatePlayerConnectionStatus(username,disconnected));
+        notifyListeners(listener->listener.updatePlayerConnectionStatus(username,disconnected));
     }
 
     public ClientBookshelf getBookshelf() {
@@ -73,7 +74,7 @@ public class ClientPlayer extends ModelObservable {
     public void updatePlayer(String data){
         this.getBookshelf().updateBookshelf(data);
         this.updateScore(data);
-        notifyObservers(obs->obs.updateBookshelf(getUsername(), getBookshelf().getTiles()));
+        notifyListeners(listener->listener.updateBookshelf(getUsername(), getBookshelf().getTiles()));
     }
 
     /**

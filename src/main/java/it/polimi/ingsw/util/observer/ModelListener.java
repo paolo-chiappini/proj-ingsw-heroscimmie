@@ -1,6 +1,6 @@
 package it.polimi.ingsw.util.observer;
 
-public interface ViewObserver {
+public interface ModelListener extends Listener {
     void updateGameStatus(boolean isGameOver);
     void updatePlayerScore(String player, int score);
     void updateBookshelf(String player, int[][] update);
@@ -12,5 +12,4 @@ public interface ViewObserver {
     void setCurrentTurn(int turn);
     void addMessage(String message, String sender, boolean isWhisper);
     void addPlayer(String username, int score, boolean isClient);
-
 }

@@ -24,7 +24,7 @@ import it.polimi.ingsw.exceptions.IllegalActionException;
 import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
-import it.polimi.ingsw.util.observer.ViewObserver;
+import it.polimi.ingsw.util.observer.ModelListener;
 import org.json.JSONArray;
 
 import java.io.FileNotFoundException;
@@ -38,7 +38,7 @@ import java.util.Map;
  * The class contains both setup and update methods for the
  * various CLI graphic elements.
  */
-public class DefaultCliGraphics implements ViewObserver {
+public class DefaultCliGraphics implements ModelListener {
     private final BoardElement boardElement;
     private final BookshelfElement mainBookshelf;
     private final BonusesInfoElement bonusesInfoElement;

@@ -5,20 +5,22 @@ import it.polimi.ingsw.client.view.cli.ViewCli;
 import it.polimi.ingsw.client.virtualModel.ClientBoard;
 import it.polimi.ingsw.client.virtualModel.ClientCommonGoalCard;
 import it.polimi.ingsw.client.virtualModel.ClientPlayer;
+import it.polimi.ingsw.client.virtualModel.ClientTurnState;
 import it.polimi.ingsw.server.messages.Message;
-import it.polimi.ingsw.util.observer.ControllerObserver;
+import it.polimi.ingsw.util.observer.ViewListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.util.LinkedList;
 import java.util.List;
 
-public class ClientController implements ControllerObserver {
+public class ClientController implements ViewListener {
     private Client client;
     private String myUsername;
     private ClientBoard board;
     private final List<ClientPlayer> players;
     private final List<ClientCommonGoalCard> commonGoalCards;
+    private final ClientTurnState turnState;
     private final ViewCli view;
     private int row1, row2, col1, col2, first, second, third;
 
@@ -28,6 +30,7 @@ public class ClientController implements ControllerObserver {
         board = new ClientBoard();
         players = new LinkedList<>();
         commonGoalCards = new LinkedList<>();
+        turnState = new ClientTurnState();
 
         try {
             client = new Client(serverAddress);
@@ -36,9 +39,8 @@ public class ClientController implements ControllerObserver {
             return;
         }
 
-        client.addObserver(this);
-        view.addObserver(this);
-        board.addObserver(view.getGraphics());
+        view.addListener(this);
+        board.addListener(view.getGraphics());
 
         client.setOnMessageReceivedCallback(this::onMessageReceived);
         client.start();
@@ -107,9 +109,13 @@ public class ClientController implements ControllerObserver {
         }
 
         view.drawGraphics();
-        view.askCoordinatesTilesOnBoard();
     }
 
+    private void handleGameEndAndReset() {}
+
+    private void handleTurnChange(int turnIndex) {
+        if (players.get(turnIndex).getUsername().equals(myUsername)) { return; }
+    }
 
     public void onGameStart(Message message) {
         JSONObject body = new JSONObject(message.getBody());
@@ -120,7 +126,7 @@ public class ClientController implements ControllerObserver {
         for (int i = 0; i < players.length(); i++) {
             JSONObject player = players.getJSONObject(i);
             this.players.add(new ClientPlayer(player.getString("username")));
-            this.players.get(i).addObserver(view.getGraphics());
+            this.players.get(i).addListener(view.getGraphics());
             view.getGraphics().addPlayer(player.getString("username"), player.getInt("score"), player.getString("username").equals(myUsername));
             if (player.getString("username").equals(myUsername))
                 this.players.get(i).updateId(player.toString());
@@ -128,7 +134,7 @@ public class ClientController implements ControllerObserver {
 
         for (int i = 0; i < commonGoals.length(); i++) {
             this.commonGoalCards.add(new ClientCommonGoalCard());
-            this.commonGoalCards.get(i).addObserver(view.getGraphics());
+            this.commonGoalCards.get(i).addListener(view.getGraphics());
             commonGoalCards.get(i).updateId(commonGoals.getJSONObject(i).toString());
         }
 
@@ -138,14 +144,14 @@ public class ClientController implements ControllerObserver {
     }
 
 
-    public void joinGame() {
+    public void onJoinGame() {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("JOIN", body.toString());
     }
 
 
-    public void newGame(int lobbySize) {
+    public void onNewGame(int lobbySize) {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("lobby_size", lobbySize);
@@ -153,14 +159,14 @@ public class ClientController implements ControllerObserver {
     }
 
 
-    public void listSavedGames() {
+    public void onListSavedGames() {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("LIST", body.toString());
     }
 
 
-    public void loadSavedGame(String saveName) {
+    public void onLoadSavedGame(String saveName) {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("save_name", saveName);
@@ -168,14 +174,14 @@ public class ClientController implements ControllerObserver {
     }
 
 
-    public void saveCurrentGame() {
+    public void onSaveCurrentGame() {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("SAVE", body.toString());
     }
 
 
-    public void quitGame() {
+    public void onQuitGame() {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("QUIT", body.toString());

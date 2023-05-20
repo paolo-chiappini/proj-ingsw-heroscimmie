@@ -1,8 +1,8 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
-import it.polimi.ingsw.util.observer.ControllerObserver;
-import it.polimi.ingsw.util.observer.ViewObservable;
+import it.polimi.ingsw.util.observer.ObservableObject;
+import it.polimi.ingsw.util.observer.ViewListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,12 +10,11 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-public class ViewCli extends ViewObservable implements Runnable {
+public class ViewCli extends ObservableObject<ViewListener> implements Runnable {
     private final PrintStream out = new PrintStream(System.out);
     private final DefaultCliGraphics graphics = new DefaultCliGraphics();
 
-    public ViewCli(){
-        drawGraphics();
+    public ViewCli() {
         this.init();
     }
 
@@ -28,7 +27,8 @@ public class ViewCli extends ViewObservable implements Runnable {
                 Input input = parseInputString(line);
                 parseInput(input);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                System.out.println("Client is closing, reason: " + e.getMessage());
+                return;
             }
         }
     }
@@ -107,40 +107,40 @@ public class ViewCli extends ViewObservable implements Runnable {
         switch (input.command().toLowerCase()) {
             case "name" -> {
                 if(!input.args[0].isEmpty()){
-                    notifyObservers(controllerObserver -> controllerObserver.onChooseUsername(input.args[0]));
+                    notifyListeners(listener -> listener.onChooseUsername(input.args[0]));
                     askTypeOfGame();
                 }
             }
-            case "list" -> notifyObservers(ControllerObserver::listSavedGames);
+            case "list" -> notifyListeners(ViewListener::onListSavedGames);
             case "new" -> {
                 if(checkInput(input.args[0],2,4))
-                    notifyObservers(controllerObserver -> controllerObserver.newGame(Integer.parseInt(input.args[0])));
+                    notifyListeners(listener -> listener.onNewGame(Integer.parseInt(input.args[0])));
             }
-            case "join" -> notifyObservers(ControllerObserver::joinGame);
-            case "quit" -> notifyObservers(ControllerObserver::quitGame);
-            case "load" -> notifyObservers(controllerObserver -> controllerObserver.loadSavedGame(input.args[0]));
-            case "save" -> notifyObservers(ControllerObserver::saveCurrentGame);
-            case "/m" -> notifyObservers(controllerObserver -> controllerObserver.onChatMessageSent(String.join(" ", input.args)));
-            case "/w" -> notifyObservers(controllerObserver -> controllerObserver.onChatWhisperSent(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]));
+            case "join" -> notifyListeners(ViewListener::onJoinGame);
+            case "quit" -> notifyListeners(ViewListener::onQuitGame);
+            case "load" -> notifyListeners(listener -> listener.onLoadSavedGame(input.args[0]));
+            case "save" -> notifyListeners(ViewListener::onSaveCurrentGame);
+            case "/m" -> notifyListeners(listener -> listener.onChatMessageSent(String.join(" ", input.args)));
+            case "/w" -> notifyListeners(listener -> listener.onChatWhisperSent(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]));
             case "pick" -> {
                 if(input.args.length>1) {
                     int[] coords1, coords2;
                     coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                     coords2 = parseBoardCoordinates(input.args[1].toUpperCase());
-                    notifyObservers(controllerObserver -> controllerObserver.onChooseTilesOnBoard(coords1[0], coords1[1], coords2[0], coords2[1]));
+                    notifyListeners(listener -> listener.onChooseTilesOnBoard(coords1[0], coords1[1], coords2[0], coords2[1]));
                     askOrderTiles();
                 }
             }
             case "order" -> {
                 if(input.args.length == 3 && checkInput(input.args[0],1,3) && checkInput(input.args[1],0,3)&& checkInput(input.args[2],0,3)){
-                    notifyObservers(controllerObserver -> controllerObserver.onChooseTilesOrder(Integer.parseInt(input.args[0]),Integer.parseInt(input.args[1]),Integer.parseInt(input.args[2])));
+                    notifyListeners(listener -> listener.onChooseTilesOrder(Integer.parseInt(input.args[0]),Integer.parseInt(input.args[1]),Integer.parseInt(input.args[2])));
                     askNumberOfColumn();
                 }
             }
             case "drop" -> {
                 if(checkInput(input.args[0],1,5)){
-                    notifyObservers(controllerObserver -> controllerObserver.onChooseColumnOfBookshelf(Integer.parseInt(input.args[0])-1));
-                    notifyObservers(ControllerObserver::onEndOfTurn);
+                    notifyListeners(listener -> listener.onChooseColumnOfBookshelf(Integer.parseInt(input.args[0])-1));
+                    notifyListeners(ViewListener::onEndOfTurn);
                 }
             }
             case "help" -> System.out.println("""

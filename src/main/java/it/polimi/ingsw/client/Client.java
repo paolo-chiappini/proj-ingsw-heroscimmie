@@ -3,13 +3,14 @@ package it.polimi.ingsw.client;
 import it.polimi.ingsw.server.messages.Message;
 import it.polimi.ingsw.server.messages.MessageProvider;
 import it.polimi.ingsw.server.messages.MessageType;
-import it.polimi.ingsw.util.observer.ClientObservable;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.function.Consumer;
 
-public class Client extends ClientObservable {
+public class Client {
 
     private final Socket socket;
     private final BufferedReader fromServer;

@@ -1,12 +1,13 @@
 package it.polimi.ingsw.client.virtualModel;
 
-import it.polimi.ingsw.util.observer.ModelObservable;
+import it.polimi.ingsw.util.observer.ModelListener;
+import it.polimi.ingsw.util.observer.ObservableObject;
 
 /**
  * This class represents a turn in the virtual model.
  * It aims to represent the state of a turn in the client and update it if necessary
  */
-public class ClientTurnState extends ModelObservable {
+public class ClientTurnState extends ObservableObject<ModelListener> {
     int currentTurn;
     boolean gameStatus;
 
@@ -17,12 +18,12 @@ public class ClientTurnState extends ModelObservable {
 
     public void setCurrentTurn(int currentTurn) {
         this.currentTurn = currentTurn;
-        notifyObservers(obs -> obs.setCurrentTurn(currentTurn));
+        notifyListeners(listener -> listener.setCurrentTurn(currentTurn));
     }
 
     public void setGameStatus(boolean gameStatus) {
         this.gameStatus = gameStatus;
-        notifyObservers(obs->obs.updateGameStatus(gameStatus));
+        notifyListeners(listener -> listener.updateGameStatus(gameStatus));
     }
 
     public int getCurrentTurn() {
