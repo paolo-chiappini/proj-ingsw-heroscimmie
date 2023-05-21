@@ -49,6 +49,10 @@ public abstract class ServerHandlers {
 
     private static void sendUpdate(Message response, JSONObject update) {
         response.setMethod("UPDATE");
+        var disconnectedPlayers = ActiveGameManager.getDisconnectedPlayers().toArray();
+        var connectedPlayers = ActiveGameManager.getConnectedPlayers().toArray();
+        update.put("disconnected_players", new JSONArray(disconnectedPlayers));
+        update.put("connected_players", new JSONArray(connectedPlayers));
         response.setBody(update.toString());
         response.sendToAll();
     }
@@ -76,7 +80,6 @@ public abstract class ServerHandlers {
 
         try {
             ActiveGameManager.joinGame(username);
-            playerSockets.put(req.getSocket(), username);
             notifySuccess(res, "Joined game");
 
             // in case of reconnection send update to client
@@ -279,9 +282,8 @@ public abstract class ServerHandlers {
         player = getPlayerByUsername(username, currentGame.getPlayers());
         bookshelf = player.getBookshelf();
 
-        tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
-
         try {
+            tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
             if (!bookshelf.canDropTiles(tiles.size(), col)) {
                 notifyError(res, "Cannot drop tiles at specified location");
             } else {
@@ -319,21 +321,36 @@ public abstract class ServerHandlers {
         }
 
         try {
-            if(turnManager.isGameOver())
-                game.evaluateFinalScores();
-            else {
-                // Skip turns until the first player that can play
-                do {
-                    turnManager.nextTurn();
-                } while (ActiveGameManager.getDisconnectedPlayers().contains(turnManager.getCurrentPlayer().getUsername()));
-            }
+            var disconnectedPlayers = ActiveGameManager.getDisconnectedPlayers();
+            // Skip turns until the first player that can play or until game is over
+            do {
+                turnManager.nextTurn();
+            } while (
+                    disconnectedPlayers.contains(turnManager.getCurrentPlayer().getUsername())
+                    && !turnManager.isGameOver()
+            );
+
         } catch (IllegalActionException iae) {
             notifyError(res, iae.getMessage());
         }
 
         JSONObject update = new JSONObject();
-        update.put("serialized", new JSONObject(game.serialize(jsonSerializer)));
-        if (turnManager.isGameOver()) update.put("winner", game.getWinner());
+        JSONObject serializedGame = new JSONObject(game.serialize(jsonSerializer));
+
+        if (turnManager.isGameOver()) {
+            game.evaluateFinalScores();
+            update.put("winner", game.getWinner().getUsername());
+            ActiveGameManager.stopGame();
+        } else if (ActiveGameManager.getConnectedPlayers().size() == 1) {
+            serializedGame.put("is_end_game", true);
+            var lastPlayer = ActiveGameManager.getConnectedPlayers().toArray();
+            if (lastPlayer.length == 1) {
+                update.put("winner", lastPlayer[0]);
+                ActiveGameManager.stopGame();
+            }
+        }
+
+        update.put("serialized", serializedGame);
         sendUpdate(res, update);
     }
 
@@ -362,7 +379,10 @@ public abstract class ServerHandlers {
             String player = playerSockets.remove(socket);
 
             var sockets = playerSockets.keySet().stream().toList();
-            if (sockets.size() == 0) return;
+            if (sockets.size() == 0) {
+                if (ActiveGameManager.isGameInProgress()) ActiveGameManager.stopGame();
+                return;
+            }
 
             MessageProvider msgProvider = new MessageProvider(MessageType.JSON);
             JSONObject dummyRequestBody = new JSONObject();
@@ -384,31 +404,27 @@ public abstract class ServerHandlers {
     public static void handlePlayerLeaving(Message req, Message res) {
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
+        Game game = ActiveGameManager.getActiveGameInstance();
 
         try {
             ActiveGameManager.leaveGame(username);
-            res.setMethod("LEFT");
+            sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
+        } catch (IllegalActionException ignored) {}
 
-            JSONObject resBody = new JSONObject();
-            resBody.put("username", username);
-            res.setBody(resBody.toString());
-            res.sendToAll();
-        } catch (IllegalActionException iae) {
-            return;
+        if (ActiveGameManager.getConnectedPlayers().isEmpty() && ActiveGameManager.isGameInProgress()) {
+            System.out.println("No more players, resetting");
+            ActiveGameManager.stopGame();
         }
+        // Check if there's at least one player still in-game
+        else if (ActiveGameManager.isGameInProgress() && ActiveGameManager.getConnectedPlayers().size() >= 1) {
+            boolean isDisconnectPlayerTurn = game.getTurnManager()
+                    .getCurrentPlayer()
+                    .getUsername()
+                    .equals(username);
+            boolean onePlayerLeft = ActiveGameManager.getConnectedPlayers().size() == 1;
 
-        // If a player is still connected to the game, notify winner.
-        if (ActiveGameManager.isGameInProgress() && ActiveGameManager.getConnectedPlayers().size() == 1) {
-            JSONObject responseBody = new JSONObject();
-            responseBody.put("winner", ActiveGameManager.getConnectedPlayers().stream().findFirst().orElse(""));
-            responseBody.put("serialized", new JSONObject(ActiveGameManager.getActiveGameInstance().serialize(jsonSerializer)));
-
-            try {
-                ActiveGameManager.stopGame();
-            } catch (IllegalActionException iae) {
-                notifyError(res, iae.getMessage());
-            }
-            sendUpdate(res, responseBody);
+            if (isDisconnectPlayerTurn || onePlayerLeft) handleEndTurn(req, res);
+            else sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
         }
     }
 
@@ -459,6 +475,9 @@ public abstract class ServerHandlers {
     public static boolean validateSocketUsername(Message req, Message res) {
         if (missingPropertiesInBody(List.of("username"), req, res)) return false;
 
+        // demand validation to name change handler
+        if (req.getMethod().equals("NAME")) return true;
+
         JSONObject body = new JSONObject(req.getBody());
         String username = body.getString("username");
 
@@ -467,5 +486,26 @@ public abstract class ServerHandlers {
             return false;
         }
         return true;
+    }
+
+    /**
+     * Handles the assignment of names to the clients.
+     * Necessary in case a user wants to change username while connected to the server.
+     * @param req request message
+     * @param res response message
+     */
+    public static void handlePlayerNameChange(Message req, Message res) {
+        String username = new JSONObject(req.getBody()).getString("username");
+        if (playerSockets.containsValue(username)) {
+            // check if name is already associated with user
+            if (playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username)) return;
+            // another player has the name
+            else notifyError(res, "Another user has chosen this name");
+        } else {
+            playerSockets.put(req.getSocket(), username);
+            res.setMethod("NAME");
+            res.setBody(new JSONObject(req.getBody()).toString());
+            res.send();
+        }
     }
 }

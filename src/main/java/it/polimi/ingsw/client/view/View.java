@@ -43,6 +43,12 @@ public abstract class View
      */
     public abstract void handleServerConnectionError(String message);
 
+    /**
+     * Handles the end of the game and the election of the winner.
+     * @param winner name of the winner.
+     */
+    public abstract void handleWinnerSelected(String winner);
+
     public abstract void handleSuccessMessage(String message);
     public abstract void handleErrorMessage(String message);
 

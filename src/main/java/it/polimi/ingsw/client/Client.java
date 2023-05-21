@@ -78,7 +78,8 @@ public class Client {
                 callback.accept(serverMessage);
             }
         } catch (RuntimeException e) {
-            connectionLostCallback.accept("Lost connection to server, retry? y/other");
+            if (socket.isClosed()) connectionLostCallback.accept("Lost connection to server, retry? y/other");
+            else connectionLostCallback.accept(e.getMessage());
             isAlive = false;
         }
     }

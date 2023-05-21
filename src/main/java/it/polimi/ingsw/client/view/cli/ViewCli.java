@@ -1,7 +1,6 @@
 package it.polimi.ingsw.client.view.cli;
 
 import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.ViewMessage;
 import it.polimi.ingsw.client.view.cli.graphics.util.ICliRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
@@ -13,14 +12,16 @@ import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Arrays;
 
-// TODO
 public class ViewCli extends View {
     private final PrintStream out = new PrintStream(System.out);
     private DefaultCliGraphics graphics = new DefaultCliGraphics();
     private final static SimpleColorRenderer colorRenderer = new SimpleColorRenderer();
     private final static SimpleTextRenderer textRenderer = new SimpleTextRenderer();
+    private boolean hasPickedTiles, lastInputGeneratedError;
 
     public ViewCli() {
+        hasPickedTiles = false;
+        lastInputGeneratedError = false;
         this.init();
     }
 
@@ -52,6 +53,7 @@ public class ViewCli extends View {
         String[] tokens = input.split(" ");
         String[] args = new String[]{""};
         if (tokens.length > 1) args = Arrays.copyOfRange(tokens, 1, tokens.length);
+        // TODO: this caused a "ClassNotFoundException" for some reason...
         return new Input(tokens[0], args);
     }
 
@@ -130,7 +132,10 @@ public class ViewCli extends View {
                     notifyNewGameCommand(Integer.parseInt(input.args[0]));
             }
             case "join" -> notifyJoinGameCommand();
-            case "quit" -> notifyQuitGameCommand();
+            case "quit" -> {
+                notifyQuitGameCommand();
+                if (!lastInputGeneratedError) System.out.println("Left game");
+            }
             case "load" -> notifyLoadCommand(Integer.parseInt(input.args[0])); // TODO: this will crash (see other todos)
             case "save" -> notifySaveCommand();
             case "/m" -> notifyNewChatMessage(String.join(" ", input.args));
@@ -142,19 +147,29 @@ public class ViewCli extends View {
                     coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                     coords2 = parseBoardCoordinates(input.args[1].toUpperCase());
                     notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
-                    askOrderTiles();
+
+                    hasPickedTiles = true;
+                    finalizeUpdate();
+                    if (!lastInputGeneratedError) askOrderTiles();
+                    else askCoordinatesTilesOnBoard();
                 }
             }
             case "order" -> {
                 if (input.args.length == 3 && checkInput(input.args[0], 1, 3) && checkInput(input.args[1], 0, 3) && checkInput(input.args[2], 0, 3)) {
                     notifyOrderCommand(Integer.parseInt(input.args[0]), Integer.parseInt(input.args[1]), Integer.parseInt(input.args[2]));
-                    askNumberOfColumn();
+
+                    finalizeUpdate();
+                    if (!lastInputGeneratedError) askNumberOfColumn();
+                    else askOrderTiles();
                 }
             }
             case "drop" -> {
                 if (checkInput(input.args[0], 1, 5)) {
                     notifyDropCommand(Integer.parseInt(input.args[0]) - 1);
                     notifyListeners(ViewListener::onEndOfTurn);
+
+                    hasPickedTiles = false;
+                    if (lastInputGeneratedError) askNumberOfColumn();
                 }
             }
             case "help" -> System.out.println("""
@@ -173,6 +188,7 @@ public class ViewCli extends View {
                      - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
             default -> notifyGenericInput(input.command + " " + String.join(" ", input.args));
         }
+        lastInputGeneratedError = false;
     }
 
     @Override
@@ -230,11 +246,14 @@ public class ViewCli extends View {
         graphics.addPlayer(username, score, isClient);
     }
 
-    @Override
-    public void finalizeUpdate() {
-        // Clear console
+    private void flushConsole() {
         out.print("\033[H\033[2J");
         out.flush();
+    }
+
+    @Override
+    public void finalizeUpdate() {
+        flushConsole();
 
         ICliRenderer renderer = colorRenderer;
 
@@ -243,6 +262,7 @@ public class ViewCli extends View {
         if (System.getProperty("os.name").contains("win")) renderer = textRenderer;
 
         out.println(graphics.getGraphics().render(renderer));
+        if (canSendCommands && !hasPickedTiles) askCoordinatesTilesOnBoard();
     }
 
     @Override
@@ -264,7 +284,14 @@ public class ViewCli extends View {
     }
 
     @Override
+    public void handleWinnerSelected(String winner) {
+        System.out.printf("%s WON THE GAME!!!%n", winner);
+        System.out.println("Game is over, if you wish to start a new game use the 'help' command");
+    }
+
+    @Override
     public void handleErrorMessage(String message) {
+        lastInputGeneratedError = true;
         System.out.println(message);
     }
 
@@ -274,8 +301,9 @@ public class ViewCli extends View {
     }
 
     @Override
-    public void allowUsersGameCommands() {
-        super.allowUsersGameCommands();
-        askCoordinatesTilesOnBoard();
+    public void shutdown() {
+        super.shutdown();
+        flushConsole();
+        System.out.println("Exiting, (＾Ｕ＾)ノ bye");
     }
 }

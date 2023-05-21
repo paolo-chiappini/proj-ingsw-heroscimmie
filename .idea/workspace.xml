@@ -14,9 +14,13 @@
   <component name="ChangeListManager">
     <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="added client reconnection to server">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/virtualModel/ClientTurnState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/virtualModel/ClientTurnState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerMain.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,7 +137,7 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run Server">
+  <component name="RunManager" selected="Application.Run Client [CLI]">
     <configuration name="Run Client [CLI]" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
@@ -164,6 +168,11 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="3 clients game" type="CompoundRunConfigurationType">
+      <toRun name="Run Client [CLI]" type="Application" />
+      <toRun name="Run Server" type="Application" />
+      <method v="2" />
     </configuration>
     <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
       <module name="proj-ingsw-heroscimmie" />
@@ -221,6 +230,7 @@
       <item itemvalue="Application.Run Main" />
       <item itemvalue="Application.Run Client [CLI]" />
       <item itemvalue="Application.Run Client [GUI]" />
+      <item itemvalue="Compound.3 clients game" />
       <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
       <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
       <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
@@ -282,7 +292,7 @@
       <workItem from="1684604731758" duration="5001000" />
       <workItem from="1684614120586" duration="39000" />
       <workItem from="1684614334812" duration="454000" />
-      <workItem from="1684677880315" duration="3972000" />
+      <workItem from="1684677880315" duration="17022000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -368,7 +378,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684681530328</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="added client reconnection to server">
+      <created>1684681918496</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684681918496</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -399,6 +416,32 @@
     <MESSAGE value="added turn progression in client" />
     <MESSAGE value="added client reconnection to server" />
     <option name="LAST_COMMIT_MESSAGE" value="added client reconnection to server" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
+          <line>52</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
+          <line>204</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

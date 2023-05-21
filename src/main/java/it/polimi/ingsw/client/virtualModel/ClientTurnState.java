@@ -49,7 +49,7 @@ public class ClientTurnState extends ObservableObject<ModelListener> {
         int currTurn = json.getInt("players_turn"); 
         boolean isLastLap = json.getBoolean("is_end_game");
 
-        setGameStatus(isLastLap && currTurn == 0);
+        setGameStatus((isLastLap && currTurn == 0) || json.has("winner"));
         setCurrentTurn(currTurn);
         setCurrentPlayer(playersOrder.getString(currTurn));
     }
