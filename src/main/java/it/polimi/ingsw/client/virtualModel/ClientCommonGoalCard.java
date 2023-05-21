@@ -1,6 +1,7 @@
 package it.polimi.ingsw.client.virtualModel;
 
-import it.polimi.ingsw.util.observer.ModelObservable;
+import it.polimi.ingsw.util.observer.ModelListener;
+import it.polimi.ingsw.util.observer.ObservableObject;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -8,7 +9,7 @@ import org.json.JSONObject;
  * This class represents a single common goal card in the virtual model.
  * It aims to represent the state of the card in the client and update it if necessary
  */
-public class ClientCommonGoalCard extends ModelObservable {
+public class ClientCommonGoalCard extends ObservableObject<ModelListener> {
 
     private int id;
     private int currPoints; // represents the maximum current score that can be obtained
@@ -24,7 +25,7 @@ public class ClientCommonGoalCard extends ModelObservable {
      */
     public void setId(int id) {
         this.id = id;
-        notifyObservers(obs->obs.setCommonGoal(id,currPoints));
+        notifyListeners(listener -> listener.setCommonGoal(id,currPoints));
     }
 
     /**
@@ -33,7 +34,7 @@ public class ClientCommonGoalCard extends ModelObservable {
      */
     public void setScore(int points) {
         this.currPoints = points;
-        notifyObservers(obs->obs.updateCommonGoalPoints(getId(),getScore()));
+        notifyListeners(listener -> listener.updateCommonGoalPoints(getId(),getScore()));
     }
 
     /**

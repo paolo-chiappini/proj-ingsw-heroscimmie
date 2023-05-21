@@ -1,101 +1,145 @@
 package it.polimi.ingsw.client.controller;
 
 import it.polimi.ingsw.client.Client;
-import it.polimi.ingsw.client.view.cli.ViewCli;
+import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.virtualModel.ClientBoard;
 import it.polimi.ingsw.client.virtualModel.ClientCommonGoalCard;
 import it.polimi.ingsw.client.virtualModel.ClientPlayer;
+import it.polimi.ingsw.client.virtualModel.ClientTurnState;
 import it.polimi.ingsw.server.messages.Message;
-import it.polimi.ingsw.util.observer.ControllerObserver;
+import it.polimi.ingsw.util.observer.ViewListener;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ClientController implements ControllerObserver {
+public class ClientController implements ViewListener {
     private Client client;
     private String myUsername;
     private ClientBoard board;
-    private final List<ClientPlayer> players;
-    private final List<ClientCommonGoalCard> commonGoalCards;
-    private final ViewCli view;
+    private List<ClientPlayer> players;
+    private List<ClientCommonGoalCard> commonGoalCards;
+    private ClientTurnState turnState;
+    private final View view;
     private int row1, row2, col1, col2, first, second, third;
+    private boolean clientIsInGame;
 
 
-    public ClientController(ViewCli view, String serverAddress){
+    public ClientController(View view, String serverAddress) {
         this.view = view;
-        board = new ClientBoard();
-        players = new LinkedList<>();
-        commonGoalCards = new LinkedList<>();
+        clientIsInGame = false;
 
         try {
             client = new Client(serverAddress);
         } catch (RuntimeException re) {
-            System.out.println("Unable to establish connection to server, exiting");
+            view.showServerConnectionError();
             return;
         }
 
-        client.addObserver(this);
-        view.addObserver(this);
-        board.addObserver(view.getGraphics());
+        view.addListener(this);
 
         client.setOnMessageReceivedCallback(this::onMessageReceived);
         client.start();
+
+        // Start view on a different tread
         new Thread(view).start();
     }
 
-
     public void onMessageReceived(Message message) {
+        if (message == null) {
+            view.showServerConnectionError();
+            return;
+        }
+
         String method = message.getMethod();
         switch (method) {
             case "START" -> onGameStart(message);
             case "UPDATE" -> update(message);
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
-            case "LEFT" -> System.out.println(new JSONObject(message.getBody()).getString("username") + " left the game");
-            case "OK", "ERR" -> System.out.println(new JSONObject(message.getBody()).getString("msg"));
-            default -> {}
+            case "LEFT" -> onPlayerDisconnection(message);
+            case "OK" -> view.handleSuccessMessage(new JSONObject(message.getBody()).getString("msg"));
+            case "ERR" -> view.handleErrorMessage(new JSONObject(message.getBody()).getString("msg"));
         }
     }
 
+    public void onPlayerReconnection(Message message) {
+        // TODO: fix
+        String username = new JSONObject(message.getBody()).getString("username");
+        view.updatePlayerConnectionStatus(username, false);
+        view.finalizeUpdate();
+    }
+
+    public void onPlayerDisconnection(Message message) {
+        // TODO: fix
+        String username = new JSONObject(message.getBody()).getString("username");
+        if (username.equals(myUsername)) {
+            clientIsInGame = false;
+            return;
+        }
+
+        if (!clientIsInGame) return;
+        view.updatePlayerConnectionStatus(username, true);
+        view.finalizeUpdate();
+    }
 
     public void onListReceived(Message message) {
         JSONObject body = new JSONObject(message.getBody());
         JSONArray files = body.getJSONArray("files");
-        if (files.isEmpty()) System.out.println("There are no files");
-        else{
-            System.out.println("List of saved files");
-            for(int i=0; i< files.length();i++)
-                System.out.println(files.get(i).toString());
+        if (files.isEmpty()) view.showListOfSavedGames(null);
+        else {
+            String[] parsedFiles = new String[files.length()];
+            for (int i = 0; i < parsedFiles.length; i++) {
+                parsedFiles[i] = "Saved game " + parseSavedGameDateFormat(files.getString(i));
+            }
+            view.showListOfSavedGames(parsedFiles);
         }
     }
 
+    private String parseSavedGameDateFormat(String filename) {
+        String millisecondsString = filename.substring(filename.indexOf("_") + 1, filename.indexOf(".json"));
+        long millis = Long.parseLong(millisecondsString);
+        DateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm");
+        Date date = new Date(millis);
+
+        return dateFormat.format(date);
+    }
 
     public void onChatMessageReceived(Message message) {
+        if (!clientIsInGame) return;
+
         JSONObject body = new JSONObject(message.getBody());
         String chatMessage = body.getString("message");
         String sender = body.getString("username");
         String recipient = null;
         if (body.has("recipient")) recipient = body.getString("recipient");
 
-        if (recipient != null && recipient.equals(myUsername))
-            view.getGraphics().addMessage(chatMessage, sender, true);
+        if (recipient != null && (recipient.equals(myUsername) || sender.equals(myUsername)))
+            view.addMessage(chatMessage, sender, true);
         else if (recipient == null)
-            view.getGraphics().addMessage(chatMessage, sender, false);
+            view.addMessage(chatMessage, sender, false);
 
-        view.drawGraphics();
+        view.finalizeUpdate();
     }
 
 
     public void update(Message message) {
-        JSONObject body = new JSONObject(message.getBody());
+        if (!clientIsInGame) return;
 
+        JSONObject body = new JSONObject(message.getBody());
         JSONObject serialized = body.getJSONObject("serialized");
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
 
+        System.out.println(serialized);
+
         board.updateBoard(serialized.toString());
+        turnState.updateTurnState(serialized.toString());
+        System.out.println(turnState.getCurrentTurn());
 
         for (int i = 0; i < jsonPlayers.length(); i++) {
             ClientPlayer player = players.get(i);
@@ -106,46 +150,107 @@ public class ClientController implements ControllerObserver {
             commonGoalCards.get(i).updatePoints(jsonCommonGoals.getJSONObject(i).toString());
         }
 
-        view.drawGraphics();
-        view.askCoordinatesTilesOnBoard();
-    }
+        // if it's the client's turn, allow commands
+        if (turnState.getCurrentPlayer().equals(myUsername)) {
+            view.allowUsersGameCommands();
+            view.handleSuccessMessage("Your turn to play");
+        } else {
+            view.blockUsersGameCommands();
+        }
 
+        view.finalizeUpdate();
+    }
 
     public void onGameStart(Message message) {
         JSONObject body = new JSONObject(message.getBody());
-        JSONObject serialized = body.getJSONObject("serialized");
-        JSONArray players = serialized.getJSONArray("players");
-        JSONArray commonGoals = serialized.getJSONArray("common_goals");
-
+        JSONArray players = body.getJSONObject("serialized").getJSONArray("players_order");
         for (int i = 0; i < players.length(); i++) {
-            JSONObject player = players.getJSONObject(i);
-            this.players.add(new ClientPlayer(player.getString("username")));
-            this.players.get(i).addObserver(view.getGraphics());
-            view.getGraphics().addPlayer(player.getString("username"), player.getInt("score"), player.getString("username").equals(myUsername));
-            if (player.getString("username").equals(myUsername))
-                this.players.get(i).updateId(player.toString());
+            if (players.getString(i).equals(myUsername)) {
+                clientIsInGame = true;
+                break;
+            }
         }
 
-        for (int i = 0; i < commonGoals.length(); i++) {
-            this.commonGoalCards.add(new ClientCommonGoalCard());
-            this.commonGoalCards.get(i).addObserver(view.getGraphics());
-            commonGoalCards.get(i).updateId(commonGoals.getJSONObject(i).toString());
-        }
+        if (!clientIsInGame) return;
 
-        this.board.updateBoard(serialized.toString());
+        initVirtualModelAndView();
+        setupGameFromJson(body);
+        setupModelListeners();
 
         update(message);
     }
 
+    private void initVirtualModelAndView() {
+        board = new ClientBoard();
+        turnState = new ClientTurnState();
+        players = new LinkedList<>();
+        commonGoalCards = new LinkedList<>();
 
-    public void joinGame() {
+        view.reset();
+    }
+
+    private void setupModelListeners() {
+        board.addListener(view);
+        turnState.addListener(view);
+        players.forEach(player -> player.addListener(view));
+        commonGoalCards.forEach(goal -> goal.addListener(view));
+    }
+
+    private void setupGameFromJson(JSONObject gameState) {
+        JSONObject serialized = gameState.getJSONObject("serialized");
+        JSONArray jsonPlayers = serialized.getJSONArray("players");
+        JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
+
+        addPlayers(jsonPlayers);
+        addCommonGoals(jsonCommonGoals);
+    }
+
+    private void addPlayers(JSONArray jsonPlayers) {
+        for (int i = 0; i < jsonPlayers.length(); i++) {
+            JSONObject playerObject = jsonPlayers.getJSONObject(i);
+            String username = playerObject.getString("username");
+            boolean isCurrentClient = username.equals(myUsername);
+
+            ClientPlayer virtualPlayer = new ClientPlayer(username);
+            virtualPlayer.updatePlayer(playerObject.toString());
+            virtualPlayer.updatePersonalCardId(playerObject.toString());
+
+            players.add(virtualPlayer);
+            view.addPlayer(username, 0, isCurrentClient);
+            if (isCurrentClient) view.setPersonalGoal(virtualPlayer.getPersonalCardId());
+        }
+    }
+
+    private void addCommonGoals(JSONArray jsonCommonGoals) {
+        for (int i = 0; i < jsonCommonGoals.length(); i++) {
+            JSONObject goalObject = jsonCommonGoals.getJSONObject(i);
+
+            ClientCommonGoalCard virtualCommonGoal = new ClientCommonGoalCard();
+            virtualCommonGoal.updateId(goalObject.toString());
+
+            commonGoalCards.add(virtualCommonGoal);
+            view.setCommonGoal(virtualCommonGoal.getId(), 0);
+        }
+    }
+
+    public void onJoinGame() {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("JOIN", body.toString());
     }
 
 
-    public void newGame(int lobbySize) {
+    public void onNewGame(int lobbySize) {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("lobby_size", lobbySize);
@@ -153,14 +258,24 @@ public class ClientController implements ControllerObserver {
     }
 
 
-    public void listSavedGames() {
+    public void onListSavedGames() {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("LIST", body.toString());
     }
 
 
-    public void loadSavedGame(String saveName) {
+    public void onLoadSavedGame(String saveName) {
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("save_name", saveName);
@@ -168,26 +283,49 @@ public class ClientController implements ControllerObserver {
     }
 
 
-    public void saveCurrentGame() {
+    public void onSaveCurrentGame() {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("SAVE", body.toString());
     }
 
 
-    public void quitGame() {
+    public void onQuitGame() {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("QUIT", body.toString());
+
+        // reset local data
+        initVirtualModelAndView();
+        clientIsInGame = false;
     }
 
 
     public void onChooseUsername(String username) {
-        System.out.println("updated username : " + username);
+        if (clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action while in game");
+            return;
+        }
+
         this.myUsername = username;
     }
 
     public void onChooseColumnOfBookshelf(int numberOfColumn) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("row1", row1);
@@ -195,21 +333,30 @@ public class ClientController implements ControllerObserver {
         body.put("col1", col1);
         body.put("col2", col2);
         body.put("first_tile", first);
-        body.put("second_tile",second);
-        body.put("third_tile",third);
+        body.put("second_tile", second);
+        body.put("third_tile", third);
         body.put("column", numberOfColumn);
-        System.out.println("sending message");
         client.sendRequest("DROP", body.toString());
     }
 
 
     public void onChooseTilesOrder(int first, int second, int third) {
-        this.first=first;
-        this.second=second;
-        this.third=third;
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
+        this.first = first;
+        this.second = second;
+        this.third = third;
     }
 
     public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("row1", row1);
@@ -220,32 +367,44 @@ public class ClientController implements ControllerObserver {
         this.col1 = col1;
         this.row2 = row2;
         this.col2 = col2;
-        System.out.println("sending message");
+        this.first = 1;
+        this.second = 2;
+        this.third = 3;
         client.sendRequest("PICK", body.toString());
     }
 
 
     public void onChatMessageSent(String message) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot send a message when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("message", message);
-        System.out.println("sending message");
         client.sendRequest("CHAT", body.toString());
     }
 
 
     public void onChatWhisperSent(String message, String recipient) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot send a message when not in game");
+            return;
+        }
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         body.put("message", message);
         body.put("recipient", recipient);
-        System.out.println("sending whisper");
         client.sendRequest("CHAT", body.toString());
     }
 
     public void onEndOfTurn() {
+        if (!clientIsInGame) return;
+
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
-        client.sendRequest("NEXT",body.toString());
+        client.sendRequest("NEXT", body.toString());
     }
 }

@@ -15,7 +15,6 @@ public class ServerMain {
         server.setCallback("QUIT", ServerHandlers::handlePlayerLeaving);
         server.setCallback("PICK", ServerHandlers::handleBoardTilePickUp);
         server.setCallback("DROP", ServerHandlers::handleDropTiles);
-        server.setCallback("NEXT", ServerHandlers::handleEndTurn);
         server.setCallback("CHAT", (req, res) -> {
             if (ServerHandlers.validateRequestBody(req, res) && ServerHandlers.validateSocketUsername(req, res)) {
                 res.setBody(req.getBody());
