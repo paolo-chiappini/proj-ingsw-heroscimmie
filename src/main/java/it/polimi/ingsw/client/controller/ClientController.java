@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class ClientController implements ViewListener {
-    private Client client;
+    private final Client client;
     private String myUsername;
     private ClientBoard board;
     private List<ClientPlayer> players;
@@ -33,57 +33,58 @@ public class ClientController implements ViewListener {
         this.view = view;
         clientIsInGame = false;
 
-        try {
-            client = new Client(serverAddress);
-        } catch (RuntimeException re) {
-            view.showServerConnectionError();
-            return;
-        }
-
+        view.start();
         view.addListener(this);
 
+        client = new Client(serverAddress);
         client.setOnMessageReceivedCallback(this::onMessageReceived);
+        client.setOnConnectionLostCallback((msg) -> {
+            clientIsInGame = false;
+            view.handleServerConnectionError(msg);
+            initVirtualModelAndView();
+        });
         client.start();
-
-        // Start view on a different tread
-        new Thread(view).start();
     }
 
     public void onMessageReceived(Message message) {
-        if (message == null) {
-            view.showServerConnectionError();
-            return;
-        }
-
         String method = message.getMethod();
+        JSONObject body = new JSONObject(message.getBody());
+
         switch (method) {
             case "START" -> onGameStart(message);
-            case "UPDATE" -> update(message);
+            case "UPDATE" -> {
+                if (body.has("reconnected")) onGameStart(message);
+                else update(message);
+            }
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
-            case "LEFT" -> onPlayerDisconnection(message);
-            case "OK" -> view.handleSuccessMessage(new JSONObject(message.getBody()).getString("msg"));
-            case "ERR" -> view.handleErrorMessage(new JSONObject(message.getBody()).getString("msg"));
+            /*case "LEFT" -> handleDisconnections(body);*/
+            case "OK" -> view.handleSuccessMessage(body.getString("msg"));
+            case "ERR" -> view.handleErrorMessage(body.getString("msg"));
+            case "NAME" -> myUsername = body.getString("username");
         }
     }
 
-    public void onPlayerReconnection(Message message) {
-        // TODO: fix
-        String username = new JSONObject(message.getBody()).getString("username");
-        view.updatePlayerConnectionStatus(username, false);
-        view.finalizeUpdate();
-    }
+    public void handleDisconnections(JSONObject body) {
+        if (!body.has("disconnected_players") || !body.has("connected_players")) return;
+        JSONArray disconnectedPlayers = body.getJSONArray("disconnected_players");
+        JSONArray connectedPlayers = body.getJSONArray("connected_players");
 
-    public void onPlayerDisconnection(Message message) {
-        // TODO: fix
-        String username = new JSONObject(message.getBody()).getString("username");
-        if (username.equals(myUsername)) {
-            clientIsInGame = false;
-            return;
+        for (int i = 0; i < disconnectedPlayers.length(); i++) {
+            String username = disconnectedPlayers.getString(i);
+            if (username.equals(myUsername)) {
+                clientIsInGame = false;
+                return;
+            }
+            view.updatePlayerConnectionStatus(username, true);
+        }
+
+        for (int i = 0; i < connectedPlayers.length(); i++) {
+            String username = connectedPlayers.getString(i);
+            view.updatePlayerConnectionStatus(username, false);
         }
 
         if (!clientIsInGame) return;
-        view.updatePlayerConnectionStatus(username, true);
         view.finalizeUpdate();
     }
 
@@ -135,11 +136,9 @@ public class ClientController implements ViewListener {
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
 
-        System.out.println(serialized);
-
+        handleDisconnections(body);
         board.updateBoard(serialized.toString());
         turnState.updateTurnState(serialized.toString());
-        System.out.println(turnState.getCurrentTurn());
 
         for (int i = 0; i < jsonPlayers.length(); i++) {
             ClientPlayer player = players.get(i);
@@ -159,6 +158,12 @@ public class ClientController implements ViewListener {
         }
 
         view.finalizeUpdate();
+        if (body.has("winner")) {
+            view.handleWinnerSelected(body.getString("winner"));
+            // reset model and view
+            initVirtualModelAndView();
+            clientIsInGame = false;
+        }
     }
 
     public void onGameStart(Message message) {
@@ -270,7 +275,7 @@ public class ClientController implements ViewListener {
     }
 
 
-    public void onLoadSavedGame(String saveName) {
+    public void onLoadSavedGame(int saveIndex) {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
             return;
@@ -278,7 +283,7 @@ public class ClientController implements ViewListener {
 
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
-        body.put("save_name", saveName);
+        body.put("save_index", saveIndex - 1);
         client.sendRequest("LOAD", body.toString());
     }
 
@@ -317,7 +322,7 @@ public class ClientController implements ViewListener {
             return;
         }
 
-        this.myUsername = username;
+        client.sendRequest("NAME", new JSONObject().put("username", username).toString());
     }
 
     public void onChooseColumnOfBookshelf(int numberOfColumn) {
@@ -406,5 +411,15 @@ public class ClientController implements ViewListener {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("NEXT", body.toString());
+    }
+
+    public void onGenericInput(String input) {
+        if (!client.isConnected()) {
+            if (input.trim().equalsIgnoreCase("y")) client.start();
+            else view.shutdown();
+            return;
+        }
+
+        view.handleErrorMessage("No command " + input + " found");
     }
 }
