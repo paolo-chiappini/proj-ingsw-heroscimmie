@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="it.polimi.ingsw.client.view.gui.controllers.SplashScreenController">
+   <ImageView
+           fx:id="myShelfieLogo" fitHeight="186.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <Image url="@../sprites/publisher_material/splash_title.png"/>
+   </ImageView>
+</StackPane>

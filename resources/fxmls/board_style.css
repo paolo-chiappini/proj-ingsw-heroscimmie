@@ -1,0 +1,145 @@
+* {
+    -fx-color1: #a34313;
+    -fx-color2: #903b12;
+    -fx-color3: #9d4024;
+    -fx-color4: #cb622a;
+    -fx-higlighted-color4: rgba(255, 136, 72, 0.68);
+    -fx-color5: #c54e2c;
+    -fx-button-text-color: #e8ce93;
+    -fx-board-border: #693612;
+
+    -fx-color1-ok: #2da313;
+    -fx-color2-ok: #2d9012;
+    -fx-color3-ok: #3e9d24;
+    -fx-color4-ok: #4dcb2a;
+    -fx-higlighted-color4-ok: rgba(112, 255, 72, 0.68);
+    -fx-color5-ok: #4dc52c;
+
+    -fx-color1-undo: #a31313;
+    -fx-color2-undo: #901212;
+    -fx-color3-undo: #9d2424;
+    -fx-color4-undo: #cb2a2a;
+    -fx-higlighted-color4-undo: rgba(255, 72, 72, 0.68);
+    -fx-color5-undo: #c52c2c;
+}
+
+.button {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1 0%, -fx-color2 100%),
+            -fx-color3,
+            -fx-color4,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4, -fx-color5);
+    -fx-padding: 8 15 15 15;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-background-radius: 50px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-font-size: 2.1em;
+    -fx-text-fill: -fx-button-text-color;
+}
+
+.button:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1 0%, -fx-color2 100%),
+            -fx-color3,
+            -fx-color4,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4, -fx-color5);
+}
+.button:pressed {
+    -fx-padding: 10 15 13 15;
+    -fx-background-insets:
+            2 0 0 0,
+            2 0 3 0,
+            2 0 4 0,
+            2 0 5 0;
+}
+
+.ok{
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-ok 0%, -fx-color2-ok 100%),
+            -fx-color3-ok,
+            -fx-color4-ok,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4-ok, -fx-color5-ok);
+    -fx-background-radius: 200px;
+}
+
+.ok:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-ok 0%, -fx-color2-ok 100%),
+            -fx-color3-ok,
+            -fx-color4-ok,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-ok, -fx-color5-ok);
+}
+
+.board{
+    -fx-padding: 7;
+    -fx-background-color: -fx-board-border;
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
+}
+
+.card{
+    -fx-padding: 4;
+    -fx-background-color: rgb(126,69,21);
+    -fx-background-radius: 5px;
+    -fx-background-insets: 0,0 0 5 0, 0 0 6 0, 0 0 7 0;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
+}
+
+.tile-list{
+    -fx-background-color: linear-gradient(from 0% 20% to 100% 80%, rgba(126,69,21, 0.5) 0%, rgba(255, 180, 99, 0.5) 100%);
+    -fx-background-radius: 7px;
+    -fx-border-color: linear-gradient(from 0% 20% to 100% 80%, #7e4515 0%, #754609 100%);
+    -fx-border-radius: 2px;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
+}
+
+.bookshelves-view{
+    -fx-background-color: rgba(126,69,21,0.5);
+    -fx-background-radius: 7px;
+    -fx-border-color: linear-gradient(from 0% 20% to 100% 80%, #7e4515 0%, #754609 100%);
+    -fx-border-radius: 2px;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
+}
+
+.player-name{
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-button-text-color;
+}
+
+.tile-list-label{
+    -fx-background-color: #7e4515;
+    -fx-background-radius: 5px;
+    -fx-padding: 2px 12px 0px 12px;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-button-text-color;
+}
+
+.tile-box{
+    -fx-border-color:#7e4515;
+    -fx-border-insets:3;
+    -fx-border-radius:3;
+    -fx-border-width:2.0
+}
+
+.undo{
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
+            -fx-color3-undo,
+            -fx-color4-undo,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4-undo, -fx-color5-undo);
+    -fx-background-radius: 200px;
+}
+
+.undo:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
+            -fx-color3-undo,
+            -fx-color4-undo,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-undo, -fx-color5-undo);
+}
