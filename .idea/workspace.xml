@@ -12,7 +12,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Added GUI and resources">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Changed maven plugins versions">
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -397,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684663555036</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Changed maven plugins versions">
+      <created>1684664161958</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1684664161958</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -426,7 +433,8 @@
     <MESSAGE value="removed prints from controller, added saved games list" />
     <MESSAGE value="cleaned up controller" />
     <MESSAGE value="Added GUI and resources" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added GUI and resources" />
+    <MESSAGE value="Changed maven plugins versions" />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed maven plugins versions" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
