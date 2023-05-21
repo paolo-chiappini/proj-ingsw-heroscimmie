@@ -33,6 +33,9 @@ public class ClientController implements ViewListener {
         this.view = view;
         clientIsInGame = false;
 
+        // Start view on a different tread
+        new Thread(view).start();
+
         try {
             client = new Client(serverAddress);
         } catch (RuntimeException re) {
@@ -45,8 +48,6 @@ public class ClientController implements ViewListener {
         client.setOnMessageReceivedCallback(this::onMessageReceived);
         client.start();
 
-        // Start view on a different tread
-        new Thread(view).start();
     }
 
     public void onMessageReceived(Message message) {

@@ -357,7 +357,7 @@ public abstract class ServerHandlers {
      * @param socket disconnected socket
      */
     public static void handleDisconnection(Socket socket) {
-        System.out.println(socket.getInetAddress() + " disconnected");
+        System.out.println(socket.getRemoteSocketAddress() + " disconnected");
         if (playerSockets.containsKey(socket)) {
             String player = playerSockets.remove(socket);
 
@@ -467,5 +467,9 @@ public abstract class ServerHandlers {
             return false;
         }
         return true;
+    }
+
+    public static void handleConnection(Socket socket) {
+        System.out.println(socket.getRemoteSocketAddress() + " connected");
     }
 }
