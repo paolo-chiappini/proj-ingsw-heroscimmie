@@ -12,30 +12,33 @@ import java.util.function.Consumer;
 
 public class Client {
 
-    private final Socket socket;
-    private final BufferedReader fromServer;
+    private Socket socket;
+    private BufferedReader fromServer;
 
     protected Message message;
     private final MessageProvider messageProvider = new MessageProvider(MessageType.JSON);
     private Consumer<Message> callback;
+    private Consumer<String> connectionLostCallback;
     private static final int SERVER_PORT=49152;
+    private boolean isAlive;
+    private String serverAddress;
 
     public Client(String address){
-        try {
-            this.socket = new Socket(address, SERVER_PORT);
-            fromServer = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        serverAddress = address;
+
         // default callback
         callback = (msg) -> {};
     }
 
     public void sendRequest(String method, String body) {
-        Message request = messageProvider.getEmptyInstance(socket);
-        request.setMethod(method);
-        request.setBody(body);
-        request.send();
+        try {
+            Message request = messageProvider.getEmptyInstance(socket);
+            request.setMethod(method);
+            request.setBody(body);
+            request.send();
+        } catch (RuntimeException re) {
+            endConnection();
+        }
     }
 
     public Message readFromServer() {
@@ -49,23 +52,45 @@ public class Client {
 
     public void endConnection() {
         try {
+            if (socket == null) return;
             if(!socket.isClosed()) {
                 socket.close();
             }
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e);
         }
     }
 
     private void run() {
-        while (true) {
-            Message serverMessage = readFromServer();
-            callback.accept(serverMessage);
+        try {
+            socket = new Socket(serverAddress, SERVER_PORT);
+            fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (IOException e) {
+            connectionLostCallback.accept("Unable to establish connection, retry? y/other");
+            return;
+        }
+
+        isAlive = true;
+
+        try {
+            while (isAlive) {
+                Message serverMessage = readFromServer();
+                callback.accept(serverMessage);
+            }
+        } catch (RuntimeException e) {
+            connectionLostCallback.accept("Lost connection to server, retry? y/other");
+            isAlive = false;
         }
     }
 
+    public boolean isConnected() { return isAlive; }
+
     public void setOnMessageReceivedCallback(Consumer<Message> callback) {
         this.callback = callback;
+    }
+
+    public void setOnConnectionLostCallback(Consumer<String> callback) {
+        this.connectionLostCallback = callback;
     }
 
     public void start() {

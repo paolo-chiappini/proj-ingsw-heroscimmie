@@ -11,9 +11,10 @@ import it.polimi.ingsw.util.observer.ViewListener;
  */
 public abstract class View
         extends ObservableObject<ViewListener>
-        implements ModelListener, Runnable {
+        implements ModelListener {
 
     protected boolean canSendCommands;
+    protected boolean running;
 
     public View() { canSendCommands = false; }
 
@@ -38,8 +39,9 @@ public abstract class View
 
     /**
      * Shows a server connection error message to the user.
+     * @param message error details.
      */
-    public abstract void showServerConnectionError();
+    public abstract void handleServerConnectionError(String message);
 
     public abstract void handleSuccessMessage(String message);
     public abstract void handleErrorMessage(String message);
@@ -157,5 +159,29 @@ public abstract class View
             return;
         }
         notifyListeners(listener -> listener.onChooseColumnOfBookshelf(column));
+    }
+
+    /**
+     * Notifies all listeners that an unrecognized command has been received.
+     * @param rawInput input received.
+     */
+    public void notifyGenericInput(String rawInput) {
+        notifyListeners(listener -> listener.onGenericInput(rawInput));
+    }
+
+    protected abstract void run();
+
+    /**
+     * Starts the view on a different thread.
+     */
+    public void start() {
+        new Thread(this::run).start();
+    }
+
+    /**
+     * Stops the view and its thread.
+     */
+    public void shutdown() {
+        running = false;
     }
 }

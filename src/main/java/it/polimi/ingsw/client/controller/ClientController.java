@@ -33,28 +33,16 @@ public class ClientController implements ViewListener {
         this.view = view;
         clientIsInGame = false;
 
-        try {
-            client = new Client(serverAddress);
-        } catch (RuntimeException re) {
-            view.showServerConnectionError();
-            return;
-        }
-
+        view.start();
         view.addListener(this);
 
+        client = new Client(serverAddress);
         client.setOnMessageReceivedCallback(this::onMessageReceived);
+        client.setOnConnectionLostCallback(view::handleServerConnectionError);
         client.start();
-
-        // Start view on a different tread
-        new Thread(view).start();
     }
 
     public void onMessageReceived(Message message) {
-        if (message == null) {
-            view.showServerConnectionError();
-            return;
-        }
-
         String method = message.getMethod();
         switch (method) {
             case "START" -> onGameStart(message);
@@ -135,11 +123,8 @@ public class ClientController implements ViewListener {
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
 
-        System.out.println(serialized);
-
         board.updateBoard(serialized.toString());
         turnState.updateTurnState(serialized.toString());
-        System.out.println(turnState.getCurrentTurn());
 
         for (int i = 0; i < jsonPlayers.length(); i++) {
             ClientPlayer player = players.get(i);
@@ -406,5 +391,15 @@ public class ClientController implements ViewListener {
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
         client.sendRequest("NEXT", body.toString());
+    }
+
+    public void onGenericInput(String input) {
+        if (!client.isConnected()) {
+            if (input.trim().equalsIgnoreCase("y")) client.start();
+            else view.shutdown();
+            return;
+        }
+
+        view.handleErrorMessage("No command " + input + " found");
     }
 }

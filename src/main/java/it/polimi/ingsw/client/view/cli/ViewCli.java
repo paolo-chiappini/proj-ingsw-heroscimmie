@@ -29,10 +29,12 @@ public class ViewCli extends View {
         graphics = new DefaultCliGraphics();
     }
 
-    @Override
+    // TODO
+    /*@Override*/
     public void run() {
+        running = true;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        while (true) {
+        while (running) {
             try {
                 String line = reader.readLine();
                 Input input = parseInputString(line);
@@ -169,7 +171,7 @@ public class ViewCli extends View {
                      - pick + A1 + A1           | pick up tiles in the chosen range
                      - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
                      - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
-            default -> System.out.println("No command" + input.command + "found");
+            default -> notifyGenericInput(input.command + " " + String.join(" ", input.args));
         }
     }
 
@@ -257,9 +259,8 @@ public class ViewCli extends View {
     }
 
     @Override
-    public void showServerConnectionError() {
-        // TODO: implement reconnection to server (?)
-        System.out.println("Unable to connect to the sever, client shutting down.");
+    public void handleServerConnectionError(String message) {
+        System.out.println(message);
     }
 
     @Override
@@ -270,5 +271,11 @@ public class ViewCli extends View {
     @Override
     public void handleSuccessMessage(String message) {
         System.out.println(message);
+    }
+
+    @Override
+    public void allowUsersGameCommands() {
+        super.allowUsersGameCommands();
+        askCoordinatesTilesOnBoard();
     }
 }

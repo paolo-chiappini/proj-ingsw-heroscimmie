@@ -17,4 +17,5 @@ public interface ViewListener extends Listener {
     void onNewGame(int lobbySize);
     void onJoinGame();
     void onEndOfTurn();
+    void onGenericInput(String rawInput);
 }
