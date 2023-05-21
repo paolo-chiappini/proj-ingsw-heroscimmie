@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 
 import it.polimi.ingsw.client.view.gui.EventHandlers;
+import it.polimi.ingsw.client.view.gui.GuiController;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
@@ -11,7 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class MenuController {
+public class MenuController extends GuiController {
     public VBox menuBox;
     public ImageView publisherLogo;
     public StackPane stackPane;

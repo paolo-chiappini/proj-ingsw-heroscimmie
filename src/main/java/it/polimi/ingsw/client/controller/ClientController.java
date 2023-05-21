@@ -28,8 +28,7 @@ public class ClientController implements ViewListener {
     private int row1, row2, col1, col2, first, second, third;
     private boolean clientIsInGame;
 
-
-    public ClientController(View view, String serverAddress) {
+    public ClientController(View view, String serverAddress){
         this.view = view;
         clientIsInGame = false;
 

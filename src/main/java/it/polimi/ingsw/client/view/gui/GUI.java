@@ -17,8 +17,8 @@ public class GUI extends Application {
         }
         else{
             switch (p.get(0)){
-                case "menu" -> SceneSelector.nextScene(new SplashScreenController(), stage);
-                case "board" -> SceneSelector.nextScene(new MenuController(), stage);
+                case "--menu" -> SceneSelector.nextScene(new SplashScreenController(), stage);
+                case "--board" -> SceneSelector.nextScene(new MenuController(), stage);
             }
         }
     }

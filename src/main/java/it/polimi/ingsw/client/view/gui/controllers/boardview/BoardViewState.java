@@ -8,8 +8,8 @@ public abstract class BoardViewState {
 
     public BoardViewState(BoardController controller) {
         this.controller = controller;
-        var stateName = this.getClass().getSimpleName();
-        System.out.println(stateName);
+//        var stateName = this.getClass().getSimpleName();
+//        System.out.println(stateName);
     }
 
     public abstract void clickTile(Node tile);

@@ -1,5 +1,7 @@
 package it.polimi.ingsw.client.view.gui;
-
+import it.polimi.ingsw.client.view.gui.controllers.SplashScreenController;
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import it.polimi.ingsw.client.view.View;
 
 public class ViewGui extends View {
@@ -97,6 +99,7 @@ public class ViewGui extends View {
 
     @Override
     public void run() {
-        GUI.main(new String[]{ startingView });
+        GUI.main(new String[]{startingView});
     }
+
 }

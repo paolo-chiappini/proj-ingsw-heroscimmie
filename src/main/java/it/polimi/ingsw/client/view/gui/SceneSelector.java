@@ -21,10 +21,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class SceneSelector {
+    private static GuiController controller = null;
     public static void nextScene(SplashScreenController controller, Stage rootStage){
         FXMLLoader fxmlLoader = new FXMLLoader(SceneSelector.class.getResource("/fxmls/menu_view.fxml"));
         try {
-
             Platform.setImplicitExit(false); //Do not exit application when all stages are closed
             rootStage.close();
             Platform.setImplicitExit(true);
@@ -33,9 +33,10 @@ public class SceneSelector {
             var menuController = fxmlLoader.<MenuController>getController();
             Stage newStage = new Stage();
 
-            setStageDefaultProperties(newStage, nextScene);
+            setStageProperties(newStage, nextScene);
             menuController.startStage(newStage);
 
+            SceneSelector.controller = menuController;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -48,9 +49,10 @@ public class SceneSelector {
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.rgb(0, 0, 0, 0));
 
-        setStageDefaultProperties(rootStage, scene);
+        setStageProperties(rootStage, scene);
         rootStage.initStyle(StageStyle.TRANSPARENT);
         rootStage.show();
+        SceneSelector.controller = fxmlLoader.getController();
     }
 
     public static void nextScene(MenuController controller, Stage rootStage) {
@@ -69,10 +71,10 @@ public class SceneSelector {
         BoardController boardController = fxmlLoader.getController();
         Stage newStage = new Stage();
 
-        setStageDefaultProperties(newStage, nextScene);
+        setStageProperties(newStage, nextScene);
         boardController.startStage(newStage);
 
-
+        SceneSelector.controller = fxmlLoader.getController();
     }
 
     public static void testScene(MenuController controller, VBox rootElement){
@@ -85,13 +87,18 @@ public class SceneSelector {
             rootElement.getChildren().clear();
             rootElement.getChildren().add((Node)newGameView);
             nextController.setUp(lastView, rootElement);
+
+            SceneSelector.controller = fxmlLoader.getController();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
 
-    private static void setStageDefaultProperties(Stage stage, Scene scene){
-//        stage.setResizable(false);
+    public static GuiController getCurrentController(){
+        return SceneSelector.controller;
+    }
+
+    private static void setStageProperties(Stage stage, Scene scene){
         stage.setFullScreenExitHint("Press F11 to exit fullscreen");
         stage.setTitle("My Shelfie™");
 

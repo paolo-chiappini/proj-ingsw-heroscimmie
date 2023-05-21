@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui.controllers.boardview;
 
 import it.polimi.ingsw.client.view.gui.Animations;
 import it.polimi.ingsw.client.view.gui.EventHandlers;
+import it.polimi.ingsw.client.view.gui.GuiController;
 import it.polimi.ingsw.client.view.gui.SceneSelector;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.Bookshelf;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.TilesBoard;
@@ -24,7 +25,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardController {
+public class BoardController extends GuiController {
     public StackPane window;
     public GridPane gamePlane;
     public AnchorPane anchorPane;
