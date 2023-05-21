@@ -18,6 +18,7 @@ import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.io.File;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -135,17 +136,18 @@ public abstract class ServerHandlers {
      * @param res response message
      */
     public static void handleLoadGame(Message req, Message res) {
-        if (missingPropertiesInBody(List.of("username", "save_name"), req, res)) return;
+        if (missingPropertiesInBody(List.of("username", "save_index"), req, res)) return;
 
         JSONObject body = new JSONObject(req.getBody());
-        String saveName = body.getString("save_name");
+        int saveIndex = body.getInt("save_index");
         String username = body.getString("username");
 
         try {
-            ActiveGameManager.loadGame(saveName, username);
-            notifySuccess(res, "Loaded game " + saveName);
-        } catch (IllegalActionException iae) {
-            notifyError(res, iae.getMessage());
+            var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+            ActiveGameManager.loadGame(files.get(saveIndex), username);
+            notifySuccess(res, "Successfully loaded game");
+        } catch (RuntimeException re) {
+            notifyError(res, re.getMessage());
         }
     }
 

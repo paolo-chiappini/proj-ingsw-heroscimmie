@@ -98,8 +98,7 @@ public abstract class View
      * @param chosenGameIndex index of the game to load.
      */
     public void notifyLoadCommand(int chosenGameIndex) {
-        // TODO : change from string to index
-        notifyListeners(listener -> listener.onLoadSavedGame(""));
+        notifyListeners(listener -> listener.onLoadSavedGame(chosenGameIndex));
     }
 
     /**

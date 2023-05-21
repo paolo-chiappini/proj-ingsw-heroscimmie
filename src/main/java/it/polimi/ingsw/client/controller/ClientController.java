@@ -275,7 +275,7 @@ public class ClientController implements ViewListener {
     }
 
 
-    public void onLoadSavedGame(String saveName) {
+    public void onLoadSavedGame(int saveIndex) {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
             return;
@@ -283,7 +283,7 @@ public class ClientController implements ViewListener {
 
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
-        body.put("save_name", saveName);
+        body.put("save_index", saveIndex - 1);
         client.sendRequest("LOAD", body.toString());
     }
 

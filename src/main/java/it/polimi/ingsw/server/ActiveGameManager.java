@@ -87,12 +87,12 @@ public abstract class ActiveGameManager {
 
     /**
      * Loads a saved game from file.
-     * @param saveName name of the file to load.
+     * @param fileName name of the file to load.
      * @param player name of the player trying to load the game.
      * @throws IllegalActionException when player is not whitelisted or when another
      * game is already in progress or being setup.
      */
-    public static void loadGame(String saveName, String player) {
+    public static void loadGame(String fileName, String player) {
         if (isGameInProgress()) {
             throw new IllegalActionException("Cannot load new game while another is in progress");
         }
@@ -103,9 +103,9 @@ public abstract class ActiveGameManager {
 
         String serializedData;
         try {
-            serializedData = FileIOManager.readFromFile(saveName + ".json", FilePath.SAVED);
+            serializedData = FileIOManager.readFromFile(fileName, FilePath.SAVED);
         } catch (FileNotFoundException e) {
-            throw new RuntimeException("Unable to load " + saveName);
+            throw new RuntimeException("Unable to load selected game");
         }
 
         Game loadedGame = new JsonDeserializer().deserializeGame(serializedData);
