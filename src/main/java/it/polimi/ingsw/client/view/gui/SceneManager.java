@@ -101,7 +101,7 @@ public class SceneManager {
         stage.setTitle("My Shelfie™");
 
         stage.setOnCloseRequest(e->{
-            //TERMINA IL CLIENT
+            GuiController.getView().shutdown();
         });
 
         stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {

@@ -33,10 +33,9 @@ public class ClientController implements ViewListener {
         this.view = view;
         clientIsInGame = false;
 
-        view.start();
-        view.addListener(this);
-
         client = new Client(serverAddress);
+
+
         client.setOnMessageReceivedCallback(this::onMessageReceived);
         client.setOnConnectionLostCallback((msg) -> {
             clientIsInGame = false;
@@ -44,7 +43,11 @@ public class ClientController implements ViewListener {
             initVirtualModelAndView();
         });
 
-        client.start();
+//        client.start();
+
+        view.setClient(client);
+        view.addListener(this);
+        view.start();
     }
 
     public void onMessageReceived(Message message) {

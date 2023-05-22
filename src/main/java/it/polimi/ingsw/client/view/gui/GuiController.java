@@ -17,5 +17,6 @@ public abstract class GuiController {
         alert.setHeaderText("Server error");
         alert.setContentText(message);
         alert.showAndWait();
+        view.shutdown(); //TODO RECONNECTION
     }
 }

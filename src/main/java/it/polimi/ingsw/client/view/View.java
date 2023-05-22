@@ -184,10 +184,21 @@ public abstract class View
         new Thread(this::run).start();
     }
 
+    protected Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     /**
      * Stops the view and its thread.
      */
     public void shutdown() {
         running = false;
+        client.endConnection();
+    }
+
+    public void connectToServer() {
+        client.start();
     }
 }

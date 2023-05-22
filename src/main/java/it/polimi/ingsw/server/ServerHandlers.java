@@ -370,13 +370,36 @@ public abstract class ServerHandlers {
         return null;
     }
 
+
+    /**
+     * Debug method that prints the level 4 address (IP + Port) of every socket that connects to the server
+     * @param socket connected socket
+     */
+    public static void handleConnection(Socket socket) {
+        System.out.println(socket.getRemoteSocketAddress() + " connected");
+    }
+
     /**
      * Handles the disconnection of a socket.
      *
      * @param socket disconnected socket
      */
     public static void handleDisconnection(Socket socket) {
-        System.out.println(socket.getInetAddress() + " disconnected");
+        System.out.println(socket.getRemoteSocketAddress() + " disconnected due to an error");
+        handleEndOfConnection(socket);
+    }
+
+    /**
+     * Handles the disconnection of a socket.
+     *
+     * @param socket disconnected socket
+     */
+    public static void handleConnectionClosed(Socket socket) {
+        System.out.println(socket.getRemoteSocketAddress() + " closed connection");
+        handleEndOfConnection(socket);
+    }
+
+    private static void handleEndOfConnection(Socket socket) {
         if (playerSockets.containsKey(socket)) {
             String player = playerSockets.remove(socket);
 

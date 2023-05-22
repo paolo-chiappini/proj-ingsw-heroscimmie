@@ -18,9 +18,9 @@ public class SplashScreenController extends GuiController implements Initializab
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(event -> {
+            GuiController.getView().connectToServer();
             SceneManager.nextScene(this, getRootStage());
         });
         delay.play();

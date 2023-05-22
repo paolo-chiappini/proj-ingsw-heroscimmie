@@ -25,6 +25,8 @@ public class ServerMain {
         });
 
         server.onConnectionLost(ServerHandlers::handleDisconnection);
+        server.onConnectionClosed(ServerHandlers::handleConnectionClosed);
+        server.onConnection(ServerHandlers::handleConnection);
 
         server.setMiddleware("JOIN", (req, res, callback) -> {
             callback.call(req, res);
@@ -32,6 +34,9 @@ public class ServerMain {
         });
 
         server.setGlobalMiddleware((req, res, next) -> {
+            System.out.println("\nrequest from "+req.getSocket().getRemoteSocketAddress());
+            System.out.println("METHOD: "+req.getMethod());
+            System.out.println("BODY: \n"+req.getBody());
             if (ServerHandlers.validateRequestBody(req, res) && ServerHandlers.validateSocketUsername(req, res)) {
                 next.call(req, res);
             }

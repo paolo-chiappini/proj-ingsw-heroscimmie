@@ -33,6 +33,7 @@ public class ViewCli extends View {
     // TODO
     /*@Override*/
     public void run() {
+        connectToServer();
         running = true;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (running) {

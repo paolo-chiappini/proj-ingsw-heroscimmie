@@ -56,6 +56,8 @@ public class Client {
             if(!socket.isClosed()) {
                 socket.close();
             }
+
+            isAlive = false;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -75,6 +77,7 @@ public class Client {
         try {
             while (isAlive) {
                 Message serverMessage = readFromServer();
+                if(!isAlive) return;
                 callback.accept(serverMessage);
             }
         } catch (RuntimeException e) {
