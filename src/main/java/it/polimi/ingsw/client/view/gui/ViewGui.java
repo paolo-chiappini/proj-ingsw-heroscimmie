@@ -3,7 +3,7 @@ import it.polimi.ingsw.client.view.View;
 import javafx.application.Platform;
 
 public class ViewGui extends View {
-    private String startingScene;
+    private final String startingScene;
     public ViewGui(String startingScene) {
         super();
         this.startingScene = startingScene;
@@ -26,7 +26,8 @@ public class ViewGui extends View {
 
     @Override
     public void handleServerConnectionError(String message) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        Platform.runLater(()->controller.showServerConnectionError(message));
     }
 
     @Override

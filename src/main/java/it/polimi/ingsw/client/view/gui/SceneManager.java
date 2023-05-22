@@ -100,6 +100,10 @@ public class SceneManager {
         stage.setFullScreenExitHint("Press F11 to exit fullscreen");
         stage.setTitle("My Shelfie™");
 
+        stage.setOnCloseRequest(e->{
+            //TERMINA IL CLIENT
+        });
+
         stage.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
             if (KeyCode.F11.equals(event.getCode())) {
                 stage.setFullScreen(!stage.isFullScreen());

@@ -12,10 +12,10 @@ public abstract class GuiController {
         return GuiController.view;
     }
 
-    public void showServerConnectionError() {
+    public void showServerConnectionError(String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setHeaderText("Server error");
-        alert.setContentText("Unable to connect to the sever, client shutting down");
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }

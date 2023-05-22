@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view;
 
+import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.util.observer.ModelListener;
 import it.polimi.ingsw.util.observer.ObservableObject;
 import it.polimi.ingsw.util.observer.ViewListener;

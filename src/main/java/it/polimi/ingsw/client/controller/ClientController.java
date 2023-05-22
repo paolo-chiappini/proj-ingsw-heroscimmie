@@ -43,6 +43,7 @@ public class ClientController implements ViewListener {
             view.handleServerConnectionError(msg);
             initVirtualModelAndView();
         });
+
         client.start();
     }
 
