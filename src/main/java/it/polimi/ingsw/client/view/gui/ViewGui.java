@@ -25,9 +25,13 @@ public class ViewGui extends View {
     }
 
     @Override
-    public void showServerConnectionError() {
-        GuiController controller = SceneManager.getCurrentController();
-        Platform.runLater(controller::showServerConnectionError);
+    public void handleServerConnectionError(String message) {
+
+    }
+
+    @Override
+    public void handleWinnerSelected(String winner) {
+
     }
 
     @Override

@@ -24,7 +24,6 @@ public class ServerMain {
             }
         });
 
-        server.onConnection(ServerHandlers::handleConnection);
         server.onConnectionLost(ServerHandlers::handleDisconnection);
 
         server.setMiddleware("JOIN", (req, res, callback) -> {
