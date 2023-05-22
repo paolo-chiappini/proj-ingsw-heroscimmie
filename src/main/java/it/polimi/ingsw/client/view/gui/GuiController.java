@@ -1,6 +1,10 @@
 package it.polimi.ingsw.client.view.gui;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+
+import java.util.Optional;
 
 public abstract class GuiController {
     private static ViewGui view;
@@ -13,10 +17,19 @@ public abstract class GuiController {
     }
 
     public void showServerConnectionError(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setHeaderText("Server error");
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Connection error");
         alert.setContentText(message);
-        alert.showAndWait();
-        view.shutdown(); //TODO RECONNECTION
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            view.connectToServer();
+        } else {
+            view.shutdown();
+        }
+    }
+
+    public void shutdown() {
+        Platform.exit();
     }
 }

@@ -12,10 +12,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="minor changes">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Little patch for better handling of disconnections">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/Client.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +134,7 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run Client [GUI]">
+  <component name="RunManager" selected="Application.Run Server">
     <configuration name="Run Client [CLI]" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
@@ -315,7 +315,7 @@
       <workItem from="1684614334812" duration="454000" />
       <workItem from="1684677880315" duration="19944000" />
       <workItem from="1684772577079" duration="5301000" />
-      <workItem from="1684779744038" duration="1515000" />
+      <workItem from="1684779744038" duration="2204000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -443,7 +443,21 @@
       <option name="project" value="LOCAL" />
       <updated>1684779587719</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="Little patch for better handling of disconnections">
+      <created>1684781474088</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1684781474088</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Little patch for better handling of disconnections">
+      <created>1684781491712</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1684781491712</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -478,7 +492,8 @@
     <MESSAGE value="Added server connection error to GUI." />
     <MESSAGE value="Changed resources directory position (anche sticazzi) and demanded client.start() call to the view. Now when the view is shutdown, the application stops correctly." />
     <MESSAGE value="minor changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="minor changes" />
+    <MESSAGE value="Little patch for better handling of disconnections" />
+    <option name="LAST_COMMIT_MESSAGE" value="Little patch for better handling of disconnections" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
