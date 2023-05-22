@@ -18,7 +18,6 @@ import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
