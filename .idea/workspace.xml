@@ -12,23 +12,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Forse nun se piagne">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="reconnection handling and bug fixing">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_view - Copia.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_view_new_game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view_new_game.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/EventHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/EventHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/SceneSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/SceneManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuNewGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuNewGameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/SplashScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/SplashScreenController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewListener.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,9 +32,9 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
         <option value="Interface" />
         <option value="Enum" />
-        <option value="Class" />
       </list>
     </option>
   </component>
@@ -95,43 +85,34 @@
   </component>
   <component name="ProjectViewState">
     <option name="flattenModules" value="true" />
-    <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
     &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/ProgettoIngSoftware/src/main/java/it/polimi/ingsw/client/view/gui&quot;,
+    &quot;last_opened_file_path&quot;: &quot;G:/ProgettoIngSoftware/src/main/java&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.5825915&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.javacompiler&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="it.polimi.ingsw.client.view.gui" />
       <recent name="it.polimi.ingsw.util.observer" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\ProgettoIngSoftware\src\main\java\it\polimi\ingsw\client\view\gui" />
-      <recent name="G:\ProgettoIngSoftware\src\main\java\it\polimi\ingsw\client\view\gui\fxmls" />
-      <recent name="G:\ProgettoIngSoftware\resources" />
       <recent name="G:\ProgettoIngSoftware\src\main\java" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
@@ -154,27 +135,11 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run Client [GUI]">
+  <component name="RunManager" selected="Application.Run Client [CLI]">
     <configuration name="Run Client [CLI]" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
       <option name="PROGRAM_PARAMETERS" value="--cli --server-addr localhost" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Run Client [GUI] BOARD" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
-      <module name="proj-ingsw-heroscimmie" />
-      <option name="PROGRAM_PARAMETERS" value="--gui --board --server-addr localhost" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="Run Client [GUI] MENU" type="Application" factoryName="Application">
-      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
-      <module name="proj-ingsw-heroscimmie" />
-      <option name="PROGRAM_PARAMETERS" value="--gui --menu --server-addr localhost" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -201,6 +166,11 @@
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
+    </configuration>
+    <configuration name="3 clients game" type="CompoundRunConfigurationType">
+      <toRun name="Run Client [CLI]" type="Application" />
+      <toRun name="Run Server" type="Application" />
+      <method v="2" />
     </configuration>
     <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
       <module name="proj-ingsw-heroscimmie" />
@@ -232,14 +202,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="java in proj-ingsw-heroscimmie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="server in proj-ingsw-heroscimmie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="proj-ingsw-heroscimmie" />
       <option name="TEST_OBJECT" value="directory" />
@@ -266,16 +228,13 @@
       <item itemvalue="Application.Run Main" />
       <item itemvalue="Application.Run Client [CLI]" />
       <item itemvalue="Application.Run Client [GUI]" />
-      <item itemvalue="Application.Run Client [GUI] BOARD" />
-      <item itemvalue="Application.Run Client [GUI] MENU" />
+      <item itemvalue="Compound.3 clients game" />
       <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
-      <item itemvalue="JUnit.java in proj-ingsw-heroscimmie" />
       <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
       <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.java in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
       </list>
@@ -328,13 +287,10 @@
       <workItem from="1683379308220" duration="195000" />
       <workItem from="1683402892318" duration="1509000" />
       <workItem from="1684429787960" duration="3005000" />
-      <workItem from="1684604731758" duration="4903000" />
-      <workItem from="1684667976231" duration="2376000" />
-      <workItem from="1684670661167" duration="235000" />
-      <workItem from="1684685060275" duration="1900000" />
-      <workItem from="1684687521014" duration="95000" />
-      <workItem from="1684693441460" duration="4356000" />
-      <workItem from="1684755633577" duration="4141000" />
+      <workItem from="1684604731758" duration="5001000" />
+      <workItem from="1684614120586" duration="39000" />
+      <workItem from="1684614334812" duration="454000" />
+      <workItem from="1684677880315" duration="19944000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -406,49 +362,35 @@
       <option name="project" value="LOCAL" />
       <updated>1684601610790</updated>
     </task>
-    <task id="LOCAL-00011" summary="Added GUI and resources">
-      <created>1684663045362</created>
+    <task id="LOCAL-00011" summary="added turn progression in client">
+      <created>1684613965805</created>
       <option name="number" value="00011" />
       <option name="presentableId" value="LOCAL-00011" />
       <option name="project" value="LOCAL" />
-      <updated>1684663045362</updated>
+      <updated>1684613965805</updated>
     </task>
-    <task id="LOCAL-00012" summary="Added GUI and resources">
-      <created>1684663555036</created>
+    <task id="LOCAL-00012" summary="added client reconnection to server">
+      <created>1684681530328</created>
       <option name="number" value="00012" />
       <option name="presentableId" value="LOCAL-00012" />
       <option name="project" value="LOCAL" />
-      <updated>1684663555036</updated>
+      <updated>1684681530328</updated>
     </task>
-    <task id="LOCAL-00013" summary="Changed maven plugins versions">
-      <created>1684664161958</created>
+    <task id="LOCAL-00013" summary="added client reconnection to server">
+      <created>1684681918496</created>
       <option name="number" value="00013" />
       <option name="presentableId" value="LOCAL-00013" />
       <option name="project" value="LOCAL" />
-      <updated>1684664161958</updated>
+      <updated>1684681918496</updated>
     </task>
-    <task id="LOCAL-00014" summary="Changed maven plugins versions">
-      <created>1684664291441</created>
+    <task id="LOCAL-00014" summary="reconnection handling and bug fixing">
+      <created>1684695715631</created>
       <option name="number" value="00014" />
       <option name="presentableId" value="LOCAL-00014" />
       <option name="project" value="LOCAL" />
-      <updated>1684664291441</updated>
+      <updated>1684695715631</updated>
     </task>
-    <task id="LOCAL-00015" summary="Started implementing ViewGui">
-      <created>1684670344493</created>
-      <option name="number" value="00015" />
-      <option name="presentableId" value="LOCAL-00015" />
-      <option name="project" value="LOCAL" />
-      <updated>1684670344493</updated>
-    </task>
-    <task id="LOCAL-00016" summary="Forse nun se piagne">
-      <created>1684697793183</created>
-      <option name="number" value="00016" />
-      <option name="presentableId" value="LOCAL-00016" />
-      <option name="project" value="LOCAL" />
-      <updated>1684697793183</updated>
-    </task>
-    <option name="localTasksCounter" value="17" />
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -476,107 +418,117 @@
     <MESSAGE value="added javadoc to view" />
     <MESSAGE value="removed prints from controller, added saved games list" />
     <MESSAGE value="cleaned up controller" />
-    <MESSAGE value="Added GUI and resources" />
-    <MESSAGE value="Changed maven plugins versions" />
-    <MESSAGE value="Started implementing ViewGui" />
-    <MESSAGE value="Forse nun se piagne" />
-    <option name="LAST_COMMIT_MESSAGE" value="Forse nun se piagne" />
+    <MESSAGE value="added turn progression in client" />
+    <MESSAGE value="added client reconnection to server" />
+    <MESSAGE value="reconnection handling and bug fixing" />
+    <option name="LAST_COMMIT_MESSAGE" value="reconnection handling and bug fixing" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
+          <line>134</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$ServerConfigurationTest.ic" NAME="ServerConfigurationTest Coverage Results" MODIFIED="1682329568194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680354353328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333256733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$CommonGoalCardDeckTest_OnCommonGoalDeckCreationTests_GettingPointsTests_getPointsCard2Players.ic" NAME="CommonGoalCardDeckTest$OnCommonGoalDeckCreationTests$GettingPointsTests.getPointsCard2Players Coverage Results" MODIFIED="1680527192405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$it_polimi_ingsw_server_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw.server in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682329659742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JSONServerTest.ic" NAME="JSONServerTest Coverage Results" MODIFIED="1682327536667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$TileSpaceTest.ic" NAME="TileSpaceTest Coverage Results" MODIFIED="1679835142807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1680339350138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1681220954744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$it_in_proj_ingsw_heroscimmie.ic" NAME="it in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683036158569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1681545970063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ingsw_2023$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1682874151594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682882899306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$TileSpaceTest.ic" NAME="TileSpaceTest Coverage Results" MODIFIED="1679835142807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$CommonGoalCardDeckTest_OnCommonGoalDeckCreationTests_GettingPointsTests_getPointsCard2Players.ic" NAME="CommonGoalCardDeckTest$OnCommonGoalDeckCreationTests$GettingPointsTests.getPointsCard2Players Coverage Results" MODIFIED="1680527192405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1681220954744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$it_polimi_ingsw_server_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw.server in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682329659742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683202340877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ingsw_2023$FileManagerTest.ic" NAME="FileManagerTest Coverage Results" MODIFIED="1682885455980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.files.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JSONServerTest.ic" NAME="JSONServerTest Coverage Results" MODIFIED="1682327536667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$ServerConfigurationTest.ic" NAME="ServerConfigurationTest Coverage Results" MODIFIED="1682329568194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333185145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$it_in_proj_ingsw_heroscimmie.ic" NAME="it in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683036158569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
   </component>

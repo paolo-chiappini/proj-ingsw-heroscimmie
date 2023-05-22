@@ -12,9 +12,10 @@ public interface ViewListener extends Listener {
     void onChatWhisperSent(String message, String recipient);
     void onQuitGame();
     void onSaveCurrentGame();
-    void onLoadSavedGame(String saveName);
+    void onLoadSavedGame(int saveIndex);
     void onListSavedGames();
     void onNewGame(int lobbySize);
     void onJoinGame();
     void onEndOfTurn();
+    void onGenericInput(String rawInput);
 }
