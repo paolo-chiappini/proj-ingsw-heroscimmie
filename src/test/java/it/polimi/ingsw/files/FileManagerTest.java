@@ -6,6 +6,8 @@ import org.junit.jupiter.api.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -93,8 +95,11 @@ public class FileManagerTest {
     @Test
     @DisplayName("Reading contents of a directory")
     public void readDirectoryContents() {
-        List<String> expectedFiles = List.of("permanent.txt", "testfile.txt");
-        List<String> filesInDirectory = FileIOManager.getFilesInDirectory(FilePath.TEST);
+        LinkedList<String> expectedFiles = new LinkedList<>(List.of("permanent.txt", "testfile.txt"));
+        LinkedList<String> filesInDirectory = new LinkedList<>(FileIOManager.getFilesInDirectory(FilePath.TEST));
+
+        Collections.sort(expectedFiles);
+        Collections.sort(filesInDirectory);
 
         assertIterableEquals(expectedFiles, filesInDirectory);
     }
