@@ -1,9 +1,8 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.mock.DynamicTestBookshelf;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
 import it.polimi.ingsw.server.model.goals.personal.*;
-import it.polimi.ingsw.server.model.tile.TileType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -46,7 +45,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  2,  2,  4,  2},
                         { 1,  0,  2,  0,  1}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard1();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -62,7 +60,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  2,  2,  2,  2},
                         { 1,  0,  2,  0,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard2();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -78,7 +75,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  2,  2,  2,  2},
                         { 1,  0,  2,  0,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard3();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -94,7 +90,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  1,  0,  2,  2},
                         { 1,  0,  2,  0,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard4();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -110,7 +105,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  1,  0,  2,  3},
                         { 5,  0,  2,  0,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard5();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -126,7 +120,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  5,  0,  4,  3},
                         { 3,  0,  2,  0,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard6();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -142,7 +135,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  5,  0,  4,  5},
                         { 3,  0,  1,  0,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard7();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -158,7 +150,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  5,  0,  1,  5},
                         { 3,  0,  1,  5,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard8();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -174,7 +165,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  2,  0,  1,  3},
                         { 4,  0,  1,  5,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard9();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -190,7 +180,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  4,  0,  1,  3},
                         { 4,  0,  1,  3,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard10();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -206,7 +195,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  4,  0,  1,  0},
                         { 4,  0,  1,  2,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard11();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
@@ -222,7 +210,6 @@ class PersonalGoalCardDeckTest {
                         { 4,  4,  0,  1,  5},
                         { 0,  0,  1,  2,  4}
                 };
-                TileType[][] pattern=new TileType[6][5];
                 IBookshelf bookshelf= new DynamicTestBookshelf(template);
                 myCard=new PersonalGoalCard12();
                 assertEquals(12,myCard.evaluatePoints(bookshelf));
