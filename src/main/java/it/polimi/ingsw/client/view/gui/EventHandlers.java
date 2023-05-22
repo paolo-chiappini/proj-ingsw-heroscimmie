@@ -1,13 +1,14 @@
 package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.view.gui.controllers.MenuController;
+import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 
 public abstract class EventHandlers {
     public static void set(MenuController controller){
-        controller.newGameButton.setOnMouseReleased(e-> SceneSelector.nextScene(controller, controller.getRootStage()));
+        controller.newGameButton.setOnMouseReleased(e-> SceneManager.newGameScene(controller, controller.innerStackPane));
 
         controller.joinGameButton.setOnMouseReleased(e->{
             Alert alert = new Alert(Alert.AlertType.NONE,
@@ -31,5 +32,15 @@ public abstract class EventHandlers {
         controller.goToBoardButton.setOnMouseReleased(e-> controller.playSwitchToBookshelfAnimation(1));
 
         controller.goToBookshelfButton.setOnMouseReleased(e-> controller.playSwitchToBookshelfAnimation(-1));
+    }
+
+    public static void set(MenuNewGameController controller) {
+        controller.backButton.setOnMouseReleased(e->{
+            controller.root.getChildren().clear();
+            controller.root.getChildren().addAll(controller.lastView);
+        });
+        controller.confirmButton.requestFocus();
+        controller.confirmButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());
+        controller.confirmButton.setOnMouseClicked(controller::setUsername);
     }
 }

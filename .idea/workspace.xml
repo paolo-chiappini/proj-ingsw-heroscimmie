@@ -12,17 +12,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Started implementing ViewGui">
-      <change afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" afterDir="false" />
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Forse nun se piagne">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_view - Copia.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/fxmls/menu_view_new_game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view_new_game.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/EventHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/EventHandlers.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/SceneSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/SceneSelector.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/GuiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/SceneSelector.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/SceneManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuNewGameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/MenuNewGameController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/SplashScreenController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/SplashScreenController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardViewState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardViewState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +154,7 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run Client [CLI]">
+  <component name="RunManager" selected="Application.Run Client [GUI]">
     <configuration name="Run Client [CLI]" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
@@ -327,7 +333,8 @@
       <workItem from="1684670661167" duration="235000" />
       <workItem from="1684685060275" duration="1900000" />
       <workItem from="1684687521014" duration="95000" />
-      <workItem from="1684693441460" duration="4104000" />
+      <workItem from="1684693441460" duration="4356000" />
+      <workItem from="1684755633577" duration="4141000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -434,7 +441,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684670344493</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Forse nun se piagne">
+      <created>1684697793183</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1684697793183</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -465,7 +479,8 @@
     <MESSAGE value="Added GUI and resources" />
     <MESSAGE value="Changed maven plugins versions" />
     <MESSAGE value="Started implementing ViewGui" />
-    <option name="LAST_COMMIT_MESSAGE" value="Started implementing ViewGui" />
+    <MESSAGE value="Forse nun se piagne" />
+    <option name="LAST_COMMIT_MESSAGE" value="Forse nun se piagne" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

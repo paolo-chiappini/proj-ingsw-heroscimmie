@@ -36,6 +36,12 @@ public class ClientController implements ViewListener {
         new Thread(view).start();
 
         try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
             client = new Client(serverAddress);
         } catch (RuntimeException re) {
             view.showServerConnectionError();

@@ -1,15 +1,12 @@
 package it.polimi.ingsw.client.view.gui;
-import it.polimi.ingsw.client.view.gui.controllers.SplashScreenController;
-import javafx.application.Platform;
-import javafx.stage.Stage;
 import it.polimi.ingsw.client.view.View;
+import javafx.application.Platform;
 
 public class ViewGui extends View {
-    private String startingView;
-    public ViewGui(String startingView) {
+    private String startingScene;
+    public ViewGui(String startingScene) {
         super();
-        this.startingView = startingView;
-
+        this.startingScene = startingScene;
     }
 
     @Override
@@ -29,7 +26,8 @@ public class ViewGui extends View {
 
     @Override
     public void showServerConnectionError() {
-
+        GuiController controller = SceneManager.getCurrentController();
+        Platform.runLater(controller::showServerConnectionError);
     }
 
     @Override
@@ -99,7 +97,8 @@ public class ViewGui extends View {
 
     @Override
     public void run() {
-        GUI.main(new String[]{startingView});
+        GuiController.setView(this);
+        GUI.main(new String[]{startingScene});
     }
 
 }

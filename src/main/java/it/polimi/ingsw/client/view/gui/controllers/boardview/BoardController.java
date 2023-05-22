@@ -3,7 +3,7 @@ package it.polimi.ingsw.client.view.gui.controllers.boardview;
 import it.polimi.ingsw.client.view.gui.Animations;
 import it.polimi.ingsw.client.view.gui.EventHandlers;
 import it.polimi.ingsw.client.view.gui.GuiController;
-import it.polimi.ingsw.client.view.gui.SceneSelector;
+import it.polimi.ingsw.client.view.gui.SceneManager;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.Bookshelf;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.TilesBoard;
 import javafx.collections.ObservableList;
@@ -74,7 +74,7 @@ public class BoardController extends GuiController {
 
 
         //Test
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneSelector.class.getResource("/fxmls/bookshelves_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/bookshelves_view.fxml"));
         try {
             this.bookshelvesView = fxmlLoader.load();
             bookshelvesView.setVisible(false);
@@ -145,7 +145,7 @@ public class BoardController extends GuiController {
     }
 
     public List<File> getFiles(){
-        var itemTilesDirectory = SceneSelector.class.getResource("/sprites/item_tiles_small");
+        var itemTilesDirectory = SceneManager.class.getResource("/sprites/item_tiles_small");
         if (itemTilesDirectory == null)
             throw new RuntimeException("Something went wrong when locating /sprites/publisher_material/box_no_shadow.png");
 

@@ -22,29 +22,29 @@
          <Rectangle2D />
       </viewport>
    </ImageView>
-   <StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
+   <StackPane fx:id="innerStackPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
       <VBox fx:id="menuBox" alignment="TOP_CENTER" spacing="50.0">
          <StackPane.margin>
-            <Insets/>
+            <Insets />
          </StackPane.margin>
          <VBox alignment="TOP_CENTER" prefHeight="182.0" prefWidth="800.0">
             <VBox.margin>
-               <Insets bottom="30.0" top="30.0"/>
+               <Insets bottom="30.0" top="30.0" />
             </VBox.margin>
             <ImageView fitHeight="134.0" fitWidth="544.0" pickOnBounds="true" preserveRatio="true">
-               <Image url="@../sprites/publisher_material/splash_title.png"/>
+               <Image url="@../sprites/publisher_material/splash_title.png" />
                <effect>
-                  <DropShadow height="12.0" offsetX="5.0" offsetY="5.0" radius="5.5" width="12.0"/>
+                  <DropShadow height="12.0" offsetX="5.0" offsetY="5.0" radius="5.5" width="12.0" />
                </effect>
                <VBox.margin>
-                  <Insets/>
+                  <Insets />
                </VBox.margin>
             </ImageView>
             <ImageView fitHeight="117.0" fitWidth="572.0" pickOnBounds="true" preserveRatio="true">
                <effect>
-                  <DropShadow height="12.0" offsetX="5.0" offsetY="5.0" radius="5.5" width="12.0"/>
+                  <DropShadow height="12.0" offsetX="5.0" offsetY="5.0" radius="5.5" width="12.0" />
                </effect>
-               <Image url="@../sprites/publisher_material/creators.png"/>
+               <Image url="@../sprites/publisher_material/creators.png" />
             </ImageView>
          </VBox>
          <Button fx:id="newGameButton" prefHeight="75.0" prefWidth="270.0" text="New Game" textFill="#e8ce93">

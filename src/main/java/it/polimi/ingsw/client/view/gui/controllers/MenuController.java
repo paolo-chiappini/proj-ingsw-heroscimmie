@@ -16,6 +16,7 @@ public class MenuController extends GuiController {
     public VBox menuBox;
     public ImageView publisherLogo;
     public StackPane stackPane;
+    public StackPane innerStackPane;
     public Button joinGameButton;
     public Button newGameButton;
     public ImageView backgroundImage;

@@ -6,13 +6,12 @@ import it.polimi.ingsw.client.view.gui.controllers.SplashScreenController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -20,10 +19,10 @@ import javafx.stage.StageStyle;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class SceneSelector {
+public class SceneManager {
     private static GuiController controller = null;
     public static void nextScene(SplashScreenController controller, Stage rootStage){
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneSelector.class.getResource("/fxmls/menu_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view.fxml"));
         try {
             Platform.setImplicitExit(false); //Do not exit application when all stages are closed
             rootStage.close();
@@ -36,7 +35,7 @@ public class SceneSelector {
             setStageProperties(newStage, nextScene);
             menuController.startStage(newStage);
 
-            SceneSelector.controller = menuController;
+            SceneManager.controller = menuController;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,7 +43,7 @@ public class SceneSelector {
 
 
     public static void nextScene(GUI start, Stage rootStage) throws IOException {
-        var res = SceneSelector.class.getResource("/fxmls/splash_view.fxml");
+        var res = SceneManager.class.getResource("/fxmls/splash_view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(res);
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.rgb(0, 0, 0, 0));
@@ -52,11 +51,11 @@ public class SceneSelector {
         setStageProperties(rootStage, scene);
         rootStage.initStyle(StageStyle.TRANSPARENT);
         rootStage.show();
-        SceneSelector.controller = fxmlLoader.getController();
+        SceneManager.controller = fxmlLoader.getController();
     }
 
     public static void nextScene(MenuController controller, Stage rootStage) {
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneSelector.class.getResource("/fxmls/board_view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/board_view.fxml"));
 
         Platform.setImplicitExit(false); //Do not exit application when all stages are closed
         rootStage.close();
@@ -74,28 +73,27 @@ public class SceneSelector {
         setStageProperties(newStage, nextScene);
         boardController.startStage(newStage);
 
-        SceneSelector.controller = fxmlLoader.getController();
+        SceneManager.controller = fxmlLoader.getController();
     }
 
-    public static void testScene(MenuController controller, VBox rootElement){
+    public static void newGameScene(MenuController controller, Pane rootElement){
         var lastView = new ArrayList<>(rootElement.getChildren());
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneSelector.class.getResource("/fxmls/menu_view_new_game.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view_new_game.fxml"));
         try {
             var newGameView = fxmlLoader.load();
             MenuNewGameController nextController = fxmlLoader.getController();
-            rootElement.setAlignment(Pos.CENTER);
             rootElement.getChildren().clear();
             rootElement.getChildren().add((Node)newGameView);
-            nextController.setUp(lastView, rootElement);
+            nextController.start(lastView, rootElement);
 
-            SceneSelector.controller = fxmlLoader.getController();
+            SceneManager.controller = fxmlLoader.getController();
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
     }
 
     public static GuiController getCurrentController(){
-        return SceneSelector.controller;
+        return SceneManager.controller;
     }
 
     private static void setStageProperties(Stage stage, Scene scene){
@@ -110,7 +108,7 @@ public class SceneSelector {
 
         stage.setScene(scene);
 
-        var iconURL = SceneSelector.class.getResource("/sprites/publisher_material/box_no_shadow.png");
+        var iconURL = SceneManager.class.getResource("/sprites/publisher_material/box_no_shadow.png");
         if (iconURL == null)
             throw new RuntimeException("Something went wrong when locating /sprites/publisher_material/box_no_shadow.png");
 

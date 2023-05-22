@@ -1,6 +1,6 @@
 package it.polimi.ingsw.client.view.gui.controllers.boardview;
 
-import it.polimi.ingsw.client.view.gui.SceneSelector;
+import it.polimi.ingsw.client.view.gui.SceneManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -61,7 +61,7 @@ public class BookshelvesViewController {
             return;
         }
 
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneSelector.class.getResource("/fxmls/mini_bookshelf.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/mini_bookshelf.fxml"));
         try {
             Pane newBookshelf = fxmlLoader.load();
             Pane bookshelfElement = (Pane) newBookshelf.getChildren().get(0);
