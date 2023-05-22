@@ -136,7 +136,7 @@ public class ViewCli extends View {
                 notifyQuitGameCommand();
                 if (!lastInputGeneratedError) System.out.println("Left game");
             }
-            case "load" -> notifyLoadCommand(Integer.parseInt(input.args[0])); // TODO: this will crash (see other todos)
+            case "load" -> notifyLoadCommand(Integer.parseInt(input.args[0]));
             case "save" -> notifySaveCommand();
             case "/m" -> notifyNewChatMessage(String.join(" ", input.args));
             case "/w" ->

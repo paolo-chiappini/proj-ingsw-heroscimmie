@@ -12,13 +12,16 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="reconnection handling and bug fixing">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="changed load saved game to use indexes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ActiveGameManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/server/ServerHandlers.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/observer/ViewListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/templates/board_template.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/templates/board_template.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/templates/common_goals_cli_templates.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/templates/common_goals_cli_templates.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/data/templates/personal_goals_cli_templates.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/data/templates/personal_goals_cli_templates.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FilePath.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FilePath.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/files/FileManagerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/files/FileManagerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/test_files/permanent.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/test_files/permanent.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -119,6 +122,8 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\main" />
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\resources" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\server" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\.idea" />
@@ -172,6 +177,69 @@
       <toRun name="Run Server" type="Application" />
       <method v="2" />
     </configuration>
+    <configuration name="FileManagerTest$WritingReadingTests.createFileWithAbsolutePath" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.files.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.files.FileManagerTest" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.files.FileManagerTest$WritingReadingTests" />
+      <option name="METHOD_NAME" value="createFileWithAbsolutePath" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileManagerTest$WritingReadingTests.readNonExistingFile" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.files.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.files.FileManagerTest" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.files.FileManagerTest$WritingReadingTests" />
+      <option name="METHOD_NAME" value="readNonExistingFile" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileManagerTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.files.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.files" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.files.FileManagerTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="FileManagerTest.readDirectoryContents" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="proj-ingsw-heroscimmie" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.polimi.ingsw.files.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="it.polimi.ingsw.files" />
+      <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.files.FileManagerTest" />
+      <option name="METHOD_NAME" value="readDirectoryContents" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="RunServerNetworkTestManyTimes" type="JUnit" factoryName="JUnit" repeat_count="300" repeat_mode="N Times">
       <module name="proj-ingsw-heroscimmie" />
       <extension name="coverage">
@@ -202,14 +270,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="server in proj-ingsw-heroscimmie" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="proj-ingsw-heroscimmie" />
-      <option name="TEST_OBJECT" value="directory" />
-      <dir value="$PROJECT_DIR$/src/test/java/it/polimi/ingsw/server" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType">
       <module name="ProgettoIngSoftware" />
       <method v="2">
@@ -230,12 +290,18 @@
       <item itemvalue="Application.Run Client [GUI]" />
       <item itemvalue="Compound.3 clients game" />
       <item itemvalue="JUnit.RunServerNetworkTestManyTimes" />
-      <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
+      <item itemvalue="JUnit.FileManagerTest" />
+      <item itemvalue="JUnit.FileManagerTest$WritingReadingTests.createFileWithAbsolutePath" />
+      <item itemvalue="JUnit.FileManagerTest$WritingReadingTests.readNonExistingFile" />
+      <item itemvalue="JUnit.FileManagerTest.readDirectoryContents" />
       <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.server in proj-ingsw-heroscimmie" />
+        <item itemvalue="JUnit.FileManagerTest.readDirectoryContents" />
+        <item itemvalue="JUnit.FileManagerTest" />
+        <item itemvalue="JUnit.FileManagerTest$WritingReadingTests.createFileWithAbsolutePath" />
+        <item itemvalue="JUnit.FileManagerTest$WritingReadingTests.readNonExistingFile" />
         <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
       </list>
     </recent_temporary>
@@ -290,7 +356,8 @@
       <workItem from="1684604731758" duration="5001000" />
       <workItem from="1684614120586" duration="39000" />
       <workItem from="1684614334812" duration="454000" />
-      <workItem from="1684677880315" duration="19944000" />
+      <workItem from="1684677880315" duration="21277000" />
+      <workItem from="1684762382312" duration="3896000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -390,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1684695715631</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="changed load saved game to use indexes">
+      <created>1684699238570</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1684699238570</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -421,7 +495,8 @@
     <MESSAGE value="added turn progression in client" />
     <MESSAGE value="added client reconnection to server" />
     <MESSAGE value="reconnection handling and bug fixing" />
-    <option name="LAST_COMMIT_MESSAGE" value="reconnection handling and bug fixing" />
+    <MESSAGE value="changed load saved game to use indexes" />
+    <option name="LAST_COMMIT_MESSAGE" value="changed load saved game to use indexes" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -431,6 +506,15 @@
           <line>134</line>
           <option name="timeStamp" value="3" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/util/FileIOManager.java</url>
+          <line>49</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="4" />
+        </breakpoint>
       </breakpoints>
     </breakpoint-manager>
   </component>
