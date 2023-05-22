@@ -22,7 +22,7 @@ public class Client {
     private static final int SERVER_PORT=49152;
     private boolean isAlive;
     private boolean stoppedByTheUser;
-    private String serverAddress;
+    private final String serverAddress;
 
     public Client(String address){
         serverAddress = address;
