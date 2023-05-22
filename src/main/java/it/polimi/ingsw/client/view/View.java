@@ -195,7 +195,7 @@ public abstract class View
      */
     public void shutdown() {
         running = false;
-        client.endConnection();
+        client.closeConnection();
     }
 
     public void connectToServer() {
