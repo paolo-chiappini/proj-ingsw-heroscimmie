@@ -1,8 +1,6 @@
 package it.polimi.ingsw.client.view.gui;
 
-import it.polimi.ingsw.client.view.gui.controllers.MenuController;
-import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
-import it.polimi.ingsw.client.view.gui.controllers.SplashScreenController;
+import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -91,6 +89,37 @@ public class SceneManager {
             throw new RuntimeException(ex);
         }
     }
+
+    public static void joinGameScene(MenuController controller, Pane rootElement){
+        var lastView = new ArrayList<>(rootElement.getChildren());
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view_join_game.fxml"));
+        try {
+            var newGameView = fxmlLoader.load();
+            MenuJoinGameController nextController = fxmlLoader.getController();
+            rootElement.getChildren().clear();
+            rootElement.getChildren().add((Node)newGameView);
+            nextController.start(lastView, rootElement);
+
+            SceneManager.controller = fxmlLoader.getController();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+    public static void waitGameScene(GuiController controller, Pane rootElement){
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view_wait_game.fxml"));
+        try {
+            var newGameView = fxmlLoader.load();
+            rootElement.getChildren().clear();
+            rootElement.getChildren().add((Node)newGameView);
+
+            SceneManager.controller = fxmlLoader.getController();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
+
 
     public static GuiController getCurrentController(){
         return SceneManager.controller;

@@ -298,6 +298,8 @@ public class ViewCli extends View {
 
     @Override
     public void handleSuccessMessage(String message) {
+        if(message.equals("NAME")) return;
+
         System.out.println(message);
     }
 

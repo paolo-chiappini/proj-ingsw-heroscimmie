@@ -1,5 +1,8 @@
 package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.gui.controllers.MenuJoinGameController;
+import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
+import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
 import javafx.application.Platform;
 
 public class ViewGui extends View {
@@ -37,7 +40,13 @@ public class ViewGui extends View {
 
     @Override
     public void handleSuccessMessage(String message) {
-
+        if(message.equals("NAME")){
+            GuiController controller = SceneManager.getCurrentController();
+            if (controller instanceof SubMenuController)
+                Platform.runLater(()->((SubMenuController) controller).joinGame());
+            else
+                throw new RuntimeException("Wrong GUI state");
+        }
     }
 
     @Override

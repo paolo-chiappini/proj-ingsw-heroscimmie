@@ -1,21 +1,18 @@
 package it.polimi.ingsw.client.view.gui;
 
 import it.polimi.ingsw.client.view.gui.controllers.MenuController;
+import it.polimi.ingsw.client.view.gui.controllers.MenuJoinGameController;
 import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
 
 public abstract class EventHandlers {
     public static void set(MenuController controller){
-        controller.newGameButton.setOnMouseReleased(e-> SceneManager.newGameScene(controller, controller.innerStackPane));
+        controller.newGameButton.setOnMouseReleased(e-> {
+            SceneManager.newGameScene(controller, controller.innerStackPane);
+        });
 
         controller.joinGameButton.setOnMouseReleased(e->{
-            Alert alert = new Alert(Alert.AlertType.NONE,
-                    "Mi spiace ma non ho ancora implementato sta roba",
-                    ButtonType.OK);
-            alert.setTitle("Scusa bro");
-            alert.showAndWait();
+            SceneManager.joinGameScene(controller, controller.innerStackPane);
         });
     }
     public static void set(BoardController controller){
@@ -34,13 +31,20 @@ public abstract class EventHandlers {
         controller.goToBookshelfButton.setOnMouseReleased(e-> controller.playSwitchToBookshelfAnimation(-1));
     }
 
-    public static void set(MenuNewGameController controller) {
-        controller.backButton.setOnMouseReleased(e->{
-            controller.root.getChildren().clear();
-            controller.root.getChildren().addAll(controller.lastView);
-        });
+    public static void set(MenuJoinGameController controller) {
         controller.confirmButton.requestFocus();
         controller.confirmButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());
         controller.confirmButton.setOnMouseClicked(controller::setUsername);
+    }
+
+    public static void set(MenuNewGameController controller) {
+        controller.twoPlayerButton.requestFocus();
+        controller.twoPlayerButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());
+        controller.threePlayerButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());
+        controller.fourPlayerButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());
+
+        controller.twoPlayerButton.setOnMouseClicked(controller::setUsername);
+        controller.threePlayerButton.setOnMouseClicked(controller::setUsername);
+        controller.fourPlayerButton.setOnMouseClicked(controller::setUsername);
     }
 }

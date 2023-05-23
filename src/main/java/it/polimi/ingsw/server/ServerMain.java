@@ -39,6 +39,10 @@ public class ServerMain {
             System.out.println("BODY: \n"+req.getBody());
             if (ServerHandlers.validateRequestBody(req, res) && ServerHandlers.validateSocketUsername(req, res)) {
                 next.call(req, res);
+
+                System.out.println("\nresponse to "+req.getSocket().getRemoteSocketAddress());
+                System.out.println("METHOD: "+res.getMethod());
+                System.out.println("BODY: \n"+res.getBody());
             }
         });
 

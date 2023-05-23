@@ -48,6 +48,12 @@
     -fx-text-fill: -fx-text-color;
 }
 
+.loading-label{
+    -fx-font-weight: bold;
+    -fx-font-size: 30px;
+    -fx-text-fill: -fx-button-text-color;
+}
+
 .button:hover {
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%, -fx-color1 0%, -fx-color2 100%),

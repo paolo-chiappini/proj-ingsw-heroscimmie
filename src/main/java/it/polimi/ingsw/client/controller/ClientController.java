@@ -65,7 +65,10 @@ public class ClientController implements ViewListener {
             /*case "LEFT" -> handleDisconnections(body);*/
             case "OK" -> view.handleSuccessMessage(body.getString("msg"));
             case "ERR" -> view.handleErrorMessage(body.getString("msg"));
-            case "NAME" -> myUsername = body.getString("username");
+            case "NAME" -> {
+                myUsername = body.getString("username");
+                view.handleSuccessMessage("NAME");
+            }
         }
     }
 

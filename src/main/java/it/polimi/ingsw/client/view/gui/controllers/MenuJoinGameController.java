@@ -8,16 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 
 import java.util.ArrayList;
 
-public class MenuNewGameController extends SubMenuController {
-    public Button twoPlayerButton;
-    public Button threePlayerButton;
-    public Button fourPlayerButton;
-
-    private Button pressedButton;
-
+public class MenuJoinGameController extends SubMenuController {
+    public Button confirmButton;
     public void start(ArrayList<Node> lastView, Pane root) {
         this.root = root;
         this.lastView = lastView;
@@ -25,24 +21,12 @@ public class MenuNewGameController extends SubMenuController {
     }
 
     public void setUsername(MouseEvent mouseEvent) {
-        this.pressedButton = (Button) mouseEvent.getSource();
-
         GuiController.getView().notifyNameChange(nameTextField.getText());
     }
 
     @Override
     public void joinGame(){
-        int lobbySize = 0;
-
-        if (pressedButton == twoPlayerButton) {
-            lobbySize = 2;
-        } else if (pressedButton == threePlayerButton) {
-            lobbySize = 3;
-        } else if (pressedButton == fourPlayerButton){
-            lobbySize = 4;
-        }
-
-        GuiController.getView().notifyNewGameCommand(lobbySize);
+        GuiController.getView().notifyJoinGameCommand();
         SceneManager.waitGameScene(this, root);
     }
 }
