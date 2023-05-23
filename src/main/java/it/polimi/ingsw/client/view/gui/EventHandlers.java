@@ -3,6 +3,7 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.gui.controllers.MenuController;
 import it.polimi.ingsw.client.view.gui.controllers.MenuJoinGameController;
 import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
+import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 
 public abstract class EventHandlers {
@@ -27,6 +28,9 @@ public abstract class EventHandlers {
         controller.goToBookshelfButton.setOnMouseReleased(e-> controller.playSwitchToBookshelfAnimation(-1));
     }
 
+    public static void set(SubMenuController controller){
+        controller.undo.setOnMouseClicked(controller::returnToMenu);
+    }
     public static void set(MenuJoinGameController controller) {
         controller.confirmButton.requestFocus();
         controller.confirmButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());

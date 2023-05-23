@@ -8,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
 
 public class MenuNewGameController extends SubMenuController {
     public Button twoPlayerButton;
@@ -17,9 +20,8 @@ public class MenuNewGameController extends SubMenuController {
 
     private Button pressedButton;
 
-    public void start(ArrayList<Node> lastView, Pane root) {
-        this.root = root;
-        this.lastView = lastView;
+    public void start(MenuController menuController, List<Node> previousView, Pane root) {
+        super.start(menuController, previousView, root);
         EventHandlers.set(this);
     }
 
@@ -42,6 +44,8 @@ public class MenuNewGameController extends SubMenuController {
         }
 
         GuiController.getView().notifyNewGameCommand(lobbySize);
-        SceneManager.waitGameScene(this, root);
+        SceneManager.waitGameScene(root);
     }
+
+
 }

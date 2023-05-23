@@ -21,7 +21,7 @@ public class SplashScreenController extends GuiController implements Initializab
         PauseTransition delay = new PauseTransition(Duration.seconds(4));
         delay.setOnFinished(event -> {
             GuiController.getView().connectToServer();
-            SceneManager.nextScene(this, getRootStage());
+            SceneManager.menuScene(getRootStage());
         });
         delay.play();
     }

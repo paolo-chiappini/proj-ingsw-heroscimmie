@@ -1,7 +1,5 @@
 package it.polimi.ingsw.client.view.gui;
 
-import it.polimi.ingsw.client.view.gui.controllers.MenuController;
-import it.polimi.ingsw.client.view.gui.controllers.SplashScreenController;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
@@ -14,12 +12,12 @@ public class GUI extends Application {
     public void start(Stage stage) throws IOException {
         List<String> p = getParameters().getRaw();
         if(p.isEmpty()){
-            SceneManager.nextScene(this, stage);
+            SceneManager.splashScreenScene(stage);
         }
         else{
             switch (p.get(0)){
-                case "--menu" -> SceneManager.nextScene(new SplashScreenController(), stage);
-                case "--board" -> SceneManager.nextScene(new MenuController(), stage);
+                case "--menu" -> SceneManager.menuScene(stage);
+                case "--board" -> SceneManager.mainGameScene(stage);
             }
         }
     }

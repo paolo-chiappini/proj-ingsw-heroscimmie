@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.gui.controllers.MenuWaitGameController;
 import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
 import javafx.application.Platform;
 
@@ -12,7 +13,11 @@ public class ViewGui extends View {
 
     @Override
     public void reset() {
-
+        GuiController controller = SceneManager.getCurrentController(); //TODO this method is called when the game finishes. So be careful
+        if (controller instanceof MenuWaitGameController)
+            Platform.runLater(()->((MenuWaitGameController)controller).startGame());
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override

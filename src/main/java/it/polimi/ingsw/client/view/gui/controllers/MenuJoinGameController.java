@@ -8,13 +8,12 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class MenuJoinGameController extends SubMenuController {
     public Button confirmButton;
-    public void start(ArrayList<Node> lastView, Pane root) {
-        this.root = root;
-        this.lastView = lastView;
+    public void start(MenuController menuController, List<Node> previousView, Pane root) {
+        super.start(menuController, previousView, root);
         EventHandlers.set(this);
     }
 
@@ -25,6 +24,6 @@ public class MenuJoinGameController extends SubMenuController {
     @Override
     public void joinGame(){
         GuiController.getView().notifyJoinGameCommand();
-        SceneManager.waitGameScene(this, root);
+        SceneManager.waitGameScene(root);
     }
 }
