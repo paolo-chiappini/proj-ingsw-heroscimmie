@@ -65,8 +65,12 @@ public class ViewCli extends View {
         int row, col;
 
         row = rowChar - 'A';
-        col = Integer.parseInt(input.substring(1)) - 1;
-
+        try {
+            col = Integer.parseInt(input.substring(1)) - 1;
+        }
+        catch (NumberFormatException e){
+            col = 0;
+        }
         return new int[]{row, col};
     }
 
@@ -97,8 +101,8 @@ public class ViewCli extends View {
             } else {
                 return true;
             }
-        } catch (NumberFormatException e) {
-           out.println("Input is empty");
+        } catch (Exception e) {
+           out.println("Input is not valid");
         }
         return false;
     }
@@ -123,14 +127,14 @@ public class ViewCli extends View {
     private void parseInput(Input input) {
         switch (input.command().toLowerCase()) {
             case "name" -> {
-                if (!input.args[0].isEmpty()) {
+                if (input.args!=null) {
                     notifyNameChange(input.args[0]);
                     askTypeOfGame();
                 }
             }
             case "list" -> notifyListeners(ViewListener::onListSavedGames);
             case "new" -> {
-                if (checkInput(input.args[0], 2, 4))
+                if (input.args!=null && checkInput(input.args[0], 2, 4))
                     notifyNewGameCommand(Integer.parseInt(input.args[0]));
             }
             case "join" -> notifyJoinGameCommand();
@@ -139,11 +143,15 @@ public class ViewCli extends View {
                 if (!lastInputGeneratedError) System.out.println("Left game");
             }
             case "load" -> {
-                if(!input.args[0].isEmpty()) notifyLoadCommand(Integer.parseInt(input.args[0])); // TODO: this will crash (see other todos)
+                if(input.args!=null) notifyLoadCommand(Integer.parseInt(input.args[0]));
             }
             case "save" -> notifySaveCommand();
-            case "/m" -> notifyNewChatMessage(String.join(" ", input.args));
-            case "/w" -> notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
+            case "/m" -> {
+                if(input.args!=null) notifyNewChatMessage(String.join(" ", input.args));
+            }
+            case "/w" -> {
+                if(input.args!=null)notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
+            }
             case "pick" -> {
                    checkInputTilesPickUp(input);
                     if(canSendCommands) {
@@ -155,7 +163,6 @@ public class ViewCli extends View {
                             else askOrderTiles();
                         } else askCoordinatesTilesOnBoard();
                     }
-
             }
             case "order" -> {
                 checkInputTilesOrder(input, numberOfTilesPickedUp);
@@ -166,7 +173,7 @@ public class ViewCli extends View {
                 }
             }
             case "drop" -> {
-                if (checkInput(input.args[0], 1, 5)) {
+                if (input.args!=null && checkInput(input.args[0], 1, 5)) {
                     notifyDropCommand(Integer.parseInt(input.args[0]) - 1);
                     notifyListeners(ViewListener::onEndOfTurn);
 
@@ -188,7 +195,9 @@ public class ViewCli extends View {
                      - pick + A1 + A1           | pick up tiles in the chosen range
                      - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
                      - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
-            default -> notifyGenericInput(input.command + " " + String.join(" ", input.args));
+            default -> {
+                if(input.args!=null) notifyGenericInput(input.command + " " + String.join(" ", input.args));
+            }
         }
         lastInputGeneratedError = false;
     }
@@ -260,7 +269,7 @@ public class ViewCli extends View {
     private void checkInputTilesOrder(Input input, int numberOfTilesPickedUp)
     {
         int [] tiles_in_order = new int[3];
-        if(input.args.length>=1 && input.args.length<=3)
+        if(input.args!=null && input.args.length>=1 && input.args.length<=3)
         {
             for(int i=0; i<numberOfTilesPickedUp; i++)
             {
@@ -285,27 +294,21 @@ public class ViewCli extends View {
      * It also automatically enters the coordinates of the second tile if the user draws only one tile.
      * @param input is user input
      */
-    private void checkInputTilesPickUp(Input input)
-    {
-        if(input.args.length == 1)
-        {
-            if(!input.args[0].substring(1).isEmpty()){
+    private void checkInputTilesPickUp(Input input) {
+        if (input.args!=null && input.args.length >= 1 && input.args.length <= 2) {
+            if (input.args.length == 1 && input.args[0].length() == 2) {
                 coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                 coords2 = coords1;
                 notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
                 hasPickedTiles = true;
             }
-            else lastInputGeneratedError = true;
-        }
-        else if (input.args.length == 2)
-        {
-            if(!input.args[0].substring(1).isEmpty() && !input.args[1].substring(1).isEmpty()) {
+            else if (input.args.length == 2 && input.args[0].length()==2 && input.args[1].length()==2) {
                 coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                 coords2 = parseBoardCoordinates(input.args[1].toUpperCase());
                 notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
                 hasPickedTiles = true;
             }
-            else lastInputGeneratedError = true;
+          else lastInputGeneratedError = true;
         }
         else lastInputGeneratedError = true;
     }
@@ -321,7 +324,7 @@ public class ViewCli extends View {
         if (System.getProperty("os.name").contains("win")) renderer = textRenderer;
 
         out.println(graphics.getGraphics().render(renderer));
-        if (canSendCommands && !hasPickedTiles) askCoordinatesTilesOnBoard();
+        if (canSendCommands && !hasPickedTiles && !lastInputGeneratedError) askCoordinatesTilesOnBoard();
     }
 
     @Override
