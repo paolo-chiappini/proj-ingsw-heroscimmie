@@ -318,7 +318,8 @@ public abstract class ServerHandlers {
         if (board.needsRefill()) board.refill(bag);
 
         for (CommonGoalCard commonGoal : commonGoals) {
-            if (commonGoal.canObtainPoints(player.getBookshelf()))
+            if (commonGoal.canObtainPoints(player.getBookshelf()) &&
+                    !commonGoal.getAwardedPlayers().contains(player.getUsername()))
                 player.addPointsToScore(commonGoal.evaluatePoints(player));
         }
 
