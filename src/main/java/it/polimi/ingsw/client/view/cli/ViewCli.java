@@ -54,7 +54,7 @@ public class ViewCli extends View {
 
     private Input parseInputString(String input) {
         String[] tokens = input.split(" ");
-        String[] args = null;
+        String[] args = new String[]{""};
         if (tokens.length > 1) args = Arrays.copyOfRange(tokens, 1, tokens.length);
         // TODO: this caused a "ClassNotFoundException" for some reason...
         return new Input(tokens[0], args);
@@ -127,14 +127,14 @@ public class ViewCli extends View {
     private void parseInput(Input input) {
         switch (input.command().toLowerCase()) {
             case "name" -> {
-                if (input.args!=null) {
+                if (!input.args[0].isEmpty()) {
                     notifyNameChange(input.args[0]);
                     askTypeOfGame();
                 }
             }
             case "list" -> notifyListeners(ViewListener::onListSavedGames);
             case "new" -> {
-                if (input.args!=null && checkInput(input.args[0], 2, 4))
+                if (checkInput(input.args[0], 2, 4))
                     notifyNewGameCommand(Integer.parseInt(input.args[0]));
             }
             case "join" -> notifyJoinGameCommand();
@@ -143,15 +143,11 @@ public class ViewCli extends View {
                 if (!lastInputGeneratedError) System.out.println("Left game");
             }
             case "load" -> {
-                if(input.args!=null) notifyLoadCommand(Integer.parseInt(input.args[0]));
+                if(!input.args[0].isEmpty()) notifyLoadCommand(Integer.parseInt(input.args[0]));
             }
             case "save" -> notifySaveCommand();
-            case "/m" -> {
-                if(input.args!=null) notifyNewChatMessage(String.join(" ", input.args));
-            }
-            case "/w" -> {
-                if(input.args!=null)notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
-            }
+            case "/m" -> notifyNewChatMessage(String.join(" ", input.args));
+            case "/w" -> notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
             case "pick" -> {
                    checkInputTilesPickUp(input);
                     if(canSendCommands) {
@@ -173,7 +169,7 @@ public class ViewCli extends View {
                 }
             }
             case "drop" -> {
-                if (input.args!=null && checkInput(input.args[0], 1, 5)) {
+                if (checkInput(input.args[0], 1, 5)) {
                     notifyDropCommand(Integer.parseInt(input.args[0]) - 1);
                     notifyListeners(ViewListener::onEndOfTurn);
 
@@ -195,9 +191,8 @@ public class ViewCli extends View {
                      - pick + A1 + A1           | pick up tiles in the chosen range
                      - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
                      - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
-            default -> {
-                if(input.args!=null) notifyGenericInput(input.command + " " + String.join(" ", input.args));
-            }
+            default -> notifyGenericInput(input.command + " " + String.join(" ", input.args));
+
         }
         lastInputGeneratedError = false;
     }
@@ -269,7 +264,7 @@ public class ViewCli extends View {
     private void checkInputTilesOrder(Input input, int numberOfTilesPickedUp)
     {
         int [] tiles_in_order = new int[3];
-        if(input.args!=null && input.args.length>=1 && input.args.length<=3)
+        if(!input.args[0].isEmpty() && input.args.length>=1 && input.args.length<=3)
         {
             for(int i=0; i<numberOfTilesPickedUp; i++)
             {
@@ -295,7 +290,7 @@ public class ViewCli extends View {
      * @param input is user input
      */
     private void checkInputTilesPickUp(Input input) {
-        if (input.args!=null && input.args.length >= 1 && input.args.length <= 2) {
+        if (!input.args[0].isEmpty() && input.args.length >= 1 && input.args.length <= 2) {
             if (input.args.length == 1 && input.args[0].length() == 2) {
                 coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                 coords2 = coords1;
