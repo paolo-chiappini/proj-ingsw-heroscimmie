@@ -18,7 +18,6 @@ import it.polimi.ingsw.util.serialization.JsonSerializer;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.File;
 import java.net.Socket;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -196,16 +195,15 @@ public abstract class ServerHandlers {
      */
     public static void handleShowSavedGames(Message req, Message res) {
         var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+        JSONArray jsonFiles = new JSONArray();
+        JSONObject body = new JSONObject();
 
         res.setMethod(req.getMethod());
-        if (files == null) res.setBody("[]");
-        else {
-            JSONArray jsonFiles = new JSONArray(files);
-            JSONObject body = new JSONObject();
-            body.put("files", jsonFiles);
-            res.setBody(body.toString());
-        }
 
+        if (files != null) jsonFiles = new JSONArray(files);
+
+        body.put("files", jsonFiles);
+        res.setBody(body.toString());
         res.send();
     }
 
@@ -501,9 +499,8 @@ public abstract class ServerHandlers {
         String username = new JSONObject(req.getBody()).getString("username");
         if (playerSockets.containsValue(username)) {
             // check if name is already associated with user
-            if (playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username)) return;
-            // another player has the name
-            else notifyError(res, "Another user has chosen this name");
+            if (!(playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username)))
+                notifyError(res, "Another user has chosen this name");
         } else {
             playerSockets.put(req.getSocket(), username);
             res.setMethod("NAME");
