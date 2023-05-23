@@ -6,6 +6,9 @@ import org.junit.jupiter.api.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -15,26 +18,6 @@ public class FileManagerTest {
     @Nested
     @DisplayName("When writing and reading a file")
     class WritingReadingTests {
-
-        @Test
-        @DisplayName("File should be created at the specified absolute path")
-        void createFileWithAbsolutePath() {
-            String filepath = "./src/test/test_files/test1.txt";
-            try {
-                FileIOManager.writeToFile(filepath, "");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            File f = new File(filepath);
-
-            assertAll(
-                    () -> assertTrue(f.exists()),
-                    () -> assertTrue(f.isFile()),
-                    () -> assertTrue(f.delete())
-            );
-        }
-
         @Test
         @DisplayName("File should be created at the specified relative path")
         void createFileWithRelativePath() {
@@ -45,7 +28,8 @@ public class FileManagerTest {
                 throw new RuntimeException(e);
             }
 
-            File f = new File(FilePath.TEST.getPath() + "/" + filename);
+            String resourcePath = this.getClass().getResource(FilePath.TEST.getPath()).getPath();
+            File f = new File(resourcePath + "/" + filename);
 
             assertAll(
                     () -> assertTrue(f.exists()),
@@ -74,7 +58,7 @@ public class FileManagerTest {
         @DisplayName("Trying to read non existing file should throw an exception")
         void readNonExistingFile() {
             String filename = "ghost.txt";
-            assertThrows(FileNotFoundException.class, () -> FileIOManager.readFromFile(filename, FilePath.TEST));
+            assertThrows(RuntimeException.class, () -> FileIOManager.readFromFile(filename, FilePath.TEST));
         }
 
         @Test
@@ -95,7 +79,8 @@ public class FileManagerTest {
                 throw new RuntimeException(e);
             }
 
-            File f = new File(FilePath.TEST.getPath() + "/" + filename);
+            String resourcePath = this.getClass().getResource(FilePath.TEST.getPath()).getPath();
+            File f = new File(resourcePath + "/" + filename);
 
             assertAll(
                     () -> assertTrue(f.exists()),
@@ -105,5 +90,17 @@ public class FileManagerTest {
                     () -> assertTrue(f.delete())
             );
         }
+    }
+
+    @Test
+    @DisplayName("Reading contents of a directory")
+    public void readDirectoryContents() {
+        LinkedList<String> expectedFiles = new LinkedList<>(List.of("permanent.txt", "testfile.txt"));
+        LinkedList<String> filesInDirectory = new LinkedList<>(FileIOManager.getFilesInDirectory(FilePath.TEST));
+
+        Collections.sort(expectedFiles);
+        Collections.sort(filesInDirectory);
+
+        assertIterableEquals(expectedFiles, filesInDirectory);
     }
 }

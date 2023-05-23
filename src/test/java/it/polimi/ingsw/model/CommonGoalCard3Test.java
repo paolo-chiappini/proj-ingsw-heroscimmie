@@ -1,4 +1,4 @@
-package it.polimi.ingsw;
+package it.polimi.ingsw.model;
 
 import it.polimi.ingsw.mock.DynamicTestBookshelf;
 import it.polimi.ingsw.server.model.goals.common.CommonGoalCard3;
