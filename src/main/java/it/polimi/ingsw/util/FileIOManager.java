@@ -1,12 +1,13 @@
 package it.polimi.ingsw.util;
 
 import java.io.*;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 /**
- * Library class used for simple file IO operations.
+ * Library class used for simple file IO operations in the resources' folder.
  */
 public abstract class FileIOManager {
     /**
@@ -16,8 +17,9 @@ public abstract class FileIOManager {
      * @param data data to write in the file.
      * @throws IOException  when the file cannot be written or the path does not exist.
      */
-    public static void writeToFile(String filepath, String data) throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
+    public static void writeToFile(String filepath, String filename, String data) throws IOException {
+        URL url = FileIOManager.class.getResource(filepath);
+        BufferedWriter writer = new BufferedWriter(new FileWriter(url.getPath() + "/" + filename));
         writer.write(data);
         writer.close();
     }
@@ -32,25 +34,30 @@ public abstract class FileIOManager {
      * @throws IOException when the file cannot be written or the path does not exist.
      */
     public static void writeToFile(String filename, String data, FilePath path) throws IOException {
-        String fullPath = String.format("%s/%s", path.getPath(), filename);
-        writeToFile(fullPath, data);
+        writeToFile(path.getPath(), filename, data);
     }
 
     /**
      * Reads from the specified file and returns all of its contents as a string.
-     * @param filepath absolute or relative path to file.
+     * @param filepath relative path to resource file.
      * @return a string containing all the contents read from the file.
-     * @throws FileNotFoundException when the file does not exist.
+     * @throws RuntimeException when the file does not exist or something went wrong
+     * while reading.
      */
-    public static String readFromFile(String filepath) throws FileNotFoundException {
-        File file = new File(filepath);
+    public static String readFromFile(String filepath) throws RuntimeException {
         StringBuilder data = new StringBuilder();
-        Scanner reader = new Scanner(file);
-
-        while(reader.hasNextLine()) {
-            data.append(reader.nextLine());
+        InputStream inputStream = FileIOManager.class.getResourceAsStream(filepath);
+        try (
+                InputStreamReader streamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);
+                BufferedReader reader = new BufferedReader(streamReader)
+        ) {
+            String line;
+            while ((line = reader.readLine()) != null) {
+                data.append(line);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
-        reader.close();
 
         return data.toString();
     }
@@ -70,13 +77,18 @@ public abstract class FileIOManager {
 
     /**
      * Reads the names of the files in the specified directory.
-     * @param directoryPath absolute path to directory.
+     * @param directoryPath relative path to directory in resources.
      * @return returns the list of names of the files contained in the directory
-     * (null if directory is empty).
+     * (null if directory is empty or non-existent).
      */
     public static List<String> getFilesInDirectory(String directoryPath) {
         List<String> files;
-        File directory = new File(directoryPath);
+        URL url = FileIOManager.class.getResource(directoryPath);
+
+        if (url == null) return null;
+
+        String resourcePath = url.getPath();
+        File directory = new File(resourcePath);
 
         if (!directory.isDirectory()) {
             throw new IllegalArgumentException("Given path is not a directory");
