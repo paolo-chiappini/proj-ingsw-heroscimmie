@@ -5,10 +5,8 @@ import it.polimi.ingsw.client.view.gui.GuiController;
 import it.polimi.ingsw.client.view.gui.SceneManager;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import javafx.stage.Stage;
 
 import java.util.ArrayList;
 

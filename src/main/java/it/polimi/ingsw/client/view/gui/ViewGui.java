@@ -1,7 +1,5 @@
 package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.gui.controllers.MenuJoinGameController;
-import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
 import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
 import javafx.application.Platform;
 

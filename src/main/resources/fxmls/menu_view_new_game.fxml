@@ -7,28 +7,28 @@
 <?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" stylesheets="@menu_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController">
-   <children>
-      <Label prefWidth="400.0" styleClass="player-name-label" text="Enter your Nickname" />
-      <TextField fx:id="nameTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="400.0" promptText="Nickname" styleClass="player-name-textfield">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <VBox.margin>
-            <Insets bottom="80.0" />
-         </VBox.margin>
-      </TextField>
-      <Label prefHeight="30.0" prefWidth="400.0" styleClass="player-name-label" text="How many players?">
-         <VBox.margin>
-            <Insets bottom="10.0" />
-         </VBox.margin>
-      </Label>
-      <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefWidth="400.0" vgap="20.0">
-         <children>
-            <Button fx:id="twoPlayerButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="170.0" text="2 players" />
-            <Button fx:id="threePlayerButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="170.0" text="3 players" />
-            <Button fx:id="fourPlayerButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="170.0" text="4 players" />
-         </children>
-      </FlowPane>
-   </children>
+<VBox alignment="CENTER" stylesheets="@menu_style.css" xmlns="http://javafx.com/javafx/19"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController">
+   <Label prefWidth="400.0" styleClass="player-name-label" text="Enter your Nickname"/>
+   <TextField fx:id="nameTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+              minWidth="-Infinity" prefWidth="400.0" promptText="Nickname" styleClass="player-name-textfield">
+      <opaqueInsets>
+         <Insets/>
+      </opaqueInsets>
+      <VBox.margin>
+         <Insets bottom="80.0"/>
+      </VBox.margin>
+   </TextField>
+   <Label prefHeight="30.0" prefWidth="400.0" styleClass="player-name-label" text="How many players?">
+      <VBox.margin>
+         <Insets bottom="10.0"/>
+      </VBox.margin>
+   </Label>
+   <FlowPane alignment="CENTER" columnHalignment="CENTER" hgap="20.0" prefWidth="400.0" vgap="20.0">
+      <Button fx:id="twoPlayerButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="170.0" text="2 players"/>
+      <Button fx:id="threePlayerButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="170.0"
+              text="3 players"/>
+      <Button fx:id="fourPlayerButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="170.0" text="4 players"/>
+   </FlowPane>
 </VBox>

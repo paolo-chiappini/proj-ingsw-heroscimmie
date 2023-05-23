@@ -7,13 +7,9 @@ import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 
 public abstract class EventHandlers {
     public static void set(MenuController controller){
-        controller.newGameButton.setOnMouseReleased(e-> {
-            SceneManager.newGameScene(controller, controller.innerStackPane);
-        });
+        controller.newGameButton.setOnMouseReleased(e-> SceneManager.newGameScene(controller, controller.innerStackPane));
 
-        controller.joinGameButton.setOnMouseReleased(e->{
-            SceneManager.joinGameScene(controller, controller.innerStackPane);
-        });
+        controller.joinGameButton.setOnMouseReleased(e-> SceneManager.joinGameScene(controller, controller.innerStackPane));
     }
     public static void set(BoardController controller){
         controller.commonGoalCardBottom.setOnMouseClicked(controller::clickCommonGoal);
