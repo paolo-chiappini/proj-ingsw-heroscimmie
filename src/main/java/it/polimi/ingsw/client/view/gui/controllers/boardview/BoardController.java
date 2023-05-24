@@ -179,19 +179,19 @@ public class BoardController extends GuiController {
         bookshelvesView.setVisible(!bookshelvesView.isVisible());
     }
 
-    public List<File> getFiles(){
-        var itemTilesDirectory = SceneManager.class.getResource("/sprites/item_tiles_small");
-        if (itemTilesDirectory == null)
-            throw new RuntimeException("Something went wrong when locating /sprites/publisher_material/box_no_shadow.png");
-
-        File tileImagesDirectory = new File(itemTilesDirectory.getPath()
-                .replace("/", "\\")
-                .replace("%20", " "));
-
-        var tilesFiles = tileImagesDirectory.listFiles();
-        if(!tileImagesDirectory.isDirectory() || tilesFiles == null)
-            throw new RuntimeException("Something went wrong when loading item tiles sprites");
-
-        return List.of(tilesFiles);
-    }
+//    public List<File> getFiles(){
+//        var itemTilesDirectory = SceneManager.class.getResource("/sprites/item_tiles_small");
+//        if (itemTilesDirectory == null)
+//            throw new RuntimeException("Something went wrong when locating /sprites/publisher_material/box_no_shadow.png");
+//
+//        File tileImagesDirectory = new File(itemTilesDirectory.getPath()
+//                .replace("/", "\\")
+//                .replace("%20", " "));
+//
+//        var tilesFiles = tileImagesDirectory.listFiles();
+//        if(!tileImagesDirectory.isDirectory() || tilesFiles == null)
+//            throw new RuntimeException("Something went wrong when loading item tiles sprites");
+//
+//        return List.of(tilesFiles);
+//    }
 }

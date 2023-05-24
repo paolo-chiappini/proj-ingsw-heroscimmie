@@ -20,8 +20,8 @@ public class TilesBoard extends GraphicElement {
 //            {0, 0, 0, 1, 1, 1, 0, 0, 0},
 //            {0, 0, 0, 0, 1, 1, 0, 0, 0}
 //    };
-    private final int WIDTH = 9;
-    private final int HEIGHT = 9;
+//    private final int WIDTH = 9;
+//    private final int HEIGHT = 9;
     private final GridPane boardGrid;
 
     public TilesBoard(BoardController controller, GridPane boardGrid) {
@@ -42,9 +42,9 @@ public class TilesBoard extends GraphicElement {
         return boardGrid.widthProperty();
     }
 
-    public ReadOnlyDoubleProperty getHeightProperty(){
-        return boardGrid.heightProperty();
-    }
+//    public ReadOnlyDoubleProperty getHeightProperty(){
+//        return boardGrid.heightProperty();
+//    }
 
 
     public void update(int[][] update) {
