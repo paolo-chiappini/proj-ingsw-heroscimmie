@@ -43,6 +43,10 @@ public class ClientTurnState extends ObservableObject<ModelListener> {
 
     public String getCurrentPlayer() { return currentPlayer; }
 
+    /**
+     * Updates the state of a turn
+     * @param data contains up-to-date board details
+     */
     public void updateTurnState(String data) {
         JSONObject json = new JSONObject(data);
         JSONArray playersOrder = json.getJSONArray("players_order");
