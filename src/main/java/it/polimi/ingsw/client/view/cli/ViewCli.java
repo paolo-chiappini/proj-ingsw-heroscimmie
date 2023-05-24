@@ -264,9 +264,9 @@ public class ViewCli extends View {
     private void checkInputTilesOrder(Input input, int numberOfTilesPickedUp)
     {
         int [] tiles_in_order = new int[3];
-        if(!input.args[0].isEmpty() && input.args.length>=1 && input.args.length<=3)
+        if(!input.args[0].isEmpty() && input.args.length <= 3)
         {
-            for(int i=0; i<numberOfTilesPickedUp; i++)
+            for(int i=0; i<input.args.length; i++)
             {
                 if(checkInput(input.args[i],1,numberOfTilesPickedUp))
                     tiles_in_order[i]= Integer.parseInt(input.args[i]);
@@ -290,7 +290,7 @@ public class ViewCli extends View {
      * @param input is user input
      */
     private void checkInputTilesPickUp(Input input) {
-        if (!input.args[0].isEmpty() && input.args.length >= 1 && input.args.length <= 2) {
+        if (!input.args[0].isEmpty() && input.args.length <= 2) {
             if (input.args.length == 1 && input.args[0].length() == 2) {
                 coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
                 coords2 = coords1;
