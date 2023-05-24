@@ -234,8 +234,11 @@ public abstract class ServerHandlers {
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBoard board = currentGame.getBoard();
+        IBookshelf bookshelf;
 
         JSONObject body = new JSONObject(req.getBody());
+        String username = body.getString("username");
+        bookshelf = getPlayerByUsername(username, currentGame.getPlayers()).getBookshelf();
 
         int row1, row2, col1, col2;
         row1 = body.getInt("row1");
@@ -243,9 +246,16 @@ public abstract class ServerHandlers {
         col1 = body.getInt("col1");
         col2 = body.getInt("col2");
 
+        int numberOfTilesPickedUp = Integer.max(Math.abs(row2-row1),Math.abs(col2-col1));
+        List<Integer> depths = bookshelfColumnsDepths(bookshelf);
+
         try {
             if (!board.canPickUpTiles(row1, col1, row2, col2)) {
                 notifyError(res, "Invalid tile range");
+            }
+            else {
+                if(depths.stream().noneMatch(depth -> depth > numberOfTilesPickedUp))
+                    notifyError(res,"There aren't enough free spaces in the bookshelf to pick up these tiles");
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());
@@ -460,6 +470,25 @@ public abstract class ServerHandlers {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Method used to determine the maximum amount of tiles that
+     * can be inserted in the bookshelf.
+     * @param bookshelf bookshelf to evaluate
+     * @return the depths of the columns of the bookshelf.
+     */
+    private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
+        List<Integer> depths = new LinkedList<>();
+        for (int i = 0; i < bookshelf.getWidth(); i++) {
+            int depth = 0;
+            for (int j = 0; j < bookshelf.getHeight(); j++) {
+                if (bookshelf.getTileAt(j, i) == null) depth++;
+                else break;
+            }
+            depths.add(depth);
+        }
+        return depths;
     }
 
     /**

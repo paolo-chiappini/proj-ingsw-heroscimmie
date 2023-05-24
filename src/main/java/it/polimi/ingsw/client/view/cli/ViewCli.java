@@ -18,6 +18,9 @@ public class ViewCli extends View {
     private final static SimpleColorRenderer colorRenderer = new SimpleColorRenderer();
     private final static SimpleTextRenderer textRenderer = new SimpleTextRenderer();
     private boolean hasPickedTiles, lastInputGeneratedError;
+    private int[] coords1 = new int[2];
+    private int[] coords2 = new int[2];
+    private int numberOfTilesPickedUp = 0;
 
     public ViewCli() {
         hasPickedTiles = false;
@@ -62,8 +65,12 @@ public class ViewCli extends View {
         int row, col;
 
         row = rowChar - 'A';
-        col = Integer.parseInt(input.substring(1)) - 1;
-
+        try {
+            col = Integer.parseInt(input.substring(1)) - 1;
+        }
+        catch (NumberFormatException e){
+            col = 0;
+        }
         return new int[]{row, col};
     }
 
@@ -90,12 +97,12 @@ public class ViewCli extends View {
         try {
             int number = Integer.parseInt(input);
             if ((number < inferior) || (number > superior)) {
-                System.out.println("Invalid input, please enter a number from " + inferior + " to " + superior);
+                out.println("Invalid input, please enter a number from " + inferior + " to " + superior);
             } else {
                 return true;
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Input is empty");
+        } catch (Exception e) {
+           out.println("Input is not valid");
         }
         return false;
     }
@@ -110,8 +117,7 @@ public class ViewCli extends View {
                 Enter 'order' + the number of the tile you want to put in first position
                  + the number of the tile you want to put in second position
                  + the number of the tile you want to put in third position
-                Example: order 3 2 1
-                If you have only 1 or 2 tiles put 0""");
+                Example: order 1 2 3""");
     }
 
     public void askNumberOfColumn() {
@@ -136,28 +142,27 @@ public class ViewCli extends View {
                 notifyQuitGameCommand();
                 if (!lastInputGeneratedError) System.out.println("Left game");
             }
-            case "load" -> notifyLoadCommand(Integer.parseInt(input.args[0]));
+            case "load" -> {
+                if(!input.args[0].isEmpty()) notifyLoadCommand(Integer.parseInt(input.args[0]));
+            }
             case "save" -> notifySaveCommand();
             case "/m" -> notifyNewChatMessage(String.join(" ", input.args));
-            case "/w" ->
-                    notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
+            case "/w" -> notifyNewChatWhisper(String.join(" ", Arrays.copyOfRange(input.args, 1, input.args.length)), input.args[0]);
             case "pick" -> {
-                if (input.args.length > 1) {
-                    int[] coords1, coords2;
-                    coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
-                    coords2 = parseBoardCoordinates(input.args[1].toUpperCase());
-                    notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
-
-                    hasPickedTiles = true;
-                    finalizeUpdate();
-                    if (!lastInputGeneratedError) askOrderTiles();
-                    else askCoordinatesTilesOnBoard();
-                }
+                   checkInputTilesPickUp(input);
+                    if(canSendCommands) {
+                        finalizeUpdate();
+                        if (!lastInputGeneratedError) {
+                            numberOfTilesPickedUp = Integer.max(coords2[0] - coords1[0],coords2[1] - coords1[1]) + 1;
+                            if (numberOfTilesPickedUp == 1)
+                                askNumberOfColumn();
+                            else askOrderTiles();
+                        } else askCoordinatesTilesOnBoard();
+                    }
             }
             case "order" -> {
-                if (input.args.length == 3 && checkInput(input.args[0], 1, 3) && checkInput(input.args[1], 0, 3) && checkInput(input.args[2], 0, 3)) {
-                    notifyOrderCommand(Integer.parseInt(input.args[0]), Integer.parseInt(input.args[1]), Integer.parseInt(input.args[2]));
-
+                checkInputTilesOrder(input, numberOfTilesPickedUp);
+                if(canSendCommands) {
                     finalizeUpdate();
                     if (!lastInputGeneratedError) askNumberOfColumn();
                     else askOrderTiles();
@@ -169,7 +174,7 @@ public class ViewCli extends View {
                     notifyListeners(ViewListener::onEndOfTurn);
 
                     hasPickedTiles = false;
-                    if (lastInputGeneratedError) askNumberOfColumn();
+                    if (lastInputGeneratedError && canSendCommands) askNumberOfColumn();
                 }
             }
             case "help" -> System.out.println("""
@@ -187,6 +192,7 @@ public class ViewCli extends View {
                      - order + number of first tile + number of second tile + number of third tile | order tiles in the chosen way
                      - drop + number of column  | drop tiles into the chosen column of the bookshelf""");
             default -> notifyGenericInput(input.command + " " + String.join(" ", input.args));
+
         }
         lastInputGeneratedError = false;
     }
@@ -251,6 +257,57 @@ public class ViewCli extends View {
         out.flush();
     }
 
+    /**
+     * Check if the tiles order entered by the user is valid
+     * @param input is user input
+     */
+    private void checkInputTilesOrder(Input input, int numberOfTilesPickedUp)
+    {
+        int [] tiles_in_order = new int[3];
+        if(!input.args[0].isEmpty() && input.args.length <= 3)
+        {
+            for(int i=0; i<input.args.length; i++)
+            {
+                if(checkInput(input.args[i],1,numberOfTilesPickedUp))
+                    tiles_in_order[i]= Integer.parseInt(input.args[i]);
+                else
+                    lastInputGeneratedError = true;
+            }
+            int i = input.args.length;
+            while (i<3)
+            {
+                tiles_in_order[i]=input.args.length+1;
+                i++;
+            }
+            notifyOrderCommand(tiles_in_order[0], tiles_in_order[1], tiles_in_order[2]);
+        }
+        else lastInputGeneratedError = true;
+    }
+
+    /**
+     * Check if the input entered by the user is valid.
+     * It also automatically enters the coordinates of the second tile if the user draws only one tile.
+     * @param input is user input
+     */
+    private void checkInputTilesPickUp(Input input) {
+        if (!input.args[0].isEmpty() && input.args.length <= 2) {
+            if (input.args.length == 1 && input.args[0].length() == 2) {
+                coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
+                coords2 = coords1;
+                notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
+                hasPickedTiles = true;
+            }
+            else if (input.args.length == 2 && input.args[0].length()==2 && input.args[1].length()==2) {
+                coords1 = parseBoardCoordinates(input.args[0].toUpperCase());
+                coords2 = parseBoardCoordinates(input.args[1].toUpperCase());
+                notifyPickCommand(coords1[0], coords1[1], coords2[0], coords2[1]);
+                hasPickedTiles = true;
+            }
+          else lastInputGeneratedError = true;
+        }
+        else lastInputGeneratedError = true;
+    }
+
     @Override
     public void finalizeUpdate() {
         flushConsole();
@@ -262,7 +319,7 @@ public class ViewCli extends View {
         if (System.getProperty("os.name").contains("win")) renderer = textRenderer;
 
         out.println(graphics.getGraphics().render(renderer));
-        if (canSendCommands && !hasPickedTiles) askCoordinatesTilesOnBoard();
+        if (canSendCommands && !hasPickedTiles && !lastInputGeneratedError) askCoordinatesTilesOnBoard();
     }
 
     @Override
