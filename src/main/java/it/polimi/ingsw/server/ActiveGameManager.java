@@ -81,6 +81,7 @@ public abstract class ActiveGameManager {
         try {
             FileIOManager.writeToFile(filename, serializedGame, FilePath.SAVED);
         } catch (IOException e) {
+            System.out.println("[LOG]: exception " + e.getMessage());
             throw new RuntimeException("Unable to save game");
         }
     }

@@ -20,7 +20,7 @@ public abstract class PersonalGoalCard {
         int pointsAwarded = 0, matches = 0;     //matches = number of matches between pGoalCard and bookshelf
         for(int i = 0; i < bookshelf.getHeight(); i++)
             for(int j = 0 ; j < bookshelf.getWidth(); j++)
-                if(bookshelf.getTileAt(i,j).getType().equals(pattern[i][j]) && bookshelf.getTileAt(i,j) != null)
+                if(bookshelf.getTileAt(i,j) != null && bookshelf.getTileAt(i,j).getType().equals(pattern[i][j]))
                     matches++;
         pointsAwarded += pointsTable[matches-1];
         return pointsAwarded;
