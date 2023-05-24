@@ -195,16 +195,15 @@ public abstract class ServerHandlers {
      */
     public static void handleShowSavedGames(Message req, Message res) {
         var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+        JSONArray jsonFiles = new JSONArray();
+        JSONObject body = new JSONObject();
 
         res.setMethod(req.getMethod());
-        if (files == null) res.setBody("[]");
-        else {
-            JSONArray jsonFiles = new JSONArray(files);
-            JSONObject body = new JSONObject();
-            body.put("files", jsonFiles);
-            res.setBody(body.toString());
-        }
 
+        if (files != null) jsonFiles = new JSONArray(files);
+
+        body.put("files", jsonFiles);
+        res.setBody(body.toString());
         res.send();
     }
 
@@ -235,8 +234,11 @@ public abstract class ServerHandlers {
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBoard board = currentGame.getBoard();
+        IBookshelf bookshelf;
 
         JSONObject body = new JSONObject(req.getBody());
+        String username = body.getString("username");
+        bookshelf = getPlayerByUsername(username, currentGame.getPlayers()).getBookshelf();
 
         int row1, row2, col1, col2;
         row1 = body.getInt("row1");
@@ -244,9 +246,16 @@ public abstract class ServerHandlers {
         col1 = body.getInt("col1");
         col2 = body.getInt("col2");
 
+        int numberOfTilesPickedUp = Integer.max(Math.abs(row2-row1),Math.abs(col2-col1));
+        List<Integer> depths = bookshelfColumnsDepths(bookshelf);
+
         try {
             if (!board.canPickUpTiles(row1, col1, row2, col2)) {
                 notifyError(res, "Invalid tile range");
+            }
+            else {
+                if(depths.stream().noneMatch(depth -> depth > numberOfTilesPickedUp))
+                    notifyError(res,"There aren't enough free spaces in the bookshelf to pick up these tiles");
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());
@@ -317,7 +326,8 @@ public abstract class ServerHandlers {
         if (board.needsRefill()) board.refill(bag);
 
         for (CommonGoalCard commonGoal : commonGoals) {
-            if (commonGoal.canObtainPoints(player.getBookshelf()))
+            if (commonGoal.canObtainPoints(player.getBookshelf()) &&
+                    !commonGoal.getAwardedPlayers().contains(player.getUsername()))
                 player.addPointsToScore(commonGoal.evaluatePoints(player));
         }
 
@@ -486,6 +496,25 @@ public abstract class ServerHandlers {
     }
 
     /**
+     * Method used to determine the maximum amount of tiles that
+     * can be inserted in the bookshelf.
+     * @param bookshelf bookshelf to evaluate
+     * @return the depths of the columns of the bookshelf.
+     */
+    private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
+        List<Integer> depths = new LinkedList<>();
+        for (int i = 0; i < bookshelf.getWidth(); i++) {
+            int depth = 0;
+            for (int j = 0; j < bookshelf.getHeight(); j++) {
+                if (bookshelf.getTileAt(j, i) == null) depth++;
+                else break;
+            }
+            depths.add(depth);
+        }
+        return depths;
+    }
+
+    /**
      * Validates the incoming request by checking if the player that
      * sent the message is impersonating another client.
      * Used to prevent "sabotage" through impersonation of other clients:
@@ -522,9 +551,8 @@ public abstract class ServerHandlers {
         String username = new JSONObject(req.getBody()).getString("username");
         if (playerSockets.containsValue(username)) {
             // check if name is already associated with user
-            if (playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username)) return;
-            // another player has the name
-            else notifyError(res, "Another user has chosen this name");
+            if (!(playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username)))
+                notifyError(res, "Another user has chosen this name");
         } else {
             playerSockets.put(req.getSocket(), username);
             res.setMethod("NAME");

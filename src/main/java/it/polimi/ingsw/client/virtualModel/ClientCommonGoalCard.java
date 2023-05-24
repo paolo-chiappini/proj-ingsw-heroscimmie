@@ -72,7 +72,8 @@ public class ClientCommonGoalCard extends ObservableObject<ModelListener> {
     {
         JSONObject jsonObject = new JSONObject(data);
         JSONArray points = jsonObject.getJSONArray("points");
-        currPoints = points.getInt(points.length()-1);
+        if (points.length() == 0) currPoints = 0;
+        else currPoints = points.getInt(points.length()-1);
         setScore(currPoints);
     }
 }

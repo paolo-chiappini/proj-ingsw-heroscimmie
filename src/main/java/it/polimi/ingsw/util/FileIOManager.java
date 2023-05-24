@@ -79,11 +79,15 @@ public abstract class FileIOManager {
      * Reads the names of the files in the specified directory.
      * @param directoryPath relative path to directory in resources.
      * @return returns the list of names of the files contained in the directory
-     * (null if directory is empty).
+     * (null if directory is empty or non-existent).
      */
     public static List<String> getFilesInDirectory(String directoryPath) {
         List<String> files;
-        String resourcePath = FileIOManager.class.getResource(directoryPath).getPath();
+        URL url = FileIOManager.class.getResource(directoryPath);
+
+        if (url == null) return null;
+
+        String resourcePath = url.getPath();
         File directory = new File(resourcePath);
 
         if (!directory.isDirectory()) {
