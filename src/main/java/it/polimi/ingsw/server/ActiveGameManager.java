@@ -79,7 +79,7 @@ public abstract class ActiveGameManager {
         String filename = "game_" + currentTimeMs + ".json";
 
         try {
-            FileIOManager.writeToFile(filename, serializedGame, FilePath.SAVED);
+            FileIOManager.writeDataToFile(FilePath.SAVED.getPath(), filename, serializedGame);
         } catch (IOException e) {
             System.out.println("[LOG]: exception " + e.getMessage());
             throw new RuntimeException("Unable to save game");
@@ -104,7 +104,7 @@ public abstract class ActiveGameManager {
 
         String serializedData;
         try {
-            serializedData = FileIOManager.readFromFile(fileName, FilePath.SAVED);
+            serializedData = FileIOManager.readDataFromFile(String.format("%s/%s", FilePath.SAVED.getPath(), fileName));
         } catch (FileNotFoundException e) {
             throw new RuntimeException("Unable to load selected game");
         }

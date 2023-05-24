@@ -142,7 +142,7 @@ public abstract class ServerHandlers {
         String username = body.getString("username");
 
         try {
-            var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+            var files = FileIOManager.getFilesInDirectory(FilePath.SAVED.getPath());
             ActiveGameManager.loadGame(files.get(saveIndex), username);
             notifySuccess(res, "Successfully loaded game");
         } catch (RuntimeException re) {
@@ -194,7 +194,10 @@ public abstract class ServerHandlers {
      * @param res response message
      */
     public static void handleShowSavedGames(Message req, Message res) {
-        var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+        List<String> files = null;
+        try {
+            files = FileIOManager.getFilesInDirectory(FilePath.SAVED.getPath());
+        } catch (RuntimeException ignored) {}
         JSONArray jsonFiles = new JSONArray();
         JSONObject body = new JSONObject();
 
