@@ -2,7 +2,10 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.gui.controllers.MenuWaitGameController;
 import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
+import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
+import it.polimi.ingsw.server.messages.Message;
 import javafx.application.Platform;
+import org.json.JSONObject;
 
 public class ViewGui extends View {
     private final String startingScene;
@@ -12,10 +15,14 @@ public class ViewGui extends View {
     }
 
     @Override
-    public void reset() {
-        GuiController controller = SceneManager.getCurrentController(); //TODO this method is called when the game finishes. So be careful
+    public void startGameView(JSONObject body, Message message) {
+        GuiController controller = SceneManager.getCurrentController();
         if (controller instanceof MenuWaitGameController)
-            Platform.runLater(()->((MenuWaitGameController)controller).startGame());
+            Platform.runLater(()->{
+                ((MenuWaitGameController)controller).startGame();
+                clientController.setupGameFromJson(body);
+                clientController.update(message);
+            });
         else
             throw new RuntimeException("Wrong GUI state");
     }
@@ -74,7 +81,11 @@ public class ViewGui extends View {
 
     @Override
     public void updateBoard(int[][] update) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).updateBoard(update));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
@@ -122,6 +133,11 @@ public class ViewGui extends View {
     public void shutdown() {
         super.shutdown();
         SceneManager.getCurrentController().shutdown();
+    }
+
+    @Override
+    public void reset() {
+
     }
 
 

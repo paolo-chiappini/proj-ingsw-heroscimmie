@@ -9,4 +9,6 @@ module it.polimi.ingsw.client.view.gui {
     opens it.polimi.ingsw.client.view.gui.controllers to javafx.fxml;
     exports it.polimi.ingsw.client.view.gui.controllers.boardview;
     opens it.polimi.ingsw.client.view.gui.controllers.boardview to javafx.fxml;
+    exports it.polimi.ingsw.server.messages;
+    exports it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements;
 }

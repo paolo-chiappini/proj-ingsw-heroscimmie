@@ -31,6 +31,7 @@ public class ClientController implements ViewListener {
 
     public ClientController(View view, String serverAddress) {
         this.view = view;
+        view.setClientController(this);
         clientIsInGame = false;
 
         client = new Client(serverAddress);
@@ -40,7 +41,7 @@ public class ClientController implements ViewListener {
         client.setOnConnectionLostCallback((msg) -> {
             clientIsInGame = false;
             view.handleServerConnectionError(msg);
-            initVirtualModelAndView();
+            resetVirtualModelAndView();
         });
 
 //        client.start();
@@ -134,7 +135,6 @@ public class ClientController implements ViewListener {
         view.finalizeUpdate();
     }
 
-
     public void update(Message message) {
         if (!clientIsInGame) return;
 
@@ -168,9 +168,17 @@ public class ClientController implements ViewListener {
         if (body.has("winner")) {
             view.handleWinnerSelected(body.getString("winner"));
             // reset model and view
-            initVirtualModelAndView();
+            resetVirtualModelAndView();
             clientIsInGame = false;
         }
+    }
+
+    private void resetVirtualModelAndView() {
+        board = new ClientBoard();
+        turnState = new ClientTurnState();
+        players = new LinkedList<>();
+        commonGoalCards = new LinkedList<>();
+        view.reset();
     }
 
     public void onGameStart(Message message) {
@@ -185,20 +193,18 @@ public class ClientController implements ViewListener {
 
         if (!clientIsInGame) return;
 
-        initVirtualModelAndView();
-        setupGameFromJson(body);
-        setupModelListeners();
-
-        update(message);
+        initVirtualModelAndView(body, message);
     }
 
-    private void initVirtualModelAndView() {
+    private void initVirtualModelAndView(JSONObject body, Message message) {
         board = new ClientBoard();
         turnState = new ClientTurnState();
         players = new LinkedList<>();
         commonGoalCards = new LinkedList<>();
 
-        view.reset();
+        setupModelListeners(); //Por l'amor de Dios, du not spost dis
+
+        view.startGameView(body, message);
     }
 
     private void setupModelListeners() {
@@ -208,7 +214,7 @@ public class ClientController implements ViewListener {
         commonGoalCards.forEach(goal -> goal.addListener(view));
     }
 
-    private void setupGameFromJson(JSONObject gameState) {
+    public void setupGameFromJson(JSONObject gameState) {
         JSONObject serialized = gameState.getJSONObject("serialized");
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
@@ -318,7 +324,7 @@ public class ClientController implements ViewListener {
         client.sendRequest("QUIT", body.toString());
 
         // reset local data
-        initVirtualModelAndView();
+        resetVirtualModelAndView();
         clientIsInGame = false;
     }
 

@@ -14,7 +14,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -68,12 +67,10 @@ public class BoardController extends GuiController {
         EventHandlers.set(this);
         this.board = new TilesBoard(this, gridPaneBoard);
         this.bookshelf = new Bookshelf(this, columnsBox, columnsForegroundBox);
-        board.randomFillWith(getFiles());
+//        board.randomFillWith(getFiles());
 
         boardViewState = new PickUpTilesState(this);
 
-
-        //Test
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/bookshelves_view.fxml"));
         try {
             this.bookshelvesView = fxmlLoader.load();
@@ -144,6 +141,44 @@ public class BoardController extends GuiController {
         }
     }
 
+    public TilesBoard getBoard() {
+        return board;
+    }
+
+    public void updateBoard(int[][] update) {
+        board.update(update);
+    }
+
+//    public void clickCommonGoal(MouseEvent e){
+//        var imageView = (ImageView)e.getSource();
+//        var url = imageView.getImage().getUrl();
+//        var fileName = url.substring( url.lastIndexOf('/')+1);
+//        int imageIndex = Integer.parseInt(fileName.substring(0, fileName.lastIndexOf('.')));
+//
+//        imageIndex = (imageIndex+1) % 12 + 1;
+//        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
+//        imageView.setImage(new Image(newImage));
+//    }
+//
+//    public void clickScoringToken(MouseEvent e){
+//        var imageView = (ImageView)e.getSource();
+//        var url = imageView.getImage().getUrl();
+//        var fileName = url.substring( url.lastIndexOf('/')+1);
+//        int imageIndex = Integer.parseInt(fileName.substring(0, fileName.lastIndexOf('.')));
+//
+//        imageIndex -= 2;
+//        if(imageIndex == 0) imageIndex = 8;
+//
+//        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
+//        imageView.setImage(new Image(newImage));
+//    }
+
+
+    public void toggleBookshelvesView(MouseEvent e) {
+        bookshelfPane.setVisible(!bookshelfPane.isVisible());
+        bookshelvesView.setVisible(!bookshelvesView.isVisible());
+    }
+
     public List<File> getFiles(){
         var itemTilesDirectory = SceneManager.class.getResource("/sprites/item_tiles_small");
         if (itemTilesDirectory == null)
@@ -158,39 +193,5 @@ public class BoardController extends GuiController {
             throw new RuntimeException("Something went wrong when loading item tiles sprites");
 
         return List.of(tilesFiles);
-    }
-
-    public TilesBoard getBoard() {
-        return board;
-    }
-
-    public void clickCommonGoal(MouseEvent e){
-        var imageView = (ImageView)e.getSource();
-        var url = imageView.getImage().getUrl();
-        var fileName = url.substring( url.lastIndexOf('/')+1);
-        int imageIndex = Integer.parseInt(fileName.substring(0, fileName.lastIndexOf('.')));
-
-        imageIndex = (imageIndex+1) % 12 + 1;
-        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
-        imageView.setImage(new Image(newImage));
-    }
-
-    public void clickScoringToken(MouseEvent e){
-        var imageView = (ImageView)e.getSource();
-        var url = imageView.getImage().getUrl();
-        var fileName = url.substring( url.lastIndexOf('/')+1);
-        int imageIndex = Integer.parseInt(fileName.substring(0, fileName.lastIndexOf('.')));
-
-        imageIndex -= 2;
-        if(imageIndex == 0) imageIndex = 8;
-
-        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
-        imageView.setImage(new Image(newImage));
-    }
-
-
-    public void toggleBookshelvesView(MouseEvent e) {
-        bookshelfPane.setVisible(!bookshelfPane.isVisible());
-        bookshelvesView.setVisible(!bookshelvesView.isVisible());
     }
 }

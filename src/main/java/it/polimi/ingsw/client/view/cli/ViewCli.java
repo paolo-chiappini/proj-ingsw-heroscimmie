@@ -4,7 +4,9 @@ import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.graphics.util.ICliRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
+import it.polimi.ingsw.server.messages.Message;
 import it.polimi.ingsw.util.observer.ViewListener;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,6 +28,15 @@ public class ViewCli extends View {
         hasPickedTiles = false;
         lastInputGeneratedError = false;
         this.init();
+    }
+
+    @Override
+    public void startGameView(JSONObject body, Message message) {
+
+        graphics = new DefaultCliGraphics();
+
+        clientController.setupGameFromJson(body);
+        clientController.update(message);
     }
 
     @Override

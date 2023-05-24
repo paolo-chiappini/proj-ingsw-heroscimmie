@@ -31,10 +31,11 @@ public class SceneManager {
             var menuController = fxmlLoader.<MenuController>getController();
             Stage newStage = new Stage();
 
+            SceneManager.controller = menuController;
+
             setStageProperties(newStage, nextScene);
             menuController.startStage(newStage);
 
-            SceneManager.controller = menuController;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,13 +45,15 @@ public class SceneManager {
     public static void splashScreenScene(Stage rootStage) throws IOException {
         var res = SceneManager.class.getResource("/fxmls/splash_view.fxml");
         FXMLLoader fxmlLoader = new FXMLLoader(res);
+
         Scene scene = new Scene(fxmlLoader.load());
         scene.setFill(Color.rgb(0, 0, 0, 0));
+
+        SceneManager.controller = fxmlLoader.getController();
 
         setStageProperties(rootStage, scene);
         rootStage.initStyle(StageStyle.TRANSPARENT);
         rootStage.show();
-        SceneManager.controller = fxmlLoader.getController();
     }
 
     public static void mainGameScene(Stage rootStage) {
@@ -119,8 +122,6 @@ public class SceneManager {
             throw new RuntimeException(ex);
         }
     }
-
-
 
     public static GuiController getCurrentController(){
         return SceneManager.controller;
