@@ -254,7 +254,7 @@ public class ClientController implements ViewListener {
             virtualCommonGoal.updateId(goalObject.toString());
 
             commonGoalCards.add(virtualCommonGoal);
-            view.setCommonGoal(virtualCommonGoal.getId(), 0);
+            view.setCommonGoal(virtualCommonGoal.getId(), 8);
         }
     }
 

@@ -66,27 +66,14 @@
             </StackPane>
             <VBox alignment="CENTER" fillWidth="false" spacing="100.0" GridPane.columnIndex="1">
                 <HBox styleClass="card">
-                    <ImageView fx:id="commonGoalCardTop" fitHeight="160.0" nodeOrientation="INHERIT"
-                               pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../sprites/common_goal_cards/1.jpg"/>
-                    </ImageView>
+                    <ImageView fx:id="commonGoalCardTop" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
                 <HBox styleClass="card">
-                    <ImageView fx:id="commonGoalCardBottom" fitHeight="160.0" nodeOrientation="INHERIT"
-                               pickOnBounds="true" preserveRatio="true">
-                        <Image url="@../sprites/common_goal_cards/9.jpg"/>
-                    </ImageView>
+                    <ImageView fx:id="commonGoalCardBottom" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
             </VBox>
-            <ImageView fx:id="scoringTokenTop" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true"
-                       rotate="-8.0" translateX="194.0" translateY="-140.0" GridPane.columnIndex="1">
-                <Image url="@../sprites/scoring_tokens/8.jpg"/>
-            </ImageView>
-            <ImageView fx:id="scoringTokenBottom" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true"
-                       preserveRatio="true" rotate="-8.0" translateX="194.0" translateY="129.0"
-                       GridPane.columnIndex="1">
-                <Image url="@../sprites/scoring_tokens/8.jpg"/>
-            </ImageView>
+            <ImageView fx:id="scoringTokenTop" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" translateX="194.0" translateY="-140.0" GridPane.columnIndex="1" />
+            <ImageView fx:id="scoringTokenBottom" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" translateX="194.0" translateY="129.0" GridPane.columnIndex="1" />
             <Button fx:id="goToBookshelfButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Bookshelves 👉" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          <Button fx:id="toggleBookshelvesButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Change view" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
             <GridPane.margin>
@@ -118,12 +105,9 @@
             <Button fx:id="goToBoardButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="190.0" text="👈 Board" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <HBox styleClass="card" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                 <GridPane.margin>
-                    <Insets top="280.0"/>
+                    <Insets top="280.0" />
                 </GridPane.margin>
-                <ImageView fx:id="personalGoalCard" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true"
-                           preserveRatio="true">
-                    <Image url="@../sprites/personal_goal_cards/Personal_Goals10.png"/>
-                </ImageView>
+                <ImageView fx:id="personalGoalCard" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
             </HBox>
         </GridPane>
         <GridPane fx:id="foregroundGridPane" prefHeight="700.0" prefWidth="2480.0">

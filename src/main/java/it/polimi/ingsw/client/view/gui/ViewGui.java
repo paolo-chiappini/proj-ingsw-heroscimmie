@@ -111,17 +111,29 @@ public class ViewGui extends View {
 
     @Override
     public void updateCommonGoalPoints(int cardId, int points) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).updatePoints(cardId, points));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
     public void setCommonGoal(int id, int points) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).setCommonGoalCard(id, points));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
     public void setPersonalGoal(int id) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).setPersonalGoalCard(id));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override

@@ -14,6 +14,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -21,6 +22,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BoardController extends GuiController {
     public StackPane window;
@@ -56,9 +58,10 @@ public class BoardController extends GuiController {
     private BookshelvesViewController bookshelvesViewController;
     private String myName;
 
+    private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>();
+
     public void startStage(Stage stage){
         foregroundGridPane.setPickOnBounds(false);
-//        backgroundImage.fitWidthProperty().bind(stage.widthProperty().multiply(2));
         backgroundImage.fitHeightProperty().bind(stage.heightProperty());
 
         anchorPane.scaleXProperty().bind(stage.heightProperty().divide(750));
@@ -68,7 +71,6 @@ public class BoardController extends GuiController {
         this.bookshelf = new Bookshelf(this, columnsBox, columnsForegroundBox);
 
         EventHandlers.set(this);
-//        board.randomFillWith(getFiles());
 
         boardViewState = new PickUpTilesState(this);
 
@@ -166,6 +168,53 @@ public class BoardController extends GuiController {
     public void addPlayer(String username, int score, boolean isClient) {
         if(isClient)
             this.myName = username;
+    }
+
+    public void setCommonGoalCard(int i, int points){
+        var cardUrl = getClass().getResource("/sprites/common_goal_cards/" +i+".jpg");
+        Image cardImage = new Image(cardUrl.toString());
+
+        if(commonGoalCardTop.getImage() == null){
+            commonGoalCardTop.setImage(cardImage);
+            getCardFromId.put(i, commonGoalCardTop);
+        }else {
+            commonGoalCardBottom.setImage(cardImage);
+            getCardFromId.put(i, commonGoalCardBottom);
+        }
+
+
+        var tokenUrl = getClass().getResource("/sprites/scoring_tokens/"+points+".jpg");
+
+        Image tokenImage = null;
+        if(points != 0){
+            tokenImage = new Image(tokenUrl.toString());
+        }
+
+        if(scoringTokenTop.getImage() == null){
+            scoringTokenTop.setImage(tokenImage);
+        }else {
+            scoringTokenBottom.setImage(tokenImage);
+        }
+    }
+
+    public void setPersonalGoalCard(int id) {
+        var imageUrl = getClass().getResource("/sprites/personal_goal_cards/" +id+".png");
+        personalGoalCard.setImage(new Image(imageUrl.toString()));
+    }
+
+    public void updatePoints(int cardId, int points) {
+        var tokenUrl = getClass().getResource("/sprites/scoring_tokens/"+points+".jpg");
+
+        Image tokenImage = null;
+        if(points != 0){
+            tokenImage = new Image(tokenUrl.toString());
+        }
+
+        if(getCardFromId.get(cardId) == commonGoalCardTop){
+            scoringTokenTop.setImage(tokenImage);
+        }else {
+            scoringTokenBottom.setImage(tokenImage);
+        }
     }
 //    public void clickCommonGoal(MouseEvent e){
 //        var imageView = (ImageView)e.getSource();
