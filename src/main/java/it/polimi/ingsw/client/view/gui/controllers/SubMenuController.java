@@ -43,7 +43,7 @@ public abstract class SubMenuController extends GuiController {
         EventHandlers.set(this);
     }
 
-    public void returnToMenu(MouseEvent e){
+    public void returnToMenu(MouseEvent ignoredE){
         root.getChildren().clear();
         root.getChildren().addAll(previousView);
         SceneManager.setCurrentController(menuController);

@@ -6,18 +6,14 @@ import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Bookshelf extends GraphicElement{
     private final HBox columnsBox;
-    private final HBox foregroundColumnsBox;
     private final ObservableList<Node> columns;
     private final ObservableList<Node> foregroundColumns;
     private final List<ImageView> droppedTiles = new ArrayList<>();
@@ -25,7 +21,6 @@ public class Bookshelf extends GraphicElement{
     public Bookshelf(BoardController controller, HBox columnsBox, HBox foregroundColumnsBox) {
         super(controller);
         this.columnsBox = columnsBox;
-        this.foregroundColumnsBox = foregroundColumnsBox;
 
         this.columns = columnsBox.getChildren();
         this.foregroundColumns = foregroundColumnsBox.getChildren();

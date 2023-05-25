@@ -3,7 +3,6 @@ package it.polimi.ingsw.client.view.gui.controllers;
 import it.polimi.ingsw.client.view.gui.EventHandlers;
 import it.polimi.ingsw.client.view.gui.GuiController;
 import it.polimi.ingsw.client.view.gui.SceneManager;
-import it.polimi.ingsw.client.view.gui.ViewGui;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -22,7 +21,7 @@ public class MenuLoadGameController extends SubMenuController {
         getView().notifyListCommand();
     }
 
-    public void setUsername(MouseEvent mouseEvent) {
+    public void setUsername(MouseEvent ignoredMouseEvent) {
 //        System.out.println(gamesList.getItems().get(gamesList.getSelectionModel().getSelectedIndex()));
         GuiController.getView().notifyNameChange(nameTextField.getText());
     }

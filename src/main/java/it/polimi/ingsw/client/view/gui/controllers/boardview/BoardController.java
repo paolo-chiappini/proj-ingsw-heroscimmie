@@ -165,7 +165,7 @@ public class BoardController extends GuiController {
 
     public void addPlayer(String username, int score, boolean isClient) {
         if(isClient)
-            myName = username;
+            this.myName = username;
     }
 //    public void clickCommonGoal(MouseEvent e){
 //        var imageView = (ImageView)e.getSource();
