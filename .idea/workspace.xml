@@ -12,14 +12,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Fixed a little bug when starting the cli">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Added update methods for GUI">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/Bookshelf.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -400,6 +394,7 @@
       <workItem from="1684950875406" duration="7285000" />
       <workItem from="1684963337597" duration="114000" />
       <workItem from="1684999018281" duration="1398000" />
+      <workItem from="1685040403903" duration="600000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -583,12 +578,12 @@
       <option name="project" value="LOCAL" />
       <updated>1685001761051</updated>
     </task>
-    <task id="LOCAL-00027" summary="moved text resources">
-      <created>1684950703057</created>
+    <task id="LOCAL-00027" summary="Added update methods for GUI">
+      <created>1685005177586</created>
       <option name="number" value="00027" />
       <option name="presentableId" value="LOCAL-00027" />
       <option name="project" value="LOCAL" />
-      <updated>1684950703057</updated>
+      <updated>1685005177586</updated>
     </task>
     <task id="LOCAL-00028" summary="moved files and reworked files">
       <created>1684958443326</created>
@@ -604,7 +599,7 @@
       <option name="project" value="LOCAL" />
       <updated>1684960104118</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -637,7 +632,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="First iteration of javadoc." />
     <MESSAGE value="Reworked Messages by using the Builder pattern" />
     <MESSAGE value="Added some tests for Messages (didn't test SimpleMessage)" />
     <MESSAGE value="fixed bug in deserializer" />
@@ -667,7 +661,8 @@
     <MESSAGE value="Indexed some images" />
     <MESSAGE value="Game is now correctly started and the board updated" />
     <MESSAGE value="Fixed a little bug when starting the cli" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed a little bug when starting the cli" />
+    <MESSAGE value="Added update methods for GUI" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added update methods for GUI" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
