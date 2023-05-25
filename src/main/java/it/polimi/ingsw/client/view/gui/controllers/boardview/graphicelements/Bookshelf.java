@@ -110,9 +110,11 @@ public class Bookshelf extends GraphicElement{
 
     public void update(int[][] bookshelf) {
         for (int j = 0; j < 5; j++){
+            VBox column = (VBox)columns.get(j);
+            column.getChildren().clear();
             for(int i = 5; i >= 0; i--){
-                VBox column = (VBox)columns.get(j);
                 int tileIndexType = bookshelf[i][j];
+                if(tileIndexType == -1) continue;
                 var imageUrl = getClass().getResource("/sprites/item_tiles_small/" +tileIndexType+".png");
                 var tileImage = new ImageView(new Image(imageUrl.toString()));
 

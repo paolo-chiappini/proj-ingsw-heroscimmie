@@ -7,6 +7,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -17,6 +18,7 @@ import java.util.List;
 
 public abstract class SubMenuController extends GuiController {
     public TextField nameTextField;
+    public Label nameAlreadyTakenLabel;
     public List<Node> previousView;
     public MenuController menuController;
     public Button undo;
@@ -28,6 +30,7 @@ public abstract class SubMenuController extends GuiController {
         this.root = root;
         this.previousView = previousView;
         this.menuController = menuController;
+        nameAlreadyTakenLabel.setVisible(false);
 
         undo = new Button();
         undo.setText("👈Menu");
@@ -50,4 +53,7 @@ public abstract class SubMenuController extends GuiController {
         return (Stage)root.getScene().getWindow();
     }
 
+    public void notifyNameAlreadyTaken() {
+        nameAlreadyTakenLabel.setVisible(true);
+    }
 }

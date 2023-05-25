@@ -65,7 +65,15 @@ public class ViewGui extends View {
 
     @Override
     public void handleErrorMessage(String message) {
-
+        switch (message){
+            case "Another user has chosen this name" -> {
+                GuiController controller = SceneManager.getCurrentController();
+                if (controller instanceof SubMenuController)
+                    Platform.runLater(()->((SubMenuController) controller).notifyNameAlreadyTaken());
+                else
+                    throw new RuntimeException("Wrong GUI state");
+            }
+        }
     }
 
     @Override

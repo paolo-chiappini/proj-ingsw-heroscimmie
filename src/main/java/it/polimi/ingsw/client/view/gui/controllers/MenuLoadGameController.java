@@ -29,7 +29,7 @@ public class MenuLoadGameController extends SubMenuController {
 
     @Override
     public void joinGame(){
-        GuiController.getView().notifyLoadCommand(gamesList.getSelectionModel().getSelectedIndex());
+        GuiController.getView().notifyLoadCommand(gamesList.getSelectionModel().getSelectedIndex()+1);
         SceneManager.waitGameScene(root);
     }
     

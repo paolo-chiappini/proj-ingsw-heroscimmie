@@ -155,8 +155,10 @@ public class BoardController extends GuiController {
     }
 
     public void updateBookshelf(int[][] bookshelf, String playerName){
-        if (playerName.equals(myName))
+        if (playerName.equals(myName)){
             this.bookshelf.update(bookshelf);
+            return;
+        }
 
         bookshelvesViewController.addBookshelf(bookshelf, playerName);
     }

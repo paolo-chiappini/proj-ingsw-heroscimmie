@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox alignment="CENTER" stylesheets="@menu_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MenuLoadGameController">
    <Label prefWidth="350.0" styleClass="player-name-label" text="Enter your Nickname" />
@@ -14,9 +15,17 @@
          <Insets />
       </opaqueInsets>
       <VBox.margin>
-         <Insets bottom="50.0" />
+         <Insets />
       </VBox.margin>
    </TextField>
+   <Label fx:id="nameAlreadyTakenLabel" prefWidth="350.0" text="A user has already taken this name" textFill="RED">
+      <VBox.margin>
+         <Insets bottom="50.0" />
+      </VBox.margin>
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
+   </Label>
    <Label prefWidth="350.0" styleClass="player-name-label" text="Select a game" />
    <ListView fx:id="gamesList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="188.0" prefWidth="350.0" styleClass="games-list">
       <VBox.margin>
