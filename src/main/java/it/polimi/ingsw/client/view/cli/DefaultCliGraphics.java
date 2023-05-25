@@ -360,11 +360,7 @@ public class DefaultCliGraphics implements ModelListener {
     private BoardTileType[][] getBoardTemplate() {
         final String BOARD_TEMPLATE_FILE = "board_template.json";
         String json;
-        try {
-            json = FileIOManager.readFromFile(BOARD_TEMPLATE_FILE, FilePath.TEMPLATES);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        json = FileIOManager.readDataFromResource(String.format("%s/%s", FilePath.RESOURCES_TEMPLATES.getPath(), BOARD_TEMPLATE_FILE));
         JSONArray array = new JSONArray(json);
         BoardTileType[][] template = new BoardTileType[9][9];
         for (int i = 0; i < array.length(); i++) {

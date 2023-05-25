@@ -19,11 +19,7 @@ public abstract class PersonalGoalImageBuilder {
     private static TileType[][][] loadCardsTemplates() {
         TileType[][][] templates;
         String json;
-        try {
-            json = FileIOManager.readFromFile(TEMPLATE_FILE, FilePath.TEMPLATES);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        json = FileIOManager.readDataFromResource(String.format("%s/%s", FilePath.RESOURCES_TEMPLATES.getPath(), TEMPLATE_FILE));
         JSONArray array = new JSONArray(json);
         templates = new TileType[array.length()][6][5];
         for (int i = 0; i < array.length(); i++) {
