@@ -10,6 +10,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -110,6 +111,22 @@ public class SceneManager {
         }
     }
 
+    public static void loadGameScene(MenuController menuController, Pane rootElement) {
+        List<Node> savedNodes = new ArrayList<>(rootElement.getChildren());
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view_load_game.fxml"));
+        try {
+            var newGameView = fxmlLoader.load();
+            MenuLoadGameController nextController = fxmlLoader.getController();
+            rootElement.getChildren().clear();
+            rootElement.getChildren().add((Node)newGameView);
+            nextController.start(menuController, savedNodes, rootElement);
+
+            SceneManager.controller = fxmlLoader.getController();
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+    }
+
     public static void waitGameScene(Pane rootElement){
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view_wait_game.fxml"));
         try {
@@ -121,13 +138,6 @@ public class SceneManager {
         } catch (IOException ex) {
             throw new RuntimeException(ex);
         }
-    }
-
-    public static GuiController getCurrentController(){
-        return SceneManager.controller;
-    }
-    public static void setCurrentController(GuiController controller){
-        SceneManager.controller = controller;
     }
 
     private static void setStageProperties(Stage stage, Scene scene){
@@ -151,5 +161,13 @@ public class SceneManager {
         var iconPath = iconURL.toExternalForm();
         Image icon = new Image(iconPath);
         stage.getIcons().add(icon);
+    }
+
+    public static GuiController getCurrentController(){
+        return SceneManager.controller;
+    }
+
+    public static void setCurrentController(GuiController controller){
+        SceneManager.controller = controller;
     }
 }

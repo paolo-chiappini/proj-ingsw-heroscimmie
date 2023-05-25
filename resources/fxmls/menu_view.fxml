@@ -23,7 +23,7 @@
       </viewport>
    </ImageView>
    <StackPane fx:id="innerStackPane" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="800.0">
-      <VBox fx:id="menuBox" alignment="TOP_CENTER" spacing="50.0">
+      <VBox fx:id="menuBox" alignment="TOP_CENTER" spacing="25.0">
          <StackPane.margin>
             <Insets />
          </StackPane.margin>
@@ -47,10 +47,11 @@
                <Image url="@../sprites/publisher_material/creators.png" />
             </ImageView>
          </VBox>
-         <Button fx:id="newGameButton" prefHeight="75.0" prefWidth="270.0" text="New Game" textFill="#e8ce93">
+         <Button fx:id="newGameButton" prefHeight="70.0" prefWidth="250.0" text="New Game" textFill="#e8ce93">
          </Button>
-         <Button fx:id="joinGameButton" prefHeight="75.0" prefWidth="270.0" text="Join Game" textFill="#e8ce93">
+         <Button fx:id="joinGameButton" prefHeight="70.0" prefWidth="250.0" text="Join Game" textFill="#e8ce93">
          </Button>
+         <Button fx:id="loadGameButton" prefHeight="70.0" prefWidth="250.0" text="Load Game" textFill="#e8ce93" />
       </VBox>
    </StackPane>
    <ImageView fx:id="publisherLogo" fitHeight="93.0" fitWidth="93.0" pickOnBounds="true" preserveRatio="true" StackPane.alignment="BOTTOM_LEFT">

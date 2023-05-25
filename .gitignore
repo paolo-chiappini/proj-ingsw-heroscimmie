@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/resources/data/saved/
+/saved/

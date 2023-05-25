@@ -20,6 +20,7 @@ public class MenuController extends GuiController {
     public Button joinGameButton;
     public Button newGameButton;
     public ImageView backgroundImage;
+    public Button loadGameButton;
 
     public void startStage(Stage stage) {
         backgroundImage.fitHeightProperty().bind(stage.heightProperty().multiply(1.1));

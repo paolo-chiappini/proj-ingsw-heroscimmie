@@ -3,10 +3,11 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" stylesheets="@menu_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MenuJoinGameController">
+<VBox alignment="CENTER" stylesheets="@menu_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.MenuLoadGameController">
    <Label prefWidth="350.0" styleClass="player-name-label" text="Enter your Nickname" />
    <TextField fx:id="nameTextField" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="350.0" promptText="Nickname" styleClass="player-name-textfield">
       <opaqueInsets>
@@ -16,5 +17,11 @@
          <Insets bottom="50.0" />
       </VBox.margin>
    </TextField>
+   <Label prefWidth="350.0" styleClass="player-name-label" text="Select a game" />
+   <ListView fx:id="gamesList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="188.0" prefWidth="350.0" styleClass="games-list">
+      <VBox.margin>
+         <Insets bottom="50.0" />
+      </VBox.margin>
+   </ListView>
    <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="257.0" text="Confirm and Join" />
 </VBox>

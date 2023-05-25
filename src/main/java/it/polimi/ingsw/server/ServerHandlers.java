@@ -540,6 +540,9 @@ public abstract class ServerHandlers {
      * if the client is trying to impersonate another player.
      */
     public static boolean validateSocketUsername(Message req, Message res) {
+        // a name is not needed for viewing the list of games
+        if (req.getMethod().equals("LIST")) return true;
+
         if (missingPropertiesInBody(List.of("username"), req, res)) return false;
 
         // demand validation to name change handler

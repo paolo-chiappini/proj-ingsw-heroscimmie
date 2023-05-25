@@ -1,5 +1,6 @@
 package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.View;
+import it.polimi.ingsw.client.view.gui.controllers.MenuLoadGameController;
 import it.polimi.ingsw.client.view.gui.controllers.MenuWaitGameController;
 import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
@@ -32,7 +33,12 @@ public class ViewGui extends View {
 
     @Override
     public void showListOfSavedGames(String[] savedGames) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if(controller instanceof MenuLoadGameController){
+            ((MenuLoadGameController)controller).populateList(savedGames);
+        }else {
+            throw new RuntimeException("Wrong GUI state");
+        }
     }
 
     @Override

@@ -289,8 +289,13 @@ public class ClientController implements ViewListener {
             return;
         }
 
+        // This should be useless now that a username
+        // is not needed for getting the list of games,
+        // but it isn't harming anyone, so it's staying <3
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
+
+
         client.sendRequest("LIST", body.toString());
     }
 

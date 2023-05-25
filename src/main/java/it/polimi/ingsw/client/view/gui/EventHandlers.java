@@ -1,16 +1,15 @@
 package it.polimi.ingsw.client.view.gui;
 
-import it.polimi.ingsw.client.view.gui.controllers.MenuController;
-import it.polimi.ingsw.client.view.gui.controllers.MenuJoinGameController;
-import it.polimi.ingsw.client.view.gui.controllers.MenuNewGameController;
-import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
+import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
+import javafx.beans.binding.Bindings;
+import javafx.collections.ObservableList;
 
 public abstract class EventHandlers {
     public static void set(MenuController controller){
         controller.newGameButton.setOnMouseReleased(e-> SceneManager.newGameScene(controller, controller.innerStackPane));
-
         controller.joinGameButton.setOnMouseReleased(e-> SceneManager.joinGameScene(controller, controller.innerStackPane));
+        controller.loadGameButton.setOnMouseReleased(e-> SceneManager.loadGameScene(controller, controller.innerStackPane));
     }
     public static void set(BoardController controller){
 //        controller.commonGoalCardBottom.setOnMouseClicked(controller::clickCommonGoal);
@@ -31,6 +30,19 @@ public abstract class EventHandlers {
     public static void set(SubMenuController controller){
         controller.undo.setOnMouseClicked(controller::returnToMenu);
     }
+
+    public static void set(MenuLoadGameController controller){
+        controller.confirmButton.requestFocus();
+        var selectedIndeces = controller.gamesList.getSelectionModel().getSelectedIndices();
+
+        controller.confirmButton.disableProperty().bind(
+                controller.nameTextField.textProperty().isEmpty()
+                        .or(Bindings.size(selectedIndeces).greaterThan(1))
+                        .or(Bindings.size(selectedIndeces).isEqualTo(0)));
+
+        controller.confirmButton.setOnMouseClicked(controller::setUsername);
+    }
+
     public static void set(MenuJoinGameController controller) {
         controller.confirmButton.requestFocus();
         controller.confirmButton.disableProperty().bind(controller.nameTextField.textProperty().isEmpty());
