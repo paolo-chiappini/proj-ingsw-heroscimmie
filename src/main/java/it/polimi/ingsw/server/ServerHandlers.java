@@ -53,6 +53,10 @@ public abstract class ServerHandlers {
         var connectedPlayers = ActiveGameManager.getConnectedPlayers().toArray();
         update.put("disconnected_players", new JSONArray(disconnectedPlayers));
         update.put("connected_players", new JSONArray(connectedPlayers));
+
+        // DEBUG
+        // System.out.println("Sending update: " + update);
+
         response.setBody(update.toString());
         response.sendToAll();
     }
@@ -354,18 +358,22 @@ public abstract class ServerHandlers {
         if (turnManager.isGameOver()) {
             game.evaluateFinalScores();
             update.put("winner", game.getWinner().getUsername());
-            ActiveGameManager.stopGame();
         } else if (ActiveGameManager.getConnectedPlayers().size() == 1) {
             serializedGame.put("is_end_game", true);
             var lastPlayer = ActiveGameManager.getConnectedPlayers().toArray();
             if (lastPlayer.length == 1) {
                 update.put("winner", lastPlayer[0]);
-                ActiveGameManager.stopGame();
             }
         }
 
         update.put("serialized", serializedGame);
         sendUpdate(res, update);
+
+        // Stop must be done after update or players won't be notified
+        // of others disconnecting.
+        if (turnManager.isGameOver() || ActiveGameManager.getConnectedPlayers().size() == 1) {
+            ActiveGameManager.stopGame();
+        }
     }
 
     /**
@@ -422,8 +430,9 @@ public abstract class ServerHandlers {
 
         try {
             ActiveGameManager.leaveGame(username);
-            sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
-        } catch (IllegalActionException ignored) {}
+        } catch (IllegalActionException iae) {
+            System.out.println("Unable to remove " + username + " from game (" + iae.getMessage() + ")");
+        }
 
         if (ActiveGameManager.getConnectedPlayers().isEmpty() && ActiveGameManager.isGameInProgress()) {
             System.out.println("No more players, resetting");
@@ -439,6 +448,8 @@ public abstract class ServerHandlers {
 
             if (isDisconnectPlayerTurn || onePlayerLeft) handleEndTurn(req, res);
             else sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
+        } else {
+            sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
         }
     }
 
