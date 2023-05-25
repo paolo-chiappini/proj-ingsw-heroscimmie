@@ -12,7 +12,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Added update methods for GUI">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Completed game load">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -76,41 +77,44 @@
   </component>
   <component name="ProjectId" id="2NQlhWarzYju09S35seF6qqAtXr" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
-    <ConfirmationsSetting value="2" id="Add" />
+    <ConfirmationsSetting value="1" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="flattenModules" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;TODO_SCOPE&quot;: &quot;All Places&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers&quot;: &quot;true&quot;,
-    &quot;extract.method.default.visibility&quot;: &quot;private&quot;,
-    &quot;last_opened_file_path&quot;: &quot;G:/ProgettoIngSoftware/src/main/resources/fxmls&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Artifacts&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.14708602&quot;,
-    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "TODO_SCOPE": "All Places",
+    "WebServerToolWindowFactoryState": "false",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
+    "extract.method.default.visibility": "private",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "G:/ProgettoIngSoftware/resources/fxmls",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.14708602",
+    "run.code.analysis.last.selected.profile": "pProject Default",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Confirmation",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CreateClassDialog.RecentsKey">
       <recent name="it.polimi.ingsw.util.observer" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\ProgettoIngSoftware\resources\fxmls" />
+      <recent name="G:\ProgettoIngSoftware\resources\data\saved" />
       <recent name="G:\ProgettoIngSoftware\src\main\resources\fxmls" />
       <recent name="G:\ProgettoIngSoftware\src\main\java" />
     </key>
@@ -118,11 +122,11 @@
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\ProgettoIngSoftware" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\main" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\test\resources" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\main\resources\data\saved" />
-      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\resources" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="it.polimi.ingsw.server" />
@@ -394,7 +398,7 @@
       <workItem from="1684950875406" duration="7285000" />
       <workItem from="1684963337597" duration="114000" />
       <workItem from="1684999018281" duration="1398000" />
-      <workItem from="1685040403903" duration="600000" />
+      <workItem from="1685040403903" duration="11320000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -585,21 +589,56 @@
       <option name="project" value="LOCAL" />
       <updated>1685005177586</updated>
     </task>
-    <task id="LOCAL-00028" summary="moved files and reworked files">
-      <created>1684958443326</created>
+    <task id="LOCAL-00028" summary="Added update methods for GUI">
+      <created>1685042834766</created>
       <option name="number" value="00028" />
       <option name="presentableId" value="LOCAL-00028" />
       <option name="project" value="LOCAL" />
-      <updated>1684958443326</updated>
+      <updated>1685042834766</updated>
     </task>
-    <task id="LOCAL-00029" summary="moved files and reworked files">
-      <created>1684960104118</created>
+    <task id="LOCAL-00029" summary="Added update methods for GUI">
+      <created>1685043048807</created>
       <option name="number" value="00029" />
       <option name="presentableId" value="LOCAL-00029" />
       <option name="project" value="LOCAL" />
-      <updated>1684960104118</updated>
+      <updated>1685043048807</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00030" summary="Added update methods for GUI">
+      <created>1685043146800</created>
+      <option name="number" value="00030" />
+      <option name="presentableId" value="LOCAL-00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1685043146801</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Added load game view">
+      <created>1685048158561</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1685048158561</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Fixed load game view (still have to do the cards) and added notifyNameAlreadyTaken to gui">
+      <created>1685049685497</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1685049685497</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Fixed load game view (still have to do the cards) and added notifyNameAlreadyTaken to gui">
+      <created>1685049767764</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1685049767764</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Completed game load">
+      <created>1685053345158</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1685053345158</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -632,13 +671,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Reworked Messages by using the Builder pattern" />
-    <MESSAGE value="Added some tests for Messages (didn't test SimpleMessage)" />
-    <MESSAGE value="fixed bug in deserializer" />
-    <MESSAGE value="changed observers nomenclature" />
-    <MESSAGE value="view decoupling" />
-    <MESSAGE value="added javadoc to view" />
-    <MESSAGE value="removed prints from controller, added saved games list" />
     <MESSAGE value="cleaned up controller" />
     <MESSAGE value="added turn progression in client" />
     <MESSAGE value="added client reconnection to server" />
@@ -662,7 +694,10 @@
     <MESSAGE value="Game is now correctly started and the board updated" />
     <MESSAGE value="Fixed a little bug when starting the cli" />
     <MESSAGE value="Added update methods for GUI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added update methods for GUI" />
+    <MESSAGE value="Added load game view" />
+    <MESSAGE value="Fixed load game view (still have to do the cards) and added notifyNameAlreadyTaken to gui" />
+    <MESSAGE value="Completed game load" />
+    <option name="LAST_COMMIT_MESSAGE" value="Completed game load" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
