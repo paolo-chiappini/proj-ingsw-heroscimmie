@@ -88,12 +88,12 @@ public class Board implements IBoard {
             System.arraycopy(spaces[i], 0, bufferedSpaces[i + 1], 1, spaces[i].length);
         }
 
-        for (int i = 1; i < bufferedSpaces.length - 2; i++) {
-            for (int j = 1; j < bufferedSpaces[i].length - 2; j++) {
+        for (int i = 1; i < bufferedSpaces.length - 1; i++) {
+            for (int j = 1; j < bufferedSpaces[i].length - 1; j++) {
                 if (bufferedSpaces[i][j].getTile() == null) continue;
                 // check for adjacent tiles
-                if (spaces[i - 1][j].getTile() != null || spaces[i + 1][j].getTile() != null ||
-                        spaces[i][j - 1].getTile() != null || spaces[i][j + 1].getTile() != null) return false;
+                if (bufferedSpaces[i - 1][j].getTile() != null || bufferedSpaces[i + 1][j].getTile() != null ||
+                        bufferedSpaces[i][j - 1].getTile() != null || bufferedSpaces[i][j + 1].getTile() != null) return false;
             }
         }
         return true;
