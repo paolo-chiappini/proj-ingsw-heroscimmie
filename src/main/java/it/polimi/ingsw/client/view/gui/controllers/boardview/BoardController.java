@@ -53,6 +53,8 @@ public class BoardController extends GuiController {
     private TilesBoard board;
     private Bookshelf bookshelf;
     private Pane bookshelvesView;
+    private BookshelvesViewController bookshelvesViewController;
+    private String myName;
 
     public void startStage(Stage stage){
         foregroundGridPane.setPickOnBounds(false);
@@ -62,9 +64,10 @@ public class BoardController extends GuiController {
         anchorPane.scaleXProperty().bind(stage.heightProperty().divide(750));
         anchorPane.scaleYProperty().bind(stage.heightProperty().divide(750));
 
-        EventHandlers.set(this);
         this.board = new TilesBoard(this, gridPaneBoard);
         this.bookshelf = new Bookshelf(this, columnsBox, columnsForegroundBox);
+
+        EventHandlers.set(this);
 //        board.randomFillWith(getFiles());
 
         boardViewState = new PickUpTilesState(this);
@@ -79,8 +82,7 @@ public class BoardController extends GuiController {
             GridPane.setMargin(bookshelvesView, new Insets(0, 0, 10, 0));
             gamePlane.add(bookshelvesView, 3, 0);
 
-            BookshelvesViewController bookshelvesViewController = fxmlLoader.getController();
-            bookshelvesViewController.setup();
+            this.bookshelvesViewController = fxmlLoader.getController();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -147,6 +149,22 @@ public class BoardController extends GuiController {
         board.update(update);
     }
 
+    public void toggleBookshelvesView(MouseEvent ignoredE) {
+        bookshelfPane.setVisible(!bookshelfPane.isVisible());
+        bookshelvesView.setVisible(!bookshelvesView.isVisible());
+    }
+
+    public void updateBookshelf(int[][] bookshelf, String playerName){
+        if (playerName.equals(myName))
+            this.bookshelf.update(bookshelf);
+
+        bookshelvesViewController.addBookshelf(bookshelf, playerName);
+    }
+
+    public void addPlayer(String username, int score, boolean isClient) {
+        if(isClient)
+            myName = username;
+    }
 //    public void clickCommonGoal(MouseEvent e){
 //        var imageView = (ImageView)e.getSource();
 //        var url = imageView.getImage().getUrl();
@@ -169,13 +187,9 @@ public class BoardController extends GuiController {
 //
 //        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
 //        imageView.setImage(new Image(newImage));
+
 //    }
 
-
-    public void toggleBookshelvesView(MouseEvent e) {
-        bookshelfPane.setVisible(!bookshelfPane.isVisible());
-        bookshelvesView.setVisible(!bookshelvesView.isVisible());
-    }
 
 //    public List<File> getFiles(){
 //        var itemTilesDirectory = SceneManager.class.getResource("/sprites/item_tiles_small");

@@ -2,11 +2,10 @@ package it.polimi.ingsw.client.view;
 
 import it.polimi.ingsw.client.Client;
 import it.polimi.ingsw.client.controller.ClientController;
-import it.polimi.ingsw.server.messages.Message;
 import it.polimi.ingsw.util.observer.ModelListener;
 import it.polimi.ingsw.util.observer.ObservableObject;
 import it.polimi.ingsw.util.observer.ViewListener;
-import org.json.JSONObject;
+
 
 /**
  * Represents a generic view.

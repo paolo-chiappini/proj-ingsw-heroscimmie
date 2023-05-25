@@ -4,9 +4,7 @@ import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.graphics.util.ICliRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
-import it.polimi.ingsw.server.messages.Message;
 import it.polimi.ingsw.util.observer.ViewListener;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;

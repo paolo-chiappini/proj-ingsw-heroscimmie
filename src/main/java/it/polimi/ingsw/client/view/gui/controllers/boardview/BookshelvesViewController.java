@@ -15,49 +15,22 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class BookshelvesViewController {
-    private final String[] names;
     @FXML
     private FlowPane bookshelvesPane;
     private final HashMap<String, Pane> bookshelves;
 
     public BookshelvesViewController() {
         this.bookshelves = new HashMap<>();
-        this.names = new String[]{"Giorgio", "Gianni", "Giuseppa"};
     }
 
-    public void setup(){
-        for(int k = 0; k<3; k++){
-            Random r = new Random();
-
-            int[][] randomArray = new int[6][5];
-            for (int i = 0; i < 6; i++) {
-                for (int j = 0; j < 5; j++) {
-                    var randomInt = r.nextInt(12)-6;
-                    randomArray[i][j] = (randomInt+Math.abs(randomInt))/2;
-                }
-            }
-            addBookshelf(randomArray, names[k]);
-        }
-
-        bookshelvesPane.setOnMouseClicked(e->{
-            for(int k = 0; k<3; k++){
-                Random r = new Random();
-
-                int[][] randomArray = new int[6][5];
-                for (int i = 0; i < 6; i++) {
-                    for (int j = 0; j < 5; j++) {
-                        var randomInt = r.nextInt(12)-6;
-                        randomArray[i][j] = (randomInt+Math.abs(randomInt))/2;
-                    }
-                }
-                updateBookshelf(randomArray, names[k]);
-            }
-        });
-    }
-
-    public void addBookshelf(int[][] bookshelf, String playername){
-        if(bookshelves.containsKey(playername)){
-            updateBookshelf(bookshelf, playername);
+    /**
+     * Adds a player's bookshelf to the GUI. If it already exists, it updates it.
+     * @param bookshelf representation of the bookshelf
+     * @param playerName name of the player
+     */
+    public void addBookshelf(int[][] bookshelf, String playerName){
+        if(bookshelves.containsKey(playerName)){
+            updateBookshelf(bookshelf, playerName);
             return;
         }
 
@@ -65,20 +38,17 @@ public class BookshelvesViewController {
         try {
             Pane newBookshelf = fxmlLoader.load();
             Pane bookshelfElement = (Pane) newBookshelf.getChildren().get(0);
-            Label playerName = (Label) newBookshelf.getChildren().get(1);
+            Label playerNameLabel = (Label) newBookshelf.getChildren().get(1);
 
-            playerName.setText(playername);
+            playerNameLabel.setText(playerName);
             GridPane grid = (GridPane) bookshelfElement.getChildren().get(0);
 
             for (int i = 0; i < 6; i++) {
                 for (int j = 0; j < 5; j++) {
                     Rectangle rec = new Rectangle();
-                    var colorFill = Color.hsb((double) bookshelf[i][j] /5*255, 0.8, 0.8);
 
-                    if(bookshelf[i][j] == 0)
-                        colorFill = Color.TRANSPARENT;
+                    setTileFill(rec, bookshelf[i][j]);
 
-                    rec.setFill(colorFill);
                     rec.heightProperty().bind(
                             grid.heightProperty().add(grid.getVgap())
                                     .divide(grid.getRowCount())
@@ -89,7 +59,7 @@ public class BookshelvesViewController {
                 }
             }
 
-            bookshelves.put(playername, newBookshelf);
+            bookshelves.put(playerName, newBookshelf);
             bookshelvesPane.getChildren().add(newBookshelf);
 
         } catch (IOException e) {
@@ -107,15 +77,24 @@ public class BookshelvesViewController {
             int i = k/5;
             int j = k%5;
 
-            var colorFill = Color.hsb((double) bookshelf[i][j] /5*255, 0.8, 0.8);
-
-            if(bookshelf[i][j] == 0)
-                colorFill = Color.TRANSPARENT;
-
             Rectangle rec = (Rectangle) grid.getChildren().get(k);
-
-            rec.setFill(colorFill);
+            setTileFill(rec, bookshelf[i][j]);
         }
+    }
+
+    private void setTileFill(Rectangle rec, int colorIndex) {
+        Color colorFill = null;
+        switch (colorIndex){
+            case -1 -> colorFill = Color.TRANSPARENT;
+            case 0  -> colorFill = Color.rgb(144, 164, 65); //CAT
+            case 1  -> colorFill = Color.rgb(236, 225, 190); //BOOK
+            case 2  -> colorFill = Color.rgb(96, 180, 177); //TROPHY
+            case 3  -> colorFill = Color.rgb(197, 76, 124); //PLANT
+            case 4  -> colorFill = Color.rgb(0, 100, 140); //FRAME
+            case 5  -> colorFill = Color.rgb(220, 164, 60); //TOYT
+        }
+
+        rec.setFill(colorFill);
     }
 
 }

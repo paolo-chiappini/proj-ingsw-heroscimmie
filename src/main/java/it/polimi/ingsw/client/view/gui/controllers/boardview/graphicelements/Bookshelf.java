@@ -4,9 +4,13 @@ import it.polimi.ingsw.client.view.gui.Animations;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Rectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,5 +106,23 @@ public class Bookshelf extends GraphicElement{
             columnsBox.setDisable(false);
         });
         animation.play();
+    }
+
+    public void update(int[][] bookshelf) {
+        for (int j = 0; j < 5; j++){
+            for(int i = 5; i >= 0; i--){
+                VBox column = (VBox)columns.get(j);
+                int tileIndexType = bookshelf[i][j];
+                var imageUrl = getClass().getResource("/sprites/item_tiles_small/" +tileIndexType+".png");
+                var tileImage = new ImageView(new Image(imageUrl.toString()));
+
+                tileImage.setRotate(180);
+                tileImage.setPreserveRatio(false);
+                tileImage.setFitWidth(column.getWidth());
+                tileImage.setFitHeight(column.getWidth());
+
+                column.getChildren().add(tileImage);
+            }
+        }
     }
 }

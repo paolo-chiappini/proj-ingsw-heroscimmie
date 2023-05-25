@@ -3,12 +3,11 @@ import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.gui.controllers.MenuWaitGameController;
 import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
-import it.polimi.ingsw.server.messages.Message;
 import javafx.application.Platform;
-import org.json.JSONObject;
 
 public class ViewGui extends View {
     private final String startingScene;
+
     public ViewGui(String startingScene) {
         super();
         this.startingScene = startingScene;
@@ -75,7 +74,11 @@ public class ViewGui extends View {
 
     @Override
     public void updateBookshelf(String player, int[][] update) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).updateBookshelf(update, player));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
@@ -119,7 +122,11 @@ public class ViewGui extends View {
 
     @Override
     public void addPlayer(String username, int score, boolean isClient) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).addPlayer(username, score, isClient));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override

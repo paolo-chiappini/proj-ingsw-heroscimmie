@@ -12,136 +12,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="">
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Fixed a little bug when starting the cli">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/View.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/cli/ViewCli.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/ViewGui.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/TilesBoard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/TilesBoard.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/board_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/board_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/board_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/board_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/bookshelves_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/bookshelves_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/menu_style.css" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_style.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/menu_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/menu_view_join_game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view_join_game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/menu_view_new_game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view_new_game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/menu_view_wait_game.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/menu_view_wait_game.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/mini_bookshelf.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/mini_bookshelf.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/fxmls/splash_view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/resources/fxmls/splash_view.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/boards/bookshelf.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/boards/bookshelf.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/boards/bookshelf_orth.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/boards/bookshelf_orth.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/boards/livingroom.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/boards/livingroom.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/boards/livingroom_small.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/boards/livingroom_small.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/10.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/11.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/12.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/7.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/8.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/9.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/common_goal_cards/back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/common_goal_cards/back.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Cornici1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Cornici1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Cornici1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Cornici1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Cornici1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Cornici1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Gatti1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Gatti1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Gatti1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Gatti1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Gatti1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Gatti1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Giochi1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Giochi1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Giochi1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Giochi1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Giochi1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Giochi1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Libri1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Libri1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Libri1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Libri1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Libri1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Libri1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Piante1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Piante1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Piante1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Piante1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Piante1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Piante1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Trofei1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Trofei1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Trofei1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Trofei1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles/Trofei1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles/Trofei1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/0.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/0.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/233.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/233.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/4.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/5.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Cornici1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Cornici1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Gatti1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Gatti1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Gatti1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Gatti1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Giochi1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Giochi1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Giochi1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Giochi1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Libri1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Libri1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Libri1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Libri1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Piante1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Piante1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Piante1.3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Piante1.3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Trofei1.1.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Trofei1.1.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/item_tiles_small/Trofei1.2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/item_tiles_small/Trofei1.2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/Sacchetto_Aperto.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/Sacchetto_Aperto.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/Sacchetto_Chiuso.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/Sacchetto_Chiuso.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/White_check.svg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/White_check.svg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/base_pagina2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/base_pagina2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/firstplayertoken.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/firstplayertoken.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/selezione_colonna.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/selezione_colonna.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/selezione_colonna.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/selezione_colonna.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/sfondo_parquet.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/sfondo_parquet.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/sfondo_salotto.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/sfondo_salotto.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/sfondo_salotto_16_9.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/sfondo_salotto_16_9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/sfondo_salotto_long.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/sfondo_salotto_long.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/misc/sfondo_salotto_long2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/misc/sfondo_salotto_long2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals10.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals10.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals11.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals11.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals12.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals12.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals2.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals2.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals3.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals3.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals4.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals4.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals5.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals5.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals6.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals6.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals7.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals7.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals8.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals8.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/Personal_Goals9.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/Personal_Goals9.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/back.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/back.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/front_EMPTY.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/front_EMPTY.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/10.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/10.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/11.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/11.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/12.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/12.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/7.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/7.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/8.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/personal_goal_cards/old/9.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/personal_goal_cards/old/9.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Box 280x280px.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Box 280x280px.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Display_1.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Display_1.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Display_2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Display_2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Display_3.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Display_3.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Display_4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Display_4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Display_5.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Display_5.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Icon 50x50px.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Icon 50x50px.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Publisher.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Publisher.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/Title 2000x2000px.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/Title 2000x2000px.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/banner_1386x400px.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/banner_1386x400px.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/box_no_shadow.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/box_no_shadow.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/creators.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/creators.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/publisher_material/splash_title.png" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/publisher_material/splash_title.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/2.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/2.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/4.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/4.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/6.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/6.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/8.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/8.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/end_game.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/end_game.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/scoring.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/scoring.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/scoring_back_EMPTY.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/scoring_back_EMPTY.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/sprites/scoring_tokens/scoring_back_example.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sprites/scoring_tokens/scoring_back_example.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/Bookshelf.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/Bookshelf.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -698,12 +576,12 @@
       <option name="project" value="LOCAL" />
       <updated>1684958121472</updated>
     </task>
-    <task id="LOCAL-00026" summary="fixed some exceptions">
-      <created>1684947049541</created>
+    <task id="LOCAL-00026" summary="Fixed a little bug when starting the cli">
+      <created>1685001761051</created>
       <option name="number" value="00026" />
       <option name="presentableId" value="LOCAL-00026" />
       <option name="project" value="LOCAL" />
-      <updated>1684947049541</updated>
+      <updated>1685001761051</updated>
     </task>
     <task id="LOCAL-00027" summary="moved text resources">
       <created>1684950703057</created>
@@ -726,7 +604,7 @@
       <option name="project" value="LOCAL" />
       <updated>1684960104118</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -759,7 +637,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Added Network related code" />
     <MESSAGE value="First iteration of javadoc." />
     <MESSAGE value="Reworked Messages by using the Builder pattern" />
     <MESSAGE value="Added some tests for Messages (didn't test SimpleMessage)" />
@@ -789,21 +666,12 @@
     <MESSAGE value="Initial game startup" />
     <MESSAGE value="Indexed some images" />
     <MESSAGE value="Game is now correctly started and the board updated" />
-    <option name="LAST_COMMIT_MESSAGE" value="Game is now correctly started and the board updated" />
+    <MESSAGE value="Fixed a little bug when starting the cli" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed a little bug when starting the cli" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
-          <line>134</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/it/polimi/ingsw/client/controller/ClientController.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
         <breakpoint enabled="true" type="java-exception">
           <properties class="java.lang.NullPointerException" package="java.lang" />
           <option name="timeStamp" value="4" />
