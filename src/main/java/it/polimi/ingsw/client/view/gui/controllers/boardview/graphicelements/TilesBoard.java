@@ -54,7 +54,7 @@ public class TilesBoard extends GraphicElement {
             for (int j = 0; j < update.length; j++) {
                 if (update[i][j] >= 0) {
                     int tileIndexType = update[i][j];
-                    var imageUrl = getClass().getResource("/sprites/item_tiles_small/"+tileIndexType+".png");
+                    var imageUrl = getClass().getResource("/sprites/item_tiles_small/" +tileIndexType+".png");
                     var tileImage = new ImageView(new Image(imageUrl.toString()));
                     TileElement itemTile = new TileElement(this.controller, tileImage, i, j);
                     addTile(itemTile, i, j);

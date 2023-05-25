@@ -25,7 +25,7 @@ public abstract class View
     /**
      * Method used to restore a "reset" state for the current view.
      */
-    public abstract void startGameView(JSONObject body, Message message);
+    public abstract void startGameView(Runnable finishSetup);
 
     /**
      * Executes all the procedures needed to correctly show

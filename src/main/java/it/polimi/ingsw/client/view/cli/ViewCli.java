@@ -31,12 +31,9 @@ public class ViewCli extends View {
     }
 
     @Override
-    public void startGameView(JSONObject body, Message message) {
-
-        graphics = new DefaultCliGraphics();
-
-        clientController.setupGameFromJson(body);
-        clientController.update(message);
+    public void startGameView(Runnable finishSetup) {
+        reset();
+        finishSetup.run();
     }
 
     @Override

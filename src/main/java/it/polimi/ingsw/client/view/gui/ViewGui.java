@@ -15,13 +15,12 @@ public class ViewGui extends View {
     }
 
     @Override
-    public void startGameView(JSONObject body, Message message) {
+    public void startGameView(Runnable finishSetup) {
         GuiController controller = SceneManager.getCurrentController();
         if (controller instanceof MenuWaitGameController)
             Platform.runLater(()->{
                 ((MenuWaitGameController)controller).startGame();
-                clientController.setupGameFromJson(body);
-                clientController.update(message);
+                finishSetup.run();
             });
         else
             throw new RuntimeException("Wrong GUI state");

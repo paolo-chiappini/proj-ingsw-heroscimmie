@@ -194,6 +194,7 @@ public class ClientController implements ViewListener {
         if (!clientIsInGame) return;
 
         initVirtualModelAndView(body, message);
+
     }
 
     private void initVirtualModelAndView(JSONObject body, Message message) {
@@ -202,9 +203,13 @@ public class ClientController implements ViewListener {
         players = new LinkedList<>();
         commonGoalCards = new LinkedList<>();
 
-        setupModelListeners(); //Por l'amor de Dios, du not spost dis
+        Runnable runLater = ()->{
+            setupGameFromJson(body);
+            setupModelListeners();
+            update(message);
+        };
 
-        view.startGameView(body, message);
+        view.startGameView(runLater);
     }
 
     private void setupModelListeners() {
