@@ -11,7 +11,6 @@ target/
 *.iws
 *.iml
 *.ipr
-resources/data/saved
 
 ### Eclipse ###
 .apt_generated
@@ -37,3 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
+/resources/data/saved/
