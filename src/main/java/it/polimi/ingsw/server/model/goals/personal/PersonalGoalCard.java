@@ -22,7 +22,7 @@ public abstract class PersonalGoalCard {
             for(int j = 0 ; j < bookshelf.getWidth(); j++)
                 if(bookshelf.getTileAt(i,j) != null && bookshelf.getTileAt(i,j).getType().equals(pattern[i][j]))
                     matches++;
-        pointsAwarded += pointsTable[matches-1];
+        if (matches > 0) pointsAwarded += pointsTable[matches-1];
         return pointsAwarded;
     }
 
