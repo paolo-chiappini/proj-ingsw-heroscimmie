@@ -17,11 +17,7 @@ public abstract class CommonGoalImageBuilder {
     private static String[] loadCardsTemplates() {
         String[] templates;
         String json;
-        try {
-            json = FileIOManager.readFromFile(TEMPLATE_FILE, FilePath.TEMPLATES);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
+        json = FileIOManager.readDataFromResource(String.format("%s/%s", FilePath.RESOURCES_TEMPLATES.getPath(), TEMPLATE_FILE));
         JSONArray array = new JSONArray(json);
         templates = new String[array.length()];
         for (int i = 0; i < array.length(); i++) {
