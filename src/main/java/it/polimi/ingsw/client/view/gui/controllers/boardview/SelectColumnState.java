@@ -22,7 +22,7 @@ public class SelectColumnState extends BoardViewState{
 
         if(selectedVBoxColumn == null || !selectedTilesList.contains(tile)) return;
 
-        controller.setState(new PlaceTilesState(controller));
+        controller.setState(new DropTilesState(controller));
         controller.getState().clickTile(tile);
     }
 
@@ -47,6 +47,16 @@ public class SelectColumnState extends BoardViewState{
 
     @Override
     public void clickUndoButton() {
+
+    }
+
+    @Override
+    public void notifyInvalidMove() {
+
+    }
+
+    @Override
+    public void notifyValidMove() {
 
     }
 }

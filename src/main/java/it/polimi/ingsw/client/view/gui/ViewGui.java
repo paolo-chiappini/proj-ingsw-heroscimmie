@@ -15,11 +15,16 @@ public class ViewGui extends View {
     @Override
     public void startGameView(Runnable finishSetup) {
         Platform.runLater(()-> {
+
             GuiController controller = SceneManager.getCurrentController();
+
             if (controller instanceof MenuWaitGameController) {
+
                 ((MenuWaitGameController) controller).startGame();
                 finishSetup.run();
+
             } else if (controller instanceof SubMenuController) {
+
                 ((SubMenuController) controller).successfullyJoined();
                 controller = SceneManager.getCurrentController();
                 ((MenuWaitGameController) controller).startGame();
@@ -28,6 +33,7 @@ public class ViewGui extends View {
             } else {
                 throw new RuntimeException("Wrong GUI state");
             }
+
         });
     }
 
@@ -54,6 +60,12 @@ public class ViewGui extends View {
             case "NAME" -> {
                 if (controller instanceof SubMenuController)
                     Platform.runLater(() -> ((SubMenuController) controller).confirmUsername());
+                else
+                    throw new RuntimeException("Wrong GUI state");
+            }
+            case "PICK" -> {
+                if (controller instanceof BoardController)
+                    Platform.runLater(()->((BoardController)controller).notifyValidMove());
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
@@ -89,6 +101,12 @@ public class ViewGui extends View {
             }else {
                 throw new RuntimeException("Wrong GUI state");
             }
+        } else if (message.equals("Invalid tile range")) {
+            if (controller instanceof BoardController) {
+                Platform.runLater(() -> ((BoardController)controller).notifyInvalidMove());
+            }else {
+                throw new RuntimeException("Wrong GUI state");
+            }
         }
     }
 
@@ -111,7 +129,8 @@ public class ViewGui extends View {
 
     @Override
     public void blockUsersGameCommands() {
-        //Not my turn
+
+        super.blockUsersGameCommands();
         GuiController controller = SceneManager.getCurrentController();
         if (controller instanceof BoardController)
             Platform.runLater(()->((BoardController)controller).blockCommands());
@@ -121,6 +140,7 @@ public class ViewGui extends View {
 
     @Override
     public void allowUsersGameCommands() {
+        super.allowUsersGameCommands();
         GuiController controller = SceneManager.getCurrentController();
         if (controller instanceof BoardController)
             Platform.runLater(()->((BoardController)controller).unblockCommands());
@@ -144,6 +164,11 @@ public class ViewGui extends View {
             Platform.runLater(()->((BoardController)controller).updateBoard(update));
         else
             throw new RuntimeException("Wrong GUI state");
+    }
+
+    @Override
+    public void finalizeUpdate() {
+
     }
 
     @Override
@@ -211,6 +236,13 @@ public class ViewGui extends View {
 
     @Override
     public void reset() {}
-    @Override
-    public void finalizeUpdate() {}
+//    @Override
+//    public void notifyCorrectPick() {
+//        GuiController controller = SceneManager.getCurrentController();
+//        if (controller instanceof BoardController)
+//            Platform.runLater(()->((BoardController)controller).notifyValidMove());
+//        else
+//            throw new RuntimeException("Wrong GUI state");
+
+//    }
 }

@@ -14,6 +14,11 @@ import java.util.List;
 
 public class Bookshelf extends GraphicElement{
     private final HBox columnsBox;
+
+    public ObservableList<Node> getColumns() {
+        return columns;
+    }
+
     private final ObservableList<Node> columns;
     private final ObservableList<Node> foregroundColumns;
     private final List<ImageView> droppedTiles = new ArrayList<>();

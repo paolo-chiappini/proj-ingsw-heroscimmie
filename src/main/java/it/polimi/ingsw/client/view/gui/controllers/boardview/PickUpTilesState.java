@@ -1,14 +1,17 @@
 package it.polimi.ingsw.client.view.gui.controllers.boardview;
 
+import it.polimi.ingsw.client.view.gui.GuiController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.TileElement;
 import javafx.beans.binding.Bindings;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class PickUpTilesState extends BoardViewState{
+    private final List<TileElement> pickedUpTiles = new ArrayList<>();
     public PickUpTilesState(BoardController controller) {
         super(controller);
 
@@ -24,6 +27,7 @@ public class PickUpTilesState extends BoardViewState{
         var selectedTilesList = controller.getSelectedTilesList();
 
         if(!selectedTilesList.contains(tile) && selectedTilesList.size() < 3) {
+            pickedUpTiles.add(TileElement.getInstanceFromNode(tile));
             selectedTilesList.add(tile);
         }else if(selectedTilesList.contains(tile)){
             undoTileSelection(tile);
@@ -35,18 +39,19 @@ public class PickUpTilesState extends BoardViewState{
 
     @Override
     public void clickConfirmButton() {
-//        Random r = new Random();
-//        boolean canPickUpSelectedTiles = r.nextDouble() > 0.6;
-        boolean canPickUpSelectedTiles = true;
+        var x1 = pickedUpTiles.get(0).getGridPositionX();
+        var y1 = pickedUpTiles.get(0).getGridPositionY();
+        var x2 = pickedUpTiles.get(pickedUpTiles.size()-1).getGridPositionX();
+        var y2 = pickedUpTiles.get(pickedUpTiles.size()-1).getGridPositionY();
 
-        if(!canPickUpSelectedTiles) {
-            undoTilesSelectionWithError();
-            return;
+        if(pickedUpTiles.size() == 2){
+            if(Math.abs(x2-x1+y2-y1) != 1){
+                notifyInvalidMove();
+                return;
+            }
         }
 
-        controller.setSelectedColumn(null);
-        controller.setState(new SelectColumnState(controller));
-        controller.playSwitchToBookshelfAnimation(-1);
+        GuiController.getView().notifyPickCommand(x1, y1, x2, y2);
     }
 
     @Override
@@ -57,7 +62,19 @@ public class PickUpTilesState extends BoardViewState{
         }
     }
 
+    @Override
+    public void notifyInvalidMove() {
+        undoTilesSelectionWithError();
+    }
+
+    @Override
+    public void notifyValidMove() {
+        controller.setState(new SelectColumnState(controller));
+        controller.playSwitchToBookshelfAnimation(-1);
+    }
+
     private void undoTilesSelectionWithError() {
+        pickedUpTiles.clear();
         var selectedTiles = new ArrayList<>(controller.getSelectedTilesList());
         for(var tile : selectedTiles){
             TileElement tileElement = TileElement.getInstanceFromNode(tile);

@@ -263,6 +263,9 @@ public abstract class ServerHandlers {
             else {
                 if(depths.stream().noneMatch(depth -> depth > numberOfTilesPickedUp))
                     notifyError(res,"There aren't enough free spaces in the bookshelf to pick up these tiles");
+                else{
+                    notifySuccess(res, "PICK");
+                }
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());

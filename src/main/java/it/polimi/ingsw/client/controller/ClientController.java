@@ -402,7 +402,6 @@ public class ClientController implements ViewListener {
         client.sendRequest("PICK", body.toString());
     }
 
-
     public void onChatMessageSent(String message) {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot send a message when not in game");

@@ -8,11 +8,11 @@ import java.util.Optional;
 
 public abstract class GuiController {
     private static ViewGui view;
-    protected static void setView(ViewGui view){
+    public static void setView(ViewGui view){
         GuiController.view = view;
     }
 
-    protected static ViewGui getView(){
+    public static ViewGui getView(){
         return GuiController.view;
     }
 
@@ -22,6 +22,7 @@ public abstract class GuiController {
         alert.setContentText(message);
 
         Optional<ButtonType> result = alert.showAndWait();
+        //noinspection OptionalGetWithoutIsPresent
         if (result.get() == ButtonType.OK){
             view.connectToServer();
         } else {

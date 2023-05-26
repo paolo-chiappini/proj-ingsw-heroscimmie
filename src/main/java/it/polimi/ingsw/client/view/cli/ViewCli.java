@@ -39,6 +39,7 @@ public class ViewCli extends View {
         graphics = new DefaultCliGraphics();
     }
 
+
     // TODO
     /*@Override*/
     public void run() {
@@ -364,6 +365,7 @@ public class ViewCli extends View {
     @Override
     public void handleSuccessMessage(String message) {
         if(message.equals("NAME")) return;
+        if(message.equals("PICK")) return;
 
         System.out.println(message);
     }

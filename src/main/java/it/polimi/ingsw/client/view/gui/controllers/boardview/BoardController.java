@@ -93,8 +93,6 @@ public class BoardController extends GuiController {
         }
 
         stage.show();
-
-
     }
 
     public ObservableList<Node> getSelectedTilesList() {
@@ -216,7 +214,7 @@ public class BoardController extends GuiController {
 
     public void unblockCommands() {
         setDisableCommands(false);
-//        playSwitchToBookshelfAnimation(1);
+        playSwitchToBookshelfAnimation(1);
         var animation = Animations.getItsYourTurnAnimation(yourTurnLabel);
         animation.setOnFinished(e -> yourTurnLabel.setVisible(false));
 
@@ -243,5 +241,13 @@ public class BoardController extends GuiController {
     public void setDisableCommands(boolean b) {
         boardStackPane.setDisable(b);
         boardStackPane.setEffect( b ? new SepiaTone() : null );
+    }
+
+    public void notifyValidMove() {
+        boardViewState.notifyValidMove();
+    }
+
+    public void notifyInvalidMove() {
+        boardViewState.notifyInvalidMove();
     }
 }

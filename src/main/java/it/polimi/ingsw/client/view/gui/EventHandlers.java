@@ -12,10 +12,6 @@ public abstract class EventHandlers {
         controller.loadGameButton.setOnMouseReleased(e-> SceneManager.loadGameScene(controller, controller.innerStackPane));
     }
     public static void set(BoardController controller){
-//        controller.commonGoalCardBottom.setOnMouseClicked(controller::clickCommonGoal);
-//        controller.commonGoalCardTop.setOnMouseClicked(controller::clickCommonGoal);
-//        controller.scoringTokenBottom.setOnMouseClicked(controller::clickScoringToken);
-//        controller.scoringTokenTop.setOnMouseClicked(controller::clickScoringToken);
         controller.toggleBookshelvesButton.setOnMouseClicked(controller::toggleBookshelvesView);
 
         controller.confirmButton.setOnMouseClicked(e-> controller.getState().clickConfirmButton());

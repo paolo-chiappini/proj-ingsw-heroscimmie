@@ -18,4 +18,8 @@ public abstract class BoardViewState {
     public abstract void clickConfirmButton();
 
     public abstract void clickUndoButton();
+
+    public abstract void notifyInvalidMove();
+
+    public abstract void notifyValidMove();
 }

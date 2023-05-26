@@ -9,19 +9,6 @@ import javafx.scene.layout.GridPane;
 
 
 public class TilesBoard extends GraphicElement {
-//    private final int[][] VALID_TILES={
-//            {0, 0, 0, 1, 1, 0, 0, 0, 0},
-//            {0, 0, 0, 1, 1, 1, 0, 0, 0},
-//            {0, 0, 1, 1, 1, 1, 1, 0, 0},
-//            {0, 1, 1, 1, 1, 1, 1, 1, 1},
-//            {1, 1, 1, 1, 1, 1, 1, 1, 1},
-//            {1, 1, 1, 1, 1, 1, 1, 1, 0},
-//            {0, 0, 1, 1, 1, 1, 1, 0, 0},
-//            {0, 0, 0, 1, 1, 1, 0, 0, 0},
-//            {0, 0, 0, 0, 1, 1, 0, 0, 0}
-//    };
-//    private final int WIDTH = 9;
-//    private final int HEIGHT = 9;
     private final GridPane boardGrid;
 
     public TilesBoard(BoardController controller, GridPane boardGrid) {
@@ -48,7 +35,7 @@ public class TilesBoard extends GraphicElement {
 
 
     public void update(int[][] update) {
-//        boardGrid.getChildren().clear();
+        boardGrid.getChildren().clear();
 
         for(int i = 0; i < update.length; i++) {
             for (int j = 0; j < update.length; j++) {

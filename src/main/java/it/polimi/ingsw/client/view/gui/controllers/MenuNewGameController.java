@@ -2,7 +2,6 @@ package it.polimi.ingsw.client.view.gui.controllers;
 
 import it.polimi.ingsw.client.view.gui.EventHandlers;
 import it.polimi.ingsw.client.view.gui.GuiController;
-import it.polimi.ingsw.client.view.gui.SceneManager;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
