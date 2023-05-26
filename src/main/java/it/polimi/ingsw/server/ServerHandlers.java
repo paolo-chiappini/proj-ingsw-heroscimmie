@@ -305,10 +305,12 @@ public abstract class ServerHandlers {
                 return;
             }
 
-            tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
-            if (!bookshelf.canDropTiles(tiles.size(), col)) {
+            int numberOfTilesToPickUp = Integer.max(Math.abs(row2 - row1), Math.abs(col2- col1)) + 1;
+            if (!bookshelf.canDropTiles(numberOfTilesToPickUp, col)) {
                 notifyError(res, "Cannot drop tiles at specified location");
-            } else {
+            }
+            else {
+                tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
                 bookshelf.dropTiles(bookshelf.decideTilesOrder(tiles,first,second,third), col);
                 handleEndTurn(req, res);
             }

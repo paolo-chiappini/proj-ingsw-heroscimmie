@@ -123,7 +123,7 @@ public class Board implements IBoard {
     public List<GameTile> pickUpTiles(int row1, int col1, int row2, int col2){
         // check if range is valid
         if(!canPickUpTiles(row1, col1, row2, col2)) {
-            throw new IllegalActionException("Range of tiles is not valid, please verify beforehand with the canPickUpTiles() method");
+            throw new IllegalActionException("Range of tiles is not valid");
         }
 
         int startRow, startCol, endRow, endCol;

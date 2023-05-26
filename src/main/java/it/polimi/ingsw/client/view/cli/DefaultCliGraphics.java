@@ -27,7 +27,6 @@ import it.polimi.ingsw.util.FilePath;
 import it.polimi.ingsw.util.observer.ModelListener;
 import org.json.JSONArray;
 
-import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
