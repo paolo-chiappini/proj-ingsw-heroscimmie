@@ -14,6 +14,8 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.effect.Effect;
+import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -30,7 +32,7 @@ public class BoardController extends GuiController {
     public AnchorPane anchorPane;
     public ImageView backgroundImage;
     public GridPane gridPaneBoard;
-    public  Button confirmButton;
+    public Button confirmButton;
     public Button undoButton;
     public Button goToBookshelfButton;
     public Button goToBoardButton;
@@ -61,7 +63,7 @@ public class BoardController extends GuiController {
 
     private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>();
 
-    public void startStage(Stage stage){
+    public void startStage(Stage stage) {
         foregroundGridPane.setPickOnBounds(false);
         backgroundImage.fitHeightProperty().bind(stage.heightProperty());
         yourTurnLabel.setVisible(false);
@@ -119,9 +121,9 @@ public class BoardController extends GuiController {
         return bookshelf;
     }
 
-    public void playSwitchToBookshelfAnimation(int direction){
-        if((gamePlane.getTranslateX() == 0 && direction == 1)
-                ||(gamePlane.getTranslateX() != 0 && direction == -1)){
+    public void playSwitchToBookshelfAnimation(int direction) {
+        if ((gamePlane.getTranslateX() == 0 && direction == 1)
+                || (gamePlane.getTranslateX() != 0 && direction == -1)) {
             return;
         }
 
@@ -129,7 +131,7 @@ public class BoardController extends GuiController {
 
         var transition = Animations.getSwitchToBookshelfAnimation(gamePlane, backgroundImage, direction);
 
-        transition.setOnFinished(e-> setDisabledInterface(false));
+        transition.setOnFinished(e -> setDisabledInterface(false));
         transition.play();
     }
 
@@ -146,8 +148,8 @@ public class BoardController extends GuiController {
         bookshelvesView.setVisible(!bookshelvesView.isVisible());
     }
 
-    public void updateBookshelf(int[][] bookshelf, String playerName){
-        if (playerName.equals(myName)){
+    public void updateBookshelf(int[][] bookshelf, String playerName) {
+        if (playerName.equals(myName)) {
             this.bookshelf.update(bookshelf);
             return;
         }
@@ -156,67 +158,67 @@ public class BoardController extends GuiController {
     }
 
     public void addPlayer(String username, int score, boolean isClient) {
-        if(isClient)
+        if (isClient)
             this.myName = username;
     }
 
-    public void setCommonGoalCard(int i, int points){
-        var cardUrl = getClass().getResource("/sprites/common_goal_cards/" +i+".jpg");
+    public void setCommonGoalCard(int i, int points) {
+        var cardUrl = getClass().getResource("/sprites/common_goal_cards/" + i + ".jpg");
         Image cardImage = new Image(cardUrl.toString());
 
-        if(commonGoalCardTop.getImage() == null){
+        if (commonGoalCardTop.getImage() == null) {
             commonGoalCardTop.setImage(cardImage);
             getCardFromId.put(i, commonGoalCardTop);
-        }else {
+        } else {
             commonGoalCardBottom.setImage(cardImage);
             getCardFromId.put(i, commonGoalCardBottom);
         }
 
 
-        var tokenUrl = getClass().getResource("/sprites/scoring_tokens/"+points+".jpg");
+        var tokenUrl = getClass().getResource("/sprites/scoring_tokens/" + points + ".jpg");
 
         Image tokenImage = null;
-        if(points != 0){
+        if (points != 0) {
             tokenImage = new Image(tokenUrl.toString());
         }
 
-        if(scoringTokenTop.getImage() == null){
+        if (scoringTokenTop.getImage() == null) {
             scoringTokenTop.setImage(tokenImage);
-        }else {
+        } else {
             scoringTokenBottom.setImage(tokenImage);
         }
     }
 
     public void setPersonalGoalCard(int id) {
-        var imageUrl = getClass().getResource("/sprites/personal_goal_cards/" +id+".png");
+        var imageUrl = getClass().getResource("/sprites/personal_goal_cards/" + id + ".png");
         personalGoalCard.setImage(new Image(imageUrl.toString()));
     }
 
     public void updatePoints(int cardId, int points) {
-        var tokenUrl = getClass().getResource("/sprites/scoring_tokens/"+points+".jpg");
+        var tokenUrl = getClass().getResource("/sprites/scoring_tokens/" + points + ".jpg");
 
         Image tokenImage = null;
-        if(points != 0){
+        if (points != 0) {
             tokenImage = new Image(tokenUrl.toString());
         }
 
-        if(getCardFromId.get(cardId) == commonGoalCardTop){
+        if (getCardFromId.get(cardId) == commonGoalCardTop) {
             scoringTokenTop.setImage(tokenImage);
-        }else {
+        } else {
             scoringTokenBottom.setImage(tokenImage);
         }
     }
 
     //TODO different disabling for when it's not your turn
     public void blockCommands() {
-        setDisabledInterface(true);
+        setDisabledCommands(true);
     }
 
     public void unblockCommands() {
-        setDisabledInterface(false);
+        setDisabledCommands(false);
         playSwitchToBookshelfAnimation(1);
         var animation = Animations.getItsYourTurnAnimation(yourTurnLabel);
-        animation.setOnFinished(e->{
+        animation.setOnFinished(e -> {
             yourTurnLabel.setVisible(false);
         });
 
@@ -228,10 +230,10 @@ public class BoardController extends GuiController {
         var gameElements = new ArrayList<>(gamePlane.getChildren());
         gameElements.addAll(foregroundGridPane.getChildren());
 
-        for(var n : gameElements){
-            if(n.disableProperty().isBound()) continue;
+        for (var n : gameElements) {
+            if (n.disableProperty().isBound()) continue;
 
-            if(n == selectedTilesBox){
+            if (n == selectedTilesBox) {
                 selectedTilesList.setDisable(b);
                 continue;
             }
@@ -240,45 +242,22 @@ public class BoardController extends GuiController {
         }
     }
 
-//    public void clickCommonGoal(MouseEvent e){
-//        var imageView = (ImageView)e.getSource();
-//        var url = imageView.getImage().getUrl();
-//        var fileName = url.substring( url.lastIndexOf('/')+1);
-//        int imageIndex = Integer.parseInt(fileName.substring(0, fileName.lastIndexOf('.')));
-//
-//        imageIndex = (imageIndex+1) % 12 + 1;
-//        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
-//        imageView.setImage(new Image(newImage));
-//    }
-//
-//    public void clickScoringToken(MouseEvent e){
-//        var imageView = (ImageView)e.getSource();
-//        var url = imageView.getImage().getUrl();
-//        var fileName = url.substring( url.lastIndexOf('/')+1);
-//        int imageIndex = Integer.parseInt(fileName.substring(0, fileName.lastIndexOf('.')));
-//
-//        imageIndex -= 2;
-//        if(imageIndex == 0) imageIndex = 8;
-//
-//        String newImage = url.replace(fileName, String.format("%d.jpg", imageIndex));
-//        imageView.setImage(new Image(newImage));
+    public void setDisabledCommands(boolean b) {
+        var gameElements = new ArrayList<>(gamePlane.getChildren());
+        gameElements.addAll(foregroundGridPane.getChildren());
 
-//    }
+        for (var n : gameElements) {
+            if (n.disableProperty().isBound()) continue;
 
+            if (n == goToBookshelfButton || n == toggleBookshelvesButton || n == goToBoardButton) continue;
 
-//    public List<File> getFiles(){
-//        var itemTilesDirectory = SceneManager.class.getResource("/sprites/item_tiles_small");
-//        if (itemTilesDirectory == null)
-//            throw new RuntimeException("Something went wrong when locating /sprites/publisher_material/box_no_shadow.png");
-//
-//        File tileImagesDirectory = new File(itemTilesDirectory.getPath()
-//                .replace("/", "\\")
-//                .replace("%20", " "));
-//
-//        var tilesFiles = tileImagesDirectory.listFiles();
-//        if(!tileImagesDirectory.isDirectory() || tilesFiles == null)
-//            throw new RuntimeException("Something went wrong when loading item tiles sprites");
-//
-//        return List.of(tilesFiles);
-//    }
+            if (n == selectedTilesBox) {
+                selectedTilesList.setDisable(b);
+                continue;
+            }
+
+            n.setEffect(new SepiaTone());
+            n.setDisable(b);
+        }
+    }
 }

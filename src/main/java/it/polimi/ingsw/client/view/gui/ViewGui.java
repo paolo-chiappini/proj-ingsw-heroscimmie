@@ -1,8 +1,6 @@
 package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.View;
-import it.polimi.ingsw.client.view.gui.controllers.MenuLoadGameController;
-import it.polimi.ingsw.client.view.gui.controllers.MenuWaitGameController;
-import it.polimi.ingsw.client.view.gui.controllers.SubMenuController;
+import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.application.Platform;
 
@@ -45,17 +43,25 @@ public class ViewGui extends View {
     @Override
     public void handleSuccessMessage(String message) {
         GuiController controller = SceneManager.getCurrentController();
-        if(message.equals("NAME")){
-            if (controller instanceof SubMenuController)
-                Platform.runLater(()->((SubMenuController) controller).confirmUsername());
-            else
-                throw new RuntimeException("Wrong GUI state");
-        }else if(message.equals("Successfully loaded game")){
-            if (controller instanceof MenuLoadGameController)
-                Platform.runLater(()->((MenuLoadGameController) controller).loadGame());
-            else
-                throw new RuntimeException("Wrong GUI state");
-
+        switch (message) {
+            case "NAME" -> {
+                if (controller instanceof SubMenuController)
+                    Platform.runLater(() -> ((SubMenuController) controller).confirmUsername());
+                else
+                    throw new RuntimeException("Wrong GUI state");
+            }
+            case "Successfully loaded game" -> {
+                if (controller instanceof MenuLoadGameController)
+                    Platform.runLater(() -> ((MenuLoadGameController) controller).loadGame());
+                else
+                    throw new RuntimeException("Wrong GUI state");
+            }
+            case "Joined game" -> {
+                if (controller instanceof MenuNewGameController)
+                    Platform.runLater(() -> ((MenuNewGameController) controller).loadGame());
+                else
+                    throw new RuntimeException("Wrong GUI state");
+            }
         }
     }
 
@@ -63,13 +69,30 @@ public class ViewGui extends View {
     public void handleErrorMessage(String message) {
         GuiController controller = SceneManager.getCurrentController();
         if (message.equals("Another user has chosen this name")) {
+
             if (controller instanceof SubMenuController)
                 Platform.runLater(() -> ((SubMenuController) controller).notifyNameAlreadyTaken());
             else
                 throw new RuntimeException("Wrong GUI state");
+
         } else if (message.contains("You are not whitelisted in this game")) {
+
             if (controller instanceof MenuLoadGameController)
                 Platform.runLater(() -> ((MenuLoadGameController) controller).notifyNotWhitelisted());
+            else
+                throw new RuntimeException("Wrong GUI state");
+
+        } else if (message.equals("A game is already being setup by a player") ||
+                message.equals("Cannot create new lobby, game already in progress/setup")) {
+
+            if (controller instanceof SubMenuController)
+                Platform.runLater(() -> ((SubMenuController) controller).notifyWithDialog(message));
+            else
+                throw new RuntimeException("Wrong GUI state");
+
+        } else if (message.equals("No lobby found")) {
+            if (controller instanceof SubMenuController)
+                Platform.runLater(() -> ((SubMenuController) controller).notifyWithDialog(message));
             else
                 throw new RuntimeException("Wrong GUI state");
         }
