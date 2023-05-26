@@ -4,9 +4,6 @@ import it.polimi.ingsw.client.ClientMain;
 import it.polimi.ingsw.client.view.cli.ViewCli;
 import it.polimi.ingsw.client.view.gui.ViewGui;
 import it.polimi.ingsw.server.ServerMain;
-import it.polimi.ingsw.util.FileIOManager;
-
-import java.io.IOException;
 
 public class Main {
     private static final String SERVER_ARG = "--server";

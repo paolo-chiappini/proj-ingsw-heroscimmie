@@ -17,6 +17,11 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * Class responsible for managing communication between the network, model and view.
+ * It updates the virtual model, observes view and notify its updates.
+ * Furthermore, it receives user input and notifies the network of the request.
+ */
 public class ClientController implements ViewListener {
     private final Client client;
     private String myUsername;
@@ -51,6 +56,10 @@ public class ClientController implements ViewListener {
         view.start();
     }
 
+    /**
+     * It performs an action based on the message received from the server
+     * @param message is the message received from the server
+     */
     public void onMessageReceived(Message message) {
         String method = message.getMethod();
         JSONObject body = new JSONObject(message.getBody());
