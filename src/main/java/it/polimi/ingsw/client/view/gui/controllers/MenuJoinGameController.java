@@ -17,7 +17,7 @@ public class MenuJoinGameController extends SubMenuController {
         EventHandlers.set(this);
     }
 
-    public void setUsername(MouseEvent mouseEvent) {
+    public void setUsername(MouseEvent ignoredMouseEvent) {
         GuiController.getView().notifyNameChange(nameTextField.getText());
     }
 
