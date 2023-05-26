@@ -24,7 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+
 
 public class BoardController extends GuiController {
     public StackPane window;
@@ -218,9 +218,7 @@ public class BoardController extends GuiController {
         setDisableCommands(false);
 //        playSwitchToBookshelfAnimation(1);
         var animation = Animations.getItsYourTurnAnimation(yourTurnLabel);
-        animation.setOnFinished(e -> {
-            yourTurnLabel.setVisible(false);
-        });
+        animation.setOnFinished(e -> yourTurnLabel.setVisible(false));
 
         yourTurnLabel.setVisible(true);
         animation.play();
