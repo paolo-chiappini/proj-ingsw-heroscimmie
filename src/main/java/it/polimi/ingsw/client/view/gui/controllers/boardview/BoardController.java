@@ -14,7 +14,6 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.Effect;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -25,6 +24,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class BoardController extends GuiController {
     public StackPane window;
@@ -211,12 +211,12 @@ public class BoardController extends GuiController {
 
     //TODO different disabling for when it's not your turn
     public void blockCommands() {
-        setDisabledCommands(true);
+        setDisableCommands(true);
     }
 
     public void unblockCommands() {
-        setDisabledCommands(false);
-        playSwitchToBookshelfAnimation(1);
+        setDisableCommands(false);
+//        playSwitchToBookshelfAnimation(1);
         var animation = Animations.getItsYourTurnAnimation(yourTurnLabel);
         animation.setOnFinished(e -> {
             yourTurnLabel.setVisible(false);
@@ -242,22 +242,8 @@ public class BoardController extends GuiController {
         }
     }
 
-    public void setDisabledCommands(boolean b) {
-        var gameElements = new ArrayList<>(gamePlane.getChildren());
-        gameElements.addAll(foregroundGridPane.getChildren());
-
-        for (var n : gameElements) {
-            if (n.disableProperty().isBound()) continue;
-
-            if (n == goToBookshelfButton || n == toggleBookshelvesButton || n == goToBoardButton) continue;
-
-            if (n == selectedTilesBox) {
-                selectedTilesList.setDisable(b);
-                continue;
-            }
-
-            n.setEffect(new SepiaTone());
-            n.setDisable(b);
-        }
+    public void setDisableCommands(boolean b) {
+        boardStackPane.setDisable(b);
+        boardStackPane.setEffect( b ? new SepiaTone() : null );
     }
 }

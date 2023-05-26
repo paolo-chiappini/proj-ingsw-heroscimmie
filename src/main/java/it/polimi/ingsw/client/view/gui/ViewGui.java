@@ -56,12 +56,6 @@ public class ViewGui extends View {
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
-            case "Joined game" -> {
-                if (controller instanceof MenuNewGameController)
-                    Platform.runLater(() -> ((MenuNewGameController) controller).loadGame());
-                else
-                    throw new RuntimeException("Wrong GUI state");
-            }
         }
     }
 
@@ -82,19 +76,6 @@ public class ViewGui extends View {
             else
                 throw new RuntimeException("Wrong GUI state");
 
-        } else if (message.equals("A game is already being setup by a player") ||
-                message.equals("Cannot create new lobby, game already in progress/setup")) {
-
-            if (controller instanceof SubMenuController)
-                Platform.runLater(() -> ((SubMenuController) controller).notifyWithDialog(message));
-            else
-                throw new RuntimeException("Wrong GUI state");
-
-        } else if (message.equals("No lobby found")) {
-            if (controller instanceof SubMenuController)
-                Platform.runLater(() -> ((SubMenuController) controller).notifyWithDialog(message));
-            else
-                throw new RuntimeException("Wrong GUI state");
         }
     }
 
