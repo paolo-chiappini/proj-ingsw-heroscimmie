@@ -60,9 +60,9 @@ public class TurnManager implements ITurnManager {
             throw new IllegalActionException("The current game is over, there are no more turns to play. Please check with TurnManager.isGameOver().");
         }
 
+        checkEndCondition();
         currentPlayerIndex++;
         currentPlayerIndex = currentPlayerIndex % players.size();
-        checkEndCondition();
     }
 
     @Override

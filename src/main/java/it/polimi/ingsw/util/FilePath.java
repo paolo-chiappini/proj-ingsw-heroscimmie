@@ -4,9 +4,9 @@ package it.polimi.ingsw.util;
  * Predefined paths for managing local resources.
  */
 public enum FilePath {
-    DEFAULT("/data"),
-    TEMPLATES(DEFAULT.getPath() + "/templates"),
-    SAVED(DEFAULT.getPath() + "/saved"),
+    RESOURCES_DATA("/data"),
+    RESOURCES_TEMPLATES(RESOURCES_DATA.path + "/templates"),
+    SAVED("./saved"),
     TEST("/test_files");
 
     private final String path;

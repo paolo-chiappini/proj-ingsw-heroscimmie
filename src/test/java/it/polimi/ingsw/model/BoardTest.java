@@ -102,12 +102,13 @@ public class BoardTest {
         @Test
         @DisplayName("when there are only tiles without any other adjacent tiles")
         void noAdjacentTiles(){
-            Board boardBefore = new Board(2);
-            Board boardAfter = new Board(2);
-            boardBefore.refill(new BagMock(Map.of(TileType.FRAME, 5)));
-            boardAfter.refill(new BagMock(Map.of(TileType.FRAME, 5)));
-            boardAfter.pickUpTiles(1, 4, 2, 4);
-            boardAfter.pickUpTiles(2, 3, 2, 3);
+            Board boardBefore = new Board(3);
+            Board boardAfter = new Board(3);
+            boardBefore.refill(new BagMock(Map.of(TileType.FRAME, 7)));
+            boardAfter.refill(new BagMock(Map.of(TileType.FRAME, 7)));
+            boardAfter.needsRefill();
+            boardAfter.pickUpTiles(1, 3, 1, 3);
+            boardAfter.pickUpTiles(2, 3, 2, 4);
 
             assertAll(
                     () -> assertFalse(boardBefore.needsRefill()),

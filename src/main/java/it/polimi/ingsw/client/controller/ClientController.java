@@ -58,7 +58,6 @@ public class ClientController implements ViewListener {
             }
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);
-            /*case "LEFT" -> handleDisconnections(body);*/
             case "OK" -> view.handleSuccessMessage(body.getString("msg"));
             case "ERR" -> view.handleErrorMessage(body.getString("msg"));
             case "NAME" -> myUsername = body.getString("username");
@@ -138,7 +137,7 @@ public class ClientController implements ViewListener {
 
         handleDisconnections(body);
         board.updateBoard(serialized.toString());
-        turnState.updateTurnState(serialized.toString());
+        turnState.updateTurnState(body.toString());
 
         for (int i = 0; i < jsonPlayers.length(); i++) {
             ClientPlayer player = players.get(i);
@@ -159,9 +158,10 @@ public class ClientController implements ViewListener {
 
         view.finalizeUpdate();
         if (body.has("winner")) {
+            System.out.println("YOOOO we have a winner!");
             view.handleWinnerSelected(body.getString("winner"));
             // reset model and view
-            initVirtualModelAndView();
+            // initVirtualModelAndView();
             clientIsInGame = false;
         }
     }

@@ -2,6 +2,9 @@ package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.ClientMain;
 import it.polimi.ingsw.server.ServerMain;
+import it.polimi.ingsw.util.FileIOManager;
+
+import java.io.IOException;
 
 public class Main {
     private static final String SERVER_ARG = "--server";

@@ -43,13 +43,17 @@ public class ClientTurnState extends ObservableObject<ModelListener> {
 
     public String getCurrentPlayer() { return currentPlayer; }
 
+    /**
+     * Updates the state of a turn
+     * @param data contains up-to-date board details
+     */
     public void updateTurnState(String data) {
         JSONObject json = new JSONObject(data);
-        JSONArray playersOrder = json.getJSONArray("players_order");
-        int currTurn = json.getInt("players_turn"); 
-        boolean isLastLap = json.getBoolean("is_end_game");
+        JSONObject serialized = json.getJSONObject("serialized");
+        JSONArray playersOrder = serialized.getJSONArray("players_order");
+        int currTurn = serialized.getInt("players_turn");
 
-        setGameStatus((isLastLap && currTurn == 0) || json.has("winner"));
+        setGameStatus(json.has("winner"));
         setCurrentTurn(currTurn);
         setCurrentPlayer(playersOrder.getString(currTurn));
     }

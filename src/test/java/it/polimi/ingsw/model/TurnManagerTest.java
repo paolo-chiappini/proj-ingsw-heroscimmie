@@ -193,6 +193,39 @@ public class TurnManagerTest {
         }
 
         @Test
+        @DisplayName("end of lap with multiple players should be game over")
+        void endOfLapAfterEndGameConditionMetWithMultiplePlayers() {
+            ITurnManager turnManager = new TurnManager.TurnManagerBuilder()
+                    .addPlayer(new TestPlayer("a", new TestBookshelf(false)))
+                    .addPlayer(new TestPlayer("b", new TestBookshelf(false)))
+                    .addPlayer(new TestPlayer("c", new TestBookshelf(true)))
+                    .setCurrentTurn(0)
+                    .setIsEndGame(false)
+                    .build();
+
+            turnManager.nextTurn();
+            boolean isLastAfterTurn1 = turnManager.isLastLap();
+            boolean isGameOverAfterTurn1 = turnManager.isGameOver();
+            turnManager.nextTurn();
+            boolean isLastAfterTurn2 = turnManager.isLastLap();
+            boolean isGameOverAfterTurn2 = turnManager.isGameOver();
+            turnManager.nextTurn();
+            boolean isLastAfterTurn3 = turnManager.isLastLap();
+            boolean isGameOverAfterTurn3 = turnManager.isGameOver();
+
+            assertAll(
+                    () -> assertFalse(isLastAfterTurn1),
+                    () -> assertFalse(isGameOverAfterTurn1),
+                    () -> assertFalse(isLastAfterTurn2),
+                    () -> assertFalse(isGameOverAfterTurn2),
+                    () -> assertTrue(isLastAfterTurn3),
+                    () -> assertTrue(isGameOverAfterTurn3),
+                    () -> assertTrue(turnManager.isLastLap()),
+                    () -> assertTrue(turnManager.isGameOver())
+            );
+        }
+
+        @Test
         @DisplayName("after game over, should throw exception")
         void nextTurnAfterGameOverShouldThrowException() {
             List<IPlayer> player = new ArrayList<>();

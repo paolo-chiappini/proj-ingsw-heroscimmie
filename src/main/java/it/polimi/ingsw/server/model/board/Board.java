@@ -1,19 +1,23 @@
 package it.polimi.ingsw.server.model.board;
 
 import it.polimi.ingsw.exceptions.IllegalActionException;
-import it.polimi.ingsw.server.model.tile.GameTile;
 import it.polimi.ingsw.server.model.bag.IBag;
+import it.polimi.ingsw.server.model.tile.GameTile;
 import it.polimi.ingsw.server.model.tile.TileType;
 import it.polimi.ingsw.util.serialization.Serializer;
 
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class Board implements IBoard {
     private static final int BOARD_DIM = 9;
     private final TileSpace[][] spaces;
+    // spaces used to check for refill without the need for excessive conditions
+    private TileSpace[][] bufferedSpaces;
 
     public Board(int playersPlaying){
         this.spaces = createSpacesFromTemplate(playersPlaying);
+        initTilesBuffer();
     }
 
     /**
@@ -22,6 +26,7 @@ public class Board implements IBoard {
      */
     private Board(BoardBuilder builder) {
         this.spaces = builder.spaces;
+        initTilesBuffer();
     }
 
     /**
@@ -52,6 +57,16 @@ public class Board implements IBoard {
         return grid;
     }
 
+    private void initTilesBuffer() {
+        // init buffered spaces with null tiles
+        bufferedSpaces = new TileSpace[BOARD_DIM + 2][BOARD_DIM + 2];
+        for (int i = 0; i < bufferedSpaces.length; i++) {
+            for (int j = 0; j < bufferedSpaces.length; j++) {
+                bufferedSpaces[i][j] = new TileSpace(0, 0);
+            }
+        }
+    }
+
     @Override
     public GameTile getTileAt(int row, int col) {
         return spaces[row][col].getTile();
@@ -68,16 +83,17 @@ public class Board implements IBoard {
      */
     @Override
     public boolean needsRefill(){
-        for(int i = 0; i < spaces.length; i++) {
-            for(int j = 0; j < spaces[0].length; j++) {
-                if(spaces[i][j].getTile()!= null) {
-                    if ((i == 0) || (j == 0)) {
-                        if (spaces[i + 1][j].getTile() != null || spaces[i][j + 1].getTile() != null) return false;
-                    } else {
-                        if (spaces[i + 1][j].getTile()!= null || spaces[i - 1][j].getTile()!= null || spaces[i][j + 1].getTile()!= null || spaces[i][j - 1].getTile()!= null)
-                            return false;
-                    }
-                }
+        // copy spaces in buffer
+        for (int i = 0; i < spaces.length; i++) {
+            System.arraycopy(spaces[i], 0, bufferedSpaces[i + 1], 1, spaces[i].length);
+        }
+
+        for (int i = 1; i < bufferedSpaces.length - 1; i++) {
+            for (int j = 1; j < bufferedSpaces[i].length - 1; j++) {
+                if (bufferedSpaces[i][j].getTile() == null) continue;
+                // check for adjacent tiles
+                if (bufferedSpaces[i - 1][j].getTile() != null || bufferedSpaces[i + 1][j].getTile() != null ||
+                        bufferedSpaces[i][j - 1].getTile() != null || bufferedSpaces[i][j + 1].getTile() != null) return false;
             }
         }
         return true;

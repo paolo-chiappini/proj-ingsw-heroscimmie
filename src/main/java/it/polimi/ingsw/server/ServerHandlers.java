@@ -53,6 +53,10 @@ public abstract class ServerHandlers {
         var connectedPlayers = ActiveGameManager.getConnectedPlayers().toArray();
         update.put("disconnected_players", new JSONArray(disconnectedPlayers));
         update.put("connected_players", new JSONArray(connectedPlayers));
+
+        // DEBUG
+        System.out.println("Sending update: " + update);
+
         response.setBody(update.toString());
         response.sendToAll();
     }
@@ -142,7 +146,7 @@ public abstract class ServerHandlers {
         String username = body.getString("username");
 
         try {
-            var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+            var files = FileIOManager.getFilesInDirectory(FilePath.SAVED.getPath());
             ActiveGameManager.loadGame(files.get(saveIndex), username);
             notifySuccess(res, "Successfully loaded game");
         } catch (RuntimeException re) {
@@ -182,7 +186,7 @@ public abstract class ServerHandlers {
             res.setBody(resBody.toString());
             res.setMethod("SAVE");
             res.sendToAll();
-        } catch (IllegalActionException iae) {
+        } catch (RuntimeException iae) {
             notifyError(res, iae.getMessage());
         }
     }
@@ -194,7 +198,10 @@ public abstract class ServerHandlers {
      * @param res response message
      */
     public static void handleShowSavedGames(Message req, Message res) {
-        var files = FileIOManager.getFilesInDirectory(FilePath.SAVED);
+        List<String> files = null;
+        try {
+            files = FileIOManager.getFilesInDirectory(FilePath.SAVED.getPath());
+        } catch (RuntimeException ignored) {}
         JSONArray jsonFiles = new JSONArray();
         JSONObject body = new JSONObject();
 
@@ -234,8 +241,11 @@ public abstract class ServerHandlers {
 
         Game currentGame = ActiveGameManager.getActiveGameInstance();
         IBoard board = currentGame.getBoard();
+        IBookshelf bookshelf;
 
         JSONObject body = new JSONObject(req.getBody());
+        String username = body.getString("username");
+        bookshelf = getPlayerByUsername(username, currentGame.getPlayers()).getBookshelf();
 
         int row1, row2, col1, col2;
         row1 = body.getInt("row1");
@@ -243,9 +253,16 @@ public abstract class ServerHandlers {
         col1 = body.getInt("col1");
         col2 = body.getInt("col2");
 
+        int numberOfTilesPickedUp = Integer.max(Math.abs(row2-row1),Math.abs(col2-col1));
+        List<Integer> depths = bookshelfColumnsDepths(bookshelf);
+
         try {
             if (!board.canPickUpTiles(row1, col1, row2, col2)) {
                 notifyError(res, "Invalid tile range");
+            }
+            else {
+                if(depths.stream().noneMatch(depth -> depth > numberOfTilesPickedUp))
+                    notifyError(res,"There aren't enough free spaces in the bookshelf to pick up these tiles");
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());
@@ -283,6 +300,11 @@ public abstract class ServerHandlers {
         bookshelf = player.getBookshelf();
 
         try {
+            if (!currentGame.getBoard().canPickUpTiles(row1, col1, row2, col2)) {
+                notifyError(res, "Something went wrong, cannot pick up selected tiles");
+                return;
+            }
+
             tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
             if (!bookshelf.canDropTiles(tiles.size(), col)) {
                 notifyError(res, "Cannot drop tiles at specified location");
@@ -338,21 +360,27 @@ public abstract class ServerHandlers {
         JSONObject update = new JSONObject();
         JSONObject serializedGame = new JSONObject(game.serialize(jsonSerializer));
 
-        if (turnManager.isGameOver()) {
+        if (turnManager.isGameOver() && ActiveGameManager.getConnectedPlayers().size() > 1) {
             game.evaluateFinalScores();
+            // Re-serialize game with updated scores
+            serializedGame = new JSONObject(game.serialize(jsonSerializer));
             update.put("winner", game.getWinner().getUsername());
-            ActiveGameManager.stopGame();
         } else if (ActiveGameManager.getConnectedPlayers().size() == 1) {
             serializedGame.put("is_end_game", true);
             var lastPlayer = ActiveGameManager.getConnectedPlayers().toArray();
             if (lastPlayer.length == 1) {
                 update.put("winner", lastPlayer[0]);
-                ActiveGameManager.stopGame();
             }
         }
 
         update.put("serialized", serializedGame);
         sendUpdate(res, update);
+
+        // Stop must be done after update or players won't be notified
+        // of others disconnecting.
+        if (turnManager.isGameOver() || ActiveGameManager.getConnectedPlayers().size() == 1) {
+            ActiveGameManager.stopGame();
+        }
     }
 
     /**
@@ -409,7 +437,6 @@ public abstract class ServerHandlers {
 
         try {
             ActiveGameManager.leaveGame(username);
-            sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
         } catch (IllegalActionException ignored) {}
 
         if (ActiveGameManager.getConnectedPlayers().isEmpty() && ActiveGameManager.isGameInProgress()) {
@@ -460,6 +487,25 @@ public abstract class ServerHandlers {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Method used to determine the maximum amount of tiles that
+     * can be inserted in the bookshelf.
+     * @param bookshelf bookshelf to evaluate
+     * @return the depths of the columns of the bookshelf.
+     */
+    private static List<Integer> bookshelfColumnsDepths (IBookshelf bookshelf) {
+        List<Integer> depths = new LinkedList<>();
+        for (int i = 0; i < bookshelf.getWidth(); i++) {
+            int depth = 0;
+            for (int j = 0; j < bookshelf.getHeight(); j++) {
+                if (bookshelf.getTileAt(j, i) == null) depth++;
+                else break;
+            }
+            depths.add(depth);
+        }
+        return depths;
     }
 
     /**
