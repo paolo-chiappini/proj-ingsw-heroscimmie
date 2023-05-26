@@ -29,8 +29,16 @@
    <Label prefWidth="350.0" styleClass="player-name-label" text="Select a game" />
    <ListView fx:id="gamesList" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="188.0" prefWidth="350.0" styleClass="games-list">
       <VBox.margin>
-         <Insets bottom="50.0" />
+         <Insets />
       </VBox.margin>
    </ListView>
+   <Label fx:id="notWhitelistedLabel" prefWidth="350.0" text="You are not whitelisted in the selected game" textFill="RED">
+      <font>
+         <Font name="System Bold" size="15.0" />
+      </font>
+      <VBox.margin>
+         <Insets bottom="50.0" />
+      </VBox.margin>
+   </Label>
    <Button fx:id="confirmButton" mnemonicParsing="false" prefHeight="76.0" prefWidth="257.0" text="Confirm and Join" />
 </VBox>

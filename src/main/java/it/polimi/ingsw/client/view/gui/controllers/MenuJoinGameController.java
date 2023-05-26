@@ -22,7 +22,7 @@ public class MenuJoinGameController extends SubMenuController {
     }
 
     @Override
-    public void joinGame(){
+    public void confirmUsername(){
         GuiController.getView().notifyJoinGameCommand();
         SceneManager.waitGameScene(root);
     }

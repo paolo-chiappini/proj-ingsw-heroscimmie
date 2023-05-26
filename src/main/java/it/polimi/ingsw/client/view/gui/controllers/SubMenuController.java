@@ -24,7 +24,7 @@ public abstract class SubMenuController extends GuiController {
     public Button undo;
     public Pane root;
 
-    public abstract void joinGame();
+    public abstract void confirmUsername();
 
     public void start(MenuController menuController, List<Node> previousView, Pane root){
         this.root = root;

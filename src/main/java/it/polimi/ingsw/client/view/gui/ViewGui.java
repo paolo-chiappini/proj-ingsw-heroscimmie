@@ -54,25 +54,34 @@ public class ViewGui extends View {
 
     @Override
     public void handleSuccessMessage(String message) {
+        GuiController controller = SceneManager.getCurrentController();
         if(message.equals("NAME")){
-            GuiController controller = SceneManager.getCurrentController();
             if (controller instanceof SubMenuController)
-                Platform.runLater(()->((SubMenuController) controller).joinGame());
+                Platform.runLater(()->((SubMenuController) controller).confirmUsername());
             else
                 throw new RuntimeException("Wrong GUI state");
+        }else if(message.equals("Successfully loaded game")){
+            if (controller instanceof MenuLoadGameController)
+                Platform.runLater(()->((MenuLoadGameController) controller).loadGame());
+            else
+                throw new RuntimeException("Wrong GUI state");
+
         }
     }
 
     @Override
     public void handleErrorMessage(String message) {
-        switch (message){
-            case "Another user has chosen this name" -> {
-                GuiController controller = SceneManager.getCurrentController();
-                if (controller instanceof SubMenuController)
-                    Platform.runLater(()->((SubMenuController) controller).notifyNameAlreadyTaken());
-                else
-                    throw new RuntimeException("Wrong GUI state");
-            }
+        GuiController controller = SceneManager.getCurrentController();
+        if (message.equals("Another user has chosen this name")) {
+            if (controller instanceof SubMenuController)
+                Platform.runLater(() -> ((SubMenuController) controller).notifyNameAlreadyTaken());
+            else
+                throw new RuntimeException("Wrong GUI state");
+        } else if (message.contains("You are not whitelisted in this game")) {
+            if (controller instanceof MenuLoadGameController)
+                Platform.runLater(() -> ((MenuLoadGameController) controller).notifyNotWhitelisted());
+            else
+                throw new RuntimeException("Wrong GUI state");
         }
     }
 

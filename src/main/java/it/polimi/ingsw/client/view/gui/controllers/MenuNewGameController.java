@@ -32,7 +32,7 @@ public class MenuNewGameController extends SubMenuController {
     }
 
     @Override
-    public void joinGame(){
+    public void confirmUsername(){
         int lobbySize = 0;
 
         if (pressedButton == twoPlayerButton) {
