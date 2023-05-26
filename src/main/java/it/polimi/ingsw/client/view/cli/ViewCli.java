@@ -60,10 +60,12 @@ public class ViewCli extends View {
     private record Input(String command, String[] args) {}
 
     private Input parseInputString(String input) {
+        // guard against escape chars
+        if (input == null || input.isEmpty()) return new Input("", new String[]{""});
+
         String[] tokens = input.split(" ");
         String[] args = new String[]{""};
         if (tokens.length > 1) args = Arrays.copyOfRange(tokens, 1, tokens.length);
-        // TODO: this caused a "ClassNotFoundException" for some reason...
         return new Input(tokens[0], args);
     }
 
