@@ -16,7 +16,7 @@ public abstract class GuiController {
         return GuiController.view;
     }
 
-    public void showServerConnectionError(String message) {
+    public void showConnectionErrorDialog(String message) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setHeaderText("Connection error");
         alert.setContentText(message);
@@ -27,6 +27,14 @@ public abstract class GuiController {
         } else {
             view.shutdown();
         }
+    }
+
+    public void showErrorMessageDialog(String message) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setHeaderText("Error");
+        alert.setContentText(message);
+
+        alert.showAndWait();
     }
 
     public void shutdown() {

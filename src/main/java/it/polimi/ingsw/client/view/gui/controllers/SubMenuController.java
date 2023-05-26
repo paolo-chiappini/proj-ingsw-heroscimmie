@@ -55,4 +55,12 @@ public abstract class SubMenuController extends GuiController {
     public void notifyNameAlreadyTaken() {
         nameAlreadyTakenLabel.setVisible(true);
     }
+
+    public void successfullyJoined(){
+        SceneManager.waitGameScene(root);
+    }
+
+    public void notifyNotWhitelisted() {
+        showErrorMessageDialog("Your nickname is not whitelisted");
+    }
 }

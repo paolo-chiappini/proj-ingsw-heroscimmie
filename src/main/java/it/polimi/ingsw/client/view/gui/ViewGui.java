@@ -14,14 +14,21 @@ public class ViewGui extends View {
 
     @Override
     public void startGameView(Runnable finishSetup) {
-        GuiController controller = SceneManager.getCurrentController();
-        if (controller instanceof MenuWaitGameController)
-            Platform.runLater(()->{
-                ((MenuWaitGameController)controller).startGame();
+        Platform.runLater(()-> {
+            GuiController controller = SceneManager.getCurrentController();
+            if (controller instanceof MenuWaitGameController) {
+                ((MenuWaitGameController) controller).startGame();
                 finishSetup.run();
-            });
-        else
-            throw new RuntimeException("Wrong GUI state");
+            } else if (controller instanceof SubMenuController) {
+                ((SubMenuController) controller).successfullyJoined();
+                controller = SceneManager.getCurrentController();
+                ((MenuWaitGameController) controller).startGame();
+                finishSetup.run();
+
+            } else {
+                throw new RuntimeException("Wrong GUI state");
+            }
+        });
     }
 
     @Override
@@ -37,7 +44,7 @@ public class ViewGui extends View {
     @Override
     public void handleServerConnectionError(String message) {
         GuiController controller = SceneManager.getCurrentController();
-        Platform.runLater(()->controller.showServerConnectionError(message));
+        Platform.runLater(()->controller.showConnectionErrorDialog(message));
     }
 
     @Override
@@ -63,19 +70,25 @@ public class ViewGui extends View {
     public void handleErrorMessage(String message) {
         GuiController controller = SceneManager.getCurrentController();
         if (message.equals("Another user has chosen this name")) {
-
-            if (controller instanceof SubMenuController)
+            if (controller instanceof SubMenuController) {
                 Platform.runLater(() -> ((SubMenuController) controller).notifyNameAlreadyTaken());
-            else
+            }else {
                 throw new RuntimeException("Wrong GUI state");
-
-        } else if (message.contains("You are not whitelisted in this game")) {
-
-            if (controller instanceof MenuLoadGameController)
-                Platform.runLater(() -> ((MenuLoadGameController) controller).notifyNotWhitelisted());
-            else
+            }
+        } else if (message.contains("whitelist")) {
+            if (controller instanceof SubMenuController) {
+                Platform.runLater(() -> ((SubMenuController) controller).notifyNotWhitelisted());
+            }else {
                 throw new RuntimeException("Wrong GUI state");
-
+            }
+        } else if (message.equals("No lobby found") ||
+                message.contains("Cannot create new lobby") ||
+                message.equals("A game is already being setup by a player")) {
+            if (controller instanceof SubMenuController) {
+                Platform.runLater(() -> controller.showErrorMessageDialog(message));
+            }else {
+                throw new RuntimeException("Wrong GUI state");
+            }
         }
     }
 

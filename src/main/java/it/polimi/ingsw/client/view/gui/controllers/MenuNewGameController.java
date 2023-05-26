@@ -40,8 +40,9 @@ public class MenuNewGameController extends SubMenuController {
         }
 
         GuiController.getView().notifyNewGameCommand(lobbySize);
-        SceneManager.waitGameScene(root);
     }
+
+
 
 
 }
