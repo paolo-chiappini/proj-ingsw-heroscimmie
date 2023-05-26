@@ -153,7 +153,7 @@ public class ViewCli extends View {
                     if(canSendCommands) {
                         finalizeUpdate();
                         if (!lastInputGeneratedError) {
-                            numberOfTilesPickedUp = Integer.max(coords2[0] - coords1[0],coords2[1] - coords1[1]) + 1;
+                            numberOfTilesPickedUp = Integer.max(Math.abs(coords2[0] - coords1[0]),Math.abs(coords2[1] - coords1[1])) + 1;
                             if (numberOfTilesPickedUp == 1)
                                 askNumberOfColumn();
                             else askOrderTiles();
