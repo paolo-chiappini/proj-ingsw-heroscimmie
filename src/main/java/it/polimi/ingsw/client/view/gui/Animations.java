@@ -2,6 +2,7 @@ package it.polimi.ingsw.client.view.gui;
 
 import javafx.animation.*;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
@@ -49,4 +50,28 @@ public abstract class Animations {
         return transition;
     }
 
+    public static Transition getItsYourTurnAnimation(Label yourTurnLabel) {
+        ParallelTransition transition = new ParallelTransition();
+        TranslateTransition descendTransition = new TranslateTransition(Duration.millis(700), yourTurnLabel);
+        descendTransition.setInterpolator(Interpolator.EASE_OUT);
+        descendTransition.setByY(150);
+
+        FadeTransition fadeIn = new FadeTransition(Duration.millis(700), yourTurnLabel);
+        fadeIn.setFromValue(0);
+        fadeIn.setToValue(1);
+
+        FadeTransition fadeOut = new FadeTransition(Duration.millis(800), yourTurnLabel);
+        fadeOut.setFromValue(1);
+        fadeOut.setToValue(0);
+
+        transition.getChildren().add(fadeIn);
+        transition.getChildren().add(descendTransition);
+
+        return new SequentialTransition (
+                transition,
+                new PauseTransition(Duration.seconds(2)),
+                fadeOut
+        );
+
+    }
 }

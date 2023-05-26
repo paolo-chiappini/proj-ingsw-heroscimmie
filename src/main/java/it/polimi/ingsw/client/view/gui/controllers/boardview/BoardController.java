@@ -38,6 +38,7 @@ public class BoardController extends GuiController {
     public HBox columnsBox;
     public HBox selectedTilesList;
     public Label selectedTilesListLabel;
+    public Label yourTurnLabel;
     public ImageView boardImage;
     public StackPane boardStackPane;
     public GridPane foregroundGridPane;
@@ -63,7 +64,7 @@ public class BoardController extends GuiController {
     public void startStage(Stage stage){
         foregroundGridPane.setPickOnBounds(false);
         backgroundImage.fitHeightProperty().bind(stage.heightProperty());
-
+        yourTurnLabel.setVisible(false);
         anchorPane.scaleXProperty().bind(stage.heightProperty().divide(750));
         anchorPane.scaleYProperty().bind(stage.heightProperty().divide(750));
 
@@ -90,6 +91,8 @@ public class BoardController extends GuiController {
         }
 
         stage.show();
+
+
     }
 
     public ObservableList<Node> getSelectedTilesList() {
@@ -117,7 +120,10 @@ public class BoardController extends GuiController {
     }
 
     public void playSwitchToBookshelfAnimation(int direction){
-        if(gamePlane.getTranslateX()*direction > 0) return;
+        if((gamePlane.getTranslateX() == 0 && direction == 1)
+                ||(gamePlane.getTranslateX() != 0 && direction == -1)){
+            return;
+        }
 
         setDisabledInterface(true);
 
@@ -125,22 +131,6 @@ public class BoardController extends GuiController {
 
         transition.setOnFinished(e-> setDisabledInterface(false));
         transition.play();
-    }
-
-    public void setDisabledInterface(boolean b) {
-        var gameElements = new ArrayList<>(gamePlane.getChildren());
-        gameElements.addAll(foregroundGridPane.getChildren());
-
-        for(var n : gameElements){
-            if(n.disableProperty().isBound()) continue;
-
-            if(n == selectedTilesBox){
-                selectedTilesList.setDisable(b);
-                continue;
-            }
-
-            n.setDisable(b);
-        }
     }
 
     public TilesBoard getBoard() {
@@ -216,6 +206,40 @@ public class BoardController extends GuiController {
             scoringTokenBottom.setImage(tokenImage);
         }
     }
+
+    //TODO different disabling for when it's not your turn
+    public void blockCommands() {
+        setDisabledInterface(true);
+    }
+
+    public void unblockCommands() {
+        setDisabledInterface(false);
+        playSwitchToBookshelfAnimation(1);
+        var animation = Animations.getItsYourTurnAnimation(yourTurnLabel);
+        animation.setOnFinished(e->{
+            yourTurnLabel.setVisible(false);
+        });
+
+        yourTurnLabel.setVisible(true);
+        animation.play();
+    }
+
+    public void setDisabledInterface(boolean b) {
+        var gameElements = new ArrayList<>(gamePlane.getChildren());
+        gameElements.addAll(foregroundGridPane.getChildren());
+
+        for(var n : gameElements){
+            if(n.disableProperty().isBound()) continue;
+
+            if(n == selectedTilesBox){
+                selectedTilesList.setDisable(b);
+                continue;
+            }
+
+            n.setDisable(b);
+        }
+    }
+
 //    public void clickCommonGoal(MouseEvent e){
 //        var imageView = (ImageView)e.getSource();
 //        var url = imageView.getImage().getUrl();

@@ -127,6 +127,8 @@
     -fx-border-width:2.0
 }
 
+
+
 .undo{
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
@@ -142,4 +144,18 @@
             -fx-color3-undo,
             -fx-color4-undo,
             radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-undo, -fx-color5-undo);
+}
+
+.turn-notification-label {
+    -fx-padding: 8 15 15 15;
+    -fx-font-weight: bold;
+    -fx-font-size: 4em;
+    -fx-text-fill: -fx-button-text-color;
+
+    -fx-background-color: rgba(255, 87, 0, 0.67);
+    -fx-background-radius: 25px;
+    -fx-border-color: #853c00;
+    -fx-border-radius: 20px;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
 }

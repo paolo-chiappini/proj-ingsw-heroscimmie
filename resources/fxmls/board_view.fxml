@@ -143,6 +143,11 @@
                     </graphic>
                 </Button>
             </VBox>
+         <Label fx:id="yourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="turn-notification-label" text="It's your turn!" GridPane.columnSpan="3" GridPane.valignment="TOP">
+            <GridPane.margin>
+               <Insets left="300.0" />
+            </GridPane.margin>
+         </Label>
         </GridPane>
     </AnchorPane>
 </StackPane>

@@ -27,11 +27,6 @@ public class ViewGui extends View {
     }
 
     @Override
-    public void finalizeUpdate() {
-
-    }
-
-    @Override
     public void showListOfSavedGames(String[] savedGames) {
         GuiController controller = SceneManager.getCurrentController();
         if(controller instanceof MenuLoadGameController){
@@ -45,11 +40,6 @@ public class ViewGui extends View {
     public void handleServerConnectionError(String message) {
         GuiController controller = SceneManager.getCurrentController();
         Platform.runLater(()->controller.showServerConnectionError(message));
-    }
-
-    @Override
-    public void handleWinnerSelected(String winner) {
-
     }
 
     @Override
@@ -87,12 +77,38 @@ public class ViewGui extends View {
 
     @Override
     public void updateGameStatus(boolean isGameOver) {
+        if(isGameOver){
+            //NOTIFY GUI
+        }
+    }
 
+    @Override
+    public void handleWinnerSelected(String winner) {
+        //NOTIFY GUI
     }
 
     @Override
     public void updatePlayerScore(String player, int score) {
+        //NOTIFY GUI
+    }
 
+    @Override
+    public void blockUsersGameCommands() {
+        //Not my turn
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).blockCommands());
+        else
+            throw new RuntimeException("Wrong GUI state");
+    }
+
+    @Override
+    public void allowUsersGameCommands() {
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).unblockCommands());
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
@@ -177,9 +193,7 @@ public class ViewGui extends View {
     }
 
     @Override
-    public void reset() {
-
-    }
-
-
+    public void reset() {}
+    @Override
+    public void finalizeUpdate() {}
 }

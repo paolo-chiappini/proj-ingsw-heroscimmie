@@ -170,7 +170,6 @@ public class ClientController implements ViewListener {
             view.handleWinnerSelected(body.getString("winner"));
             // reset model and view
             resetVirtualModelAndView();
-            // initVirtualModelAndView();
             clientIsInGame = false;
         }
     }
