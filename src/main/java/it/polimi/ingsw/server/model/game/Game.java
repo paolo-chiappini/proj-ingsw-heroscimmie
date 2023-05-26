@@ -12,7 +12,7 @@ import it.polimi.ingsw.util.serialization.Serializable;
 import it.polimi.ingsw.util.serialization.Serializer;
 
 import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -62,19 +62,18 @@ public class Game implements Serializable {
         if (winner != null) return winner;
 
         List<IPlayer> players = turnManager.getPlayersInOrder();
+        LinkedList<IPlayer> highestScoringPlayers = new LinkedList<>();
+        int maxScore = players.get(0).getScore();
 
-        IPlayer topPlayer = players.stream()
-                .max(Comparator.comparingInt(IPlayer::getScore))
-                .orElse(null);
+        // get the highest score
+        for (IPlayer player : players) maxScore = Integer.max(maxScore, player.getScore());
+        // get players that scored the most points
+        for (IPlayer player : players)
+            if (player.getScore() == maxScore)
+                highestScoringPlayers.add(player);
 
-        List<IPlayer> playersWithHighestScores = players.stream()
-                .filter(p -> p.getScore() == topPlayer.getScore())
-                .toList();
-
-        winner = playersWithHighestScores.stream()
-                .sorted(Comparator.comparingInt(players::indexOf))
-                .reduce((first, second) -> second)
-                .orElse(null);
+        // if there are multiple players, get the furthest from the first
+        winner = highestScoringPlayers.getLast();
 
         return winner;
     }

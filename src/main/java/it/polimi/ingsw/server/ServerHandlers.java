@@ -55,7 +55,7 @@ public abstract class ServerHandlers {
         update.put("connected_players", new JSONArray(connectedPlayers));
 
         // DEBUG
-        // System.out.println("Sending update: " + update);
+        System.out.println("Sending update: " + update);
 
         response.setBody(update.toString());
         response.sendToAll();
@@ -300,6 +300,11 @@ public abstract class ServerHandlers {
         bookshelf = player.getBookshelf();
 
         try {
+            if (!currentGame.getBoard().canPickUpTiles(row1, col1, row2, col2)) {
+                notifyError(res, "Something went wrong, cannot pick up selected tiles");
+                return;
+            }
+
             tiles = currentGame.getBoard().pickUpTiles(row1, col1, row2, col2);
             if (!bookshelf.canDropTiles(tiles.size(), col)) {
                 notifyError(res, "Cannot drop tiles at specified location");
@@ -355,8 +360,10 @@ public abstract class ServerHandlers {
         JSONObject update = new JSONObject();
         JSONObject serializedGame = new JSONObject(game.serialize(jsonSerializer));
 
-        if (turnManager.isGameOver()) {
+        if (turnManager.isGameOver() && ActiveGameManager.getConnectedPlayers().size() > 1) {
             game.evaluateFinalScores();
+            // Re-serialize game with updated scores
+            serializedGame = new JSONObject(game.serialize(jsonSerializer));
             update.put("winner", game.getWinner().getUsername());
         } else if (ActiveGameManager.getConnectedPlayers().size() == 1) {
             serializedGame.put("is_end_game", true);
@@ -430,9 +437,7 @@ public abstract class ServerHandlers {
 
         try {
             ActiveGameManager.leaveGame(username);
-        } catch (IllegalActionException iae) {
-            System.out.println("Unable to remove " + username + " from game (" + iae.getMessage() + ")");
-        }
+        } catch (IllegalActionException ignored) {}
 
         if (ActiveGameManager.getConnectedPlayers().isEmpty() && ActiveGameManager.isGameInProgress()) {
             System.out.println("No more players, resetting");
@@ -448,8 +453,6 @@ public abstract class ServerHandlers {
 
             if (isDisconnectPlayerTurn || onePlayerLeft) handleEndTurn(req, res);
             else sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
-        } else {
-            sendUpdate(res, new JSONObject().put("serialized", new JSONObject(game.serialize(jsonSerializer))));
         }
     }
 
