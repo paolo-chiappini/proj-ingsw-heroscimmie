@@ -54,7 +54,8 @@ public abstract class Animations {
         ParallelTransition transition = new ParallelTransition();
         TranslateTransition descendTransition = new TranslateTransition(Duration.millis(700), yourTurnLabel);
         descendTransition.setInterpolator(Interpolator.EASE_OUT);
-        descendTransition.setByY(150);
+        descendTransition.setFromY(0);
+        descendTransition.setToY(150);
 
         FadeTransition fadeIn = new FadeTransition(Duration.millis(700), yourTurnLabel);
         fadeIn.setFromValue(0);

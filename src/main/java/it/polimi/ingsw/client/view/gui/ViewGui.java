@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.application.Platform;
 
+//This is probably the buggiest part of Client right now.
 public class ViewGui extends View {
     private final String startingScene;
 
@@ -52,6 +53,9 @@ public class ViewGui extends View {
         GuiController controller = SceneManager.getCurrentController();
         Platform.runLater(()->controller.showConnectionErrorDialog(message));
     }
+
+    //Not having enough differentiation between success and error messages,
+    //I had to figure out something. I know it's not very pretty using strings literals, but it was the fastest way.
 
     @Override
     public void handleSuccessMessage(String message) {

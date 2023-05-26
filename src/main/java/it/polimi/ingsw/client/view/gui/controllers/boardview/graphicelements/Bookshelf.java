@@ -61,7 +61,7 @@ public class Bookshelf extends GraphicElement{
 
         tileImage.fitWidthProperty().unbind();
         tileImage.fitHeightProperty().unbind();
-        tileImage.setRotate(180);
+        tileImage.setRotate(180); //yes, the tiles are upside down
         tileImage.setPreserveRatio(false);
         tileImage.setFitWidth(selectedColumn.getWidth());
         tileImage.setFitHeight(selectedColumn.getWidth());

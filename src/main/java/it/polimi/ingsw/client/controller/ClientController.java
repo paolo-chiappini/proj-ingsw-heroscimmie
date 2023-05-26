@@ -49,7 +49,7 @@ public class ClientController implements ViewListener {
             resetVirtualModelAndView();
         });
 
-//        client.start();
+        //The client network listener is started by the View now
 
         view.setClient(client);
         view.addListener(this);
@@ -76,7 +76,7 @@ public class ClientController implements ViewListener {
             case "ERR" -> view.handleErrorMessage(body.getString("msg"));
             case "NAME" -> {
                 myUsername = body.getString("username");
-                view.handleSuccessMessage("NAME");
+                view.handleSuccessMessage("NAME"); //The GUI needs to know if the name is ok to proceed
             }
         }
     }
@@ -183,12 +183,31 @@ public class ClientController implements ViewListener {
         }
     }
 
+    //Differentiated between initialization and reset of the view and virtualmodel
     private void resetVirtualModelAndView() {
         board = new ClientBoard();
         turnState = new ClientTurnState();
         players = new LinkedList<>();
         commonGoalCards = new LinkedList<>();
         view.reset();
+    }
+
+    private void initVirtualModelAndView(JSONObject body, Message message) {
+        board = new ClientBoard();
+        turnState = new ClientTurnState();
+        players = new LinkedList<>();
+        commonGoalCards = new LinkedList<>();
+
+        //DOUBLE DISPATCH™ BABY
+        //the view needs to be initialized for dealing with updates,
+        //so the final part of the initialization is started by the view itself
+        Runnable runLater = ()->{
+            setupGameFromJson(body);
+            setupModelListeners();
+            update(message);
+        };
+
+        view.startGameView(runLater);
     }
 
     public void onGameStart(Message message) {
@@ -205,21 +224,6 @@ public class ClientController implements ViewListener {
 
         initVirtualModelAndView(body, message);
 
-    }
-
-    private void initVirtualModelAndView(JSONObject body, Message message) {
-        board = new ClientBoard();
-        turnState = new ClientTurnState();
-        players = new LinkedList<>();
-        commonGoalCards = new LinkedList<>();
-
-        Runnable runLater = ()->{
-            setupGameFromJson(body);
-            setupModelListeners();
-            update(message);
-        };
-
-        view.startGameView(runLater);
     }
 
     private void setupModelListeners() {

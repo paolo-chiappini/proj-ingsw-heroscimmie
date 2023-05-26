@@ -8,8 +8,6 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
-
 public class PickUpTilesState extends BoardViewState{
     private final List<TileElement> pickedUpTiles = new ArrayList<>();
     public PickUpTilesState(BoardController controller) {

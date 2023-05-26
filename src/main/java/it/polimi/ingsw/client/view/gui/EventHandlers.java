@@ -3,8 +3,6 @@ package it.polimi.ingsw.client.view.gui;
 import it.polimi.ingsw.client.view.gui.controllers.*;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController;
 import javafx.beans.binding.Bindings;
-import javafx.collections.ObservableList;
-
 public abstract class EventHandlers {
     public static void set(MenuController controller){
         controller.newGameButton.setOnMouseReleased(e-> SceneManager.newGameScene(controller, controller.innerStackPane));

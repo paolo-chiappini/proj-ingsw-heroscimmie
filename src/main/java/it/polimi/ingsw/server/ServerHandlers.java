@@ -264,7 +264,7 @@ public abstract class ServerHandlers {
                 if(depths.stream().noneMatch(depth -> depth > numberOfTilesPickedUp))
                     notifyError(res,"There aren't enough free spaces in the bookshelf to pick up these tiles");
                 else{
-                    notifySuccess(res, "PICK");
+                    notifySuccess(res, "PICK"); //The GUI needs to know when the pick is valid
                 }
             }
         } catch (RuntimeException re) {
@@ -412,7 +412,7 @@ public abstract class ServerHandlers {
     }
 
     /**
-     * Handles the disconnection of a socket.
+     * Handles an unexpected disconnection of a socket.
      *
      * @param socket disconnected socket
      */
@@ -422,7 +422,7 @@ public abstract class ServerHandlers {
     }
 
     /**
-     * Handles the disconnection of a socket.
+     * Handles the correct disconnection of a socket.
      *
      * @param socket disconnected socket
      */
@@ -430,6 +430,8 @@ public abstract class ServerHandlers {
         System.out.println(socket.getRemoteSocketAddress() + " closed connection");
         handleEndOfConnection(socket);
     }
+
+
 
     private static void handleEndOfConnection(Socket socket) {
         if (playerSockets.containsKey(socket)) {

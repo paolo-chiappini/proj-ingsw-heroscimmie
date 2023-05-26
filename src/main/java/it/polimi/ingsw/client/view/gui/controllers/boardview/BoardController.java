@@ -25,8 +25,11 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+//This is where the fun begins
 
 public class BoardController extends GuiController {
+
+    //FXMLS Nodes
     public StackPane window;
     public GridPane gamePlane;
     public AnchorPane anchorPane;
@@ -53,6 +56,8 @@ public class BoardController extends GuiController {
     public Button toggleBookshelvesButton;
     public StackPane bookshelfPane;
 
+
+    //Internal stuff
     private VBox selectedColumn;
     private BoardViewState boardViewState;
     private TilesBoard board;
@@ -61,22 +66,26 @@ public class BoardController extends GuiController {
     private BookshelvesViewController bookshelvesViewController;
     private String myName;
 
-    private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>();
+    private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>(); //Used for updating GUI elements
 
     public void startStage(Stage stage) {
-        foregroundGridPane.setPickOnBounds(false);
+        foregroundGridPane.setPickOnBounds(false); //For mouse transparency
+
+        //Stuff for making magic (reactivity) possible
         backgroundImage.fitHeightProperty().bind(stage.heightProperty());
-        yourTurnLabel.setVisible(false);
         anchorPane.scaleXProperty().bind(stage.heightProperty().divide(750));
         anchorPane.scaleYProperty().bind(stage.heightProperty().divide(750));
 
+        //Initialize graphic elements
         this.board = new TilesBoard(this, gridPaneBoard);
         this.bookshelf = new Bookshelf(this, columnsBox, columnsForegroundBox);
+        this.boardViewState = new PickUpTilesState(this);
 
         EventHandlers.set(this);
+        yourTurnLabel.setVisible(false);
 
-        boardViewState = new PickUpTilesState(this);
 
+        //Other bookshelves view and controller initialization
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/bookshelves_view.fxml"));
         try {
             this.bookshelvesView = fxmlLoader.load();
@@ -120,12 +129,12 @@ public class BoardController extends GuiController {
     }
 
     public void playSwitchToBookshelfAnimation(int direction) {
-        if ((gamePlane.getTranslateX() == 0 && direction == 1)
+        if ((gamePlane.getTranslateX() == 0 && direction == 1) //Do not play animation if already in position
                 || (gamePlane.getTranslateX() != 0 && direction == -1)) {
             return;
         }
 
-        setDisabledInterface(true);
+        setDisabledInterface(true); //Disable everything when moving
 
         var transition = Animations.getSwitchToBookshelfAnimation(gamePlane, backgroundImage, direction);
 
@@ -148,30 +157,31 @@ public class BoardController extends GuiController {
 
     public void updateBookshelf(int[][] bookshelf, String playerName) {
         if (playerName.equals(myName)) {
-            this.bookshelf.update(bookshelf);
+            this.bookshelf.update(bookshelf); //If this is my bookshelf use the Bookshelf GraphicElement
             return;
         }
 
         bookshelvesViewController.addBookshelf(bookshelf, playerName);
     }
 
+    //TODO finish this
     public void addPlayer(String username, int score, boolean isClient) {
         if (isClient)
             this.myName = username;
     }
 
+    //I am not proud of this
     public void setCommonGoalCard(int i, int points) {
         var cardUrl = getClass().getResource("/sprites/common_goal_cards/" + i + ".jpg");
         Image cardImage = new Image(cardUrl.toString());
 
-        if (commonGoalCardTop.getImage() == null) {
+        if (commonGoalCardTop.getImage() == null) { //Set if not set
             commonGoalCardTop.setImage(cardImage);
             getCardFromId.put(i, commonGoalCardTop);
         } else {
             commonGoalCardBottom.setImage(cardImage);
             getCardFromId.put(i, commonGoalCardBottom);
         }
-
 
         var tokenUrl = getClass().getResource("/sprites/scoring_tokens/" + points + ".jpg");
 
@@ -207,7 +217,6 @@ public class BoardController extends GuiController {
         }
     }
 
-    //TODO different disabling for when it's not your turn
     public void blockCommands() {
         setDisableCommands(true);
     }
@@ -226,7 +235,7 @@ public class BoardController extends GuiController {
         var gameElements = new ArrayList<>(gamePlane.getChildren());
         gameElements.addAll(foregroundGridPane.getChildren());
 
-        for (var n : gameElements) {
+        for (var n : gameElements) { //Disables everything apart from the tiles-box and label
             if (n.disableProperty().isBound()) continue;
 
             if (n == selectedTilesBox) {
@@ -239,7 +248,7 @@ public class BoardController extends GuiController {
     }
 
     public void setDisableCommands(boolean b) {
-        boardStackPane.setDisable(b);
+        boardStackPane.setDisable(b); //Can't touch the board if it's not your turn
         boardStackPane.setEffect( b ? new SepiaTone() : null );
     }
 
