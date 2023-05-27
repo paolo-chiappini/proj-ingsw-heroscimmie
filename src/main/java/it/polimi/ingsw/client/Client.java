@@ -21,7 +21,8 @@ public class Client {
     private Consumer<String> connectionLostCallback;
     private static final int SERVER_PORT=49152;
     private boolean isAlive;
-    private String serverAddress;
+    private boolean stoppedByTheUser;
+    private final String serverAddress;
 
     public Client(String address){
         serverAddress = address;
@@ -50,12 +51,25 @@ public class Client {
         return null;
     }
 
-    public void endConnection() {
+
+    /**
+     * Stops the client in the most polite way possible
+     */
+    public void closeConnection() {
+        stoppedByTheUser = true;
+        endConnection();
+    }
+
+    private void endConnection() {
         try {
             if (socket == null) return;
+
+            isAlive = false;
+
             if(!socket.isClosed()) {
                 socket.close();
             }
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -71,10 +85,12 @@ public class Client {
         }
 
         isAlive = true;
+        stoppedByTheUser = false;
 
         try {
             while (isAlive) {
                 Message serverMessage = readFromServer();
+                if(stoppedByTheUser) return;
                 callback.accept(serverMessage);
             }
         } catch (RuntimeException e) {

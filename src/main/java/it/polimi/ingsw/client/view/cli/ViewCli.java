@@ -29,13 +29,21 @@ public class ViewCli extends View {
     }
 
     @Override
+    public void startGameView(Runnable finishSetup) {
+        reset();
+        finishSetup.run();
+    }
+
+    @Override
     public void reset() {
         graphics = new DefaultCliGraphics();
     }
 
+
     // TODO
     /*@Override*/
     public void run() {
+        connectToServer();
         running = true;
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
         while (running) {
@@ -356,6 +364,9 @@ public class ViewCli extends View {
 
     @Override
     public void handleSuccessMessage(String message) {
+        if(message.equals("NAME")) return;
+        if(message.equals("PICK")) return;
+
         System.out.println(message);
     }
 

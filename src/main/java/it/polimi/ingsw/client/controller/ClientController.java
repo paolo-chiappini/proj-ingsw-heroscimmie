@@ -36,19 +36,24 @@ public class ClientController implements ViewListener {
 
     public ClientController(View view, String serverAddress) {
         this.view = view;
+        view.setClientController(this);
         clientIsInGame = false;
 
-        view.start();
-        view.addListener(this);
-
         client = new Client(serverAddress);
+
+
         client.setOnMessageReceivedCallback(this::onMessageReceived);
         client.setOnConnectionLostCallback((msg) -> {
             clientIsInGame = false;
             view.handleServerConnectionError(msg);
-            initVirtualModelAndView();
+            resetVirtualModelAndView();
         });
-        client.start();
+
+        //The client network listener is started by the View now
+
+        view.setClient(client);
+        view.addListener(this);
+        view.start();
     }
 
     /**
@@ -69,7 +74,10 @@ public class ClientController implements ViewListener {
             case "LIST" -> onListReceived(message);
             case "OK" -> view.handleSuccessMessage(body.getString("msg"));
             case "ERR" -> view.handleErrorMessage(body.getString("msg"));
-            case "NAME" -> myUsername = body.getString("username");
+            case "NAME" -> {
+                myUsername = body.getString("username");
+                view.handleSuccessMessage("NAME"); //The GUI needs to know if the name is ok to proceed
+            }
         }
     }
 
@@ -170,9 +178,36 @@ public class ClientController implements ViewListener {
             System.out.println("YOOOO we have a winner!");
             view.handleWinnerSelected(body.getString("winner"));
             // reset model and view
-            // initVirtualModelAndView();
+            resetVirtualModelAndView();
             clientIsInGame = false;
         }
+    }
+
+    //Differentiated between initialization and reset of the view and virtualmodel
+    private void resetVirtualModelAndView() {
+        board = new ClientBoard();
+        turnState = new ClientTurnState();
+        players = new LinkedList<>();
+        commonGoalCards = new LinkedList<>();
+        view.reset();
+    }
+
+    private void initVirtualModelAndView(JSONObject body, Message message) {
+        board = new ClientBoard();
+        turnState = new ClientTurnState();
+        players = new LinkedList<>();
+        commonGoalCards = new LinkedList<>();
+
+        //DOUBLE DISPATCH™ BABY
+        //the view needs to be initialized for dealing with updates,
+        //so the final part of the initialization is started by the view itself
+        Runnable runLater = ()->{
+            setupGameFromJson(body);
+            setupModelListeners();
+            update(message);
+        };
+
+        view.startGameView(runLater);
     }
 
     public void onGameStart(Message message) {
@@ -187,20 +222,8 @@ public class ClientController implements ViewListener {
 
         if (!clientIsInGame) return;
 
-        initVirtualModelAndView();
-        setupGameFromJson(body);
-        setupModelListeners();
+        initVirtualModelAndView(body, message);
 
-        update(message);
-    }
-
-    private void initVirtualModelAndView() {
-        board = new ClientBoard();
-        turnState = new ClientTurnState();
-        players = new LinkedList<>();
-        commonGoalCards = new LinkedList<>();
-
-        view.reset();
     }
 
     private void setupModelListeners() {
@@ -210,7 +233,7 @@ public class ClientController implements ViewListener {
         commonGoalCards.forEach(goal -> goal.addListener(view));
     }
 
-    private void setupGameFromJson(JSONObject gameState) {
+    public void setupGameFromJson(JSONObject gameState) {
         JSONObject serialized = gameState.getJSONObject("serialized");
         JSONArray jsonPlayers = serialized.getJSONArray("players");
         JSONArray jsonCommonGoals = serialized.getJSONArray("common_goals");
@@ -243,7 +266,7 @@ public class ClientController implements ViewListener {
             virtualCommonGoal.updateId(goalObject.toString());
 
             commonGoalCards.add(virtualCommonGoal);
-            view.setCommonGoal(virtualCommonGoal.getId(), 0);
+            view.setCommonGoal(virtualCommonGoal.getId(), 8);
         }
     }
 
@@ -278,8 +301,13 @@ public class ClientController implements ViewListener {
             return;
         }
 
+        // This should be useless now that a username
+        // is not needed for getting the list of games,
+        // but it isn't harming anyone, so it's staying <3
         JSONObject body = new JSONObject();
         body.put("username", myUsername);
+
+
         client.sendRequest("LIST", body.toString());
     }
 
@@ -320,7 +348,7 @@ public class ClientController implements ViewListener {
         client.sendRequest("QUIT", body.toString());
 
         // reset local data
-        initVirtualModelAndView();
+        resetVirtualModelAndView();
         clientIsInGame = false;
     }
 
@@ -386,7 +414,6 @@ public class ClientController implements ViewListener {
         this.third = 3;
         client.sendRequest("PICK", body.toString());
     }
-
 
     public void onChatMessageSent(String message) {
         if (!clientIsInGame) {

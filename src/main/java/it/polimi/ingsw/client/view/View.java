@@ -1,8 +1,11 @@
 package it.polimi.ingsw.client.view;
 
+import it.polimi.ingsw.client.Client;
+import it.polimi.ingsw.client.controller.ClientController;
 import it.polimi.ingsw.util.observer.ModelListener;
 import it.polimi.ingsw.util.observer.ObservableObject;
 import it.polimi.ingsw.util.observer.ViewListener;
+
 
 /**
  * Represents a generic view.
@@ -12,16 +15,16 @@ import it.polimi.ingsw.util.observer.ViewListener;
 public abstract class View
         extends ObservableObject<ViewListener>
         implements ModelListener {
-
+    protected ClientController clientController;
     protected boolean canSendCommands;
     protected boolean running;
 
     public View() { canSendCommands = false; }
-
+    public void setClientController(ClientController clientController){this.clientController = clientController;}
     /**
      * Method used to restore a "reset" state for the current view.
      */
-    public abstract void reset();
+    public abstract void startGameView(Runnable finishSetup);
 
     /**
      * Executes all the procedures needed to correctly show
@@ -183,10 +186,24 @@ public abstract class View
         new Thread(this::run).start();
     }
 
+    protected Client client;
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     /**
      * Stops the view and its thread.
      */
     public void shutdown() {
         running = false;
+        client.closeConnection();
     }
+
+    public void connectToServer() {
+        client.start();
+    }
+
+    public abstract void reset();
+
 }

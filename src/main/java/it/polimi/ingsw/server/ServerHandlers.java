@@ -263,6 +263,9 @@ public abstract class ServerHandlers {
             else {
                 if(depths.stream().noneMatch(depth -> depth > numberOfTilesPickedUp))
                     notifyError(res,"There aren't enough free spaces in the bookshelf to pick up these tiles");
+                else{
+                    notifySuccess(res, "PICK"); //The GUI needs to know when the pick is valid
+                }
             }
         } catch (RuntimeException re) {
             notifyError(res, re.getMessage());
@@ -399,13 +402,38 @@ public abstract class ServerHandlers {
         return null;
     }
 
+
     /**
-     * Handles the disconnection of a socket.
+     * Debug method that prints the level 4 address (IP + Port) of every socket that connects to the server
+     * @param socket connected socket
+     */
+    public static void handleConnection(Socket socket) {
+        System.out.println(socket.getRemoteSocketAddress() + " connected");
+    }
+
+    /**
+     * Handles an unexpected disconnection of a socket.
      *
      * @param socket disconnected socket
      */
     public static void handleDisconnection(Socket socket) {
-        System.out.println(socket.getInetAddress() + " disconnected");
+        System.out.println(socket.getRemoteSocketAddress() + " disconnected due to an error");
+        handleEndOfConnection(socket);
+    }
+
+    /**
+     * Handles the correct disconnection of a socket.
+     *
+     * @param socket disconnected socket
+     */
+    public static void handleConnectionClosed(Socket socket) {
+        System.out.println(socket.getRemoteSocketAddress() + " closed connection");
+        handleEndOfConnection(socket);
+    }
+
+
+
+    private static void handleEndOfConnection(Socket socket) {
         if (playerSockets.containsKey(socket)) {
             String player = playerSockets.remove(socket);
 
@@ -522,6 +550,9 @@ public abstract class ServerHandlers {
      * if the client is trying to impersonate another player.
      */
     public static boolean validateSocketUsername(Message req, Message res) {
+        // a name is not needed for viewing the list of games
+        if (req.getMethod().equals("LIST")) return true;
+
         if (missingPropertiesInBody(List.of("username"), req, res)) return false;
 
         // demand validation to name change handler

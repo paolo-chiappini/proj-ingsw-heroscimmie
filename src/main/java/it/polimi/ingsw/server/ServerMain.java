@@ -24,7 +24,12 @@ public class ServerMain {
             }
         });
 
+
+        //I differentiated between handleDisconnection and handleConnectionClosed just for
+        //debugging purposes
         server.onConnectionLost(ServerHandlers::handleDisconnection);
+        server.onConnectionClosed(ServerHandlers::handleConnectionClosed);
+        server.onConnection(ServerHandlers::handleConnection);
 
         server.setMiddleware("JOIN", (req, res, callback) -> {
             callback.call(req, res);

@@ -1,17 +1,22 @@
 package it.polimi.ingsw;
 
 import it.polimi.ingsw.client.ClientMain;
+import it.polimi.ingsw.client.view.cli.ViewCli;
+import it.polimi.ingsw.client.view.gui.ViewGui;
 import it.polimi.ingsw.server.ServerMain;
 
 public class Main {
     private static final String SERVER_ARG = "--server";
     private static final String CLI_ARG = "--cli";
     private static final String GUI_ARG = "--gui";
+    private static final String GUI_MENU_ARG = "--menu";
+    private static final String GUI_BOARD_ARG = "--board";
     private static final String SERVER_ADDR = "--server-addr";
 
     public static void main(String[] args) {
         String startupMode = null;
         String serverAddress = null;
+        String guiStartingView = null;
 
         int argIndex = 0;
         for (String arg : args) {
@@ -38,6 +43,9 @@ public class Main {
                 }
 
                 serverAddress = args[argIndex + 1];
+            } else if (arg.equalsIgnoreCase(GUI_MENU_ARG)||
+                        arg.equalsIgnoreCase(GUI_BOARD_ARG)) {
+                guiStartingView = arg.toLowerCase();
             }
 
             argIndex++;
@@ -55,7 +63,8 @@ public class Main {
 
         switch (startupMode) {
             case SERVER_ARG -> ServerMain.main(args);
-            case CLI_ARG, GUI_ARG -> ClientMain.main(new String[] { startupMode, serverAddress });
+            case CLI_ARG -> ClientMain.main(new ViewCli(), new String[] { serverAddress });
+            case GUI_ARG -> ClientMain.main(new ViewGui(guiStartingView), new String[] { serverAddress });
         }
     }
 }

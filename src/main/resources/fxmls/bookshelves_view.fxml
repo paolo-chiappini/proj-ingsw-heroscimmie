@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.StackPane?>
+
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="504.0" prefWidth="476.0" styleClass="bookshelves-view"
+           stylesheets="@board_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
+           fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.BookshelvesViewController">
+   <FlowPane fx:id="bookshelvesPane" alignment="CENTER" columnHalignment="CENTER" hgap="50.0" maxHeight="-Infinity"
+             maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWrapLength="500.0"
+             stylesheets="@board_style.css" vgap="20.0">
+      <cursor>
+         <Cursor fx:constant="DEFAULT"/>
+      </cursor>
+      <padding>
+         <Insets bottom="8.0" top="20.0"/>
+      </padding>
+   </FlowPane>
+</StackPane>
