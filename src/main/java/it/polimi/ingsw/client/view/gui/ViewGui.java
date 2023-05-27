@@ -116,19 +116,19 @@ public class ViewGui extends View {
 
     @Override
     public void updateGameStatus(boolean isGameOver) {
-        if(isGameOver){
-            //NOTIFY GUI
-        }
     }
 
     @Override
     public void handleWinnerSelected(String winner) {
-        //NOTIFY GUI
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).endGame(winner));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
     public void updatePlayerScore(String player, int score) {
-        //NOTIFY GUI
     }
 
     @Override

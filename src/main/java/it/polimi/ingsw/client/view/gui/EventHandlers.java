@@ -53,4 +53,7 @@ public abstract class EventHandlers {
         controller.threePlayerButton.setOnMouseClicked(controller::setUsername);
         controller.fourPlayerButton.setOnMouseClicked(controller::setUsername);
     }
+    public static void set(EndgameWindowController controller) {
+        controller.exitButton.setOnMouseReleased(controller::backToMenu);
+    }
 }

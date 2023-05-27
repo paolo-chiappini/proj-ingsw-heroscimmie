@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.view.gui.Animations;
 import it.polimi.ingsw.client.view.gui.EventHandlers;
 import it.polimi.ingsw.client.view.gui.GuiController;
 import it.polimi.ingsw.client.view.gui.SceneManager;
+import it.polimi.ingsw.client.view.gui.controllers.EndgameWindowController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.Bookshelf;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.TilesBoard;
 import javafx.collections.ObservableList;
@@ -22,8 +23,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 //This is where the fun begins
 
@@ -69,9 +69,10 @@ public class BoardController extends GuiController {
     private String myName;
 
     private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>(); //Used for updating GUI elements
-    private int playerIndex = 0;
+    private final List<Player> players = new ArrayList<>();
 
     public void startStage(Stage stage) {
+
         foregroundGridPane.setPickOnBounds(false); //For mouse transparency
 
         //Stuff for making magic (reactivity) possible
@@ -168,11 +169,12 @@ public class BoardController extends GuiController {
 
 
     public void addPlayer(String username, int score, boolean isClient) {
-        playerIndex++;
+        players.add(new Player(username, score));
+
         if (isClient)
             this.myName = username;
 
-        var playerLabel = new Label(playerIndex +") "+username);
+        var playerLabel = new Label(players.size() +") "+username);
         playerLabel.getStyleClass().add("player-name");
         playersList.getChildren().add(playerLabel);
     }
@@ -277,5 +279,28 @@ public class BoardController extends GuiController {
 
     public void notifyInvalidMove() {
         boardViewState.notifyInvalidMove();
+    }
+
+    public void endGame(String winner){
+        setDisabledInterface(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/end_game_view.fxml"));
+        try {
+            Pane endgameView = fxmlLoader.load();
+            EndgameWindowController endgameWindowController = fxmlLoader.getController();
+
+            players.sort(Comparator.comparingInt(Player::points).reversed());
+
+            endgameWindowController.setWinner(winner, players.get(0).points());
+
+            for(int i = 0; i<players.size(); i++){
+                var p = players.get(i);
+                if(p.name().equals(winner)) continue;
+                endgameWindowController.setOtherPlayer(p.name(), p.points(), i+1);
+            }
+
+            window.getChildren().add(endgameView);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

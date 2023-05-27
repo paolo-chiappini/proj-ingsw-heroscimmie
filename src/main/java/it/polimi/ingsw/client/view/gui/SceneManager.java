@@ -127,22 +127,6 @@ public class SceneManager {
         }
     }
 
-    public static void endgameScene(String[] players, int[] points, String winner){
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/end_game_view.fxml"));
-        try {
-            Scene nextScene = new Scene(fxmlLoader.load());
-            EndgameWindowController boardController = fxmlLoader.getController();
-            Stage newStage = new Stage();
-
-            setStageProperties(newStage, nextScene);
-            boardController.startStage(newStage);
-
-            SceneManager.controller = fxmlLoader.getController();
-        } catch (IOException ex) {
-            throw new RuntimeException(ex);
-        }
-    }
-
     public static void waitGameScene(Pane rootElement){
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/menu_view_wait_game.fxml"));
         try {
