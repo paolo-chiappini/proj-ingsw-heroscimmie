@@ -168,17 +168,6 @@ public class BoardController extends GuiController {
     }
 
 
-    public void addPlayer(String username, int score, boolean isClient) {
-        players.add(new Player(username, score));
-
-        if (isClient)
-            this.myName = username;
-
-        var playerLabel = new Label(players.size() +") "+username);
-        playerLabel.getStyleClass().add("player-name");
-        playersList.getChildren().add(playerLabel);
-    }
-
     public void setCurrentTurn(int turn) {
         var players = playersList.getChildren();
         for(int i = 0; i < players.size(); i++){
@@ -191,6 +180,7 @@ public class BoardController extends GuiController {
     }
 
     //I am not proud of this
+
     public void setCommonGoalCard(int i, int points) {
         var cardUrl = getClass().getResource("/sprites/common_goal_cards/" + i + ".jpg");
         Image cardImage = new Image(cardUrl.toString());
@@ -216,7 +206,6 @@ public class BoardController extends GuiController {
             scoringTokenBottom.setImage(tokenImage);
         }
     }
-
     public void setPersonalGoalCard(int id) {
         var imageUrl = getClass().getResource("/sprites/personal_goal_cards/" + id + ".png");
         personalGoalCard.setImage(new Image(imageUrl.toString()));
@@ -281,21 +270,39 @@ public class BoardController extends GuiController {
         boardViewState.notifyInvalidMove();
     }
 
+    public void addPlayer(String username, int score, boolean isClient) {
+        players.add(new Player(username, score));
+
+        if (isClient)
+            this.myName = username;
+
+        var playerLabel = new Label(players.size() +") "+username);
+        playerLabel.getStyleClass().add("player-name");
+        playersList.getChildren().add(playerLabel);
+    }
+
+    public void updatePlayerScore(String player, int score) {
+        var updatedPlayer = players.stream()
+                .filter(p->p.getName().equals(player)).toList().get(0);
+        updatedPlayer.setPoints(score);
+    }
+
     public void endGame(String winner){
+        System.out.println("WINNER:");
         setDisabledInterface(true);
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/end_game_view.fxml"));
         try {
             Pane endgameView = fxmlLoader.load();
             EndgameWindowController endgameWindowController = fxmlLoader.getController();
 
-            players.sort(Comparator.comparingInt(Player::points).reversed());
+            players.sort(Comparator.comparingInt(Player::getPoints).reversed());
 
-            endgameWindowController.setWinner(winner, players.get(0).points());
+            endgameWindowController.setWinner(winner, players.get(0).getPoints());
 
             for(int i = 0; i<players.size(); i++){
                 var p = players.get(i);
-                if(p.name().equals(winner)) continue;
-                endgameWindowController.setOtherPlayer(p.name(), p.points(), i+1);
+                if(p.getName().equals(winner)) continue;
+                endgameWindowController.setOtherPlayer(p.getName(), p.getPoints(), i+1);
             }
 
             window.getChildren().add(endgameView);

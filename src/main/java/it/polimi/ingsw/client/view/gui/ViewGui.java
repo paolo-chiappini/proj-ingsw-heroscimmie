@@ -129,6 +129,11 @@ public class ViewGui extends View {
 
     @Override
     public void updatePlayerScore(String player, int score) {
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).updatePlayerScore(player, score));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override

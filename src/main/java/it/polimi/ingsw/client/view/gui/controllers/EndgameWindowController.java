@@ -15,17 +15,13 @@ public class EndgameWindowController extends GuiController {
     public Label winnerPointsLabel;
     public VBox playersList;
 
-    public EndgameWindowController() {
-        EventHandlers.set(this);
-    }
-
     public void setWinner(String winner, int points) {
         winnerNameLabel.setText(winner.toUpperCase()+"!");
-        winnerPointsLabel.setText(points+"points");
+        winnerPointsLabel.setText(points+" points");
     }
 
     public void setOtherPlayer(String player, int points, int position) {
-        Label playerLabel = new Label(position+") "+player+" ("+points+" points)");
+        Label playerLabel = new Label(position+"°: "+player+" ("+points+" points)");
         playerLabel.getStyleClass().add("player-name");
         playersList.getChildren().add(playerLabel);
     }

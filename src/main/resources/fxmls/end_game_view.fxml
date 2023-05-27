@@ -6,7 +6,7 @@
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="5.0" styleClass="window" stylesheets="@end_game_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.EndgameWindowController">
+<VBox alignment="CENTER" maxHeight="680.0" maxWidth="540.0" spacing="5.0" styleClass="window" stylesheets="@end_game_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.EndgameWindowController">
    <padding>
       <Insets bottom="20.0" left="50.0" right="50.0" />
    </padding>
@@ -21,11 +21,11 @@
       <Label fx:id="winnerPointsLabel" styleClass="winner-points-label" text="48 punti" />
    </VBox>
    <Separator prefWidth="200.0" />
-   <VBox fx:id="playersList" alignment="CENTER" prefHeight="200.0" spacing="20.0" />
+   <VBox fx:id="playersList" alignment="CENTER" spacing="20.0" />
    <Separator prefWidth="200.0">
       <VBox.margin>
          <Insets bottom="20.0" />
       </VBox.margin>
    </Separator>
-   <Button fx:id="exitButton" mnemonicParsing="false" prefHeight="83.0" prefWidth="261.0" text="Back to Menu" />
+   <Button fx:id="exitButton" mnemonicParsing="false" onMouseReleased="#backToMenu" prefHeight="83.0" prefWidth="261.0" text="Back to Menu" />
 </VBox>

@@ -1,3 +1,29 @@
 package it.polimi.ingsw.client.view.gui.controllers.boardview;
 
-public record Player(String name, int points){}
+public class Player{
+    String name;
+    int points;
+
+    public Player(String name, int points) {
+        this.name = name;
+        this.points = points;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public Player setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    public int getPoints() {
+        return points;
+    }
+
+    public Player setPoints(int points) {
+        this.points = points;
+        return this;
+    }
+}

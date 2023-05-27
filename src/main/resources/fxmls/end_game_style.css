@@ -48,12 +48,12 @@
     -fx-text-fill: -fx-color5-ok;
 }
 .window{
-    -fx-background-color: #c54e2caa;
-    -fx-background-radius: 15px;
-    -fx-border-radius: 10px;
-    -fx-border-color: #461d00;
+    -fx-background-color: rgba(126,69,21,0.5);
+    -fx-background-radius: 7px;
+    -fx-border-color: linear-gradient(from 0% 20% to 100% 80%, #7e4515 0%, #754609 100%);
+    -fx-border-radius: 2px;
     -fx-border-width: 5px;
-    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.9), 5, 0, 1, 1);
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
 }
 
 .button {
