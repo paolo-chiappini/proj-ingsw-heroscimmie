@@ -19,14 +19,16 @@ public class ViewGui extends View {
 
             GuiController controller = SceneManager.getCurrentController();
 
-            if (controller instanceof  SubMenuController) {
-                ((SubMenuController) controller).successfullyJoined();
+            if (controller instanceof SubMenuController) {
+                // If the GUI is NOT in the "Waiting for players" view and has received a START message,
+                // it means it was in a lobby and the only reason it's not in the correct view is that
+                // the GUI was the last player needed for the game to start
+                ((SubMenuController) controller).successfullyJoined(); // Switch temporarily to "waiting for players"
                 controller = SceneManager.getCurrentController();
-                ((MenuWaitGameController) controller).startGame();
+                ((MenuWaitGameController) controller).startGame(); // And the start the game
                 finishSetup.run();
 
-            } else if (controller instanceof MenuWaitGameController) {
-
+            } else if (controller instanceof MenuWaitGameController) { // Normal startup
                 ((MenuWaitGameController) controller).startGame();
                 finishSetup.run();
 
@@ -60,25 +62,25 @@ public class ViewGui extends View {
     public void handleSuccessMessage(String message) {
         GuiController controller = SceneManager.getCurrentController();
         switch (message) {
-            case "NAME" -> {
+            case "NAME" -> { // When the name is correctly set
                 if (controller instanceof SubMenuController)
                     Platform.runLater(() -> ((SubMenuController) controller).confirmUsername());
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
-            case "Joined game" -> {
-                if (controller instanceof MenuNewGameController)
-                    Platform.runLater(() -> ((MenuNewGameController) controller).successfullyJoined());
+            case "Joined game" -> { // When the client has correctly entered a lobby
+                if (controller instanceof SubMenuController)
+                    Platform.runLater(() -> ((SubMenuController) controller).successfullyJoined());
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
-            case "Successfully loaded game" -> {
+            case "Successfully loaded game" -> { // When a game has been loaded
                 if (controller instanceof MenuLoadGameController)
                     Platform.runLater(() -> ((MenuLoadGameController) controller).loadGame());
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
-            case "PICK" -> {
+            case "PICK" -> { // When the tiles can be picked
                 if (controller instanceof BoardController)
                     Platform.runLater(()->((BoardController)controller).notifyValidMove());
                 else
@@ -97,17 +99,9 @@ public class ViewGui extends View {
             }else {
                 throw new RuntimeException("Wrong GUI state");
             }
-        } else if (message.contains("whitelist")) {
+        } else if (message.contains("whitelist")) { // This is the only reason I couldn't use a switch statement (thx Java)
             if (controller instanceof SubMenuController) {
                 Platform.runLater(() -> ((SubMenuController) controller).notifyNotWhitelisted());
-            }else {
-                throw new RuntimeException("Wrong GUI state");
-            }
-        } else if (message.equals("No lobby found") ||
-                message.contains("Cannot create new lobby") ||
-                message.equals("A game is already being setup by a player")) {
-            if (controller instanceof SubMenuController) {
-                Platform.runLater(() -> controller.showErrorMessageDialog(message));
             }else {
                 throw new RuntimeException("Wrong GUI state");
             }
@@ -117,6 +111,8 @@ public class ViewGui extends View {
             }else {
                 throw new RuntimeException("Wrong GUI state");
             }
+        } else{
+            Platform.runLater(() -> controller.showErrorMessageDialog(message));
         }
     }
 
@@ -188,7 +184,12 @@ public class ViewGui extends View {
 
     @Override
     public void updatePlayerConnectionStatus(String player, boolean isDisconnected) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            //TODO test this
+            Platform.runLater(()->((BoardController)controller).updatePlayerConnection(player, isDisconnected));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override

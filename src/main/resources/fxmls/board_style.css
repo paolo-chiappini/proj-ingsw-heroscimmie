@@ -117,6 +117,12 @@
     -fx-text-fill: -fx-color5-ok;
 }
 
+.disconnected-player-name{
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+    -fx-text-fill: -fx-color1-undo;
+}
+
 .tile-list-label{
     -fx-background-color: #7e4515;
     -fx-background-radius: 5px;
@@ -169,5 +175,5 @@
 .not-your-turn-label{
     -fx-font-weight: bold;
     -fx-font-size: 4em;
-    -fx-text-fill: rgb(0, 0, 0);
+    -fx-text-fill: rgba(0, 0, 0, 0.8);
 }

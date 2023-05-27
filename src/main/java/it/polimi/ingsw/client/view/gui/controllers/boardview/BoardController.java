@@ -310,4 +310,16 @@ public class BoardController extends GuiController {
             throw new RuntimeException(e);
         }
     }
+
+    //Might be buggy with the visuals, haven't tested this
+    public void updatePlayerConnection(String player, boolean isDisconnected) {
+        if(isDisconnected){
+            for(Node n: playersList.getChildren()){
+                Label label = (Label) n;
+                if(label.getText().substring(3).contains(player)){
+                    label.getStyleClass().add("disconnected-player-name");
+                }
+            }
+        }
+    }
 }
