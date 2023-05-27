@@ -66,9 +66,9 @@ public class ViewGui extends View {
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
-            case "PICK" -> {
-                if (controller instanceof BoardController)
-                    Platform.runLater(()->((BoardController)controller).notifyValidMove());
+            case "Joined game" -> {
+                if (controller instanceof MenuNewGameController)
+                    Platform.runLater(() -> ((MenuNewGameController) controller).successfullyJoined());
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
@@ -78,6 +78,13 @@ public class ViewGui extends View {
                 else
                     throw new RuntimeException("Wrong GUI state");
             }
+            case "PICK" -> {
+                if (controller instanceof BoardController)
+                    Platform.runLater(()->((BoardController)controller).notifyValidMove());
+                else
+                    throw new RuntimeException("Wrong GUI state");
+            }
+
         }
     }
 

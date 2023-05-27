@@ -578,13 +578,15 @@ public abstract class ServerHandlers {
         String username = new JSONObject(req.getBody()).getString("username");
         if (playerSockets.containsValue(username)) {
             // check if name is already associated with user
-            if (!(playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username)))
+            if (!(playerSockets.containsKey(req.getSocket()) && playerSockets.get(req.getSocket()).equals(username))) {
                 notifyError(res, "Another user has chosen this name");
-        } else {
-            playerSockets.put(req.getSocket(), username);
-            res.setMethod("NAME");
-            res.setBody(new JSONObject(req.getBody()).toString());
-            res.send();
+                return;
+            }
         }
+
+        playerSockets.put(req.getSocket(), username);
+        res.setMethod("NAME");
+        res.setBody(new JSONObject(req.getBody()).toString());
+        res.send();
     }
 }
