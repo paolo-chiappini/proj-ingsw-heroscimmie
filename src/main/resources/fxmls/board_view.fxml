@@ -15,7 +15,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-<StackPane fx:id="window" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController">
+<StackPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController">
     <ImageView fx:id="backgroundImage" pickOnBounds="true" preserveRatio="true" StackPane.alignment="CENTER_LEFT">
         <Image url="@../sprites/misc/sfondo_salotto.png" />
     </ImageView>
@@ -63,17 +63,31 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                 </GridPane>
+            <Label fx:id="notYourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="not-your-turn-label" text="It's not your turn" />
             </StackPane>
-            <VBox alignment="CENTER" fillWidth="false" spacing="100.0" GridPane.columnIndex="1">
+            <VBox alignment="CENTER" fillWidth="false" spacing="25.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                 <HBox styleClass="card">
                     <ImageView fx:id="commonGoalCardTop" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
                 <HBox styleClass="card">
                     <ImageView fx:id="commonGoalCardBottom" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
+            <Pane fx:id="selectedTilesBox1">
+               <children>
+                  <VBox fx:id="playersList" layoutY="25.0" prefHeight="183.0" prefWidth="300.0" spacing="15.0" styleClass="tile-list">
+                     <padding>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                     </padding>
+                  </VBox>
+                  <Label fx:id="selectedTilesListLabel1" styleClass="tile-list-label" text="Players" />
+               </children>
+            </Pane>
+            <GridPane.margin>
+               <Insets bottom="20.0" />
+            </GridPane.margin>
             </VBox>
-            <ImageView fx:id="scoringTokenTop" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" translateX="194.0" translateY="-140.0" GridPane.columnIndex="1" />
-            <ImageView fx:id="scoringTokenBottom" fitHeight="73.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true" rotate="-8.0" translateX="194.0" translateY="129.0" GridPane.columnIndex="1" />
+            <ImageView fx:id="scoringTokenTop" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="-8.5" translateX="194.0" translateY="-184.0" GridPane.columnIndex="1" />
+            <ImageView fx:id="scoringTokenBottom" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="-8.5" translateX="194.0" translateY="10.0" GridPane.columnIndex="1" />
             <Button fx:id="goToBookshelfButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Bookshelves 👉" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          <Button fx:id="toggleBookshelvesButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Change view" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
             <GridPane.margin>
@@ -107,7 +121,7 @@
                 <GridPane.margin>
                     <Insets top="280.0" />
                 </GridPane.margin>
-                <ImageView fx:id="personalGoalCard" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="personalGoalCard" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
             </HBox>
         </GridPane>
         <GridPane fx:id="foregroundGridPane" prefHeight="700.0" prefWidth="2480.0">
@@ -143,7 +157,7 @@
                     </graphic>
                 </Button>
             </VBox>
-         <Label fx:id="yourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="turn-notification-label" text="It's your turn!" GridPane.columnSpan="3" GridPane.valignment="TOP">
+         <Label fx:id="yourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="turn-notification-label" text="It's your turn!" visible="false" GridPane.columnSpan="3" GridPane.valignment="TOP">
             <GridPane.margin>
                <Insets left="300.0" />
             </GridPane.margin>

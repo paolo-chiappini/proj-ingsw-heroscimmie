@@ -183,7 +183,7 @@ public class ClientController implements ViewListener {
         }
     }
 
-    //Differentiated between initialization and reset of the view and virtualmodel
+    //Differentiation between initialization and reset of the view and virtual model
     private void resetVirtualModelAndView() {
         board = new ClientBoard();
         turnState = new ClientTurnState();

@@ -4,6 +4,7 @@ import it.polimi.ingsw.client.view.gui.Animations;
 import it.polimi.ingsw.client.view.gui.EventHandlers;
 import it.polimi.ingsw.client.view.gui.GuiController;
 import it.polimi.ingsw.client.view.gui.SceneManager;
+import it.polimi.ingsw.client.view.gui.controllers.EndgameWindowController;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.Bookshelf;
 import it.polimi.ingsw.client.view.gui.controllers.boardview.graphicelements.TilesBoard;
 import javafx.collections.ObservableList;
@@ -22,8 +23,7 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 
 //This is where the fun begins
 
@@ -44,6 +44,7 @@ public class BoardController extends GuiController {
     public HBox selectedTilesList;
     public Label selectedTilesListLabel;
     public Label yourTurnLabel;
+    public Label notYourTurnLabel;
     public ImageView boardImage;
     public StackPane boardStackPane;
     public GridPane foregroundGridPane;
@@ -55,6 +56,7 @@ public class BoardController extends GuiController {
     public ImageView personalGoalCard;
     public Button toggleBookshelvesButton;
     public StackPane bookshelfPane;
+    public VBox playersList;
 
 
     //Internal stuff
@@ -67,8 +69,10 @@ public class BoardController extends GuiController {
     private String myName;
 
     private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>(); //Used for updating GUI elements
+    private final List<Player> players = new ArrayList<>();
 
     public void startStage(Stage stage) {
+
         foregroundGridPane.setPickOnBounds(false); //For mouse transparency
 
         //Stuff for making magic (reactivity) possible
@@ -79,11 +83,10 @@ public class BoardController extends GuiController {
         //Initialize graphic elements
         this.board = new TilesBoard(this, gridPaneBoard);
         this.bookshelf = new Bookshelf(this, columnsBox, columnsForegroundBox);
+
         this.boardViewState = new PickUpTilesState(this);
 
         EventHandlers.set(this);
-        yourTurnLabel.setVisible(false);
-
 
         //Other bookshelves view and controller initialization
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/bookshelves_view.fxml"));
@@ -164,13 +167,20 @@ public class BoardController extends GuiController {
         bookshelvesViewController.addBookshelf(bookshelf, playerName);
     }
 
-    //TODO finish this
-    public void addPlayer(String username, int score, boolean isClient) {
-        if (isClient)
-            this.myName = username;
+
+    public void setCurrentTurn(int turn) {
+        var players = playersList.getChildren();
+        for(int i = 0; i < players.size(); i++){
+            players.get(i).getStyleClass().remove("current-player-name");
+
+            if(i == turn){
+                players.get(i).getStyleClass().add("current-player-name");
+            }
+        }
     }
 
     //I am not proud of this
+
     public void setCommonGoalCard(int i, int points) {
         var cardUrl = getClass().getResource("/sprites/common_goal_cards/" + i + ".jpg");
         Image cardImage = new Image(cardUrl.toString());
@@ -196,7 +206,6 @@ public class BoardController extends GuiController {
             scoringTokenBottom.setImage(tokenImage);
         }
     }
-
     public void setPersonalGoalCard(int id) {
         var imageUrl = getClass().getResource("/sprites/personal_goal_cards/" + id + ".png");
         personalGoalCard.setImage(new Image(imageUrl.toString()));
@@ -250,6 +259,7 @@ public class BoardController extends GuiController {
     public void setDisableCommands(boolean b) {
         boardStackPane.setDisable(b); //Can't touch the board if it's not your turn
         boardStackPane.setEffect( b ? new SepiaTone() : null );
+        notYourTurnLabel.setVisible(b);
     }
 
     public void notifyValidMove() {
@@ -258,5 +268,58 @@ public class BoardController extends GuiController {
 
     public void notifyInvalidMove() {
         boardViewState.notifyInvalidMove();
+    }
+
+    public void addPlayer(String username, int score, boolean isClient) {
+        players.add(new Player(username, score));
+
+        if (isClient)
+            this.myName = username;
+
+        var playerLabel = new Label(players.size() +") "+username);
+        playerLabel.getStyleClass().add("player-name");
+        playersList.getChildren().add(playerLabel);
+    }
+
+    public void updatePlayerScore(String player, int score) {
+        var updatedPlayer = players.stream()
+                .filter(p->p.getName().equals(player)).toList().get(0);
+        updatedPlayer.setPoints(score);
+    }
+
+    public void endGame(String winner){
+        System.out.println("WINNER:");
+        setDisabledInterface(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/end_game_view.fxml"));
+        try {
+            Pane endgameView = fxmlLoader.load();
+            EndgameWindowController endgameWindowController = fxmlLoader.getController();
+
+            players.sort(Comparator.comparingInt(Player::getPoints).reversed());
+
+            endgameWindowController.setWinner(winner, players.get(0).getPoints());
+
+            for(int i = 0; i<players.size(); i++){
+                var p = players.get(i);
+                if(p.getName().equals(winner)) continue;
+                endgameWindowController.setOtherPlayer(p.getName(), p.getPoints(), i+1);
+            }
+
+            window.getChildren().add(endgameView);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    //Might be buggy with the visuals, haven't tested this
+    public void updatePlayerConnection(String player, boolean isDisconnected) {
+        if(isDisconnected){
+            for(Node n: playersList.getChildren()){
+                Label label = (Label) n;
+                if(label.getText().substring(3).contains(player)){
+                    label.getStyleClass().add("disconnected-player-name");
+                }
+            }
+        }
     }
 }
