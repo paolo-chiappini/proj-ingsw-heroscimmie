@@ -19,15 +19,14 @@ public class ViewGui extends View {
 
             GuiController controller = SceneManager.getCurrentController();
 
-            if (controller instanceof MenuWaitGameController) {
-
+            if (controller instanceof  SubMenuController) {
+                ((SubMenuController) controller).successfullyJoined();
+                controller = SceneManager.getCurrentController();
                 ((MenuWaitGameController) controller).startGame();
                 finishSetup.run();
 
-            } else if (controller instanceof SubMenuController) {
+            } else if (controller instanceof MenuWaitGameController) {
 
-                ((SubMenuController) controller).successfullyJoined();
-                controller = SceneManager.getCurrentController();
                 ((MenuWaitGameController) controller).startGame();
                 finishSetup.run();
 
