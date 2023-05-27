@@ -44,6 +44,7 @@ public class BoardController extends GuiController {
     public HBox selectedTilesList;
     public Label selectedTilesListLabel;
     public Label yourTurnLabel;
+    public Label notYourTurnLabel;
     public ImageView boardImage;
     public StackPane boardStackPane;
     public GridPane foregroundGridPane;
@@ -85,8 +86,6 @@ public class BoardController extends GuiController {
         this.boardViewState = new PickUpTilesState(this);
 
         EventHandlers.set(this);
-        yourTurnLabel.setVisible(false);
-
 
         //Other bookshelves view and controller initialization
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/bookshelves_view.fxml"));
@@ -269,6 +268,7 @@ public class BoardController extends GuiController {
     public void setDisableCommands(boolean b) {
         boardStackPane.setDisable(b); //Can't touch the board if it's not your turn
         boardStackPane.setEffect( b ? new SepiaTone() : null );
+        notYourTurnLabel.setVisible(b);
     }
 
     public void notifyValidMove() {

@@ -165,3 +165,9 @@
     -fx-border-width: 5px;
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
 }
+
+.not-your-turn-label{
+    -fx-font-weight: bold;
+    -fx-font-size: 4em;
+    -fx-text-fill: rgba(0, 0, 0, 0.8);
+}

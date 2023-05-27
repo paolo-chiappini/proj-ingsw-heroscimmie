@@ -63,6 +63,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                 </GridPane>
+            <Label fx:id="notYourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="not-your-turn-label" text="It's not your turn" visible="false" />
             </StackPane>
             <VBox alignment="CENTER" fillWidth="false" spacing="25.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                 <HBox styleClass="card">
@@ -120,7 +121,7 @@
                 <GridPane.margin>
                     <Insets top="280.0" />
                 </GridPane.margin>
-                <ImageView fx:id="personalGoalCard" fitWidth="180.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
+                <ImageView fx:id="personalGoalCard" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
             </HBox>
         </GridPane>
         <GridPane fx:id="foregroundGridPane" prefHeight="700.0" prefWidth="2480.0">
