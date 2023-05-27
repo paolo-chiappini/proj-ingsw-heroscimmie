@@ -63,7 +63,7 @@
                         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                     </rowConstraints>
                 </GridPane>
-            <Label fx:id="notYourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="not-your-turn-label" text="It's not your turn" visible="false" />
+            <Label fx:id="notYourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="not-your-turn-label" text="It's not your turn" />
             </StackPane>
             <VBox alignment="CENTER" fillWidth="false" spacing="25.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                 <HBox styleClass="card">
