@@ -209,7 +209,11 @@ public class ViewGui extends View {
 
     @Override
     public void setCurrentTurn(int turn) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).setCurrentTurn(turn));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
@@ -240,13 +244,4 @@ public class ViewGui extends View {
 
     @Override
     public void reset() {}
-//    @Override
-//    public void notifyCorrectPick() {
-//        GuiController controller = SceneManager.getCurrentController();
-//        if (controller instanceof BoardController)
-//            Platform.runLater(()->((BoardController)controller).notifyValidMove());
-//        else
-//            throw new RuntimeException("Wrong GUI state");
-
-//    }
 }

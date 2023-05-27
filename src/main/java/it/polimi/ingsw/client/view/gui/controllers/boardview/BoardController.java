@@ -55,6 +55,7 @@ public class BoardController extends GuiController {
     public ImageView personalGoalCard;
     public Button toggleBookshelvesButton;
     public StackPane bookshelfPane;
+    public VBox playersList;
 
 
     //Internal stuff
@@ -67,6 +68,7 @@ public class BoardController extends GuiController {
     private String myName;
 
     private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>(); //Used for updating GUI elements
+    private int playerIndex = 0;
 
     public void startStage(Stage stage) {
         foregroundGridPane.setPickOnBounds(false); //For mouse transparency
@@ -79,6 +81,7 @@ public class BoardController extends GuiController {
         //Initialize graphic elements
         this.board = new TilesBoard(this, gridPaneBoard);
         this.bookshelf = new Bookshelf(this, columnsBox, columnsForegroundBox);
+
         this.boardViewState = new PickUpTilesState(this);
 
         EventHandlers.set(this);
@@ -164,10 +167,26 @@ public class BoardController extends GuiController {
         bookshelvesViewController.addBookshelf(bookshelf, playerName);
     }
 
-    //TODO finish this
+
     public void addPlayer(String username, int score, boolean isClient) {
+        playerIndex++;
         if (isClient)
             this.myName = username;
+
+        var playerLabel = new Label(playerIndex +") "+username);
+        playerLabel.getStyleClass().add("player-name");
+        playersList.getChildren().add(playerLabel);
+    }
+
+    public void setCurrentTurn(int turn) {
+        var players = playersList.getChildren();
+        for(int i = 0; i < players.size(); i++){
+            players.get(i).getStyleClass().remove("current-player-name");
+
+            if(i == turn){
+                players.get(i).getStyleClass().add("current-player-name");
+            }
+        }
     }
 
     //I am not proud of this

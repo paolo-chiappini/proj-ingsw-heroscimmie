@@ -106,9 +106,15 @@
 }
 
 .player-name{
-    -fx-font-weight: bold;
+    -fx-font-weight: normal;
     -fx-font-size: 18px;
     -fx-text-fill: -fx-button-text-color;
+}
+
+.current-player-name{
+    -fx-font-weight: bold;
+    -fx-font-size: 20px;
+    -fx-text-fill: -fx-color5-ok;
 }
 
 .tile-list-label{
