@@ -13,11 +13,6 @@ public class ChatController extends GuiController {
     public StackPane window;
     public TextField messageField;
     public TextArea chatTextArea;
-    private BoardController boarController;
-
-    public void setup(BoardController controller){
-        this.boarController = controller;
-    }
 
     public void send(){
         var message = messageField.getText().trim();

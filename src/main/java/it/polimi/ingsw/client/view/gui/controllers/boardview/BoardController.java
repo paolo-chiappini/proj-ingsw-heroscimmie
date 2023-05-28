@@ -115,7 +115,7 @@ public class BoardController extends GuiController {
 
             window.getChildren().add(chatViewRootPane);
             this.chatViewController = chatLoader.getController();
-            chatViewController.setup(this);
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
