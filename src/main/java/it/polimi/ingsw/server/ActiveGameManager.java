@@ -222,7 +222,7 @@ public abstract class ActiveGameManager {
      * @throws IllegalActionException when trying to stop a game that doesn't exist.
      */
     public static void stopGame() {
-        if (activeGameInstance == null) {
+        if (activeGameInstance == null && !existsActiveLobby()) {
             throw new IllegalActionException("No active game to stop");
         }
 
@@ -244,7 +244,7 @@ public abstract class ActiveGameManager {
      * the size is not within the acceptable range.
      */
     public static void setLobbySize(int size) {
-        if (lobby != null) {
+        if (existsActiveLobby()) {
             throw new IllegalActionException("Cannot create new lobby, game already in progress/setup");
         }
 
@@ -262,7 +262,14 @@ public abstract class ActiveGameManager {
      * if a game is already in progress.
      */
     public static boolean canStartGame() {
-        return lobby != null && lobby.size() == lobbySize && !gameStarted;
+        return existsActiveLobby() && lobby.size() == lobbySize && !gameStarted;
+    }
+
+    /**
+     * @return true if a lobby exists.
+     */
+    public static boolean existsActiveLobby() {
+        return lobby != null && lobby.size() > 0;
     }
 
     /**
