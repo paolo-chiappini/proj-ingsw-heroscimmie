@@ -1,0 +1,61 @@
+* {
+    -fx-color1: #a34313;
+    -fx-color2: #903b12;
+    -fx-color3: #9d4024;
+    -fx-color5: #cb622a;
+    -fx-higlighted-color5: rgba(255, 136, 72, 0.68);
+    -fx-color6: #c54e2c;
+    -fx-button-text-color: #e8ce93;
+    -fx-text-color: #313131;
+
+    -fx-color1-undo: #a31313;
+    -fx-color2-undo: #901212;
+    -fx-color3-undo: #9d2424;
+    -fx-color4-undo: #cb2a2a;
+    -fx-higlighted-color4-undo: rgba(255, 72, 72, 0.68);
+    -fx-color5-undo: #c52c2c;
+}
+
+.window{
+    -fx-border-color: linear-gradient(from 0% 20% to 100% 80%, #7e4515 0%, #754609 100%);
+    -fx-border-radius: 2px;
+    -fx-border-width: 5px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
+}
+
+
+.text-field{
+    -fx-font-weight: bold;
+    -fx-font-size: 15px;
+    -fx-text-fill: -fx-text-color;
+}
+
+.button {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1 0%, -fx-color2 100%),
+            -fx-color3,
+            -fx-color5,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color5, -fx-color6);
+    -fx-background-radius: 2px;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
+    -fx-font-weight: bold;
+    -fx-text-fill: -fx-text-color;
+}
+
+.button:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1 0%, -fx-color2 100%),
+            -fx-color3,
+            -fx-color5,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color5, -fx-color6);
+}
+
+.button:pressed {
+    -fx-background-insets:
+            2 0 0 0,
+            0 2 0 0,
+            0 0 2 0,
+            0 0 0 2
+}
+
+

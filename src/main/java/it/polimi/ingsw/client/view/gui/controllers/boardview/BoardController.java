@@ -15,11 +15,13 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -57,6 +59,10 @@ public class BoardController extends GuiController {
     public Button toggleBookshelvesButton;
     public StackPane bookshelfPane;
     public VBox playersList;
+    public Button chatButton;
+    public Button saveGameButton;
+    public Circle notificationChip;
+    public Label scoreLabel;
 
 
     //Internal stuff
@@ -66,11 +72,12 @@ public class BoardController extends GuiController {
     private Bookshelf bookshelf;
     private Pane bookshelvesView;
     private BookshelvesViewController bookshelvesViewController;
+
     private String myName;
 
     private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>(); //Used for updating GUI elements
     private final List<Player> players = new ArrayList<>();
-
+    private ChatController chatViewController;
     public void startStage(Stage stage) {
 
         foregroundGridPane.setPickOnBounds(false); //For mouse transparency
@@ -100,6 +107,22 @@ public class BoardController extends GuiController {
             gamePlane.add(bookshelvesView, 3, 0);
 
             this.bookshelvesViewController = fxmlLoader.getController();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        //Chat view
+        FXMLLoader chatLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/chat_view.fxml"));
+        try {
+            Pane chatViewRootPane = chatLoader.load();
+            chatViewRootPane.setVisible(false);
+
+            window.getChildren().add(chatViewRootPane);
+            this.chatViewController = chatLoader.getController();
+            //Autoscroll
+            chatViewController.scrollPane.vvalueProperty()
+                    .bind(chatViewController.chatTextArea.heightProperty());
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -285,24 +308,30 @@ public class BoardController extends GuiController {
         var updatedPlayer = players.stream()
                 .filter(p->p.getName().equals(player)).toList().get(0);
         updatedPlayer.setPoints(score);
+        if (player.equals(myName))
+            scoreLabel.setText(String.valueOf(score));
     }
 
     //Might be buggy with the visuals, haven't tested this
     public void updatePlayerConnection(String player, boolean isDisconnected) {
         for(Node n: playersList.getChildren()){
             Label label = (Label) n;
-            if(label.getText().substring(3).contains(player) && isDisconnected){
-                label.getStyleClass().add("disconnected-player-name");
-                label.setText(label.getText()+" (disconnected)");
-            }else {
-                label.setText(label.getText().replace(" (disconnected)", ""));
-                label.getStyleClass().remove("disconnected-player-name");
+
+            if(label.getText().contains(player)){
+                if(isDisconnected){
+                    label.getStyleClass().add("disconnected-player-name");
+                    label.setText(label.getText()+" (disconnected)");
+                }
+                else {
+                    label.getStyleClass().remove("disconnected-player-name");
+                    label.setText(label.getText().replace(" (disconnected)", ""));
+                }
+
             }
         }
     }
 
     public void endGame(String winner){
-        System.out.println("WINNER:");
         setDisabledInterface(true);
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/end_game_view.fxml"));
         try {
@@ -323,5 +352,19 @@ public class BoardController extends GuiController {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public void saveGame(MouseEvent ignoredMouseEvent) {
+        getView().notifySaveCommand();
+    }
+
+    public void openChat(MouseEvent ignoredMouseEvent) {
+        chatViewController.openChat();
+        notificationChip.setVisible(false);
+    }
+
+    public void addChatMessage(String message, String sender, boolean isWhisper) {
+        if(!chatViewController.window.isVisible()) notificationChip.setVisible(true);
+        chatViewController.receiveChatMessage(message, sender, isWhisper);
     }
 }

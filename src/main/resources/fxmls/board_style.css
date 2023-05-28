@@ -21,6 +21,13 @@
     -fx-color4-undo: #cb2a2a;
     -fx-higlighted-color4-undo: rgba(255, 72, 72, 0.68);
     -fx-color5-undo: #c52c2c;
+
+    -fx-color1-chat: #132ba3;
+    -fx-color2-chat: #122b90;
+    -fx-color3-chat: #24349d;
+    -fx-color4-chat: #2a3fcb;
+    -fx-higlighted-color4-chat: rgba(72, 109, 255, 0.68);
+    -fx-color5-chat: #2c50c5;
 }
 
 .button {
@@ -37,6 +44,8 @@
     -fx-font-size: 2.1em;
     -fx-text-fill: -fx-button-text-color;
 }
+
+
 
 .button:hover {
     -fx-background-color:
@@ -96,6 +105,12 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
 }
 
+.score-label{
+    -fx-font-weight: bold;
+    -fx-font-size: 60;
+    -fx-text-fill: -fx-color1-ok;
+}
+
 .bookshelves-view{
     -fx-background-color: rgba(126,69,21,0.5);
     -fx-background-radius: 7px;
@@ -120,7 +135,7 @@
 .disconnected-player-name{
     -fx-font-weight: bold;
     -fx-font-size: 18px;
-    -fx-text-fill: -fx-color1-undo;
+    -fx-text-fill: rgb(255, 0, 0);
 }
 
 .tile-list-label{
@@ -147,7 +162,6 @@
             -fx-color3-undo,
             -fx-color4-undo,
             radial-gradient(center 50% 50%, radius 100%, -fx-color4-undo, -fx-color5-undo);
-    -fx-background-radius: 200px;
 }
 
 .undo:hover {
@@ -156,6 +170,41 @@
             -fx-color3-undo,
             -fx-color4-undo,
             radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-undo, -fx-color5-undo);
+}
+
+.save-button{
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
+            -fx-color3-undo,
+            -fx-color4-undo,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4-undo, -fx-color5-undo);
+    -fx-font-size: 1.5em;
+}
+
+
+.save-button:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
+            -fx-color3-undo,
+            -fx-color4-undo,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-undo, -fx-color5-undo);
+}
+
+.chat-button{
+    -fx-padding: 8 20 15 20;
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-chat 0%, -fx-color2-chat 100%),
+            -fx-color3-chat,
+            -fx-color4-chat,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4-chat, -fx-color5-chat);
+}
+
+.chat-button:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-chat 0%, -fx-color2-chat 100%),
+            -fx-color3-chat,
+            -fx-color4-chat,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-chat, -fx-color5-chat);
 }
 
 .turn-notification-label {
@@ -176,4 +225,8 @@
     -fx-font-weight: bold;
     -fx-font-size: 4em;
     -fx-text-fill: rgba(0, 0, 0, 0.8);
+}
+
+.notification{
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }

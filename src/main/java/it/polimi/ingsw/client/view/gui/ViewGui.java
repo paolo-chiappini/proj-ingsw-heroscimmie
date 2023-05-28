@@ -117,8 +117,7 @@ public class ViewGui extends View {
     }
 
     @Override
-    public void updateGameStatus(boolean isGameOver) {
-    }
+    public void updateGameStatus(boolean isGameOver) {}
 
     @Override
     public void handleWinnerSelected(String winner) {
@@ -186,7 +185,6 @@ public class ViewGui extends View {
     public void updatePlayerConnectionStatus(String player, boolean isDisconnected) {
         GuiController controller = SceneManager.getCurrentController();
         if (controller instanceof BoardController)
-            //TODO test this
             Platform.runLater(()->((BoardController)controller).updatePlayerConnection(player, isDisconnected));
         else
             throw new RuntimeException("Wrong GUI state");
@@ -230,7 +228,11 @@ public class ViewGui extends View {
 
     @Override
     public void addMessage(String message, String sender, boolean isWhisper) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).addChatMessage(message, sender, isWhisper));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override

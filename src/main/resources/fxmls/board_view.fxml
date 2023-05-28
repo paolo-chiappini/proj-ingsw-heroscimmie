@@ -13,6 +13,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
 <?import javafx.scene.shape.SVGPath?>
 
 <StackPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="700.0" prefWidth="1240.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.BoardController">
@@ -32,6 +33,11 @@
             <rowConstraints>
                 <RowConstraints fillHeight="false" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             </rowConstraints>
+         <Button fx:id="saveGameButton" alignment="CENTER" mnemonicParsing="false" styleClass="save-button" text="Save Game" GridPane.valignment="TOP">
+            <GridPane.margin>
+               <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+            </GridPane.margin>
+         </Button>
             <StackPane fx:id="boardStackPane" styleClass="board" GridPane.hgrow="NEVER" GridPane.valignment="BOTTOM" GridPane.vgrow="NEVER">
                 <GridPane.margin>
                     <Insets bottom="20.0" left="10.0" />
@@ -65,7 +71,7 @@
                 </GridPane>
             <Label fx:id="notYourTurnLabel" alignment="CENTER" contentDisplay="CENTER" mouseTransparent="true" prefHeight="118.0" prefWidth="653.0" styleClass="not-your-turn-label" text="It's not your turn" />
             </StackPane>
-            <VBox alignment="CENTER" fillWidth="false" spacing="25.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
+            <VBox alignment="CENTER" fillWidth="false" spacing="35.0" GridPane.columnIndex="1" GridPane.valignment="BOTTOM">
                 <HBox styleClass="card">
                     <ImageView fx:id="commonGoalCardTop" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
@@ -73,21 +79,20 @@
                     <ImageView fx:id="commonGoalCardBottom" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
                 <Pane fx:id="selectedTilesBox1">
-                    <VBox fx:id="playersList" layoutY="25.0" prefHeight="183.0" prefWidth="300.0" spacing="15.0"
-                          styleClass="tile-list">
+                    <VBox fx:id="playersList" layoutY="25.0" maxHeight="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="170.0" prefWidth="280.0" spacing="10.0" styleClass="tile-list">
                         <padding>
-                            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                            <Insets bottom="10.0" left="10.0" top="10.0" />
                         </padding>
                     </VBox>
-                    <Label fx:id="selectedTilesListLabel1" styleClass="tile-list-label" text="Players"/>
+                    <Label fx:id="selectedTilesListLabel1" styleClass="tile-list-label" text="Players" />
                 </Pane>
             <GridPane.margin>
                <Insets bottom="20.0" />
             </GridPane.margin>
             </VBox>
-            <ImageView fx:id="scoringTokenTop" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="-8.5" translateX="194.0" translateY="-184.0" GridPane.columnIndex="1" />
-            <ImageView fx:id="scoringTokenBottom" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="-8.5" translateX="194.0" translateY="10.0" GridPane.columnIndex="1" />
-            <Button fx:id="goToBookshelfButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Bookshelves 👉" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <ImageView fx:id="scoringTokenTop" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="-8.5" translateX="194.0" translateY="-190.0" GridPane.columnIndex="1" />
+            <ImageView fx:id="scoringTokenBottom" fitHeight="72.0" fitWidth="72.0" pickOnBounds="true" preserveRatio="true" rotate="-8.5" translateX="194.0" translateY="13.0" GridPane.columnIndex="1" />
+            <Button fx:id="goToBookshelfButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" text="Bookshelves 👉" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          <Button fx:id="toggleBookshelvesButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="225.0" text="Change view" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="TOP">
             <GridPane.margin>
                <Insets top="75.0" />
@@ -115,13 +120,22 @@
                     <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mouseTransparent="true" prefHeight="385.0" prefWidth="57.0" rotate="180.0" spacing="10.0" />
                 </HBox>
             </StackPane>
-            <Button fx:id="goToBoardButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="190.0" text="👈 Board" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button fx:id="goToBoardButton" mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" text="👈 Board" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <HBox styleClass="card" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                 <GridPane.margin>
                     <Insets top="280.0" />
                 </GridPane.margin>
                 <ImageView fx:id="personalGoalCard" fitWidth="200.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
             </HBox>
+            <Pane fx:id="selectedTilesBox2" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.valignment="TOP">
+                <GridPane.margin>
+                    <Insets top="60.0" />
+                </GridPane.margin>
+                <HBox alignment="CENTER" layoutY="25.0" prefHeight="110.0" prefWidth="150.0" spacing="15.0" styleClass="tile-list">
+                    <Label fx:id="scoreLabel" styleClass="score-label" text="69" />
+                </HBox>
+                <Label styleClass="tile-list-label" text="Your Score" />
+            </Pane>
         </GridPane>
         <GridPane fx:id="foregroundGridPane" prefHeight="700.0" prefWidth="2480.0">
             <columnConstraints>
@@ -144,13 +158,13 @@
                 <HBox fx:id="selectedTilesList" alignment="CENTER" layoutY="25.0" prefHeight="110.0" prefWidth="260.0" spacing="15.0" styleClass="tile-list" />
                 <Label fx:id="selectedTilesListLabel" styleClass="tile-list-label" text="Selected Tiles" />
             </Pane>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="20.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
-                <Button fx:id="undoButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="190.0" styleClass="undo">
+            <VBox alignment="CENTER" prefHeight="200.0" spacing="20.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+                <Button fx:id="undoButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="70.0" prefWidth="210.0" styleClass="undo">
                     <graphic>
                         <SVGPath content="M596.676923 248.123077c204.8 0 372.184615 165.415385 372.184615 372.184615s-167.384615 372.184615-372.184615 372.184616h-161.476923c-15.753846 0-25.6-11.815385-25.6-27.569231v-63.015385c0-15.753846 11.815385-29.538462 27.569231-29.538461h159.507692c139.815385 0 252.061538-112.246154 252.061539-252.061539s-112.246154-252.061538-252.061539-252.061538H322.953846s-15.753846 0-21.661538 1.969231c-15.753846 7.876923-11.815385 19.692308 1.96923 33.476923l96.492308 96.492307c11.815385 11.815385 9.846154 29.538462-1.969231 41.353847L354.461538 584.861538c-11.815385 11.815385-25.6 11.815385-37.415384 1.969231l-256-256c-9.846154-9.846154-9.846154-25.6 0-35.446154L315.076923 41.353846c11.815385-11.815385 31.507692-11.815385 41.353846 0l41.353846 41.353846c11.815385 11.815385 11.815385 31.507692 0 41.353846l-96.492307 96.492308c-11.815385 11.815385-11.815385 25.6 7.876923 25.6h13.784615l273.723077 1.969231z" fill="#e5cb93" scaleX="0.03" scaleY="0.03" />
                     </graphic>
                 </Button>
-                <Button fx:id="confirmButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="190.0" prefWidth="190.0" styleClass="ok">
+                <Button fx:id="confirmButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="200.0" prefWidth="200.0" styleClass="ok">
                     <graphic>
                         <SVGPath content="m7.7,404.6c0,0 115.2,129.7 138.2,182.68l99,0c41.5-126.7 202.7-429.1 340.92-535.1c28.6-36.8-43.3-52-101.35-27.62-87.5,36.7-252.5,317.2-283.3,384.64-43.7,11.5-89.8-73.7-89.84-73.7z" fill="#e5cb93" scaleX="0.13" scaleY="0.13" />
                     </graphic>
@@ -161,6 +175,12 @@
                <Insets left="300.0" />
             </GridPane.margin>
          </Label>
+         <Button fx:id="chatButton" alignment="CENTER" mnemonicParsing="false" styleClass="chat-button" text="Open Chat" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP">
+            <GridPane.margin>
+               <Insets top="30.0" />
+            </GridPane.margin>
+         </Button>
+         <Circle fx:id="notificationChip" fill="#ff6200" radius="17.0" stroke="#d32e00" strokeLineCap="ROUND" strokeLineJoin="BEVEL" strokeType="INSIDE" strokeWidth="0.0" styleClass="notification" translateX="80.0" translateY="15.0" visible="false" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="TOP" />
         </GridPane>
     </AnchorPane>
 </StackPane>
