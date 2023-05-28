@@ -438,12 +438,8 @@ public class ClientController implements ViewListener {
             return;
         }
 
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        body.put("row1", row1);
-        body.put("row2", row2);
-        body.put("col1", col1);
-        body.put("col2", col2);
+        var body = setJsonObjectForMoveRequest();
+
         body.put("first_tile", first);
         body.put("second_tile", second);
         body.put("third_tile", third);
@@ -481,12 +477,7 @@ public class ClientController implements ViewListener {
             return;
         }
 
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        body.put("row1", row1);
-        body.put("row2", row2);
-        body.put("col1", col1);
-        body.put("col2", col2);
+        var body = setJsonObjectForMoveRequest();
         this.row1 = row1;
         this.col1 = col1;
         this.row2 = row2;
@@ -495,6 +486,17 @@ public class ClientController implements ViewListener {
         this.second = 2;
         this.third = 3;
         client.sendRequest("PICK", body.toString());
+    }
+
+    public JSONObject setJsonObjectForMoveRequest(){
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("row1", row1);
+        body.put("row2", row2);
+        body.put("col1", col1);
+        body.put("col2", col2);
+
+        return body;
     }
 
     /**
