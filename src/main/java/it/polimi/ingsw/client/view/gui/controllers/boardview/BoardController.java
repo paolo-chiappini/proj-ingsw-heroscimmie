@@ -117,6 +117,9 @@ public class BoardController extends GuiController {
 
             window.getChildren().add(chatViewRootPane);
             this.chatViewController = chatLoader.getController();
+            //Autoscroll
+            chatViewController.scrollPane.vvalueProperty()
+                    .bind(chatViewController.chatTextArea.heightProperty());
 
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -346,7 +349,7 @@ public class BoardController extends GuiController {
         getView().notifySaveCommand();
     }
 
-    public void openChat(MouseEvent mouseEvent) {
+    public void openChat(MouseEvent ignoredMouseEvent) {
         chatViewController.openChat();
         notificationChip.setVisible(false);
     }

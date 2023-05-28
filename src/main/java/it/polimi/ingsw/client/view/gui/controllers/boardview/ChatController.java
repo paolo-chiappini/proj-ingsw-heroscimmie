@@ -2,17 +2,21 @@ package it.polimi.ingsw.client.view.gui.controllers.boardview;
 
 import it.polimi.ingsw.client.view.gui.GuiController;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class ChatController extends GuiController {
     public Button sendButton;
     public Button closeChatButton;
     public StackPane window;
     public TextField messageField;
-    public TextArea chatTextArea;
+    public TextFlow chatTextArea;
+    public ScrollPane scrollPane;
 
     public void send(){
         var message = messageField.getText().trim();
@@ -47,11 +51,13 @@ public class ChatController extends GuiController {
         window.setVisible(true);
     }
 
-    private void addMessage(String message, String sender){
-        chatTextArea.appendText(sender+") "+message+"\n");
-    }
-
     public void receiveChatMessage(String message, String sender, boolean isWhisper) {
-        addMessage(message, sender + (isWhisper?" whispers":"") );
+        Text t = new Text();
+        if(isWhisper){
+            t.setFill(Color.rgb(0, 0, 0, 0.5));
+            t.setStyle("-fx-font-style: italic");
+        }
+        t.setText(sender+(isWhisper?" whispers":"")+") "+message+"\n");
+        chatTextArea.getChildren().add(t);
     }
 }

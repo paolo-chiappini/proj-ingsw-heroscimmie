@@ -23,11 +23,6 @@
     -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 5, 0, 1, 1);
 }
 
-.text-area{
-    -fx-font-weight: bold;
-    -fx-font-size: 15px;
-    -fx-text-fill: -fx-text-color;
-}
 
 .text-field{
     -fx-font-weight: bold;
