@@ -72,16 +72,15 @@
                 <HBox styleClass="card">
                     <ImageView fx:id="commonGoalCardBottom" fitHeight="160.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true" />
                 </HBox>
-            <Pane fx:id="selectedTilesBox1">
-               <children>
-                  <VBox fx:id="playersList" layoutY="25.0" prefHeight="183.0" prefWidth="300.0" spacing="15.0" styleClass="tile-list">
-                     <padding>
-                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-                     </padding>
-                  </VBox>
-                  <Label fx:id="selectedTilesListLabel1" styleClass="tile-list-label" text="Players" />
-               </children>
-            </Pane>
+                <Pane fx:id="selectedTilesBox1">
+                    <VBox fx:id="playersList" layoutY="25.0" prefHeight="183.0" prefWidth="300.0" spacing="15.0"
+                          styleClass="tile-list">
+                        <padding>
+                            <Insets bottom="10.0" left="15.0" right="15.0" top="10.0"/>
+                        </padding>
+                    </VBox>
+                    <Label fx:id="selectedTilesListLabel1" styleClass="tile-list-label" text="Players"/>
+                </Pane>
             <GridPane.margin>
                <Insets bottom="20.0" />
             </GridPane.margin>
