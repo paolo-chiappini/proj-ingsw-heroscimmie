@@ -40,6 +40,7 @@ public class MenuLoadGameController extends SubMenuController {
     }
     
     public void populateList(String[] savedGames){
+        if(savedGames == null) return;
         gamesList.getItems().addAll(savedGames);
     }
 
