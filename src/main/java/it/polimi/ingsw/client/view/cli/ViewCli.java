@@ -4,7 +4,6 @@ import it.polimi.ingsw.client.view.View;
 import it.polimi.ingsw.client.view.cli.graphics.util.ICliRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleColorRenderer;
 import it.polimi.ingsw.client.view.cli.graphics.util.SimpleTextRenderer;
-import it.polimi.ingsw.util.observer.ViewListener;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,8 +39,7 @@ public class ViewCli extends View {
     }
 
 
-    // TODO
-    /*@Override*/
+    @Override
     public void run() {
         connectToServer();
         running = true;
@@ -60,6 +58,12 @@ public class ViewCli extends View {
 
     private record Input(String command, String[] args) {}
 
+    /**
+     * Parses the input and differentiate between the header of the message,
+     * i.e. the method to be invoked, and the body of the message.
+     * @param input is the input entered by the user
+     * @return formatted input
+     */
     private Input parseInputString(String input) {
         // guard against escape chars
         if (input == null || input.isEmpty()) return new Input("", new String[]{""});
@@ -70,6 +74,11 @@ public class ViewCli extends View {
         return new Input(tokens[0], args);
     }
 
+    /**
+     * Parses the input and distinguishes between the row and the column number of the tile to collect.
+     * @param input is the input entered by the user
+     * @return the row and column number of the tile to collect
+     */
     private int[] parseBoardCoordinates(String input) {
         char rowChar = input.charAt(0);
         int row, col;
@@ -103,6 +112,13 @@ public class ViewCli extends View {
         );
     }
 
+    /**
+     * Checks if the entered input complies with the limits, i.e. falls within the acceptance range.
+     * @param input is the input entered by the user
+     * @param inferior is lower limit of the range
+     * @param superior is the upper limit of the range
+     * @return true if the input is valid
+     */
     private boolean checkInput(String input, int inferior, int superior) {
         try {
             int number = Integer.parseInt(input);
@@ -134,6 +150,10 @@ public class ViewCli extends View {
         out.println("Enter 'drop' + column number (you can select a number among 1 and 5)\nExample: drop 1");
     }
 
+    /**
+     * Notifies the controller that it has received user input to send to the server.
+     * @param input is the input received from the user and formatted by parseInputString()
+     */
     private void parseInput(Input input) {
         switch (input.command().toLowerCase()) {
             case "name" -> {
@@ -142,7 +162,7 @@ public class ViewCli extends View {
                     askTypeOfGame();
                 }
             }
-            case "list" -> notifyListeners(ViewListener::onListSavedGames);
+            case "list" -> notifyListCommand();
             case "new" -> {
                 if (checkInput(input.args[0], 2, 4))
                     notifyNewGameCommand(Integer.parseInt(input.args[0]));
@@ -181,11 +201,9 @@ public class ViewCli extends View {
             case "drop" -> {
                 if (checkInput(input.args[0], 1, 5)) {
                     notifyDropCommand(Integer.parseInt(input.args[0]) - 1);
-                    notifyListeners(ViewListener::onEndOfTurn);
-
-                    hasPickedTiles = false;
-                    if (lastInputGeneratedError && canSendCommands) askNumberOfColumn();
+                    if (canSendCommands && !lastInputGeneratedError) hasPickedTiles = false;
                 }
+                else askNumberOfColumn();
             }
             case "help" -> System.out.println("""
                     Possible commands:

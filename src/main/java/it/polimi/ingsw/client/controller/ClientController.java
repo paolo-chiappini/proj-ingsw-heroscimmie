@@ -30,7 +30,6 @@ public class ClientController implements ViewListener {
     private List<ClientCommonGoalCard> commonGoalCards;
     private ClientTurnState turnState;
     private final View view;
-
     private int row1, row2, col1, col2, first, second, third;
     private boolean clientIsInGame;
 
@@ -87,6 +86,10 @@ public class ClientController implements ViewListener {
         }
     }
 
+    /**
+     * Manages the disconnection of one or more players.
+     * @param body is the body of the message received from the server
+     */
     public void handleDisconnections(JSONObject body) {
         if (!body.has("disconnected_players") || !body.has("connected_players")) return;
         JSONArray disconnectedPlayers = body.getJSONArray("disconnected_players");
@@ -105,8 +108,15 @@ public class ClientController implements ViewListener {
             String username = connectedPlayers.getString(i);
             view.updatePlayerConnectionStatus(username, false);
         }
+
+        //if (!clientIsInGame) return;
+        //view.finalizeUpdate();
     }
 
+    /**
+     * Shows the list of game saves.
+     * @param message is the message received from the server
+     */
     public void onListReceived(Message message) {
         JSONObject body = new JSONObject(message.getBody());
         JSONArray files = body.getJSONArray("files");
@@ -120,6 +130,10 @@ public class ClientController implements ViewListener {
         }
     }
 
+    /**
+     * Format the game save file name.
+     * @param filename is the name of the game save
+     */
     private String parseSavedGameDateFormat(String filename) {
         String millisecondsString = filename.substring(filename.indexOf("_") + 1, filename.indexOf(".json"));
         long millis = Long.parseLong(millisecondsString);
@@ -129,6 +143,10 @@ public class ClientController implements ViewListener {
         return dateFormat.format(date);
     }
 
+    /**
+     * Shows the message received from other users in the chat.
+     * @param message is the message received from the server
+     */
     public void onChatMessageReceived(Message message) {
         if (!clientIsInGame) return;
 
@@ -146,7 +164,10 @@ public class ClientController implements ViewListener {
         view.finalizeUpdate();
     }
 
-
+    /**
+     * Updates the virtual model, the view of the game and the turn of the player.
+     * @param message is the message received from the server
+     */
     public void update(Message message) {
         if (!clientIsInGame) return;
 
@@ -178,7 +199,7 @@ public class ClientController implements ViewListener {
 
         view.finalizeUpdate();
         if (body.has("winner")) {
-            System.out.println("YOOOO we have a winner!");
+            System.out.println("\nYOOOO we have a winner!");
             view.handleWinnerSelected(body.getString("winner"));
             // reset model and view
             resetVirtualModelAndView();
@@ -187,6 +208,9 @@ public class ClientController implements ViewListener {
     }
 
     //Differentiation between initialization and reset of the view and virtual model
+    /**
+     * Resets the virtual model and the game view.
+     */
     private void resetVirtualModelAndView() {
         board = new ClientBoard();
         turnState = new ClientTurnState();
@@ -195,6 +219,9 @@ public class ClientController implements ViewListener {
         view.reset();
     }
 
+    /**
+     * Initializes the virtual model by instantiating all game objects.
+     */
     private void initVirtualModelAndView(JSONObject body, Message message) {
         board = new ClientBoard();
         turnState = new ClientTurnState();
@@ -213,6 +240,10 @@ public class ClientController implements ViewListener {
         view.startGameView(runLater);
     }
 
+    /**
+     * Initializes the game view when server starts the game
+     * @param message is the message received from the server
+     */
     public void onGameStart(Message message) {
         JSONObject body = new JSONObject(message.getBody());
         JSONArray players = body.getJSONObject("serialized").getJSONArray("players_order");
@@ -229,6 +260,9 @@ public class ClientController implements ViewListener {
 
     }
 
+    /**
+     * Adds listeners (view) to the virtual model
+     */
     private void setupModelListeners() {
         board.addListener(view);
         turnState.addListener(view);
@@ -236,6 +270,10 @@ public class ClientController implements ViewListener {
         commonGoalCards.forEach(goal -> goal.addListener(view));
     }
 
+    /**
+     * Adds players and common goal cards to the game
+     * @param gameState is the state of the game received from the server
+     */
     public void setupGameFromJson(JSONObject gameState) {
         JSONObject serialized = gameState.getJSONObject("serialized");
         JSONArray jsonPlayers = serialized.getJSONArray("players");
@@ -245,6 +283,10 @@ public class ClientController implements ViewListener {
         addCommonGoals(jsonCommonGoals);
     }
 
+    /**
+     * Adds players and the personal goal card to the virtual model
+     * @param jsonPlayers contains the list of players
+     */
     private void addPlayers(JSONArray jsonPlayers) {
         for (int i = 0; i < jsonPlayers.length(); i++) {
             JSONObject playerObject = jsonPlayers.getJSONObject(i);
@@ -261,6 +303,10 @@ public class ClientController implements ViewListener {
         }
     }
 
+    /**
+     * Adds common goal card to the virtual model
+     * @param jsonCommonGoals contains common goal cards to be used in the game
+     */
     private void addCommonGoals(JSONArray jsonCommonGoals) {
         for (int i = 0; i < jsonCommonGoals.length(); i++) {
             JSONObject goalObject = jsonCommonGoals.getJSONObject(i);
@@ -273,6 +319,9 @@ public class ClientController implements ViewListener {
         }
     }
 
+    /**
+     * Sends a request to the server to join the game.
+     */
     public void onJoinGame() {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
@@ -284,7 +333,10 @@ public class ClientController implements ViewListener {
         client.sendRequest("JOIN", body.toString());
     }
 
-
+    /**
+     * Sends a request to the server to start a new game.
+     * @param lobbySize is the number of players chosen
+     */
     public void onNewGame(int lobbySize) {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
@@ -297,7 +349,9 @@ public class ClientController implements ViewListener {
         client.sendRequest("NEW", body.toString());
     }
 
-
+    /**
+     * Sends a request to the server to get the list of game saves.
+     */
     public void onListSavedGames() {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
@@ -314,7 +368,9 @@ public class ClientController implements ViewListener {
         client.sendRequest("LIST", body.toString());
     }
 
-
+    /**
+     * Sends the request to load a game save to the server.
+     */
     public void onLoadSavedGame(int saveIndex) {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
@@ -327,7 +383,9 @@ public class ClientController implements ViewListener {
         client.sendRequest("LOAD", body.toString());
     }
 
-
+    /**
+     * Sends the request to save the game to the server.
+     */
     public void onSaveCurrentGame() {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action when not in game");
@@ -339,7 +397,9 @@ public class ClientController implements ViewListener {
         client.sendRequest("SAVE", body.toString());
     }
 
-
+    /**
+     * Sends the request to quit the game to the server.
+     */
     public void onQuitGame() {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action when not in game");
@@ -355,7 +415,10 @@ public class ClientController implements ViewListener {
         clientIsInGame = false;
     }
 
-
+    /**
+     * Sends a request to the server with the username chosen by the user.
+     * @param username is the nickname chosen by the user
+     */
     public void onChooseUsername(String username) {
         if (clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action while in game");
@@ -365,13 +428,22 @@ public class ClientController implements ViewListener {
         client.sendRequest("NAME", new JSONObject().put("username", username).toString());
     }
 
+    /**
+     * Sends a request to the server with the number of column of the bookshelf where to insert the tiles.
+     * @param numberOfColumn is the number of the column where you drop the tiles
+     */
     public void onChooseColumnOfBookshelf(int numberOfColumn) {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action when not in game");
             return;
         }
-        var body = setJsonObjectForMoveRequest();
 
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("row1", row1);
+        body.put("row2", row2);
+        body.put("col1", col1);
+        body.put("col2", col2);
         body.put("first_tile", first);
         body.put("second_tile", second);
         body.put("third_tile", third);
@@ -379,34 +451,12 @@ public class ClientController implements ViewListener {
         client.sendRequest("DROP", body.toString());
     }
 
-    public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
-        if (!clientIsInGame) {
-            view.handleErrorMessage("Cannot perform this action when not in game");
-            return;
-        }
-
-        var body = setJsonObjectForMoveRequest();
-
-        this.row1 = row1;
-        this.col1 = col1;
-        this.row2 = row2;
-        this.col2 = col2;
-        this.first = 1;
-        this.second = 2;
-        this.third = 3;
-        client.sendRequest("PICK", body.toString());
-    }
-
-    public JSONObject setJsonObjectForMoveRequest(){
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        body.put("row1", row1);
-        body.put("row2", row2);
-        body.put("col1", col1);
-        body.put("col2", col2);
-        return body;
-    }
-
+    /**
+     * Sends a request to the server with the order of the tiles.
+     * @param first is the position of the first tile to drop
+     * @param second is the position of the second tile to drop
+     * @param third is the position of the third tile to drop
+     */
     public void onChooseTilesOrder(int first, int second, int third) {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot perform this action when not in game");
@@ -418,6 +468,39 @@ public class ClientController implements ViewListener {
         this.third = third;
     }
 
+    /**
+     * Sends a request to the server with the range of tiles to pick up.
+     * @param row1 is the row index of the first tile to pick up
+     * @param col1 is the column index of the first tile to pick up
+     * @param row2 is the row index of the last tile to pick up
+     * @param col2 is the column index of the last tile to pick up
+     */
+    public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("row1", row1);
+        body.put("row2", row2);
+        body.put("col1", col1);
+        body.put("col2", col2);
+        this.row1 = row1;
+        this.col1 = col1;
+        this.row2 = row2;
+        this.col2 = col2;
+        this.first = 1;
+        this.second = 2;
+        this.third = 3;
+        client.sendRequest("PICK", body.toString());
+    }
+
+    /**
+     * Send a chat request to the server with the message text
+     * @param message is the text of the message to send
+     */
     public void onChatMessageSent(String message) {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot send a message when not in game");
@@ -430,7 +513,11 @@ public class ClientController implements ViewListener {
         client.sendRequest("CHAT", body.toString());
     }
 
-
+    /**
+     * Sends a chat request to the server with the message text and the recipient.
+     * @param message is the text of the message to send
+     * @param recipient is the recipient of the message
+     */
     public void onChatWhisperSent(String message, String recipient) {
         if (!clientIsInGame) {
             view.handleErrorMessage("Cannot send a message when not in game");
@@ -444,14 +531,10 @@ public class ClientController implements ViewListener {
         client.sendRequest("CHAT", body.toString());
     }
 
-    public void onEndOfTurn() {
-        if (!clientIsInGame) return;
-
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        client.sendRequest("NEXT", body.toString());
-    }
-
+    /**
+     * Handles the insertion of an unknown input and client reconnect request.
+     * @param input is the input of the user
+     */
     public void onGenericInput(String input) {
         if (!client.isConnected()) {
             if (input.trim().equalsIgnoreCase("y")) client.start();
