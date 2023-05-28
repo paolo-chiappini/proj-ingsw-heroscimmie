@@ -431,15 +431,15 @@ public abstract class ServerHandlers {
         handleEndOfConnection(socket);
     }
 
-
-
     private static void handleEndOfConnection(Socket socket) {
         if (playerSockets.containsKey(socket)) {
             String player = playerSockets.remove(socket);
 
             var sockets = playerSockets.keySet().stream().toList();
             if (sockets.size() == 0) {
-                if (ActiveGameManager.isGameInProgress()) ActiveGameManager.stopGame();
+                System.out.println("All clients disconnected, stopping game");
+                if (ActiveGameManager.isGameInProgress() || ActiveGameManager.existsActiveLobby())
+                    ActiveGameManager.stopGame();
                 return;
             }
 
