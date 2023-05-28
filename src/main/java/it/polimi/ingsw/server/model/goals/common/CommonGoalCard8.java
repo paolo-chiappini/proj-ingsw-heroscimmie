@@ -33,7 +33,7 @@ public class CommonGoalCard8 extends CommonGoalCard {
                 if(bookShelf.hasTile(i,j))
                 {
                     countTiles++;
-                    countTileType.computeIfPresent(bookShelf.getTileAt(i,j).getType(),(key, value) -> value + 1);
+                    countTileType.computeIfPresent(bookShelf.getTileAt(i,j).type(),(key, value) -> value + 1);
                 }
             }
             //the number of tile types without elements must be 1 and has 5 tiles

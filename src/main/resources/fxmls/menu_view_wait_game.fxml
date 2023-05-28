@@ -7,7 +7,7 @@
 <VBox alignment="CENTER" stylesheets="@menu_style.css" xmlns="http://javafx.com/javafx/19"
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="it.polimi.ingsw.client.view.gui.controllers.MenuWaitGameController">
-   <Label fx:id="waitingforLabel" styleClass="loading-label" text="Waiting for other players...">
+   <Label fx:id="waitingForLabel" styleClass="loading-label" text="Waiting for other players...">
       <font>
          <Font size="19.0"/>
       </font>

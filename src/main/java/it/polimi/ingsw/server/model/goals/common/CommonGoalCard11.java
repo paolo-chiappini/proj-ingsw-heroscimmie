@@ -29,7 +29,7 @@ public class CommonGoalCard11 extends CommonGoalCard {
             {
                 if(bookShelf.hasTile(i,j))
                 {
-                    countTileType.computeIfPresent(bookShelf.getTileAt(i,j).getType(),(key, val) -> val + 1);
+                    countTileType.computeIfPresent(bookShelf.getTileAt(i,j).type(),(key, val) -> val + 1);
                 }
             }
         }

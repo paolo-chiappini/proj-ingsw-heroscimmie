@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 /*
@@ -104,10 +103,8 @@ class JsonMessageTest {
         }
 
 
-        assertTrue(messages.stream().allMatch((m)->{
-            return m.getMethod().equals("TEST") &&
-                   m.getBody().equals("This is a test message");
-        }));
+        assertTrue(messages.stream().allMatch((m)-> m.getMethod().equals("TEST") &&
+               m.getBody().equals("This is a test message")));
     }
 
     @Test

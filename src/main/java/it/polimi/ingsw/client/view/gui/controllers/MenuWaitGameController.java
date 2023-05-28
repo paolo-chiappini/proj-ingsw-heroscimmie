@@ -8,14 +8,14 @@ import javafx.stage.Stage;
 public class MenuWaitGameController extends GuiController {
 
     @FXML
-    private Label waitingforLabel;
+    private Label waitingForLabel;
 
     public void startGame() {
         SceneManager.mainGameScene(getRootStage());
     }
 
     public Stage getRootStage() {
-        return (Stage)waitingforLabel.getScene().getWindow();
+        return (Stage) waitingForLabel.getScene().getWindow();
     }
 
 }

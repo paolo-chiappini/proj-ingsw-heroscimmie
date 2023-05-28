@@ -21,10 +21,10 @@ class CommonGoalCardDeckTest {
     CommonGoalCardDeck commonDeck3Players;
     CommonGoalCardDeck commonDeck4Players;
 
-    Player player1 = new Player("Primo");
-    Player player2 = new Player("Secondo");
-    Player player3 = new Player("Terzo");
-    Player player4 = new Player("Quarto");
+    final Player player1 = new Player("Primo");
+    final Player player2 = new Player("Secondo");
+    final Player player3 = new Player("Terzo");
+    final Player player4 = new Player("Quarto");
 
     @Nested
     @DisplayName("On common deck creation")

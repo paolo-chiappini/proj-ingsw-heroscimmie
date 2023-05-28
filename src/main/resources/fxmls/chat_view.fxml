@@ -13,7 +13,7 @@
 
 <StackPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="410.0" stylesheets="@chat_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.ChatController">
    <VBox alignment="CENTER" styleClass="window">
-      <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0">
+      <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="300.0" prefWidth="400.0">
          <TextFlow fx:id="chatTextArea" lineSpacing="5.0" nodeOrientation="LEFT_TO_RIGHT" styleClass="text-field">
             <padding>
                <Insets left="10.0" right="10.0" top="10.0" />

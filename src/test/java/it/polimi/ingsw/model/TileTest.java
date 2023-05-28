@@ -15,7 +15,7 @@ public class TileTest {
         void typeIsEqualToAssigned() {
             TileType type = TileType.CAT;
             Tile tile = new Tile(type);
-            assertEquals(tile.getType(), type);
+            assertEquals(tile.type(), type);
         }
     }
 }

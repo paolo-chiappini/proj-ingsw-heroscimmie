@@ -33,7 +33,7 @@ public class CommonGoalCard9 extends CommonGoalCard {
                 if(bookShelf.hasTile(j,i))
                 {
                     countTiles++;
-                    countTileType.computeIfPresent(bookShelf.getTileAt(j,i).getType(),(key, value) -> value + 1);
+                    countTileType.computeIfPresent(bookShelf.getTileAt(j,i).type(),(key, value) -> value + 1);
                 }
             }
             //if you need to have a maximum of three different types,I must have at least 3 types of tile with no elements

@@ -126,12 +126,14 @@
     -fx-text-fill: -fx-button-text-color;
 }
 
+/*noinspection ALL*/
 .current-player-name{
     -fx-font-weight: bold;
     -fx-font-size: 20px;
     -fx-text-fill: -fx-color5-ok;
 }
 
+/*noinspection ALL*/
 .disconnected-player-name{
     -fx-font-weight: bold;
     -fx-font-size: 18px;
@@ -147,6 +149,7 @@
     -fx-text-fill: -fx-button-text-color;
 }
 
+/*noinspection ALL*/
 .tile-box{
     -fx-border-color:#7e4515;
     -fx-border-insets:3;

@@ -5,8 +5,6 @@ import it.polimi.ingsw.util.FileIOManager;
 import it.polimi.ingsw.util.FilePath;
 import org.json.JSONArray;
 
-import java.io.FileNotFoundException;
-
 /**
  * Represents a factory class for common goal card "images".
  */

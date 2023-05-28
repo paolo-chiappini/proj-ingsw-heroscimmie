@@ -32,7 +32,7 @@ public class CommonGoalCard6 extends CommonGoalCard {
                 if(bookShelf.hasTile(j,i))
                 {
                     countTile++;
-                    countTileType.computeIfPresent(bookShelf.getTileAt(j,i).getType(),(key, value) -> value + 1);
+                    countTileType.computeIfPresent(bookShelf.getTileAt(j,i).type(),(key, value) -> value + 1);
                 }
             }
             //it has all types of tiles and has 6 tiles

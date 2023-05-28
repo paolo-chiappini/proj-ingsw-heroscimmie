@@ -2,7 +2,7 @@ package it.polimi.ingsw.mock;
 
 import it.polimi.ingsw.server.model.goals.common.CommonGoalCard;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
-import it.polimi.ingsw.util.serialization.Serializer;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +32,4 @@ public class CommonCardMock extends CommonGoalCard {
         return points;
     }
 
-    @Override
-    public String serialize(Serializer serializer) {
-        return serializer.serialize(this);
-    }
 }

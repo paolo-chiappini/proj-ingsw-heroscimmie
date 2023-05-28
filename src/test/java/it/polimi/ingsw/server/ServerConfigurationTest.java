@@ -54,9 +54,7 @@ class ServerConfigurationTest {
         new Thread(this::startDummyClient).start();
 
 
-        s.onConnection((c)->{
-            System.out.println("connection open");
-        });
+        s.onConnection((c)-> System.out.println("connection open"));
 
         s.onConnectionClosed((c)->{
             System.out.println("connection closed");
@@ -76,7 +74,7 @@ class ServerConfigurationTest {
 
     // ==================== DUMMY CLIENT ====================
     private void startDummyClient(){
-        Socket s = null;
+        Socket s;
         try {
             s = new Socket("localhost", 54321);
             s.close();

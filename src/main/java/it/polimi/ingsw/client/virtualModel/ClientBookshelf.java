@@ -10,7 +10,7 @@ import org.json.JSONObject;
  * It aims to represent the state of the bookshelf in the client and update it if necessary
  */
 public class ClientBookshelf extends ObservableObject<ModelListener> {
-    private int [][] tiles;
+    private final int [][] tiles;
     private int width = 5;
     private int height = 6;
     public ClientBookshelf() {

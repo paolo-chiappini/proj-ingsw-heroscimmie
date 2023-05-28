@@ -7,7 +7,7 @@ import it.polimi.ingsw.util.serialization.Serializer;
 
 public class PlayerMock implements IPlayer {
     int score;
-    String name;
+    final String name;
     IBookshelf bookshelf;
     PersonalGoalCard personalGoalCard;
 

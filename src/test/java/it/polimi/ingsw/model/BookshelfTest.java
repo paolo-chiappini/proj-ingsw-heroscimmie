@@ -109,15 +109,15 @@ class BookshelfTest {
                 tiles.add((new Tile(TileType.FRAME)));
                 bookshelf.dropTiles(tiles, 2);
                 assertAll(
-                        () -> assertEquals(bookshelf.getTileAt(5, 2).getType(), tiles.get(0).getType()),
-                        () -> assertEquals(bookshelf.getTileAt(4, 2).getType(), tiles.get(1).getType()),
+                        () -> assertEquals(bookshelf.getTileAt(5, 2).type(), tiles.get(0).type()),
+                        () -> assertEquals(bookshelf.getTileAt(4, 2).type(), tiles.get(1).type()),
                         () -> assertNull(bookshelf.getTileAt(3, 2))
                 );
             }
             @Test
             @DisplayName("the bookshelf should be full when adding 30 tiles")
             void isFull() {
-                assertFalse(bookshelf.isFull());
+                assertFalse(bookshelf.full());
                 List<GameTile> tiles=new ArrayList<>();
                 tiles.add(new Tile(TileType.PLANT));
                 for(int i=0;i< bookshelf.getHeight();i++)
@@ -127,7 +127,7 @@ class BookshelfTest {
                         bookshelf.dropTiles(tiles,j);
                     }
                 }
-                assertTrue(bookshelf.isFull());
+                assertTrue(bookshelf.full());
             }
 
             @Test

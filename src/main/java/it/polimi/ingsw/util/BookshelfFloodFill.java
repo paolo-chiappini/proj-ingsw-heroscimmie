@@ -43,7 +43,7 @@ public class BookshelfFloodFill {
     private static int floodFill(int startX, int startY, IBookshelf bookshelf, boolean[][] visited) {
         if(visited[startY][startX] || bookshelf.getTileAt(startY,startX) == null) return 0;
 
-        TileType startTile = bookshelf.getTileAt(startY, startX).getType();
+        TileType startTile = bookshelf.getTileAt(startY, startX).type();
         int x, y, xEast, xWest, yNorth, ySouth;
         int width, height;
         int groupDimension = 0;
@@ -72,7 +72,7 @@ public class BookshelfFloodFill {
 
             while (xEast < width - 1 &&
                     bookshelf.getTileAt(y, xEast + 1) != null &&
-                    bookshelf.getTileAt(y, xEast + 1).getType().equals(startTile)) {
+                    bookshelf.getTileAt(y, xEast + 1).type().equals(startTile)) {
                 xEast++;
                 visited[y][xEast] = true;
                 groupDimension++;
@@ -80,7 +80,7 @@ public class BookshelfFloodFill {
 
             while (xWest > 0 &&
                     bookshelf.getTileAt(y, xWest - 1) != null &&
-                    bookshelf.getTileAt(y, xWest - 1).getType().equals(startTile)) {
+                    bookshelf.getTileAt(y, xWest - 1).type().equals(startTile)) {
                 xWest--;
                 visited[y][xWest] = true;
                 groupDimension++;
@@ -90,7 +90,7 @@ public class BookshelfFloodFill {
                 if (yNorth >= 0 &&
                         !visited[yNorth][x] &&
                         bookshelf.getTileAt(yNorth, x) != null &&
-                        bookshelf.getTileAt(yNorth, x).getType().equals(startTile)
+                        bookshelf.getTileAt(yNorth, x).type().equals(startTile)
                 ) {
                     coords.addLast(x);
                     coords.addLast(yNorth);
@@ -98,7 +98,7 @@ public class BookshelfFloodFill {
                 if (ySouth >= 0 &&
                         !visited[ySouth][x] &&
                         bookshelf.getTileAt(ySouth, x) != null &&
-                        bookshelf.getTileAt(ySouth, x).getType().equals(startTile)
+                        bookshelf.getTileAt(ySouth, x).type().equals(startTile)
                 ) {
                     coords.addLast(x);
                     coords.addLast(ySouth);

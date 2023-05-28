@@ -58,7 +58,7 @@ public class Bag implements IBag {
         if(tilesBag.values().stream().reduce(0,Integer::sum)>=132)
             throw new IllegalActionException("The bag is full");
         else
-            tilesBag.computeIfPresent(tile.getType(),(key, val) -> val + 1);
+            tilesBag.computeIfPresent(tile.type(),(key, val) -> val + 1);
     }
 
     /**
