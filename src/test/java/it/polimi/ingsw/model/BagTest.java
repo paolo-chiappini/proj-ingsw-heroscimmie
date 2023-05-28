@@ -48,14 +48,14 @@ class BagTest {
             @DisplayName("one tile should be removed from the bag")
             void drawOneTile() {
                 GameTile tile = bag.drawTile();
-                assertEquals(21,bag.getTilesBag().get(tile.getType()));
+                assertEquals(21,bag.getTilesBag().get(tile.type()));
             }
 
             @Test
             @DisplayName("a tile of a chosen type should be removed from the bag")
             void drawTileByType() {
                 GameTile tile = bag.getTileByType(TileType.TOY);
-                assertEquals(21,bag.getTilesBag().get(tile.getType()));
+                assertEquals(21,bag.getTilesBag().get(tile.type()));
             }
             @Test
             @DisplayName("a random number of tiles should be removed from the bag")
@@ -116,8 +116,8 @@ class BagTest {
             @DisplayName("one tile should be added to the bag")
             void addOneTile() {
                 GameTile tile = bag.drawTile();
-                bag.addTile(new Tile(tile.getType()));
-                assertEquals(22,bag.getTilesBag().get(tile.getType()));
+                bag.addTile(new Tile(tile.type()));
+                assertEquals(22,bag.getTilesBag().get(tile.type()));
             }
             @Test
             @DisplayName("exception should be raised when bag is full")

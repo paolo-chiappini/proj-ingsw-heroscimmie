@@ -78,7 +78,7 @@ public class JsonSerializer implements Serializer {
                     continue;
                 }
 
-                row.put(tile.getType().ordinal());
+                row.put(tile.type().ordinal());
             }
             rows.put(row);
         }
@@ -96,7 +96,7 @@ public class JsonSerializer implements Serializer {
                 int tileTypeInt = -1; // equivalent to null
 
                 if (bookshelf.hasTile(row, col)) {
-                    tileTypeInt = bookshelf.getTileAt(row, col).getType().ordinal();
+                    tileTypeInt = bookshelf.getTileAt(row, col).type().ordinal();
                 }
 
                 rowArray.put(tileTypeInt);

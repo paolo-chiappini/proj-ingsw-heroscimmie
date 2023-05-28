@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class BagMock implements IBag {
-    HashMap<TileType, Integer> tiles;
+    final HashMap<TileType, Integer> tiles;
 
     public BagMock(Map<TileType, Integer> tiles) {
         this.tiles = new HashMap<>(tiles);

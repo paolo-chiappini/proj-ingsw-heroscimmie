@@ -30,6 +30,7 @@ public class ClientController implements ViewListener {
     private List<ClientCommonGoalCard> commonGoalCards;
     private ClientTurnState turnState;
     private final View view;
+
     private int row1, row2, col1, col2, first, second, third;
     private boolean clientIsInGame;
 
@@ -104,9 +105,6 @@ public class ClientController implements ViewListener {
             String username = connectedPlayers.getString(i);
             view.updatePlayerConnectionStatus(username, false);
         }
-
-        if (!clientIsInGame) return;
-        view.finalizeUpdate();
     }
 
     public void onListReceived(Message message) {
@@ -372,13 +370,8 @@ public class ClientController implements ViewListener {
             view.handleErrorMessage("Cannot perform this action when not in game");
             return;
         }
+        var body = setJsonObjectForMoveRequest();
 
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        body.put("row1", row1);
-        body.put("row2", row2);
-        body.put("col1", col1);
-        body.put("col2", col2);
         body.put("first_tile", first);
         body.put("second_tile", second);
         body.put("third_tile", third);
@@ -386,6 +379,33 @@ public class ClientController implements ViewListener {
         client.sendRequest("DROP", body.toString());
     }
 
+    public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
+        if (!clientIsInGame) {
+            view.handleErrorMessage("Cannot perform this action when not in game");
+            return;
+        }
+
+        var body = setJsonObjectForMoveRequest();
+
+        this.row1 = row1;
+        this.col1 = col1;
+        this.row2 = row2;
+        this.col2 = col2;
+        this.first = 1;
+        this.second = 2;
+        this.third = 3;
+        client.sendRequest("PICK", body.toString());
+    }
+
+    public JSONObject setJsonObjectForMoveRequest(){
+        JSONObject body = new JSONObject();
+        body.put("username", myUsername);
+        body.put("row1", row1);
+        body.put("row2", row2);
+        body.put("col1", col1);
+        body.put("col2", col2);
+        return body;
+    }
 
     public void onChooseTilesOrder(int first, int second, int third) {
         if (!clientIsInGame) {
@@ -396,28 +416,6 @@ public class ClientController implements ViewListener {
         this.first = first;
         this.second = second;
         this.third = third;
-    }
-
-    public void onChooseTilesOnBoard(int row1, int col1, int row2, int col2) {
-        if (!clientIsInGame) {
-            view.handleErrorMessage("Cannot perform this action when not in game");
-            return;
-        }
-
-        JSONObject body = new JSONObject();
-        body.put("username", myUsername);
-        body.put("row1", row1);
-        body.put("row2", row2);
-        body.put("col1", col1);
-        body.put("col2", col2);
-        this.row1 = row1;
-        this.col1 = col1;
-        this.row2 = row2;
-        this.col2 = col2;
-        this.first = 1;
-        this.second = 2;
-        this.third = 3;
-        client.sendRequest("PICK", body.toString());
     }
 
     public void onChatMessageSent(String message) {

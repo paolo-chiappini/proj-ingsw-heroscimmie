@@ -29,10 +29,6 @@ public class TilesBoard extends GraphicElement {
         return boardGrid.widthProperty();
     }
 
-//    public ReadOnlyDoubleProperty getHeightProperty(){
-//        return boardGrid.heightProperty();
-//    }
-
 
     public void update(int[][] update) {
         boardGrid.getChildren().clear();
@@ -49,23 +45,5 @@ public class TilesBoard extends GraphicElement {
             }
         }
     }
-//    public void randomFillWith(List<File> images) {
-//        Random rand = new Random();
-//
-//        for(int i = 0; i < WIDTH; i++) {
-//            for (int j = 0; j < HEIGHT; j++) {
-//                if (isTileInvalid(i, j)) continue;
-//
-//                File randomFile = images.get(rand.nextInt(images.size()));
-//                var tileImage = new ImageView(new Image(randomFile.getPath()));
-//                TileElement itemTile = new TileElement(this.controller, tileImage, i, j);
-//
-//                addTile(itemTile, i, j);
-//            }
-//        }
-//    }
 
-        //    private boolean isTileInvalid(int i, int j) {
-//        return VALID_TILES[i][j] != 1;
-//    }
 }

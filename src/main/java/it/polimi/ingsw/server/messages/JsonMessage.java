@@ -15,13 +15,13 @@ import java.util.List;
  * }
  */
 class JsonMessage extends Message{
-    private final String EMPTY_JSON_MESSAGE = "{\"method\":\"\", \"body\":\"\"}";
     private JSONObject jsonData;
 
     private JsonMessage(Socket clientSocket, List<Socket> clientConnections, JSONObject data) {
         super(clientSocket, clientConnections);
         this.jsonData = data;
 
+        String EMPTY_JSON_MESSAGE = "{\"method\":\"\", \"body\":\"\"}";
         if(jsonData.isEmpty())
             jsonData = new JSONObject(EMPTY_JSON_MESSAGE);
     }

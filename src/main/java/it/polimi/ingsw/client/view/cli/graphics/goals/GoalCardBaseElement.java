@@ -9,7 +9,8 @@ import it.polimi.ingsw.client.view.cli.graphics.util.ReplaceTarget;
  * Represents the base of a goal card.
  */
 public abstract class GoalCardBaseElement extends FramedElement {
-    protected int width, height;
+    protected final int width;
+    protected final int height;
 
     /**
      * @param width width of the card.

@@ -103,7 +103,7 @@ public class Bookshelf implements IBookshelf {
      * @return true if the bookshelf has free spaces
      */
     @Override
-    public boolean isFull()
+    public boolean full()
     {
         return Arrays.stream(tiles).flatMap(Arrays::stream).noneMatch(Objects::isNull);
     }
@@ -131,7 +131,7 @@ public class Bookshelf implements IBookshelf {
     {
         if (this.hasTile(row,column) && this.hasTile(row2,column2))
         {
-            return tiles[row][column].getType().equals(tiles[row2][column2].getType());
+            return tiles[row][column].type().equals(tiles[row2][column2].type());
         }
         return false;
     }

@@ -38,7 +38,7 @@ public class TurnManager implements ITurnManager {
      */
     private void checkEndCondition() {
         if (lastLap) return;
-        lastLap = players.get(currentPlayerIndex).getBookshelf().isFull();
+        lastLap = players.get(currentPlayerIndex).getBookshelf().full();
         // add bonus points to the first player with a full bookshelf
         if (lastLap) players.get(currentPlayerIndex).addPointsToScore(FIRST_TO_END_BONUS_POINTS);
     }

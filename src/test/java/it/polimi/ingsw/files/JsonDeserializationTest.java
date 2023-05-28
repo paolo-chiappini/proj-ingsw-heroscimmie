@@ -38,9 +38,9 @@ public class JsonDeserializationTest {
         assertAll (
                 () -> assertNotNull(board),
                 () -> assertEquals(9, board.getSize()),
-                () -> assertEquals(TileType.CAT, board.getTileAt(6, 4).getType()),
-                () -> assertEquals(TileType.TROPHY, board.getTileAt(4, 7).getType()),
-                () -> assertEquals(TileType.FRAME, board.getTileAt(0, 3).getType()),
+                () -> assertEquals(TileType.CAT, board.getTileAt(6, 4).type()),
+                () -> assertEquals(TileType.TROPHY, board.getTileAt(4, 7).type()),
+                () -> assertEquals(TileType.FRAME, board.getTileAt(0, 3).type()),
                 () -> assertEquals(78, finalNulls)
         );
     }
@@ -65,10 +65,10 @@ public class JsonDeserializationTest {
                 () -> assertNotNull(bookshelf),
                 () -> assertEquals(6, bookshelf.getHeight()),
                 () -> assertEquals(5, bookshelf.getWidth()),
-                () -> assertEquals(TileType.BOOK, bookshelf.getTileAt(5, 4).getType()),
-                () -> assertEquals(TileType.CAT, bookshelf.getTileAt(5, 2).getType()),
-                () -> assertEquals(TileType.TROPHY, bookshelf.getTileAt(4, 4).getType()),
-                () -> assertEquals(TileType.PLANT, bookshelf.getTileAt(3, 4).getType()),
+                () -> assertEquals(TileType.BOOK, bookshelf.getTileAt(5, 4).type()),
+                () -> assertEquals(TileType.CAT, bookshelf.getTileAt(5, 2).type()),
+                () -> assertEquals(TileType.TROPHY, bookshelf.getTileAt(4, 4).type()),
+                () -> assertEquals(TileType.PLANT, bookshelf.getTileAt(3, 4).type()),
                 () -> assertEquals(26, finalNulls)
         );
     }

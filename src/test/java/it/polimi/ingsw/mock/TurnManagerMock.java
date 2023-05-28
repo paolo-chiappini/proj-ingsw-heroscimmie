@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TurnManagerMock implements ITurnManager {
-    List<IPlayer> players;
+    final List<IPlayer> players;
     int turn;
     boolean lastLap;
 
@@ -20,7 +20,7 @@ public class TurnManagerMock implements ITurnManager {
 
     @Override
     public boolean isLastLap() {
-        if (players.get(turn).getBookshelf().isFull()) lastLap = true;
+        if (players.get(turn).getBookshelf().full()) lastLap = true;
         return lastLap;
     }
 

@@ -4,7 +4,7 @@ import it.polimi.ingsw.server.model.goals.personal.PersonalGoalCard;
 import it.polimi.ingsw.server.model.bookshelf.IBookshelf;
 
 public class PersonalCardMock extends PersonalGoalCard {
-    int points;
+    final int points;
 
     public PersonalCardMock(int id) {
         this.id = id;

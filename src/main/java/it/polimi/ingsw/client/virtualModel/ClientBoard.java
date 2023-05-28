@@ -11,7 +11,7 @@ import org.json.JSONObject;
  */
 public class ClientBoard extends ObservableObject<ModelListener> {
 
-    private int [][] spaces;
+    private final int [][] spaces;
     private int boardSize = 9;
 
     public ClientBoard()

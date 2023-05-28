@@ -2,6 +2,7 @@ package it.polimi.ingsw.server;
 
 import it.polimi.ingsw.server.messages.MessageType;
 
+@SuppressWarnings("CommentedOutCode")
 public class ServerMain {
 
     public static void main(String[] args) {

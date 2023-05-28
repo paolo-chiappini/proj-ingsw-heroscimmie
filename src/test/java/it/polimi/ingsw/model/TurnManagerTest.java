@@ -64,49 +64,52 @@ public class TurnManagerTest {
         }
     }
 
-    private static class TestBookshelf implements IBookshelf {
-        private final boolean full;
+    private record TestBookshelf(boolean full) implements IBookshelf {
 
-        public TestBookshelf(boolean full) {
-            this.full = full;
+        @Override
+            public GameTile getTileAt(int row, int column) {
+                return null;
+            }
+
+            @Override
+            public int getWidth() {
+                return 0;
+            }
+
+            @Override
+            public int getHeight() {
+                return 0;
+            }
+
+        @Override
+            public void dropTiles(List<GameTile> tilesToDrop, int column) {
         }
 
         @Override
-        public GameTile getTileAt(int row, int column) {
-            return null;
+            public boolean canDropTiles(int numOfTiles, int column) {
+            return false;
         }
 
         @Override
-        public int getWidth() {
-            return 0;
+            public boolean hasTile(int row, int column) {
+            return false;
         }
 
         @Override
-        public int getHeight() {
-            return 0;
+            public boolean compareTiles(int row, int column, int row2, int column2) {
+            return false;
         }
 
-        @Override
-        public boolean isFull() { return full; }
-        @Override
-        public void dropTiles(List<GameTile> tilesToDrop, int column) {}
-        @Override
-        public boolean canDropTiles(int numOfTiles, int column) { return false; }
-        @Override
-        public boolean hasTile(int row, int column) { return false; }
-        @Override
-        public boolean compareTiles(int row, int column, int row2, int column2) { return false; }
+            @Override
+            public List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3) {
+                return null;
+            }
 
-        @Override
-        public List<GameTile> decideTilesOrder(List<GameTile> tilesToDrop, int position1, int position2, int position3) {
-            return null;
+            @Override
+            public String serialize(Serializer serializer) {
+                return null;
+            }
         }
-
-        @Override
-        public String serialize(Serializer serializer) {
-            return null;
-        }
-    }
 
     private static List<IPlayer> players;
 

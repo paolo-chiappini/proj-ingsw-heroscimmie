@@ -33,7 +33,7 @@ public interface IBookshelf extends Serializable {
      * Checks if the bookshelf is full of tiles.
      * @return true if the bookshelf is full.
      */
-    boolean isFull();
+    boolean full();
 
     /**
      * Inserts tiles inside the bookshelf by occupying the first available spaces from the bottom.

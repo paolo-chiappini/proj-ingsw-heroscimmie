@@ -12,15 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 @DisplayName("Tests on TileSpace")
 public class TileSpaceTest {
 
-    private static class TestTile implements GameTile {
-        private final TileType type;
-        public TestTile(TileType type) {
-            this.type = type;
-        }
-        @Override
-        public TileType getType() {
-            return type;
-        }
+    private record TestTile(TileType type) implements GameTile {
     }
 
     @Nested

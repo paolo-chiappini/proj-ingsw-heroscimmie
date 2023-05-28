@@ -12,7 +12,6 @@ import javafx.scene.shape.Rectangle;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.Random;
 
 public class BookshelvesViewController {
     @FXML
@@ -67,8 +66,8 @@ public class BookshelvesViewController {
         }
     }
 
-    public void updateBookshelf(int[][] bookshelf, String playername) {
-        Pane bookShelf = bookshelves.get(playername);
+    public void updateBookshelf(int[][] bookshelf, String playerName) {
+        Pane bookShelf = bookshelves.get(playerName);
 
         Pane bookshelfElement = (Pane) bookShelf.getChildren().get(0);
         GridPane grid = (GridPane) bookshelfElement.getChildren().get(0);

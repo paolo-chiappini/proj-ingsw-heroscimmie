@@ -45,7 +45,7 @@ public class DynamicTestBookshelf implements IBookshelf {
     }
 
     @Override
-    public boolean isFull() {
+    public boolean full() {
         for (int i = 0; i < getHeight(); i++) {
             for (int j = 0; j < getWidth(); j++) {
                 if (tiles[i][j] == null) return false;
@@ -72,7 +72,7 @@ public class DynamicTestBookshelf implements IBookshelf {
     public boolean compareTiles(int row, int column, int row2, int column2) {
         if (this.hasTile(row,column) && this.hasTile(row2,column2))
         {
-            return tiles[row][column].getType().equals(tiles[row2][column2].getType());
+            return tiles[row][column].type().equals(tiles[row2][column2].type());
         }
         return false;
     }

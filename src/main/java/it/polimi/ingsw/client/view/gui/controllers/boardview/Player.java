@@ -22,8 +22,7 @@ public class Player{
         return points;
     }
 
-    public Player setPoints(int points) {
+    public void setPoints(int points) {
         this.points = points;
-        return this;
     }
 }

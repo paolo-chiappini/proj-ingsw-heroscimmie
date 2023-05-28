@@ -48,10 +48,6 @@ public abstract class SubMenuController extends GuiController {
         SceneManager.setCurrentController(menuController);
     }
 
-//    public Stage getRootStage() {
-//        return (Stage)root.getScene().getWindow();
-//    }
-
     public void notifyNameAlreadyTaken() {
         nameAlreadyTakenLabel.setVisible(true);
     }

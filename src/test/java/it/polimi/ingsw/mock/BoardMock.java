@@ -11,8 +11,8 @@ import it.polimi.ingsw.util.serialization.Serializer;
 import java.util.List;
 
 public class BoardMock implements IBoard {
-    int size;
-    TileSpace[][] spaces;
+    final int size;
+    final TileSpace[][] spaces;
 
     public BoardMock(int size, int[][] template) {
         this.size = size;

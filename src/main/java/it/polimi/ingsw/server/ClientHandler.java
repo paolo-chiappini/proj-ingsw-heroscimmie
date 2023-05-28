@@ -84,9 +84,7 @@ public class ClientHandler {
                     to the global middleware. By doing this, there's non need for the user to know
                     exactly how the request pipeline is structured.
                 */
-                globalMiddleware.apply(request, response, (req, res)->{
-                    specificMiddleware.apply(req, res, callback);
-                });
+                globalMiddleware.apply(request, response, (req, res)-> specificMiddleware.apply(req, res, callback));
 
 
             }

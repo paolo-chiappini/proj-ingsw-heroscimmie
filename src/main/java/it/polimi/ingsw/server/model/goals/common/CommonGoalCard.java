@@ -80,15 +80,13 @@ public abstract class CommonGoalCard implements GoalCard {
         }
 
         @Override
-        public ICommonGoalCardBuilder addPoints(int points) {
+        public void addPoints(int points) {
             instance.points.add(points);
-            return this;
         }
 
         @Override
-        public ICommonGoalCardBuilder addPlayer(String playerName) {
+        public void addPlayer(String playerName) {
             instance.players.add(playerName);
-            return this;
         }
     }
 }
