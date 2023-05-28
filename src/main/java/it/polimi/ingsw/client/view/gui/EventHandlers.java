@@ -12,6 +12,9 @@ public abstract class EventHandlers {
     public static void set(BoardController controller){
         controller.toggleBookshelvesButton.setOnMouseClicked(controller::toggleBookshelvesView);
 
+        controller.chatButton.setOnMouseReleased(controller::openChat);
+        controller.saveGameButton.setOnMouseReleased(controller::saveGame);
+
         controller.confirmButton.setOnMouseClicked(e-> controller.getState().clickConfirmButton());
 
         controller.undoButton.setOnMouseClicked(e-> controller.getState().clickUndoButton());

@@ -21,6 +21,13 @@
     -fx-color4-undo: #cb2a2a;
     -fx-higlighted-color4-undo: rgba(255, 72, 72, 0.68);
     -fx-color5-undo: #c52c2c;
+
+    -fx-color1-chat: #132ba3;
+    -fx-color2-chat: #122b90;
+    -fx-color3-chat: #24349d;
+    -fx-color4-chat: #2a3fcb;
+    -fx-higlighted-color4-chat: rgba(72, 109, 255, 0.68);
+    -fx-color5-chat: #2c50c5;
 }
 
 .button {
@@ -147,7 +154,6 @@
             -fx-color3-undo,
             -fx-color4-undo,
             radial-gradient(center 50% 50%, radius 100%, -fx-color4-undo, -fx-color5-undo);
-    -fx-background-radius: 200px;
 }
 
 .undo:hover {
@@ -156,6 +162,40 @@
             -fx-color3-undo,
             -fx-color4-undo,
             radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-undo, -fx-color5-undo);
+}
+
+.save-button{
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
+            -fx-color3-undo,
+            -fx-color4-undo,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4-undo, -fx-color5-undo);
+    -fx-font-size: 1.5em;
+}
+
+
+.save-button:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-undo 0%, -fx-color2-undo 100%),
+            -fx-color3-undo,
+            -fx-color4-undo,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-undo, -fx-color5-undo);
+}
+
+.chat-button{
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-chat 0%, -fx-color2-chat 100%),
+            -fx-color3-chat,
+            -fx-color4-chat,
+            radial-gradient(center 50% 50%, radius 100%, -fx-color4-chat, -fx-color5-chat);
+}
+
+.chat-button:hover {
+    -fx-background-color:
+            linear-gradient(from 0% 93% to 0% 100%, -fx-color1-chat 0%, -fx-color2-chat 100%),
+            -fx-color3-chat,
+            -fx-color4-chat,
+            radial-gradient(center 50% 50%, radius 100%, -fx-higlighted-color4-chat, -fx-color5-chat);
 }
 
 .turn-notification-label {

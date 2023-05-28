@@ -57,6 +57,8 @@ public class BoardController extends GuiController {
     public Button toggleBookshelvesButton;
     public StackPane bookshelfPane;
     public VBox playersList;
+    public Button chatButton;
+    public Button saveGameButton;
 
 
     //Internal stuff
@@ -302,7 +304,6 @@ public class BoardController extends GuiController {
     }
 
     public void endGame(String winner){
-        System.out.println("WINNER:");
         setDisabledInterface(true);
         FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/end_game_view.fxml"));
         try {
@@ -320,6 +321,23 @@ public class BoardController extends GuiController {
             }
 
             window.getChildren().add(endgameView);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void saveGame(MouseEvent ignoredMouseEvent) {
+        getView().notifySaveCommand();
+    }
+
+    public void openChat(MouseEvent mouseEvent) {
+        chatButton.setDisable(true);
+        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/chat_view.fxml"));
+        try {
+            Pane chatViewRootPane = fxmlLoader.load();
+            ChatController chatController = fxmlLoader.getController();
+
+            window.getChildren().add(chatViewRootPane);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
