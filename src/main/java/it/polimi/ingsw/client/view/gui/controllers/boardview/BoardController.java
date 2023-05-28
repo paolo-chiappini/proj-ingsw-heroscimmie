@@ -287,6 +287,20 @@ public class BoardController extends GuiController {
         updatedPlayer.setPoints(score);
     }
 
+    //Might be buggy with the visuals, haven't tested this
+    public void updatePlayerConnection(String player, boolean isDisconnected) {
+        for(Node n: playersList.getChildren()){
+            Label label = (Label) n;
+            if(label.getText().substring(3).contains(player) && isDisconnected){
+                label.getStyleClass().add("disconnected-player-name");
+                label.setText(label.getText()+" (disconnected)");
+            }else {
+                label.setText(label.getText().replace(" (disconnected)", ""));
+                label.getStyleClass().remove("disconnected-player-name");
+            }
+        }
+    }
+
     public void endGame(String winner){
         System.out.println("WINNER:");
         setDisabledInterface(true);
@@ -308,18 +322,6 @@ public class BoardController extends GuiController {
             window.getChildren().add(endgameView);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        }
-    }
-
-    //Might be buggy with the visuals, haven't tested this
-    public void updatePlayerConnection(String player, boolean isDisconnected) {
-        if(isDisconnected){
-            for(Node n: playersList.getChildren()){
-                Label label = (Label) n;
-                if(label.getText().substring(3).contains(player)){
-                    label.getStyleClass().add("disconnected-player-name");
-                }
-            }
         }
     }
 }

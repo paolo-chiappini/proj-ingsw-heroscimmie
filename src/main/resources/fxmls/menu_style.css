@@ -49,12 +49,18 @@
 }
 
 
-.games-list{
+
+.list-view{
+    /*The linear gradient generates a warning when cascaded to list-cell because of a bug in the CssStyleHelper library*/
     -fx-background-color: linear-gradient(from 0% 20% to 100% 80%, rgba(126,69,21, 0.5) 0%, rgba(255, 180, 99, 0.5) 100%);
     -fx-background-radius: 7px;
     -fx-border-color: #7e4515;
     -fx-border-radius: 2px;
     -fx-border-width: 2px;
+}
+
+.list-cell{
+    -fx-control-inner-background: linear-gradient(from 0% 50% to 100% 50%, rgba(126,69,21, 0.5) 0%, rgba(255, 180, 99, 0.5) 100%);
     -fx-font-weight: bold;
     -fx-font-size: 15px;
     -fx-text-fill: -fx-text-color;

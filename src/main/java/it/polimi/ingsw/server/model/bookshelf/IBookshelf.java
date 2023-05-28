@@ -18,7 +18,7 @@ public interface IBookshelf extends Serializable {
     GameTile getTileAt(int row, int column);
 
     /**
-     * Get the with of the bookshelf.
+     * Get the width of the bookshelf.
      * @return the width of the bookshelf.
      */
     int getWidth();
