@@ -68,11 +68,12 @@ public class BoardController extends GuiController {
     private Bookshelf bookshelf;
     private Pane bookshelvesView;
     private BookshelvesViewController bookshelvesViewController;
+
     private String myName;
 
     private final HashMap<Integer, ImageView> getCardFromId = new HashMap<>(); //Used for updating GUI elements
     private final List<Player> players = new ArrayList<>();
-
+    private ChatController chatViewController;
     public void startStage(Stage stage) {
 
         foregroundGridPane.setPickOnBounds(false); //For mouse transparency
@@ -106,7 +107,24 @@ public class BoardController extends GuiController {
             throw new RuntimeException(e);
         }
 
+        //Chat view
+        FXMLLoader chatLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/chat_view.fxml"));
+        try {
+            Pane chatViewRootPane = chatLoader.load();
+            chatViewRootPane.setVisible(false);
+
+            window.getChildren().add(chatViewRootPane);
+            this.chatViewController = chatLoader.getController();
+            chatViewController.setup(this);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
         stage.show();
+    }
+
+    public String getMyName() {
+        return myName;
     }
 
     public ObservableList<Node> getSelectedTilesList() {
@@ -331,15 +349,10 @@ public class BoardController extends GuiController {
     }
 
     public void openChat(MouseEvent mouseEvent) {
-        chatButton.setDisable(true);
-        FXMLLoader fxmlLoader = new FXMLLoader(SceneManager.class.getResource("/fxmls/chat_view.fxml"));
-        try {
-            Pane chatViewRootPane = fxmlLoader.load();
-            ChatController chatController = fxmlLoader.getController();
+        chatViewController.openChat();
+    }
 
-            window.getChildren().add(chatViewRootPane);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+    public void addChatMessage(String message, String sender, boolean isWhisper) {
+        chatViewController.receiveChatMessage(message, sender, isWhisper);
     }
 }

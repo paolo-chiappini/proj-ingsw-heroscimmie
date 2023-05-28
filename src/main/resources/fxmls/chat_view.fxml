@@ -10,25 +10,22 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.SVGPath?>
 
-
-<StackPane stylesheets="@chat_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.ChatController">
+<StackPane fx:id="window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="410.0" stylesheets="@chat_style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="it.polimi.ingsw.client.view.gui.controllers.boardview.ChatController">
    <VBox alignment="CENTER" styleClass="window">
-      <TextArea editable="false" prefHeight="300.0" prefWidth="400.0" wrapText="true"/>
-      <Separator prefWidth="200.0"/>
+      <TextArea fx:id="chatTextArea" editable="false" focusTraversable="false" prefHeight="300.0" prefWidth="400.0" wrapText="true" />
+      <Separator prefWidth="200.0" />
       <HBox>
-         <TextField prefWidth="320.0"/>
-         <Button fx:id="sendButton" minHeight="-Infinity" mnemonicParsing="false" prefHeight="25.0"
-                 prefWidth="80.0">
+         <TextField fx:id="messageField" onAction="#send" prefWidth="360.0" />
+         <Button fx:id="sendButton" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#send" prefHeight="30.0" prefWidth="40.0">
             <graphic>
-               <SVGPath content="M4.02 42l41.98-18-41.98-18-.02 14 30 4-30 4z" scaleX="0.5" scaleY="0.5"/>
+               <SVGPath content="M4.02 42l41.98-18-41.98-18-.02 14 30 4-30 4z" scaleX="0.5" scaleY="0.5" />
             </graphic>
          </Button>
       </HBox>
    </VBox>
-   <Button fx:id="closeChatButton" mnemonicParsing="false" text="X" StackPane.alignment="TOP_RIGHT">
+   <Button fx:id="closeChatButton" mnemonicParsing="false" onMouseClicked="#exit" text="X" StackPane.alignment="TOP_RIGHT">
       <StackPane.margin>
-         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0"/>
+         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
       </StackPane.margin>
    </Button>
 </StackPane>

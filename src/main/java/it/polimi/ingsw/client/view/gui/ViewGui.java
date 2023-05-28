@@ -230,7 +230,11 @@ public class ViewGui extends View {
 
     @Override
     public void addMessage(String message, String sender, boolean isWhisper) {
-
+        GuiController controller = SceneManager.getCurrentController();
+        if (controller instanceof BoardController)
+            Platform.runLater(()->((BoardController)controller).addChatMessage(message, sender, isWhisper));
+        else
+            throw new RuntimeException("Wrong GUI state");
     }
 
     @Override
