@@ -45,6 +45,8 @@
     -fx-text-fill: -fx-button-text-color;
 }
 
+
+
 .button:hover {
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%, -fx-color1 0%, -fx-color2 100%),
@@ -183,6 +185,7 @@
 }
 
 .chat-button{
+    -fx-padding: 8 20 15 20;
     -fx-background-color:
             linear-gradient(from 0% 93% to 0% 100%, -fx-color1-chat 0%, -fx-color2-chat 100%),
             -fx-color3-chat,
@@ -216,4 +219,8 @@
     -fx-font-weight: bold;
     -fx-font-size: 4em;
     -fx-text-fill: rgba(0, 0, 0, 0.8);
+}
+
+.notification{
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.75) , 4,0,0,1 );
 }

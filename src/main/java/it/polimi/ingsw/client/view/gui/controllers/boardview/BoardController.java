@@ -20,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -59,6 +60,7 @@ public class BoardController extends GuiController {
     public VBox playersList;
     public Button chatButton;
     public Button saveGameButton;
+    public Circle notificationChip;
 
 
     //Internal stuff
@@ -121,10 +123,6 @@ public class BoardController extends GuiController {
         }
 
         stage.show();
-    }
-
-    public String getMyName() {
-        return myName;
     }
 
     public ObservableList<Node> getSelectedTilesList() {
@@ -350,9 +348,11 @@ public class BoardController extends GuiController {
 
     public void openChat(MouseEvent mouseEvent) {
         chatViewController.openChat();
+        notificationChip.setVisible(false);
     }
 
     public void addChatMessage(String message, String sender, boolean isWhisper) {
+        if(!chatViewController.window.isVisible()) notificationChip.setVisible(true);
         chatViewController.receiveChatMessage(message, sender, isWhisper);
     }
 }
