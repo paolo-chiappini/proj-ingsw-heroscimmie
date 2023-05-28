@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.function.Consumer;
 
+/**
+ * Handles the connection and disconnection of the client and its communication with the server
+ */
 public class Client {
 
     private Socket socket;
