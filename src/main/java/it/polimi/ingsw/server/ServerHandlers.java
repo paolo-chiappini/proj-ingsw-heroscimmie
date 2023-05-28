@@ -90,7 +90,7 @@ public abstract class ServerHandlers {
             if (ActiveGameManager.isGameInProgress()) {
                 JSONObject update = new JSONObject();
                 update.put("serialized", new JSONObject(ActiveGameManager.getActiveGameInstance().serialize(jsonSerializer)));
-                update.put("reconnected", true);
+                update.put("reconnected", username);
                 sendUpdate(res, update);
             }
         } catch (IllegalActionException iae) {

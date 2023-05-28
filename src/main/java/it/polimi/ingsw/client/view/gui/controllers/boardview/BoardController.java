@@ -15,6 +15,7 @@ import javafx.geometry.VPos;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.OverrunStyle;
 import javafx.scene.effect.SepiaTone;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -61,6 +62,7 @@ public class BoardController extends GuiController {
     public Button chatButton;
     public Button saveGameButton;
     public Circle notificationChip;
+    public Label scoreLabel;
 
 
     //Internal stuff
@@ -306,18 +308,25 @@ public class BoardController extends GuiController {
         var updatedPlayer = players.stream()
                 .filter(p->p.getName().equals(player)).toList().get(0);
         updatedPlayer.setPoints(score);
+        if (player.equals(myName))
+            scoreLabel.setText(String.valueOf(score));
     }
 
     //Might be buggy with the visuals, haven't tested this
     public void updatePlayerConnection(String player, boolean isDisconnected) {
         for(Node n: playersList.getChildren()){
             Label label = (Label) n;
-            if(label.getText().substring(3).contains(player) && isDisconnected){
-                label.getStyleClass().add("disconnected-player-name");
-                label.setText(label.getText()+" (disconnected)");
-            }else {
-                label.setText(label.getText().replace(" (disconnected)", ""));
-                label.getStyleClass().remove("disconnected-player-name");
+
+            if(label.getText().contains(player)){
+                if(isDisconnected){
+                    label.getStyleClass().add("disconnected-player-name");
+                    label.setText(label.getText()+" (disconnected)");
+                }
+                else {
+                    label.getStyleClass().remove("disconnected-player-name");
+                    label.setText(label.getText().replace(" (disconnected)", ""));
+                }
+
             }
         }
     }

@@ -67,8 +67,13 @@ public class ClientController implements ViewListener {
         switch (method) {
             case "START" -> onGameStart(message);
             case "UPDATE" -> {
-                if (body.has("reconnected")) onGameStart(message);
-                else update(message);
+                if (body.has("reconnected")){
+                    if(body.get("reconnected").equals(myUsername))  {
+                        onGameStart(message);
+                        return;
+                    }
+                }
+                update(message);
             }
             case "CHAT" -> onChatMessageReceived(message);
             case "LIST" -> onListReceived(message);

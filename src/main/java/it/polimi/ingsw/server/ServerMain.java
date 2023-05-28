@@ -37,16 +37,16 @@ public class ServerMain {
         });
 
         server.setGlobalMiddleware((req, res, next) -> {
-            System.out.println("Request from "+req.getSocket().getRemoteSocketAddress());
-            System.out.println("METHOD: "+req.getMethod());
-            System.out.println("BODY:\n"+req.getBody());
+//            System.out.println("Request from "+req.getSocket().getRemoteSocketAddress());
+//            System.out.println("METHOD: "+req.getMethod());
+//            System.out.println("BODY:\n"+req.getBody());
             if (ServerHandlers.validateRequestBody(req, res) && ServerHandlers.validateSocketUsername(req, res)) {
                 next.call(req, res);
             }
 
-            System.out.println("Response to "+res.getSocket().getRemoteSocketAddress());
-            System.out.println("METHOD: "+res.getMethod());
-            System.out.println("BODY:\n"+res.getBody());
+//            System.out.println("Response to "+res.getSocket().getRemoteSocketAddress());
+//            System.out.println("METHOD: "+res.getMethod());
+//            System.out.println("BODY:\n"+res.getBody());
         });
 
         server.start();
