@@ -31,6 +31,11 @@ public class Client {
         callback = (msg) -> {};
     }
 
+    /**
+     * Sends a request to the server.
+     * @param method is the header of the message to send to the server
+     * @param body is the body of the message to send to the server
+     */
     public void sendRequest(String method, String body) {
         try {
             Message request = messageProvider.getEmptyInstance(socket);
@@ -42,6 +47,9 @@ public class Client {
         }
     }
 
+    /**
+     * Read responses from the server.
+     */
     public Message readFromServer() {
         try {
             return messageProvider.getInstanceForIncomingRequest(this.socket, fromServer.readLine());
@@ -60,6 +68,9 @@ public class Client {
         endConnection();
     }
 
+    /**
+     * Closes the socket of the client.
+     */
     private void endConnection() {
         try {
             if (socket == null) return;
@@ -110,6 +121,9 @@ public class Client {
         this.connectionLostCallback = callback;
     }
 
+    /**
+     * Starts the client.
+     */
     public void start() {
         new Thread(this::run).start();
     }
