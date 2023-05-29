@@ -11,7 +11,7 @@ import java.util.function.Consumer;
  *  Handles client requests and connection events.
  */
 public class Server {
-    private final ServerSocket serverSocket;
+    private ServerSocket serverSocket;
     private final HashMap<String, Callback> callbacks;
     private final HashMap<String, Middleware> middlewares;
     private final MessageType messageType;
@@ -35,7 +35,8 @@ public class Server {
         try {
             serverSocket = new ServerSocket(port);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("Can't start server, port already in use");
+            System.exit(1);
         }
 
         clientConnections = new ArrayList<>();
