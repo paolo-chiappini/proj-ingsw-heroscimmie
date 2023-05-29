@@ -474,7 +474,6 @@ public class ClientController implements ViewListener {
             return;
         }
 
-        var body = setJsonObjectForMoveRequest();
         this.row1 = row1;
         this.col1 = col1;
         this.row2 = row2;
@@ -482,6 +481,7 @@ public class ClientController implements ViewListener {
         this.first = 1;
         this.second = 2;
         this.third = 3;
+        var body = setJsonObjectForMoveRequest();
         client.sendRequest("PICK", body.toString());
     }
 
