@@ -49,6 +49,7 @@ public class PickUpTilesState extends BoardViewState{
             }
         }
 
+        controller.setSelectedColumn(null);
         GuiController.getView().notifyPickCommand(x1, y1, x2, y2);
     }
 
