@@ -74,7 +74,7 @@ di un flag per la versione 16 del compilatore. Questo warning può essere ignora
 
 --- 
 
-## Eglish version
+## English version
 #### Abstract
 Development of a distributed program for simulating the board game "MyShelfie" as described by the rules.
 The program is developed in the Java language and uses the JavaFX library for the graphical component.
