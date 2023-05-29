@@ -5,4 +5,9 @@ e ognun si considerasse suo fratello,
 ci sarebbe meno pensieri e meno pene
 e il mondo ne sarebbe assai più bello.
 
-https://r.mtdv.me/ingsw
+---- 
+#### Persistenza della partita 
+Al fine di utilizzare la funzionalità di persitenza della partita è necessario
+disporre di una cartella `saved` nella stessa directory del jar.
+Nel caso la cartella non fosse presente, verrà auto-generata dal server 
+nel momento della generazione di un salvataggio.

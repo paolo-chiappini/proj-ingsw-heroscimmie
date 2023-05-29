@@ -12,9 +12,331 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="Completed game load">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="6dc22444-1e1e-489e-a946-038ba26552ea" name="Changes" comment="added UML diagram">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/allclasses-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/allclasses-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/allpackages-index.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/allpackages-index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/constant-values.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/constant-values.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/copy.svg" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/copy.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/element-list" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/element-list" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/help-doc.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/help-doc.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-1.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-10.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-11.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-12.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-13.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-13.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-14.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-14.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-15.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-15.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-16.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-16.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-17.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-17.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-18.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-18.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-19.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-19.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-2.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-20.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-20.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-21.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-21.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-22.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-22.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-3.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-5.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-6.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-7.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-8.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index-files/index-9.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index-files/index-9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/Main.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/Main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/Client.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/Client.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/ClientMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/ClientMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/controller/ClientController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/controller/ClientController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/controller/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/controller/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/controller/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/controller/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/View.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/View.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/ViewMessage.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/ViewMessage.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/DefaultCliGraphics.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/DefaultCliGraphics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/DefaultLayout.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/DefaultLayout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/ViewCli.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/ViewCli.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/BoardElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/BoardElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/BoardSpaceElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/BoardSpaceElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/BoardTileType.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/BoardTileType.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/board/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/BookshelfBaseElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/BookshelfBaseElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/BookshelfElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/BookshelfElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/SmallBookshelfElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/SmallBookshelfElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/bookshelf/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/GoalCardBaseElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/GoalCardBaseElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/CommonGoalCardElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/CommonGoalCardElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/CommonGoalImageBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/CommonGoalImageBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/common/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/PersonalGoalCardElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/PersonalGoalCardElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/PersonalGoalImageBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/PersonalGoalImageBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/goals/personal/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/CellElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/CellElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/GridElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/GridElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/SmallCellElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/SmallCellElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/SmallGridElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/SmallGridElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/TableChars.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/TableChars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/grids/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/BonusesInfoElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/BonusesInfoElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/ChatElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/ChatElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/TurnListElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/TurnListElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/info/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliBackColors.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliBackColors.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliForeColors.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliForeColors.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliTextElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/CliTextElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/ColumnElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/ColumnElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/FramedElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/FramedElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/JaggedElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/JaggedElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/RectangleElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/RectangleElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/RowElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/RowElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/simple/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/SmallTileElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/SmallTileElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/TileElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/TileElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/TileTextElementBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/TileTextElementBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/tiles/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/CliDrawer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/CliDrawer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/ICliRenderable.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/ICliRenderable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/ICliRenderer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/ICliRenderer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/ReplaceTarget.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/ReplaceTarget.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/SimpleColorRenderer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/SimpleColorRenderer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/SimpleTextRenderer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/SimpleTextRenderer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/StringToCliTextConverter.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/StringToCliTextConverter.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/graphics/util/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/cli/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/cli/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/Animations.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/Animations.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/EventHandlers.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/EventHandlers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/GUI.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/GUI.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/GuiController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/GuiController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/SceneManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/SceneManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/ViewGui.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/ViewGui.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/EndgameWindowController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/EndgameWindowController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuJoinGameController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuJoinGameController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuLoadGameController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuLoadGameController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuNewGameController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuNewGameController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuWaitGameController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/MenuWaitGameController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/SplashScreenController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/SplashScreenController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/SubMenuController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/SubMenuController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardViewState.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/BoardViewState.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/BookshelvesViewController.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/DropTilesState.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/DropTilesState.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/PickUpTilesState.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/PickUpTilesState.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/Player.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/Player.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/SelectColumnState.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/SelectColumnState.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/Bookshelf.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/Bookshelf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/GraphicElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/GraphicElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/TileElement.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/TileElement.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/TilesBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/TilesBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/graphicelements/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/boardview/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/controllers/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/controllers/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/gui/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/gui/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/view/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/view/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/ClientBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/ClientBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/ClientBookshelf.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/ClientBookshelf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/ClientCommonGoalCard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/ClientCommonGoalCard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/ClientPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/ClientPlayer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/ClientTurnState.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/ClientTurnState.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/client/virtualModel/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/client/virtualModel/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/exceptions/IllegalActionException.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/exceptions/IllegalActionException.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/exceptions/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/exceptions/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/exceptions/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/exceptions/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/files/JsonDeserializationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/files/JsonDeserializationTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/files/JsonSerializationTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/files/JsonSerializationTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/files/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/files/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/files/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/files/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/BagMock.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/BagMock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/BoardMock.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/BoardMock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/CommonCardMock.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/CommonCardMock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/DynamicTestBookshelf.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/DynamicTestBookshelf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/PersonalCardMock.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/PersonalCardMock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/PlayerMock.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/PlayerMock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/TurnManagerMock.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/TurnManagerMock.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/mock/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/mock/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/AdjacencyBonusTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/AdjacencyBonusTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/BoardTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/BoardTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/BookshelfFloodFillTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/BookshelfFloodFillTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard10Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard10Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard11Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard11Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard12Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard12Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard1Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard1Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard2Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard2Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard3Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard3Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard4Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard4Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard5Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard5Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard6Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard6Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard7Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard7Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard8Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard8Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/CommonGoalCard9Test.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/CommonGoalCard9Test.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/GameTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/GameTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/PlayerTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/PlayerTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/TileSpaceTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/TileSpaceTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/TileTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/TileTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/TurnManagerTest.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/TurnManagerTest.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/model/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/model/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/ActiveGameManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/ActiveGameManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/Callback.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/Callback.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/ClientHandler.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/ClientHandler.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/Middleware.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/Middleware.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/Server.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/Server.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/ServerHandlers.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/ServerHandlers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/ServerMain.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/ServerMain.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/messages/Message.MessageBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/messages/Message.MessageBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/messages/Message.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/messages/Message.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/messages/MessageProvider.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/messages/MessageProvider.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/messages/MessageType.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/messages/MessageType.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/messages/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/messages/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/messages/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/messages/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bag/Bag.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bag/Bag.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bag/IBag.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bag/IBag.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bag/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bag/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bag/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bag/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/Board.BoardBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/Board.BoardBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/Board.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/Board.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/BoardSpace.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/BoardSpace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/IBoard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/IBoard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/IBoardBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/IBoardBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/TileSpace.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/TileSpace.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/board/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/board/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bookshelf/Bookshelf.BookshelfBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bookshelf/Bookshelf.BookshelfBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bookshelf/Bookshelf.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bookshelf/Bookshelf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bookshelf/IBookshelf.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bookshelf/IBookshelf.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bookshelf/IBookshelfBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bookshelf/IBookshelfBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bookshelf/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bookshelf/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/bookshelf/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/bookshelf/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/game/Game.GameBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/game/Game.GameBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/game/Game.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/game/Game.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/game/IGameBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/game/IGameBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/game/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/game/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/game/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/game/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/AdjacencyBonusGoal.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/AdjacencyBonusGoal.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard.CommonGoalCardBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard.CommonGoalCardBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard1.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard10.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard11.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard12.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard2.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard3.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard4.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard5.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard6.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard7.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard8.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard9.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCard9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCardDeck.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/CommonGoalCardDeck.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/GoalCard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/GoalCard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/ICommonGoalCardBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/ICommonGoalCardBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/common/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/common/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard1.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard1.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard10.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard10.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard11.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard11.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard12.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard12.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard2.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard2.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard3.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard3.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard4.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard5.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard5.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard6.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard6.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard7.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard7.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard8.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard8.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard9.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCard9.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCardDeck.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/PersonalGoalCardDeck.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/goals/personal/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/goals/personal/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/player/IPlayer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/player/IPlayer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/player/Player.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/player/Player.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/player/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/player/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/player/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/player/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/tile/GameTile.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/tile/GameTile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/tile/Tile.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/tile/Tile.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/tile/TileType.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/tile/TileType.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/tile/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/tile/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/tile/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/tile/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/turn/ITurnManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/turn/ITurnManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/turn/ITurnManagerBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/turn/ITurnManagerBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/turn/TurnManager.TurnManagerBuilder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/turn/TurnManager.TurnManagerBuilder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/turn/TurnManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/turn/TurnManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/turn/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/turn/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/model/turn/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/model/turn/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/server/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/server/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/BookshelfFloodFill.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/BookshelfFloodFill.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/Builder.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/Builder.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/FileIOManager.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/FileIOManager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/FilePath.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/FilePath.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/Listener.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/Listener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/ModelListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/ModelListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/Observable.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/Observable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/ObservableObject.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/ObservableObject.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/ViewListener.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/ViewListener.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/observer/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/observer/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/Deserializer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/Deserializer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/JsonDeserializer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/JsonDeserializer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/JsonSerializer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/JsonSerializer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/Serializable.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/Serializable.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/Serializer.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/Serializer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/package-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/package-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/it/polimi/ingsw/util/serialization/package-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/it/polimi/ingsw/util/serialization/package-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/jquery-ui.overrides.css" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/jquery-ui.overrides.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/legal/ADDITIONAL_LICENSE_INFO" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/legal/ADDITIONAL_LICENSE_INFO" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/legal/ASSEMBLY_EXCEPTION" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/legal/ASSEMBLY_EXCEPTION" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/legal/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/legal/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/legal/jquery.md" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/legal/jquery.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/legal/jqueryUI.md" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/legal/jqueryUI.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/member-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/member-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/module-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/module-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/overview-summary.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/overview-summary.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/overview-tree.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/overview-tree.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/package-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/package-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/resources/glass.png" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/resources/glass.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/resources/x.png" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/resources/x.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-3.6.0.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/script-dir/jquery-3.6.0.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/script-dir/jquery-ui.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/script-dir/jquery-ui.min.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/script-dir/jquery-ui.min.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/script.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/script.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/search-page.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/search-page.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/search.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/search.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/serialized-form.html" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/serialized-form.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/stylesheet.css" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/stylesheet.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/tag-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/tag-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/javadoc/type-search-index.js" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/javadoc/type-search-index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uml/myShelfie_Final.mdj" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/uml/myShelfie_Final.mdj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uml/myShelfie_Final.png" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/uml/myShelfie_Final.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uml/myShelfie_Final.svg" beforeDir="false" afterPath="$PROJECT_DIR$/deliverable/uml/myShelfie_Final.svg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +416,7 @@
     "com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers": "true",
     "extract.method.default.visibility": "private",
     "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "G:/ProgettoIngSoftware/resources/fxmls",
+    "last_opened_file_path": "C:/Users/Paolo/Desktop/Polimi/INGSW/ingsw-2023/deliverable/game/saved",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -113,20 +435,21 @@
       <recent name="it.polimi.ingsw.util.observer" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\deliverable\game\saved" />
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\deliverable\game" />
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\uml" />
       <recent name="G:\ProgettoIngSoftware\resources\fxmls" />
       <recent name="G:\ProgettoIngSoftware\resources\data\saved" />
-      <recent name="G:\ProgettoIngSoftware\src\main\resources\fxmls" />
-      <recent name="G:\ProgettoIngSoftware\src\main\java" />
     </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\deliverable" />
       <recent name="G:\ProgettoIngSoftware" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\main" />
       <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\test\resources" />
-      <recent name="C:\Users\Paolo\Desktop\Polimi\INGSW\ingsw-2023\src\main\resources\data\saved" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="it.polimi.ingsw.server" />
@@ -141,7 +464,7 @@
       <recent name="it.polimi.ingsw.server" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Run Client [CLI]">
+  <component name="RunManager" selected="JUnit.All in proj-ingsw-heroscimmie">
     <configuration name="Run Client [CLI]" type="Application" factoryName="Application" singleton="false">
       <option name="MAIN_CLASS_NAME" value="it.polimi.ingsw.Main" />
       <module name="proj-ingsw-heroscimmie" />
@@ -330,12 +653,11 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.All in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.FileManagerTest" />
         <item itemvalue="JUnit.FileManagerTest.readDirectoryContents" />
-        <item itemvalue="JUnit.All in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.java in proj-ingsw-heroscimmie" />
         <item itemvalue="JUnit.it.polimi.ingsw in proj-ingsw-heroscimmie" />
-        <item itemvalue="JUnit.FileManagerTest$WritingReadingTests.createFileWithAbsolutePath" />
       </list>
     </recent_temporary>
   </component>
@@ -399,6 +721,8 @@
       <workItem from="1684963337597" duration="114000" />
       <workItem from="1684999018281" duration="1398000" />
       <workItem from="1685040403903" duration="11320000" />
+      <workItem from="1685361280502" duration="1306000" />
+      <workItem from="1685362626120" duration="2380000" />
     </task>
     <task id="LOCAL-00001" summary="Added Network related code">
       <created>1682184196026</created>
@@ -638,13 +962,50 @@
       <option name="project" value="LOCAL" />
       <updated>1685053345158</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="removed debug prints">
+      <created>1685349920532</created>
+      <option name="number" value="00035" />
+      <option name="presentableId" value="LOCAL-00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1685349920532</updated>
+    </task>
+    <task id="LOCAL-00036" summary="cleanup of unused methods">
+      <created>1685350616531</created>
+      <option name="number" value="00036" />
+      <option name="presentableId" value="LOCAL-00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1685350616531</updated>
+    </task>
+    <task id="LOCAL-00037" summary="cleanup of unused methods">
+      <created>1685362111159</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1685362111159</updated>
+    </task>
+    <task id="LOCAL-00038" summary="added UML diagram">
+      <created>1685362369910</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1685362369910</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
     <option name="RECENT_FILTERS">
       <map>
         <entry key="Branch">
@@ -660,21 +1021,8 @@
         </entry>
       </map>
     </option>
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="cleaned up controller" />
-    <MESSAGE value="added turn progression in client" />
-    <MESSAGE value="added client reconnection to server" />
-    <MESSAGE value="reconnection handling and bug fixing" />
     <MESSAGE value="changed load saved game to use indexes" />
     <MESSAGE value="changed file io to work with jars" />
     <MESSAGE value="attempt to fix test error in build" />
@@ -697,7 +1045,10 @@
     <MESSAGE value="Added load game view" />
     <MESSAGE value="Fixed load game view (still have to do the cards) and added notifyNameAlreadyTaken to gui" />
     <MESSAGE value="Completed game load" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completed game load" />
+    <MESSAGE value="removed debug prints" />
+    <MESSAGE value="cleanup of unused methods" />
+    <MESSAGE value="added UML diagram" />
+    <option name="LAST_COMMIT_MESSAGE" value="added UML diagram" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -714,96 +1065,96 @@
     <select />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$ServerConfigurationTest.ic" NAME="ServerConfigurationTest Coverage Results" MODIFIED="1682329568194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1679654243962" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_tilesCanBePickedUp.ic" NAME="BoardTest.tilesCanBePickedUp Coverage Results" MODIFIED="1680354353328" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333256733" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1685361958308" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680355141037" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$CommonGoalCardDeckTest_OnCommonGoalDeckCreationTests_GettingPointsTests_getPointsCard2Players.ic" NAME="CommonGoalCardDeckTest$OnCommonGoalDeckCreationTests$GettingPointsTests.getPointsCard2Players Coverage Results" MODIFIED="1680527192405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$it_polimi_ingsw_server_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw.server in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682329659742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JSONServerTest.ic" NAME="JSONServerTest Coverage Results" MODIFIED="1682327536667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$TileSpaceTest.ic" NAME="TileSpaceTest Coverage Results" MODIFIED="1679835142807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1680339350138" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1681220954744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$it_in_proj_ingsw_heroscimmie.ic" NAME="it in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683036158569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1681545970063" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>it.polimi.ingsw.*</FILTER>
-    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__3_.ic" NAME="All in proj-ingsw-heroscimmie (3) Coverage Results" MODIFIED="1679654807784" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/ingsw_2023$ingsw_in_server.ic" NAME="ingsw in server Coverage Results" MODIFIED="1681498171828" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ingsw_2023$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1682874151594" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682882899306" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680947941153" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$TileSpaceTest.ic" NAME="TileSpaceTest Coverage Results" MODIFIED="1679835142807" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfFloodFillTest.ic" NAME="BookshelfFloodFillTest Coverage Results" MODIFIED="1680354961403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_doesBoardNeedRefill.ic" NAME="BoardTest.doesBoardNeedRefill Coverage Results" MODIFIED="1680619862855" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$CalculatorTest.ic" NAME="CalculatorTest Coverage Results" MODIFIED="1679606565592" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$CommonGoalCardDeckTest_OnCommonGoalDeckCreationTests_GettingPointsTests_getPointsCard2Players.ic" NAME="CommonGoalCardDeckTest$OnCommonGoalDeckCreationTests$GettingPointsTests.getPointsCard2Players Coverage Results" MODIFIED="1680527192405" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest_EndGameTests_winningPlayerElectionWithDraw.ic" NAME="GameTest$EndGameTests.winningPlayerElectionWithDraw Coverage Results" MODIFIED="1681221280747" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680961744304" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$GameTest.ic" NAME="GameTest Coverage Results" MODIFIED="1681220954744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$TurnManagerTest.ic" NAME="TurnManagerTest Coverage Results" MODIFIED="1680354884033" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$it_polimi_ingsw_server_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw.server in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682329659742" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$it_polimi_ingsw_in_proj_ingsw_heroscimmie.ic" NAME="it.polimi.ingsw in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683202340877" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__1_.ic" NAME="All in proj-ingsw-heroscimmie (1) Coverage Results" MODIFIED="1679654279221" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BagTest.ic" NAME="BagTest Coverage Results" MODIFIED="1680354855112" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$PlayerTest.ic" NAME="PlayerTest Coverage Results" MODIFIED="1680614773840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_server.ic" NAME="All in server Coverage Results" MODIFIED="1679654320358" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/ingsw_2023$FileManagerTest.ic" NAME="FileManagerTest Coverage Results" MODIFIED="1682885455980" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.files.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/ingsw_2023$BookshelfTest.ic" NAME="BookshelfTest Coverage Results" MODIFIED="1680196660453" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_isBoardEmpty.ic" NAME="BoardTest.isBoardEmpty Coverage Results" MODIFIED="1680342663563" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JSONServerTest.ic" NAME="JSONServerTest Coverage Results" MODIFIED="1682327536667" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$JsonMessageTest.ic" NAME="JsonMessageTest Coverage Results" MODIFIED="1682280462952" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.messages.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$All_in_proj_ingsw_heroscimmie__2_.ic" NAME="All in proj-ingsw-heroscimmie (2) Coverage Results" MODIFIED="1679654338743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest.ic" NAME="BoardTest Coverage Results" MODIFIED="1680355152579" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$ServerConfigurationTest.ic" NAME="ServerConfigurationTest Coverage Results" MODIFIED="1682329568194" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.server.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ProgettoIngSoftware$All_in_proj_ingsw_heroscimmie.ic" NAME="All in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1682333185145" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$BoardTest_pickUp2DifferentTiles.ic" NAME="BoardTest.pickUp2DifferentTiles Coverage Results" MODIFIED="1680622180403" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.polimi.ingsw.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/ingsw_2023$it_in_proj_ingsw_heroscimmie.ic" NAME="it in proj-ingsw-heroscimmie Coverage Results" MODIFIED="1683036158569" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>it.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/proj_ingsw_heroscimmie$AdjacencyBonusTest.ic" NAME="AdjacencyBonusTest Coverage Results" MODIFIED="1680354840677" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>it.polimi.ingsw.*</FILTER>
     </SUITE>
   </component>
