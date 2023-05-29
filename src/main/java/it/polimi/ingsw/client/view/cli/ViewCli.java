@@ -344,7 +344,7 @@ public class ViewCli extends View {
 
         // Check if view is running in a windows' console, in that case don't use colors
         // (ANSI codes are not supported by windows' powershell)
-        if (System.getProperty("os.name").contains("win")) renderer = textRenderer;
+        if (System.getProperty("os.name").toLowerCase().contains("win")) renderer = textRenderer;
 
         out.println(graphics.getGraphics().render(renderer));
         if (canSendCommands && !hasPickedTiles && !lastInputGeneratedError) askCoordinatesTilesOnBoard();
