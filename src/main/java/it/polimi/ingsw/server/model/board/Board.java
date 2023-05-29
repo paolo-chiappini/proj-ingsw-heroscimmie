@@ -166,7 +166,7 @@ public class Board implements IBoard {
         // either row1 = row2 or col1 = col2
         if (row1 != row2 && col1 != col2) return false;
         // check if size of range is valid
-        if (endRow - startRow > 3 || endCol - startCol > 3) return false;
+        if (endRow - startRow > 2 || endCol - startCol > 2) return false;
 
         for (int row = startRow; row <= endRow; row++) {
             for (int col = startCol; col <= endCol; col++) {
