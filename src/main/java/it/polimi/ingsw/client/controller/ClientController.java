@@ -109,8 +109,6 @@ public class ClientController implements ViewListener {
             view.updatePlayerConnectionStatus(username, false);
         }
 
-        //if (!clientIsInGame) return;
-        //view.finalizeUpdate();
     }
 
     /**
@@ -199,7 +197,6 @@ public class ClientController implements ViewListener {
 
         view.finalizeUpdate();
         if (body.has("winner")) {
-            System.out.println("\nYOOOO we have a winner!");
             view.handleWinnerSelected(body.getString("winner"));
             // reset model and view
             resetVirtualModelAndView();

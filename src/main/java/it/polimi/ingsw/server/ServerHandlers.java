@@ -55,7 +55,7 @@ public abstract class ServerHandlers {
         update.put("connected_players", new JSONArray(connectedPlayers));
 
         // DEBUG
-        System.out.println("Sending update: " + update);
+        /*System.out.println("Sending update: " + update);*/
 
         response.setBody(update.toString());
         response.sendToAll();
