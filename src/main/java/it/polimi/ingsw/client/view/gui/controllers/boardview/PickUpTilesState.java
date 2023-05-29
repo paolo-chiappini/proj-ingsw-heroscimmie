@@ -49,6 +49,7 @@ public class PickUpTilesState extends BoardViewState{
             }
         }
 
+
         GuiController.getView().notifyPickCommand(x1, y1, x2, y2);
     }
 
@@ -67,6 +68,8 @@ public class PickUpTilesState extends BoardViewState{
 
     @Override
     public void notifyValidMove() {
+
+        controller.setSelectedColumn(null);
         controller.setState(new SelectColumnState(controller));
         controller.playSwitchToBookshelfAnimation(-1);
     }
