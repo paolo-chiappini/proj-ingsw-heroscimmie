@@ -28,13 +28,6 @@ public class PlayerTest {
             assertEquals(player1.getUsername(), "TestPlayer");
         }
 
-        @DisplayName("Player is the first player of the game")
-        @Test
-        void isFirstPlayer() {
-            player1.setFirstPlayer(true);
-            assertTrue(player1.isFirstPlayer());
-        }
-
         @DisplayName("The initial score should be 0")
         @Test
         void isInitialScore0() {

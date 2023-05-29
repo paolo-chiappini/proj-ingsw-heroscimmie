@@ -24,7 +24,7 @@ class BagTest {
         }
 
         @Test
-        @DisplayName("the bag should has 132 tiles inside")
+        @DisplayName("the bag should have 132 tiles inside")
         void bagSizeAtBeginning() {
             int countTiles = 0;
             for (TileType type : bag.getTilesBag().keySet()) {
@@ -33,7 +33,7 @@ class BagTest {
             assertEquals(132,countTiles);
         }
         @Test
-        @DisplayName("the bag should has 6 different types of tiles and each type has 22 tiles")
+        @DisplayName("the bag should have 6 different types of tiles and each type has 22 tiles")
         void bagTypeAtBeginning() {
             assertEquals(6,bag.getTilesBag().size());
             for (TileType type : bag.getTilesBag().keySet()) {

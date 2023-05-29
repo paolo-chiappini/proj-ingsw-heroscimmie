@@ -6,7 +6,6 @@ import it.polimi.ingsw.util.serialization.Serializer;
 
 public class Player implements IPlayer {
     private final String username;
-    private boolean firstPlayer;
     private IBookshelf bookshelf;
     private PersonalGoalCard personalGoalCard;
     private int score = 0;
@@ -14,7 +13,6 @@ public class Player implements IPlayer {
 
     public Player(String username){
         this.username = username;
-        this.firstPlayer = false;
     }
 
     /**
@@ -66,20 +64,6 @@ public class Player implements IPlayer {
      */
     public PersonalGoalCard getPersonalGoalCard() {
         return personalGoalCard;
-    }
-
-    /**
-     * @param firstPlayer is true if the player is the first in Game
-     */
-    public void setFirstPlayer(boolean firstPlayer) {
-        this.firstPlayer = firstPlayer;
-    }
-
-    /**
-     * @return true if the player is the first of the game
-     */
-    public boolean isFirstPlayer() {
-        return firstPlayer;
     }
 
     @Override
