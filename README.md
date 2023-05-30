@@ -15,7 +15,7 @@ Il gioco può essere avviato in 3 modalità differenti:
 
 Per avviare le varie versioni sono necessari i seguenti comandi da terminale: 
 - Server: `java -jar myShelfie.jar --server`;
-- CLI: `java -jar -Difile.encoding=utf-8 myShelfie.jar --cli --server-addr [server-ip]` (_il flag `Dfile.encoding` è necessario per la compatibilità con determinati caratteri testuali_);
+- CLI: `java -jar -Dfile.encoding=utf-8 myShelfie.jar --cli --server-addr [server-ip]` (_il flag `Dfile.encoding` è necessario per la compatibilità con determinati caratteri testuali_);
 - GUI: `java -jar myShelfie.jar --gui --server-addr [server-ip]`;
 
 *_(si noti che la CLI è pensata per funzionare in terminali Linux, nel caso di terminali basati su Windows non saranno disponibili
